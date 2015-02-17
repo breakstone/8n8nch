@@ -1,0 +1,123 @@
+{include file="./header.html" title="收藏夹"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/puerh2.css">
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+{literal}
+<script>
+	function form_submit(){
+		document.getElementById("searchform").submit();
+	}
+	function dconfirm(){
+		if(!confirm("是否将此需求删除?")){
+			return false;
+		}
+		return true;
+	}
+</script>
+{/literal}
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}mypage/">MyPage</a></li>
+	<li>&gt; Job收藏夹</li>
+</ul>
+<form action="{$BASE_URL}mypage/myrequirement/" accept-charset="utf-8" id="searchform" name="searchform" method="post">
+<!-- //pan -->
+<div id="mypage">
+<h2 class="title">
+Wellcom To MyPage!&nbsp;&nbsp;{$USERNAME}&nbsp;&nbsp;&nbsp;会員番号 ：{$USERID}
+</h2>
+<p class="more"><a href="{$BASE_URL}control/mypageC.php?logout">退出</a></p>
+<table class="tableStyle" style="width: 100%">
+	<tbody>
+	<tr><td nowrap="nowrap">
+	<ul id="iconbar">
+		<li><a href="{$BASE_URL}requirement/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu1.png" alt="发表需求" />
+		</a></li>
+		<li><a href="{$BASE_URL}mypage/myrequirement/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu2.png" alt="我的需求" />
+		</a></li>
+		<li><a href="{$BASE_URL}mypage/favorite/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu3.png" alt="收藏夹" />
+		</a></li>
+		<li><a href="{$BASE_URL}mypage/personal/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu4.png" alt="个人简历" />
+		</a></li>
+		<li><a href="{$BASE_URL}mypage/pmessage/">
+		{if $unread > 0}
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu_5_new.png" alt="个人信箱" />
+		{else}
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu5.png" alt="个人信箱" />
+		{/if}
+		</a></li>
+	</ul>
+	</td></tr>
+	</tbody>
+</table>
+<h1 class="title">我的需求&nbsp;&nbsp;&nbsp;
+<label><input type="radio" name="Which_Show" value="1" checked onclick="form_submit();">生活服务</label>&nbsp; 
+<label><input type="radio" name="Which_Show" value="2" onclick="form_submit();" {if $Which_Show eq 2}checked{/if}>求人招聘</label>&nbsp;
+</h1>
+<h2 class="title">
+&nbsp;收藏&nbsp;<font color="red">{$all}</font>&nbsp;件&nbsp;&nbsp;&nbsp;{$show}
+</h2>
+{if $Which_Show eq 1}<!-- 生活服务 -->
+<table class="tableStyle" style="width: 100%">
+	<tbody>
+		<tr>
+			<th style="width: 12%;">类别</th>
+			<th>标题</th>
+			<th style="width: 15%;">更新时间</th>
+			<th style="width: 15%;">操作</th>
+		</tr>
+		{section name="list" loop="$requirement"}
+		<tr>
+			<td>{$requirement[list].service_name}</td>
+			<td class="alLeft"><a href='{$BASE_URL}live/show/{$requirement[list].live_id}/' target="_blank">{$requirement[list].live_title}</a></td>
+			<td class="alLeft">{$requirement[list].create_date|date_format:"%Y年%m月%d日"}</td>
+			<td>
+			<a href="{$BASE_URL}mypage/myrequirement_up/?id={$requirement[list].Id}&type=live&ws=1"><button type="button" id="logB" class="big button">置顶</button></a>
+			<a href="{$BASE_URL}mypage/myrequirement_delete/?id={$requirement[list].Id}&type=live&ws=1" onclick="return dconfirm();"><button type="button" id="logB" class="big button">删除</button></a>
+			</td>
+		</tr>
+		{/section}
+	</tbody>
+</table>
+{/if}
+
+{if $Which_Show eq 2}
+<table class="tableStyle" style="width: 100%">
+	<tbody>
+		<tr>
+			<th style="width:12%">番号</th>
+			<th>工作标题</th>
+			<th style="width: 15%;">更新时间</th>
+			<th style="width:15%">操作</th>
+		</tr>
+		{section name="list" loop="$requirement"}
+		<tr>
+			<td>{$requirement[list].job_id}</td>
+			<td class="alLeft"><a href="{$BASE_URL}job/show/{$requirement[list].job_id}/" target="_blank">{$requirement[list].job_title}</a></td>
+			<td>{$requirement[list].create_date|date_format:"%Y年%m月%d日"}</td>
+			<td nowrap="nowrap">
+			<a href="{$BASE_URL}mypage/myrequirement_up/?id={$requirement[list].Id}&type=job&ws=2"><button type="button" id="logB" class="big button">置顶</button></a>
+			<a href="{$BASE_URL}mypage/myrequirement_delete/?id={$requirement[list].Id}&type=job&ws=2" onclick="return dconfirm();"><button type="button" id="logB" class="big button">删除</button></a>
+			</td>
+		</tr>
+		{/section}
+	</tbody>
+</table>
+{/if}
+
+<ul id="pagenav" style="float: right !important">
+{$subPages}
+</ul>
+
+</div>
+</form>
+<!-- main -->
+</div></div>
+{include file="./footer.html"}

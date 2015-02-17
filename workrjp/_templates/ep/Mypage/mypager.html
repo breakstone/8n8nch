@@ -1,0 +1,429 @@
+{include file="./header.html" title="帮帮网-我的地盘"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class="on hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+{literal}
+<script>
+	function form_submit(flg){
+		document.getElementById("flg").value = flg;
+		document.getElementById("searchform").submit();
+	}
+</script>
+{/literal}
+<br>
+<form action="" name="searchform" id="searchform" method="post">
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/user_center.css">
+	<div class="container_24">
+		<!--main start-->
+		<section class="clearfix section">
+			<!--用户中心样式-->
+			<div class="second_menu ">
+				<div class="box default">
+					<div class="inner">
+						<header class="box_header clearfix">
+							<h2 class="box_title">个人用户</h2>
+						</header>
+						<div class="box_detail">
+							<nav class="minor_nav clearfix">
+								<ul class="clearfix">
+									<li>
+									<a href="{$BASE_URL}mypage/" original-title="我的地盘" class="selected"> <span class="no_list"></span><strong>我的地盘</strong></a>
+									</li>
+									<li>
+									<a href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/" original-title="我的空间" target="_blank"><span class="no_list"></span><strong class="red">我的空间</strong></a>
+									</li>
+									<li>
+									<a href="javascript:void(0);" original-title="我的需求"> <span class="no_list"></span><strong>我的需求</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}mypage/myrequirement/?Which_Show=2" original-title="计件任务">工作信息需求( <b>{if $job_um}{$job_um}{else}0{/if}</b> ) </a></li>
+										<li><a href="{$BASE_URL}mypage/myrequirement/?Which_Show=1" original-title="招标任务">生活互助需求( <b>{if $live_um}{$live_um}{else}0{/if}</b> ) </a></li>
+									</ul>
+									</li>
+									<li>
+									<a href="javascript:void(0);" original-title="我的收藏"> <span class="no_list"></span><strong>我的收藏</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}mypage/favorite/?Which_Show=2" original-title="工作信息">工作信息( <b>{if $fa_um_j}{$fa_um_j}{else}0{/if}</b> ) </a></li>
+										<li><a href="{$BASE_URL}mypage/favorite/?Which_Show=3" original-title="人才/企业">人才/企业( <b>{if $fa_um}{$fa_um}{else}0{/if}</b> ) </a></li>
+										<li><a href="{$BASE_URL}mypage/favorite/?Which_Show=1" original-title="生活互助信息">生活互助信息( <b>{if $fa_um_l}{$fa_um_l}{else}0{/if}</b> ) </a></li>
+									</ul>
+									</li>
+									<li>
+									<a href="{$BASE_URL}mypage/personal/" original-title="我的简历"> <span class="no_list"></span><strong>我的简历</strong></a>
+									</li>
+									<li>
+									<a href="javascript:void(0);" original-title="我的信箱"> <span class="no_list"></span><strong>我的信箱</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}mypage/pmessage/" original-title="悬赏任务">受信箱( <b>{if $message_um_f}{$message_um_f}{else}0{/if}</b> ) {if $unread>0}<b class="red">new</b>{/if}</a></li>
+										<li><a href="{$BASE_URL}mypage/pmessageSend/" original-title="招标任务">送信箱( <b>{if $message_um_s}{$message_um_s}{else}0{/if}</b> ) </a></li>
+									</ul>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<!--雇佣任务-->
+				<div class="box b_orange mt_10 clearfix po_re">
+					<div class="inner clearfix">
+						<a class="clearfix" href="#">
+							<div class="user_side_icon hire"></div>
+							<div class="box_side">
+								<h2>诚征广告</h2>
+								<span>049-293-1208</span>
+							</div>
+						</a>
+					</div>
+					<span class="hire_hot"></span>
+				</div>
+				<!--雇佣任务 end-->
+				<div class="box default clearfix mt_10">
+					<div class="inner clearfix">
+						<ul class="user_side_guide clearfix">
+							<li class="n_m_t clearfix">
+							<a class="clearfix" href="#">
+									<div class="user_side_icon shore"></div>
+									<div class="box_side">
+										<h3>诚征广告</h3>
+										<span>049-293-1208</span>
+									</div>
+							</a></li>
+							<li class="clearfix"><a class="clearfix" href="#">
+								<div class="user_side_icon core"></div>
+								<div class="box_side">
+									<h3>诚征广告</h3>
+									<span>049-293-1208</span>
+								</div>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix box default mt_10">
+					<div class="inner">
+						<header class="box_title clearfix">
+							<h2>意见栏，给我们建议</h2>
+						</header>
+						<article class="pad10 clearfix">
+							<textarea name="comment_tent" id="comment_tent" cols="28" rows="4" class="c999" placeholder="有话您说,我们在倾听！"></textarea>
+							<button type="button" class="button mt_10" onclick="sub_shou_comment();">提交</button>
+						</article>
+					</div>
+				</div>
+			</div>
+			<div class="show_panel clearfix ml_5">
+				<div class="box default clearfix">
+					<div class="witkey_info clearfix pad10">
+						<a href="{$BASE_URL}mypage/photo/" class="witkey_info_left fl_l">
+							<div class="witkey_img">
+								<img src="{$BASE_URL}{$user.user_photo_url}" uid="724483" class="pic_middle" original-title="" style="z-index: 1;">
+							</div>
+							<div class="t_c">更换头像</div>
+						</a>
+						<div class="witkey_info_right fl_r ml_6 po_re">
+							<div class="clearfix welcome">
+								<div class="fl_l">
+									欢迎您，<a href="{$BASE_URL}mypage/personal/" class="font14b mr_20">{$USERNAME}</a>
+								</div>
+								<div class="fl_l clearfix" style="width: 100px;"></div>
+								<a href="{$BASE_URL}control/mypageC.php?logout" class="witkey_remind sethomepage " id="setwitkey">退出我的地盘</a>
+							</div>
+							<div class="clear"></div>
+							<div class="clearfix mt_5 credt">
+								个人信用：<b class="red">{$user.points}</b> 积分
+								&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}netshow/points/" target="_blank">《积分规则》</a>
+								<!-- 他人好评：<b class="red">100%</b> -->
+							</div>
+							<div class="witkey_remind clearfix mt_20">
+								活跃状况：需求总数( {$live_um+$job_um} )<span class="c999 ml_10 mr_10">|</span> 
+								收藏总数 ( {$fa_um_j+$fa_um_l+$fa_um} )<span class="c999 ml_10 mr_10">|</span> 
+								<a href="{$BASE_URL}mypage/pmessage/">未读短信( <b class="red">{$unread+0}</b> )</a>
+							</div>
+							<div class="clearfix mt_10">
+								<span class="fl_l">我的邮箱：{$user.email}&nbsp;&nbsp;&nbsp;</span>
+								认证状况：{if $user.status eq 0}邮箱未认证&nbsp;->&nbsp;<a href="{$BASE_URL}regist/email_register/?email={$user.email}" target="_blank">邮箱认证</a>{else}<font style="color: green;">邮箱认证成功</font>{/if}
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class=" clearfix box default">
+					<!--header内容头部 start-->
+					<header class="clearfix box_header">
+					<!-- 
+						<div class="page_count fl_r mr_20" style="margin-top: 1px;">
+							<span>每页显示：</span>
+							<a class="selected" href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=30">30</a>
+							<a href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=50">50</a>
+							<a href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=100">100</a>
+						</div>
+					 -->
+						<h2 class="box_title">推荐信息</h2>
+						<div class=" ">
+							<nav class="box_nav">
+								<ul>
+									<li><a href="{$BASE_URL}mypage/" original-title="工作信息">工作信息</a></li>
+									<li class="selectedLava"><a href="{$BASE_URL}mypage/r/" original-title="工作信息">人才信息</a></li>
+									<li><a href="{$BASE_URL}mypage/j/" original-title="生活互助">生活互助</a></li>
+								</ul>
+							</nav>
+						</div>
+						<div class="clear"></div>
+					</header>
+					<!--header内容头部 end-->
+					<div class="box_detail">
+						<div class="data_list">
+							<input type="hidden" value="" name="flg" id="flg">
+							<table class="data_table">
+								<thead>
+									<tr>
+										<th>
+										{if $jobs}
+											<select class="input" style="width:100%;font-size: 16px;" name="job_service" id="job_service" onchange="form_submit(2);">
+												{section name="list" loop=$jobs}
+												<option value="{$jobs[list].job_id}" {if $jobs[list].job_id eq $job_id}selected="selected"{/if}>{$jobs[list].job_title|mb_truncate:42}</option>
+												{/section}
+											</select>
+										{else}
+											<center>
+											<div style="font-size: 28px;margin-top: 25px;">还没有发布工作信息？填写信息，人才推荐给你！</div><br>
+											<a href="{$BASE_URL}requirement/work/"><img src="{$BASE_URL}_templates/{$THEME}/img/work_chose.gif"></a><br><br>
+											</center>
+										{/if}
+										</th>
+									</tr>
+								</thead>
+								{if $jobs}
+								<tbody>
+									<tr>
+									<td>
+										<font color="green">以下是推荐的人才</font>
+									</td>
+									</tr>
+									<tr>
+									<td>
+										<div id="job" style="width:750px;">
+										{if $job_array_u}
+										<section>
+										{section name="list" loop="$job_array_u"}
+										<div class="jobBox" style="width: 100%;">
+											<h4></h4>
+											<p class="name" style="margin-top:-10px;">
+												<a href="{$BASE_URL}people/show/user_{$job_array_u[list].user_id}/" target="_blank">{$job_array_u[list].name01} {$job_array_u[list].name02}</a>
+											</p>
+											<dl class="detail" style="width: 65%">
+												<dd style="height: 30px;padding-bottom: 0px;padding-top: 0px;">
+												{$job_array_u[list].pref} {$job_array_u[list].addr01} 
+												&nbsp;&nbsp;&nbsp;
+												{if $job_array_u[list].birth neq "0000-00-00"}{$now-$job_array_u[list].birth} 岁{/if}
+												&nbsp;&nbsp;&nbsp;
+												{if $job_array_u[list].sex eq 1}男{/if}
+												{if $job_array_u[list].sex eq 2}女{/if}
+												</dd>
+												<dt>
+													职业信息:&nbsp;<font style="font-weight:normal;">{$job_array_u[list].kindsname}&nbsp;&nbsp;{$job_array_u[list].typesname|mb_truncate:50}</font>
+												</dt>
+												<dd>就职意向:&nbsp;<font style="font-weight:normal;">{$job_array_u[list].skill}</font></dd>
+												<dd style="height: 30px;padding-bottom: 0px;padding-top: 0px;">&nbsp;&nbsp;{$job_array_u[list].mypr|mb_truncate:60}</dd>
+											</dl>
+											<dl class="photo">
+												<dt style="float:right;">
+												{if $job_array_u[list].user_photo_url}
+												<a href="{$BASE_URL}people/show/user_{$job_array_u[list].user_id}/" target="_blank"><img src="{$BASE_URL}{$job_array_u[list].user_photo_url}" width="150" height="130" class="fixAspect" alt="个人照片"/></a>
+												{else}
+												<a href="{$BASE_URL}people/show/user_{$job_array_u[list].user_id}/" target="_blank"><img src="{$BASE_URL}_templates/{$THEME}/img/nopicture.png" width="150" height="130" class="fixAspect" alt="个人照片"/></a>
+												{/if}
+												</dt>
+											</dl>
+										</div>
+										{/section}
+										</section>
+										{else}
+										<div style="text-align: center;font-size: 18px;">还没有适合您的人才，请别急，我们去募集！</div>
+										{/if}
+										</div>
+									</td>
+									</tr>
+									
+									<tr>
+									<td>
+										<font color="green">以下是<font size="+2" color="red">【 {$skill_1} 】</font>相关人才</font>
+									</td>
+									</tr>
+									<tr>
+									<td>
+										<div id="job" style="width:750px;">
+										{if $user_1}
+										{section name="list" loop="$user_1"}
+										<div class="jobBox" style="width: 100%;">
+											<h4></h4>
+											<p class="name" style="margin-top:-10px;">
+												<a href="{$BASE_URL}people/show/user_{$user_1[list].user_id}/" target="_blank">{$user_1[list].name01} {$user_1[list].name02}</a>
+											</p>
+											<dl class="detail" style="width: 65%">
+												<dd style="height: 30px;padding-bottom: 0px;padding-top: 0px;">
+												{$user_1[list].pref} {$user_1[list].addr01} 
+												&nbsp;&nbsp;&nbsp;
+												{if $user_1[list].birth neq "0000-00-00"}{$now-$user_1[list].birth} 岁{/if}
+												&nbsp;&nbsp;&nbsp;
+												{if $user_1[list].sex eq 1}男{/if}
+												{if $user_1[list].sex eq 2}女{/if}
+												</dd>
+												<dt>
+													职业信息:&nbsp;<font style="font-weight:normal;">{$user_1[list].kindsname}&nbsp;&nbsp;{$user_1[list].typesname|mb_truncate:50}</font>
+												</dt>
+												<dd>就职意向:&nbsp;<font style="font-weight:normal;">{$user_1[list].skill}</font></dd>
+												<dd style="height: 30px;padding-bottom: 0px;padding-top: 0px;">&nbsp;&nbsp;{$user_1[list].mypr|mb_truncate:60}</dd>
+											</dl>
+											<dl class="photo">
+												<dt style="float:right;">
+												{if $user_1[list].user_photo_url}
+												<a href="{$BASE_URL}people/show/user_{$user_1[list].user_id}/" target="_blank"><img src="{$BASE_URL}{$user_1[list].user_photo_url}" width="150" height="130" class="fixAspect" alt="个人照片"/></a>
+												{else}
+												<a href="{$BASE_URL}people/show/user_{$user_1[list].user_id}/" target="_blank"><img src="{$BASE_URL}_templates/{$THEME}/img/nopicture.png" width="150" height="130" class="fixAspect" alt="个人照片"/></a>
+												{/if}
+												</dt>
+											</dl>
+										</div>
+										{/section}
+										{else}
+										<div style="text-align: center;font-size: 18px;">还没有适合您的人才，请别急，我们去募集！</div>
+										{/if}
+										</div>
+									</td>
+									</tr>
+									{if $skill_2}
+									<tr>
+									<td>
+										<font color="green">以下是<font size="+2" color="red">【 {$skill_2} 】</font>相关人才</font>
+									</td>
+									</tr>
+									<tr>
+									<td>
+										<div id="job" style="width:750px;">
+										{if $user_2}
+										{section name="list" loop="$user_2"}
+										<div class="jobBox" style="width: 100%;">
+											<h4></h4>
+											<p class="name" style="margin-top:-10px;">
+												<a href="{$BASE_URL}people/show/user_{$user_2[list].user_id}/" target="_blank">{$user_2[list].name01} {$user_2[list].name02}</a>
+											</p>
+											<dl class="detail" style="width: 65%">
+												<dd style="height: 30px;padding-bottom: 0px;padding-top: 0px;">
+												{$user_2[list].pref} {$user_2[list].addr01} 
+												&nbsp;&nbsp;&nbsp;
+												{if $user_2[list].birth neq "0000-00-00"}{$now-$user_2[list].birth} 岁{/if}
+												&nbsp;&nbsp;&nbsp;
+												{if $user_2[list].sex eq 1}男{/if}
+												{if $user_2[list].sex eq 2}女{/if}
+												</dd>
+												<dt>
+													职业信息:&nbsp;<font style="font-weight:normal;">{$user_2[list].kindsname}&nbsp;&nbsp;{$user_2[list].typesname|mb_truncate:50}</font>
+												</dt>
+												<dd>就职意向:&nbsp;<font style="font-weight:normal;">{$user_2[list].skill}</font></dd>
+												<dd style="height: 30px;padding-bottom: 0px;padding-top: 0px;">&nbsp;&nbsp;{$user_2[list].mypr|mb_truncate:60}</dd>
+											</dl>
+											<dl class="photo">
+												<dt style="float:right;">
+												{if $user_2[list].user_photo_url}
+												<a href="{$BASE_URL}people/show/user_{$user_2[list].user_id}/" target="_blank"><img src="{$BASE_URL}{$user_1[list].user_photo_url}" width="150" height="130" class="fixAspect" alt="个人照片"/></a>
+												{else}
+												<a href="{$BASE_URL}people/show/user_{$user_2[list].user_id}/" target="_blank"><img src="{$BASE_URL}_templates/{$THEME}/img/nopicture.png" width="150" height="130" class="fixAspect" alt="个人照片"/></a>
+												{/if}
+												</dt>
+											</dl>
+										</div>
+										{/section}
+										{else}
+										<div style="text-align: center;font-size: 18px;">还没有适合您的人才，请别急，我们去募集！</div>
+										{/if}
+										</div>
+									</td>
+									</tr>
+									{/if}
+									{if $skill_3}
+									<tr>
+									<td>
+										<font color="green">以下是<font size="+2" color="red">【 {$skill_3} 】</font>相关人才</font>
+									</td>
+									</tr>
+									<tr>
+									<td>
+										<div id="job" style="width:750px;">
+										{if $user_3}
+										{section name="list" loop="$user_3"}
+										<div class="jobBox" style="width: 100%;">
+											<h4></h4>
+											<p class="name" style="margin-top:-10px;">
+												<a href="{$BASE_URL}people/show/user_{$user_3[list].user_id}/" target="_blank">{$user_3[list].name01} {$user_3[list].name02}</a>
+											</p>
+											<dl class="detail" style="width: 65%">
+												<dd style="height: 30px;padding-bottom: 0px;padding-top: 0px;">
+												{$user_3[list].pref} {$user_3[list].addr01} 
+												&nbsp;&nbsp;&nbsp;
+												{if $user_3[list].birth neq "0000-00-00"}{$now-$user_3[list].birth} 岁{/if}
+												&nbsp;&nbsp;&nbsp;
+												{if $user_3[list].sex eq 1}男{/if}
+												{if $user_3[list].sex eq 2}女{/if}
+												</dd>
+												<dt>
+													职业信息:&nbsp;<font style="font-weight:normal;">{$user_3[list].kindsname}&nbsp;&nbsp;{$user_3[list].typesname|mb_truncate:50}</font>
+												</dt>
+												<dd>就职意向:&nbsp;<font style="font-weight:normal;">{$user_3[list].skill}</font></dd>
+												<dd style="height: 30px;padding-bottom: 0px;padding-top: 0px;">&nbsp;&nbsp;{$user_2[list].mypr|mb_truncate:60}</dd>
+											</dl>
+											<dl class="photo">
+												<dt style="float:right;">
+												{if $user_3[list].user_photo_url}
+												<a href="{$BASE_URL}people/show/user_{$user_3[list].user_id}/" target="_blank"><img src="{$BASE_URL}{$user_1[list].user_photo_url}" width="150" height="130" class="fixAspect" alt="个人照片"/></a>
+												{else}
+												<a href="{$BASE_URL}people/show/user_{$user_3[list].user_id}/" target="_blank"><img src="{$BASE_URL}_templates/{$THEME}/img/nopicture.png" width="150" height="130" class="fixAspect" alt="个人照片"/></a>
+												{/if}
+												</dt>
+											</dl>
+										</div>
+										{/section}
+										{else}
+										<div style="text-align: center;font-size: 18px;">还没有适合您的人才，请别急，我们去募集！</div>
+										{/if}
+										</div>
+									</td>
+									</tr>
+									{/if}
+								</tbody>
+								{/if}
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</form>
+<Br>
+{include file="./footer.html"}

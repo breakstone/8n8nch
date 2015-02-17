@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>《京都大久保》 临时工报名</title>
+<meta charset="utf-8">
+<meta name="keywords" content="帮帮网，在日华人，「在日华人工作信息，在日工作信息，日本华人工作」，「日本华人论坛，日本华人平台」，日本华人生活，日本留学，华人日本就职">
+<meta name="description" content="帮帮网，是提供给在日华人工作信息，在日华人互助，在日华人生活交流，免费发布华人求人信息的平台！帮帮网，在日本华人工作生活信息一点一滴开始！">
+<meta name="viewport" content="user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="copyright" content="">
+<link href="{$BASE_URL}_templates/{$THEME}/Event/css/css.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/css3buttons.css">
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/Event/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/Event/js/iepng.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<link href="{$BASE_URL}_templates/{$THEME}/Online/css/css.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/Online/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/Online/js/iepng.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/Online/js/daojishi.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/style2013.css">
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/keke.js"></script>
+
+{literal}
+<style type="text/css">
+.time-item strong{background:#C71C60;color:#fff;line-height:49px;font-size:36px;font-family:Arial;padding:0 10px;margin-right:10px;border-radius:5px;box-shadow:1px 1px 3px rgba(0,0,0,0.2);}
+.item-title .unit{background:none;line-height:49px;font-size:24px;padding:0 10px;float:left;}
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+	lxfEndtime();
+});
+function wd1check(){
+	var url = document.getElementById("url").value;
+	if(document.getElementById("session").value == ""){
+		if(confirm("请先登录，再报名！现在登陆吗？")){
+			window.location.href= url+"login/?url=online_guanxi/";
+			return false;
+		}else{
+			return false;
+		}
+	}
+	if(document.getElementById("ol").value == ""){
+		if(confirm("您还没有填写简历！现在填写简历吗？")){
+			window.location.href= url+"online/gxm/?url=online_guanxi/";
+			return false;
+		}else{
+			return false;
+		}
+	}
+	if(!confirm("确定报名当日的临时工作吗？")){
+		return false;
+	}
+	if(document.getElementById("count10").value >= 10){
+		alert("尊敬的用户您好！\n您所参加活动的次数已经达到上限。\n感谢您一直以来对我们活动的支持。\n如果有疑问的话请联系我们客服：049-293-1208");
+		return false;
+	}
+	if(document.getElementById("count2").value == 2){
+		
+		alert("尊敬的用户您好！\n七天之内只可以报名两次。");
+		return false;
+	}
+	return true;
+}
+function tibu(){
+	var url = document.getElementById("url").value;
+	if(document.getElementById("session").value == ""){
+		if(confirm("请先登录，再报名！现在登陆吗？")){
+			window.location.href= url+"login/?url=online_guanxi/";
+			return false;
+		}else{
+			return false;
+		}
+	}
+	if(document.getElementById("ol").value == ""){
+		if(confirm("您还没有填写简历！现在填写简历吗？")){
+			window.location.href= url+"online/gxm/?url=online_guanxi/";
+			return false;
+		}else{
+			return false;
+		}
+	}
+	if(!confirm("确定替补当日的临时工作吗？")){
+		return false;
+	}
+
+	
+	return true;
+}
+</script>
+{/literal}
+<div class="head1" style="height: 460px;">
+  <div class="headbox1">
+    <div class="logo" style="height: 400px;"><a href="{$BASE_URL}" target="_blank"></a></div>
+  </div>
+</div>
+<br>
+
+<div class="cntmain">
+		<p style="font-size: 34px;">「<SPAN class=att>※</SPAN>」永住 定住 日籍 日配 难民 (家族,留学必须要有资格外活动<br><br>许可)</p><br><br>
+		<p style="font-size: 34px;">「<SPAN class=att>※</SPAN>」报名成功后！我们会尽快跟您联系。</p><br><br>
+		<p style="font-size: 34px;">「<SPAN class=att>※</SPAN>」参与此活动的人员，每周报名不得超过2次。累计报名不<br><br>得超过8次。</p><br><br>
+		<p style="font-size: 34px;">「<SPAN class=att>※</SPAN>」小提示: 需要携带证件（在留卡，护照，学生证，<br><br>保险证，银行存折，印章）</p><br><br>
+		<p style="font-size: 34px;">「<SPAN class=att>※</SPAN>」工资结算: 工作结束后一周内结算。</p><br><br>
+		<p style="font-size: 34px;">「<SPAN class=att>※</SPAN>」本次活动最终解释权归帮帮网所有</p><br><br>
+		<p style="font-size: 34px;">「<SPAN class=att>※</SPAN>」招工方有权对参加活动者不给予采用</p><br><br>
+		<p style="font-size: 34px;">「<SPAN class=att>※</SPAN>」家族,留学需要遵守资格外活动许可的相关规定</p><br><br>
+</div>
+	<div id="wrapper"><!-- container -->
+	<div id="container">
+	<br>
+	<!-- main -->
+	<form name="form1" action="" method="post">
+		<input name="url" id="url" type="hidden" value="{$BASE_URL}"/>
+		<input name="session" id="session" type="hidden" value="{$smarty.session.kiwa_userid}{$smarty.session.kiwa_companyid}"/>
+		<!-- 是否填写简历 -->
+		<input name="ol" id="ol" type="hidden" value="{$ol.tel}"/>
+		<!-- 今天是否报名 -->
+		<input name="baoming" id="baoming" type="hidden" value="{$baoming.evevt}"/>
+		<br><br>
+			<h1 class="title" style="width: 1000px;font-size: 40px;">&nbsp;临时工作 一 : &nbsp;白天工作  时给900円 轻作业</h1>
+		<table class="tableStyle" style="font-size: 32px;text-align:center; vertical-align:middle;" id="bm">
+			<tr>
+				<th style="text-align:center; ">工作时间</th>
+				<th>工作地点</th>
+				<th>工作内容</th>
+				<th>給料</th>
+			</tr>
+			<tr>
+				<td>07:00 ~ 18:00 <br><br>之间(白班)</td>
+				<td>京都大久保駅<br><br>(宇治田原)</td>
+				<td>轻作业</td>
+				<td style="font-size: 1em;">
+				<br>07:00 ~ 18:00时<br><br>给<font style="font-size: 1.3em;color: red;">900</font>円
+				</td>
+			</tr>
+		</table>
+			<table class="tableStyle" style="font-size: 30px;margin-top: -23px;">
+				<tr>
+				<td colspan="4" style="font-size: 30px;color: blue;">未来七日，临时工作报名</td>
+				</tr>
+				<tr>
+				<td>{$day1|date_format:'%m月%d日'}({if $week1 eq "土" or $week1 eq "日"}<font color="red">{$week1}</font>{else}{$week1}{/if})</td>
+				<td>{$day2|date_format:'%m月%d日'}({if $week2 eq "土" or $week2 eq "日"}<font color="red">{$week2}</font>{else}{$week2}{/if})</td>
+				<td>{$day3|date_format:'%m月%d日'}({if $week3 eq "土" or $week3 eq "日"}<font color="red">{$week3}</font>{else}{$week3}{/if})</td>
+				<td>{$day4|date_format:'%m月%d日'}({if $week4 eq "土" or $week4 eq "日"}<font color="red">{$week4}</font>{else}{$week4}{/if})</td>
+			
+				</tr>
+				<tr>
+				<td style="font-size: 30px;">需要<font color="red"> {$event2_1} </font>人<br><br>{if $event2_1 neq 0}报名<font color="blue"> {$c2_1} </font>人<br><br>替补 {$c2_1_beiyong} 人{/if}</td>
+				<td style="font-size: 30px;">需要<font color="red"> {$event2_2} </font>人<br><br>{if $event2_2 neq 0}报名<font color="blue"> {$c2_2} </font>人<br><br>替补 {$c2_2_beiyong} 人{/if}</td>
+				<td style="font-size: 30px;">需要<font color="red"> {$event2_3} </font>人<br><br>{if $event2_3 neq 0}报名<font color="blue"> {$c2_3} </font>人<br><br>替补 {$c2_3_beiyong} 人{/if}</td>
+				<td style="font-size: 30px;">需要<font color="red"> {$event2_4} </font>人<br><br>{if $event2_4 neq 0}报名<font color="blue"> {$c2_4} </font>人<br><br>替补 {$c2_4_beiyong} 人{/if}</td>
+				
+				</tr>
+				<tr>
+				<td>
+				{if $event2_1 neq 0}
+					{if $baoming2_1}
+						<center><button type="button" onclick="javascript:alert('您已经报过名了，请等待我们联系您！');">本日已报名</button></center>
+					{else}
+						{if $event2_1-$c2_1 > 0}
+						<center><button type="submit" name="wd2_1" onclick="return wd1check();" style="height: 40px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">&nbsp;&nbsp;我要报名&nbsp;&nbsp;</button></center>
+						{else}
+						<br><center>
+						<button type="submit" name="wd2_1_tibu" onclick="return tibu();" style="height: 40px;">我愿意候补</button>
+						</center><br>
+						{/if}
+					{/if}
+				{/if}
+				</td>
+				<td>
+				{if $event2_2 neq 0}
+					{if $baoming2_2}
+						<center><button type="button" onclick="javascript:alert('您已经报过名了，请等待我们联系您！');">本日已报名</button></center>
+					{else}
+						{if $event2_2-$c2_2 > 0}
+						<center><button type="submit" name="wd2_2" onclick="return wd1check();" style="height: 40px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">&nbsp;&nbsp;我要报名&nbsp;&nbsp;</button></center>
+						{else}
+						<br><center>
+						<button type="submit" name="wd2_2_tibu" onclick="return tibu();" style="height: 40px;">我愿意候补</button>
+						</center><br>
+						{/if}
+					{/if}
+				{/if}
+				</td>
+				<td>
+				{if $event2_3 neq 0}
+					{if $baoming2_3}
+						<center><button type="button" onclick="javascript:alert('您已经报过名了，请等待我们联系您！');">本日已报名</button></center>
+					{else}
+						{if $event2_3-$c2_3 > 0}
+						<center><button type="submit" name="wd2_3" onclick="return wd1check();" style="height: 40px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">&nbsp;&nbsp;我要报名&nbsp;&nbsp;</button></center>
+						{else}
+						<br><center>
+						<button type="submit" name="wd2_3_tibu" onclick="return tibu();" style="height: 40px;">我愿意候补</button>
+						</center><br>
+						{/if}
+					{/if}
+				{/if}
+				</td>
+				<td>
+				{if $event2_4 neq 0}
+					{if $baoming2_4}
+						<center><button type="button" onclick="javascript:alert('您已经报过名了，请等待我们联系您！');">本日已报名</button></center>
+					{else}
+						{if $event2_4-$c2_4 > 0}
+						<center><button type="submit" name="wd2_4" onclick="return wd1check();" style="height: 40px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">&nbsp;&nbsp;我要报名&nbsp;&nbsp;</button></center>
+						{else}
+						<br><center>
+						<button type="submit" name="wd2_4_tibu" onclick="return tibu();" style="height: 40px;">我愿意候补</button>
+						</center><br>
+						{/if}
+					{/if}
+				{/if}
+				</td>
+				
+				</td>
+				</tr>
+				<tr>
+					<td>{$day5|date_format:'%m月%d日'}({if $week5 eq "土" or $week5 eq "日"}<font color="red">{$week5}</font>{else}{$week5}{/if})</td>
+				<td>{$day6|date_format:'%m月%d日'}({if $week6 eq "土" or $week6 eq "日"}<font color="red">{$week6}</font>{else}{$week6}{/if})</td>
+				<td>{$day7|date_format:'%m月%d日'}({if $week7 eq "土" or $week7 eq "日"}<font color="red">{$week7}</font>{else}{$week7}{/if})</td>
+				</tr>
+				<tr>
+				<td style="font-size: 30px;">需要<font color="red"> {$event2_5} </font>人<br><br>{if $event2_5 neq 0}报名<font color="blue"> {$c2_5} </font>人<br><br>替补 {$c2_5_beiyong} 人{/if}</td>
+				<td style="font-size: 30px;">需要<font color="red"> {$event2_6} </font>人<br><br>{if $event2_6 neq 0}报名<font color="blue"> {$c2_6} </font>人<br><br>替补 {$c2_6_beiyong} 人{/if}</td>
+				<td style="font-size: 30px;">需要<font color="red"> {$event2_7} </font>人<br><br>{if $event2_7 neq 0}报名<font color="blue"> {$c2_7} </font>人<br><br>替补 {$c2_7_beiyong} 人{/if}</td>
+				</tr>
+				<tr>
+				<td>
+				{if $event2_5 neq 0}
+					{if $baoming2_5}
+						<center><button type="button" onclick="javascript:alert('您已经报过名了，请等待我们联系您！');">本日已报名</button></center>
+					{else}
+						{if $event2_5-$c2_5 > 0}
+						<center><button type="submit" name="wd2_5" onclick="return wd1check();" style="height: 40px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">&nbsp;&nbsp;我要报名&nbsp;&nbsp;</button></center>
+						{else}
+						<br><center>
+						<button type="submit" name="wd2_5_tibu" onclick="return tibu();" style="height: 40px;">我愿意候补</button>
+						</center><br>
+						{/if}
+					{/if}
+				{/if}
+				</td>
+				<td>
+				{if $event2_6 neq 0}
+					{if $baoming2_6}
+						<center><button type="button" onclick="javascript:alert('您已经报过名了，请等待我们联系您！');">本日已报名</button></center>
+					{else}
+						{if $event2_6-$c2_6 > 0}
+						<center><button type="submit" name="wd2_6" onclick="return wd1check();" style="height: 40px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">&nbsp;&nbsp;我要报名&nbsp;&nbsp;</button></center>
+						{else}
+						<br><center>
+						<button type="submit" name="wd2_6_tibu" onclick="return tibu();" style="height: 40px;">我愿意候补</button>
+						</center><br>
+						{/if}
+					{/if}
+				{/if}
+				</td>
+				<td>
+				{if $event2_7 neq 0}
+					{if $baoming2_7}
+						<center><button type="button" onclick="javascript:alert('您已经报过名了，请等待我们联系您！');">本日已报名</button></center>
+					{else}
+						{if $event2_7-$c2_7 > 0}
+						<center><button type="submit" name="wd2_7" onclick="return wd1check();" style="height: 40px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">&nbsp;&nbsp;我要报名&nbsp;&nbsp;</button></center>
+						{else}
+						<br><center>
+						<button type="submit" name="wd2_7_tibu" onclick="return tibu();" style="height: 40px;">我愿意候补</button>
+						</center><br>
+						{/if}
+					{/if}
+				{/if}
+				</tr>
+			</table>
+			<!--  
+			<h1 class="title" style="width: 1000px;font-size: 40px;">&nbsp;临时工作 第二弹 : &nbsp;《おせち料理白班》 临时工作</h1>	
+		<section id="jobEntryRegist">
+		<table class="tableStyle" style="width: 100%;font-size: 48px;" id="bm">
+			<tr style="height: 100px;">
+				<th style="width: 32%;"><br>&nbsp;&nbsp;工作时间</th>
+				<td><br>12月29日<br><br>10:00～22:00(白班)<br><br></td>
+			</tr>
+			<tr style="height: 70px;">
+				<th><br>&nbsp;&nbsp;工作地点</th>
+				<td><br>(京都)大久保駅</td>
+			</tr>
+			<tr style="height: 70px;">
+				<th><br>&nbsp;&nbsp;工作内容</th>
+				<td><br>おせち料理</td>
+			</tr>
+			<tr style="height: 160px;">
+				<th><br>&nbsp;&nbsp;給料</th>
+				<td><br>时给:900円/小时<br><br><br>交通费:500円/日<br></td>
+			</tr>
+			<tr style="height: 70px;">
+				<th><br>&nbsp;&nbsp;今日招募数</th>
+				<td><br><font color="red">{$event1}</font> 人</td>
+			</tr>
+			<tr style="height: 80px;">
+				<td colspan="2"><br>
+				已报名 <font color="blue">{$c1}</font> 人<br><br><br>
+				还有 <font color="green">{$event1-$c1}</font> 人空缺!
+				{if $c1_beiyong > 0}<br><br><br>候补已报 <font>{$c1_beiyong}</font> 人 {/if}
+				{if $event_baoming1 eq 1}<br><br><br><font color="blue">您已经报名</font>{/if}<br><br>
+				</td>
+			</tr>
+			<tr style="height: 70px;">
+				<td colspan="2">
+				{if $event_baoming1}
+					<br><center><button type="button" onclick="javascript:alert('您今天已经报过名了，请等待我们联系您！');"> 已 报 名 </button></center>
+				{else}
+					{if $event1-$c1 > 0}
+					<br><center><button type="submit" name="sb1" onclick="return wd1check();" style="height: 60px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">&nbsp;&nbsp;我要报名&nbsp;&nbsp;</button></center><br>
+					{else}
+					<br><center>
+					<button type="submit" name="sb1_tibu" onclick="return tibu();" style="height: 60px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">报名已满？有人取消，我愿意候补</button>
+					</center><br>
+					{/if}
+				{/if}
+				</td>
+			</tr>
+		</table>
+		</section>
+			<h1 class="title" style="width: 1000px;font-size: 40px;">&nbsp;临时工作 第三弹 : &nbsp;《おせち料理夜班》 临时工作</h1>	
+		<section id="jobEntryRegist">
+		<table class="tableStyle" style="width: 100%;font-size: 48px;" id="bm">
+			<tr style="height: 100px;">
+				<th style="width: 32%;"><br>&nbsp;&nbsp;工作时间</th>
+				<td><br>12月29日<br><br>22:00～10:00(夜班)<br><br></td>
+			</tr>
+			<tr style="height: 70px;">
+				<th><br>&nbsp;&nbsp;工作地点</th>
+				<td><br>(京都)大久保駅</td>
+			</tr>
+			<tr style="height: 70px;">
+				<th><br>&nbsp;&nbsp;工作内容</th>
+				<td><br>おせち料理</td>
+			</tr>
+			<tr style="height: 160px;">
+				<th><br>&nbsp;&nbsp;給料</th>
+				<td><br>时给:22点～5点（1125円）　<br><br><br>其余时间900円<br><br><br>交通费:500円/日<br><br><br></td>
+			</tr>
+			<tr style="height: 70px;">
+				<th><br>&nbsp;&nbsp;今日招募数</th>
+				<td><br><font color="red">{$event1}</font> 人</td>
+			</tr>
+			<tr style="height: 80px;">
+				<td colspan="2"><br>
+				已报名 <font color="blue">{$c3}</font> 人<br><br><br>
+				还有 <font color="green">{$event3-$c3}</font> 人空缺!
+				{if $c3_beiyong > 0}<br><br><br>候补已报 <font>{$c3_beiyong}</font> 人 {/if}
+				{if $event3_baoming}<br><br><br><font color="blue">您已经报名</font>{/if}<br><br>
+				</td>
+			</tr>
+			<tr style="height: 70px;">
+				<td colspan="2">
+				{if $event3_baoming}
+					<br><center><button type="button" onclick="javascript:alert('您今天已经报过名了，请等待我们联系您！');"> 已 报 名 </button></center>
+				{else}
+					{if $event3-$c3 > 0}
+					<center><button type="submit" name="sb2" onclick="return wd1check();" style="height: 60px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">&nbsp;&nbsp;我要报名&nbsp;&nbsp;</button></center><br>
+					{else}
+					<center>
+					<button type="submit" name="sb2_tibu" onclick="return tibu();" style="height: 60px;color: #5F3000 !important;border-color: #CC9900;text-decoration: none;text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);background-color: #f5c400;background-position: 0 -401px;">报名已满？有人取消，我愿意候补</button>
+					</center><br>
+					{/if}
+				{/if}
+			
+				</td>
+			</tr>
+			-->
+			<tr><td colspan="5">
+				<br>
+				<center><b><font style="font-size: 48px;">联系电话: 075-343-7350 (事务所)</font></b></center>
+				<br><br>
+				<center><b><font style="font-size: 48px;">电话受付时间: 09:00-18:00</font></b></center>
+				<br><br>
+			</td></tr>
+		</table>
+		</section>
+	</form>
+	</div>
+	</div>
+<div class="footer">
+  <div class="footerbox">
+    <!--<div class="banqi">专题策划：林胡安　　视觉包装：遊 · 鱼</div>-->
+    <div class="footernav"> 
+   		<!--footer链接 start-->
+		<a href="{$BASE_URL}netshow/aboutus/">关于我们</a> | 
+		<a href="{$BASE_URL}netshow/wantj/">玩转帮帮网</a> | 
+		<a href="#">友情链接</a> | 
+		<a href="{$BASE_URL}netshow/kefu/">客服中心</a> | 
+		<a href="{$BASE_URL}netshow/points/">积分规则</a> | 
+		<a href="{$BASE_URL}regist/terms/" class="bor_n">网站协议</a> | 
+		<!--footer链接 end-->
+      </div>
+    <div class="footcontent"> copyright(c) 2012 TOYO co.,ltd. ALL Rights Reserved.<br>
+     	 服务QQ：130285388 地址：埼玉県川越市 <br>
+  	{literal}
+			<script type="text/javascript">
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-46674455-1']);
+			  _gaq.push(['_trackPageview']);
+			
+			  (function() {
+			    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+			</script>
+			{/literal}
+      </div>
+    <div class="clr"></div>
+  </div>
+  <div class="clr"></div>
+</div>
+</body>
+</html>

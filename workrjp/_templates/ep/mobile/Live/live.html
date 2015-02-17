@@ -1,0 +1,199 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|在日生活互助"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+
+{literal}
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+{/literal}
+{literal}
+<script>
+	function job_biao_submit(biaoname){
+		document.getElementById("biaoname").value = biaoname;
+	}
+</script>
+{/literal}
+
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}"><span class="title">首页</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}live/mlive/"><span class="ico ico_sec"></span></a>&nbsp;
+				<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+	<div class="tabcrooll">
+		<span class="tabbar on">
+		&nbsp;&nbsp;</span>
+		<span style="color:black;font-size:13px;">{$all}件中&nbsp;<em>|</em> 第{$start}件～第{if $start+$end > 1}{$start+$end-1}{else}0{/if}件表示</span>
+		<a	id="selecTool" class="botton_a f_r" href="">
+		<span class="ico ico_reflesh"></span>分类</a>
+	</div>
+</div>
+<div style="display:none;">
+		<img src="{$BASE_URL}_templates/{$THEME}/img/8n8n.jpg" style="max-width: 228px;">
+</div>
+<div id="wrapper_list" style="overflow: hidden; left: 0px;">
+	<div id="scroller">
+		
+		<div id="hasSelected">
+				
+		</div>
+		<div id="maincon" class="maincon">
+			<ul id="tasklist" data-role="listview">
+				
+				 {section name="list" loop="$lives"}
+							<li>
+						
+								<div class="listcont" style='padding-left:0.2em;'>
+									<h2>
+											&nbsp;{if $lives[list].live_want eq 0}
+										<font style="color:green">【提供方】</font>
+											{else}
+											<font style="color:blue">【需求方】</font>
+											{/if}
+										&nbsp;&nbsp;&nbsp;关注度：<span style="color:#FF9933;">{$lives[list].read_num} 次</span>
+										
+											<a style="border-bottom: 1px solid #FDFCFC;display: block;color:#1c5fa5" href="{$BASE_URL}live/show/{$lives[list].live_id}/"   original-title="{$bbs[list].bbs_title}">
+											&nbsp;&nbsp;&nbsp;{$lives[list].live_title|mb_truncate:19}
+											</a>
+												<span style="border-bottom: 1px solid #dfdfdf;display: block;">
+												&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;">{$lives[list].service_name}</span> |
+												<span style="color:red;">{$lives[list].pref_name}</span>
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c999"> 
+												{$lives[list].create_date|date_format:"%m/%d日"} 更新
+												</span>
+													
+											</span>
+									</h2>
+								</div>
+						</li> 
+						{/section}
+			</ul>
+			<div style="text-align: center;">
+				{if $all gt 12}
+				<span style="font-size: 18px;"> {$subPages} </span>
+				{/if}
+			</div>
+		</div>
+		<div id="pullUp">
+		</div>
+	</div>
+</div>
+
+	<form action="{$BASE_URL}live/" accept-charset="utf-8" id="searchform" name="searchform" method="post">
+	<input type="hidden" name="service_id" id="service_id" value="{$service_id}">
+			<div id="condition_list" class="condition_list pad10">
+				<div id="condison_relat">
+					<div id="condison_absolut" >
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">房产相关：</dt>
+							<dd>
+								{section name="list" loop=$fangchan}
+									<a href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}live/{$fangchan[list].service_id}/'">{$fangchan[list].service_name}</a>
+								{/section}
+						
+							</dd>
+						</dl>
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">跳蚤市场：</dt>
+							<dd>
+								{section name="list" loop=$tiaozao}
+									<a  href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}live/{$tiaozao[list].service_id}/'">{$tiaozao[list].service_name}</a>
+								{/section}
+						
+							</dd>
+						</dl>
+						
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">车辆服务：</dt>
+							<dd>
+								{section name="list" loop=$cheliang}
+									<a href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}live/{$cheliang[list].service_id}/'">{$cheliang[list].service_name}</a>
+								{/section}
+						
+							</dd>
+						</dl>
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">家政服务：</dt>
+							<dd>
+									{section name="list" loop=$jiazheng}
+									<a href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}live/{$jiazheng[list].service_id}/'">{$jiazheng[list].service_name}</a>
+								{/section}
+						
+							</dd>
+						</dl>
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">生活相关：</dt>
+							<dd>
+									{section name="list" loop=$shenghuo}
+									<a href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}live/{$shenghuo[list].service_id}/'">{$shenghuo[list].service_name}</a>
+								{/section}
+						
+							</dd>
+						</dl>
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">美食旅游：</dt>
+							<dd>
+								{section name="list" loop=$meishi}
+									<a href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}live/{$meishi[list].service_id}/'">{$meishi[list].service_name}</a>
+								{/section}
+						
+							</dd>
+						</dl>
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">设计相关：</dt>
+							<dd>
+								{section name="list" loop=$sheji}
+									<a href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}live/{$sheji[list].service_id}/'">{$sheji[list].service_name}</a>
+								{/section}
+						
+							</dd>
+						</dl>
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">法律帮助：</dt>
+							<dd>
+								{section name="list" loop=$falv}
+									<a href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}live/{$falv[list].service_id}/'">{$falv[list].service_name}</a>
+								{/section}
+						
+							</dd>
+						</dl>
+						<div class="conditbot">
+								<div class="submit">
+									
+									<input id="cacelSelect" type="button" value="取消"/>
+								</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+	</form>
+	<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklist2.js"></script>
+	<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commset.js"></script>
+{include file="./mobile/footer.html"}

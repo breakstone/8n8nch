@@ -1,0 +1,189 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|闲聊吧"}
+<meta name="format-detection" content="telephone=no"/>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+{literal}
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+{/literal}
+{literal}
+<script>
+	function job_fl_submit(fenlei)
+	{
+		document.getElementById("fenlei").value = fenlei;
+		//myScroll.refresh();
+	}
+</script>
+{/literal}
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}"><span class="title">首页</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+		<a href="{$BASE_URL}bbs/mbbs/"><span class="ico ico_sec"></span></a>&nbsp;
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+		
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+		<div class="tabcrooll" style="text-align: center;">
+		<span class="tabbar on f_l">
+		&nbsp;&nbsp;</span>
+		<span class="f_l" style="color:black;font-size:13px;">{$all}件&nbsp;</span>
+				{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+					<a  class="botton_a" style="line-height: 1.9em;font-size:12px;background:#FAE602;color: #070707 !important;" href="{$BASE_URL}bbs/send/">发布话题 </a>
+				{else}
+					<a   class="botton_a " style="line-height: 1.9em;font-size:12px;background:#FAE602;color: #070707 !important;" href="{$BASE_URL}login/?url=bbs_send" onclick="return sendconfirm();"> 发布话题 </a>
+				{/if}
+		<a	id="selecTool" class="botton_a f_r" href="">
+		<span class="ico ico_reflesh"></span>筛选</a>
+	</div>
+</div>
+<div id="wrapper_list" style="overflow: hidden; left: 0px;">
+	<div id="scroller">
+		
+		<div id="hasSelected">
+					{if $fenlei neq ""}
+						<span>
+						{$fenlei}
+						</span>
+					{/if}   
+					
+					{if $fenlei neq "" }
+						<a href="{$BASE_URL}bbs/"><span> 清除选择×</span></a>
+					{/if}
+		</div>
+		<div id="maincon" class="maincon">
+			<ul id="tasklist" data-role="listview">
+				{if $bbs}
+					{section name="list" loop="$bbs"}
+						<li style="width:98%;padding:0.5em;">
+							<div class="listcont" style="padding-left:0;">
+								<h2 style="margin: 0px;">
+									<p style="padding-left:0.1em">
+										<!-- {if $bbs[list].bbs_type eq ""}
+											<a style="border-bottom: 1px solid #FDFCFC;color:#1c5fa5;display: inline;padding:0px;" href="{$BASE_URL}bbs/?fenlei=闲聊"><font style="color:green;">【闲聊】</font></a>
+											
+										{else}
+											<a style="border-bottom: 1px solid #FDFCFC;color:#1c5fa5;display: inline;" href="{$BASE_URL}bbs/?fenlei={$bbs[list].bbs_type}"><font style="color:blue;">【{$bbs[list].bbs_type}】</font></a>
+										{/if}
+										 -->
+										<a style="border-bottom: 1px solid #FDFCFC;color:#1c5fa5;display: inline;padding:0px;" href="{$BASE_URL}bbs/show/{$bbs[list].bbs_id}/{$url1}"  original-title="{$bbs[list].bbs_title}">
+										{$bbs[list].bbs_title}
+										</a>
+									</p>
+									<span style="border-bottom: 1px solid #dfdfdf;display: block;padding:0 0.2em;font-size:0.7em">
+										{if $bbs[list].user_type eq user}
+											ID：<span style="color:#737373"><a style="border-bottom: 1px solid #FDFCFC;color:red;display: inline;padding:0px;" href="{$BASE_URL}people/show/user_{$bbs[list].user_id}/">{getname name="username" value=$bbs[list].user_id}</a></span>
+										{else}
+											ID：<span style="color:#737373"><a style="border-bottom: 1px solid #FDFCFC;color:red;display: inline;padding:0px;" href="{$BASE_URL}people/show/company_{$bbs[list].user_id}/">{getname name="company_name" value=$bbs[list].user_id}</a></span>
+										{/if}
+									
+										<span >&nbsp;|&nbsp;浏览量：<font style="color:#737373;padding:0" >{$bbs[list].read_num}</font></span>
+										<span style="color:#737373;"> 
+												{if $bbs[list].create_date|date_format:'%Y-%m-%d' eq $today}
+													<font color="red" class="f_r">今天</font>
+												{elseif $bbs[list].create_date|date_format:'%Y-%m-%d' eq $yestoday}
+													<font class="f_r">昨天</font>
+												{elseif $bbs[list].create_date|date_format:'%Y-%m-%d' eq $bfyestoday}
+													<font class="f_r">前天</font>
+												{else}
+													<font class="f_r">{$bbs[list].create_date|date_format:'%m-%d'}</font>
+												{/if}
+												{if $smarty.session.kiwa_companyid eq "000001"}
+													<a href="{$BASE_URL}bbs/del/{$bbs[list].bbs_id}/">×</a>
+												{/if}
+										</span>	
+									</span>
+							</h2>
+						</div>
+					</li> 
+				{/section}
+			{else}
+				<li>&nbsp;抱歉，还没有你索搜的信息！</li>
+			{/if}
+			</ul>
+		
+			<div style="text-align: center;">
+				{if $all gt 20}
+				<span style="font-size: 18px;"> {$subPages} </span>
+				{/if}
+			</div>
+			<br><br>
+		</div>
+		
+	</div>
+</div>
+<form action="{$BASE_URL}bbs/" method="get"  id="form_task_search">
+		<div style="overflow:auto;" id="condition_list" class="condition_list pad10">
+				<div id="condison_relat">
+					<div id="condison_absolut" style="overflow: hidden;">
+								<dl class="condition clearfix" style="transition: transform 0ms; -webkit-transition: transform 0ms; transform-origin: 0px 0px 0px; transform: translate(0px, 0px) translateZ(0px);">
+								<dt class="f_l">分类：</dt>
+								<input type="hidden" value="{$fenlei}" id="fenlei" name="fenlei">
+
+									<dd>
+							
+										<a href="{$BASE_URL}bbs/?fenlei=闲聊" class="pxa {if $fenlei eq '闲聊'}on{/if}" onclick="job_fl_submit('闲聊');">&nbsp;闲 聊&nbsp; </a>
+										<a href="{$BASE_URL}bbs/?fenlei=工作相关" class="pxa {if $fenlei eq '工作相关'}on{/if}" onclick="job_fl_submit('工作相关');">工作相关</a>
+										<a href="{$BASE_URL}bbs/?fenlei=生活相关" class="pxa {if $fenlei eq '生活相关'}on{/if}" onclick="job_fl_submit('生活相关');">生活相关</a>
+										<a href="{$BASE_URL}bbs/?fenlei=法律相关" class="pxa {if $fenlei eq '法律相关'}on{/if}" onclick="job_fl_submit('法律相关');">法律相关</a>
+										<a href="{$BASE_URL}bbs/?fenlei=留学相关" class="pxa {if $fenlei eq '留学相关'}on{/if}"  onclick="job_fl_submit('留学相关');">留学相关</a>
+										
+										<a href="{$BASE_URL}bbs/?fenlei=签证相关" class="pxa {if $fenlei eq '签证相关'}on{/if}" onclick="job_fl_submit('签证相关');">签证相关</a>
+										<a href="{$BASE_URL}bbs/?fenlei=税务相关" class="pxa {if $fenlei eq '税务相关'}on{/if}" onclick="job_fl_submit('税务相关');">税务相关</a>
+										<a href="{$BASE_URL}bbs/?fenlei=劳灾相关" class="pxa {if $fenlei eq '劳灾相关'}on{/if}" onclick="job_fl_submit('劳灾相关');">劳灾相关</a>
+										
+									</dt>
+									
+									
+								</dl>
+							<dl class="condition clearfix">
+							<dt class="f_l">关键字：</dt>
+								<dd>
+									<input type="text" name="keyword" class="txt_input mr_5 ml_10" value="{$keyword}" original-title="">
+								</dd>
+							</dl>
+							<div class="conditbot">
+								<div class="submit">
+								<button class="submit" >确定</button>
+								<a style='background: #FFFFFF;' href="{$BASE_URL}bbs/"><input  type="button" value="清除选择"/></a>
+								<input id="cacelSelect" type="button" value="取消"/>
+								</div>	
+							</div>
+								
+					
+							
+					</div>
+				</div>
+			</div>
+			
+			<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+	</form>
+
+	<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklist2.js"></script>
+	<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commsetlive.js"></script>
+	
+{include file="./mobile/footer.html"}

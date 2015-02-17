@@ -1,0 +1,175 @@
+{include file="./header.html" title="生活服务需求详细"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+{literal}
+<script>
+function null_check(){
+	if(document.getElementById("answer_content").value==""){
+		alert("请输入回复内容！");
+		return false;
+	}
+	return true;
+}
+</script>
+{/literal}
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt;<a href="{$BASE_URL}live/">生活服务需求详细</a></li>
+	<li>&gt; {$live.live_title}</li>
+</ul>
+<!-- //pan -->
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+<!-- box -->
+<div id="box">
+<div id="job_detail">
+<section>
+<form name="form1" action="{$BASE_URL}live/answerdo/" method="post">
+<p class="title">{$live.live_title}</p>
+<p class="celebration">浏览数:{$live.read_num}</p>
+<ul class="status">
+	<li>发表于:{$live.create_date|date_format:"%Y年%m月%d日"} </li>
+</ul>
+<div id="company">
+	{if $company}
+	<h3 style="padding-right: 3px; width: 86px;">
+		<img src="{$BASE_URL}{$company.company_photo_url}" alt="{$company.company_name}" width="80" height="80" class="fixAspect" />
+		<center>
+			{if $smarty.session.kiwa_companyid}
+			<a href="{$BASE_URL}companypage/cmessage_send/{$live.user_id}/" target="_blank">　联系TA　</a>
+			{/if}
+			{if $smarty.session.kiwa_userid}
+			<a href="{$BASE_URL}mypage/pmessage_send/{$live.user_id}/" target="_blank">　联系TA　</a>
+			{/if}
+		</center>
+	</h3>
+	<dl class="left">
+		<dt>发布者：</dt>
+		<dd><a href="{$BASE_URL}people/show/company_{$live.user_id}/" target="_blank">{$company.company_name}</a></dd>
+		<dt>信息类别：</dt>
+		<dd>{$live.service_name}</dd>
+		<dt>发表于：</dt>
+		<dd> {$live.create_date|date_format:"%Y年%m月%d日"} </dd>
+		
+	</dl>
+		<dl>
+			{if $company.per_status eq 1}
+			<dt>联系电话：</dt>
+			<dd>{$company.tel01} {$company.tel02} {$company.tel03}</dd>
+			<dt>邮件地址：</dt>
+			<dd>{$company.email02}</dd>
+			{/if}
+			<dt>供需关系：</dt>
+			<dd>{if $live.live_want eq 0}提供方{else}需求方{/if}</dd>
+		</dl>
+	{/if}
+	{if $user}
+	<h3 style="padding-right: 3px;">
+		<img src="{$BASE_URL}{$user.user_photo_url}" alt="{$user.name01} {$user.name02}" width="80" height="80" class="fixAspect" />
+		<center>
+			{if $smarty.session.kiwa_companyid}
+			<a href="{$BASE_URL}companypage/cmessage_send/{$live.user_id}/" target="_blank">　联系TA　</a>
+			{/if}
+			{if $smarty.session.kiwa_userid}
+			<a href="{$BASE_URL}mypage/pmessage_send/{$live.user_id}/" target="_blank">　联系TA　</a>
+			{/if}
+		</center>
+	</h3>
+	<dl class="left">
+		<dt>发布者：</dt>
+		<dd><a href="{$BASE_URL}people/show/user_{$live.user_id}/" target="_blank">{$user.name01}{$user.name02}</a></dd>
+		<dt>信息类别：</dt>
+		<dd>{$live.service_name}</dd>
+		<dt>发表于：</dt>
+		<dd> {$live.create_date|date_format:"%Y年%m月%d日"} </dd>
+	</dl>
+		<dl>
+			{if $user.tel_flag eq 1}
+			<dt>联系电话：</dt>
+			<dd>{$user.tel01} {$user.tel02} {$user.tel03}</dd>
+			{/if}
+			{if $user.per_status eq 1}
+			<dt>邮件地址：</dt>
+			<dd>{$user.email}</dd>
+			{/if}
+			<dt>供需关系：</dt>
+			<dd>{if $live.live_want eq 0}提供方{else}需求方{/if}</dd>
+		</dl>
+	{/if}
+</div>
+<h4>需求内容</h4>
+<table summary="需求内容" class="tableStyle">
+	<tr>
+		<td style="font-size:15px;">
+		地点 : {$live.pref_name} {$live.station_name}<br>
+		{if $live.type}类别 : {$live.type}<br>{/if}
+		{if $live.home_geju}房屋格局 : {$live.home_geju}<br>{/if}
+		{if $live.home_juli}离车站距离: {$live.home_juli} 分以内<br>{/if}
+		{if $live.home_year}房屋年数: {$live.home_year} 年以内<br>{/if}
+		{if $live.zhong}宠物种类: {$live.zhong}<br>{/if}
+		{if $live.weixiu_shangmen}
+		上门服务: {if $live.weixiu_shangmen eq 0}不能提供{/if}{if $live.weixiu_shangmen eq 1}可以提供{/if}<br>
+		{/if}
+		<hr>
+		{$live.live_content|nl2br}
+		<br><br><br>
+		</td>
+	</tr>
+</table>
+<h4 style="margin-bottom: -20px;"></h4>
+{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+	已登录 : {getname name="username" value=$smarty.session.kiwa_userid} {getname name="company_name" value=$smarty.session.kiwa_companyid}
+{else}
+	您需要 <a href="{$BASE_URL}login/?url=live_show_{$live.live_id}/" target="_blank">登录</a> 后才能发表留言。
+{/if}
+<div style="float: right;">请严格遵守 <a href="javascript:void(0)">留言规则</a>，无效留言将被封号处理！</div>
+<textarea rows="8" cols="" style="width:948px;" name="answer_content" id="answer_content"></textarea>
+<div class="nav" style="margin-top: 1px;">
+<ul>
+	{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+		<input type="hidden" name="live_id" id="live_id" value="{$live.live_id}">
+		<li><input type="image" src="{$BASE_URL}_templates/{$THEME}/img/answer.gif" alt="报名留言" onclick="return null_check();"></li>
+		<li class="favorite"><a href="javascript:void(0)" onclick="favorite('{$live.live_id}','live');">收藏此需求</a></li>
+	{else}
+		<li><a href="javascript:void(0)" onclick="javascript:alert('请登录,再留言！');"><img src="{$BASE_URL}_templates/{$THEME}/img/answer.gif" width="164" height="34" alt="报名留言" /></a></li>
+	{/if}
+</ul>
+</div>
+</form>
+<table summary="回复内容" class="tableStyle">
+	{section name="list" loop="$answers"}
+		<tr>
+			<th rowspan="2" style="width:130px;text-align: center;" valign="top">
+				{if $answers[list].answer_user_type eq "user"}
+					<img src="{$BASE_URL}{getname name="user_photo" value=$answers[list].answer_user_id}" width="100" height="100">
+					<br>
+					{getname name="username" value=$answers[list].answer_user_id}
+					<div>个人级用户</div>
+				{/if}
+				{if $answers[list].answer_user_type eq "company"}
+					<img src="{$BASE_URL}{getname name="company_photo" value=$answers[list].answer_user_id}" width="100" height="100">
+					<br>
+					{getname name="company_name" value=$answers[list].answer_user_id}
+					<div>企业级用户</div>
+				{/if}
+			</th>
+			<td height="120px;" valign="top">{$answers[list].answer_content|nl2br}</td>
+		</tr>
+		<tr>
+			<td style="font-size:12px;PADDING-BOTTOM:2px;PADDING-TOP:2px;PADDING-LEFT:10px;">
+				发表于: {$answers[list].create_date}<a href="#" style="float:right;">▲举报此用户</a>
+			</td>
+		</tr>
+	{/section}
+</table>
+</section>
+</div>
+</div>
+<!-- //box -->
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+
+</div>
+<!-- //container --></div>
+<!-- //wrapper -->
+{include file="./footer.html"}

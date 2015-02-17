@@ -1,0 +1,255 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息"}
+<meta name="format-detection" content="telephone=no"/>
+
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+
+
+{literal}
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+{/literal}
+{literal}
+<script>
+	function job_biao_submit(biaoname){
+		document.getElementById("biaoname").value = biaoname;
+	}
+</script>
+{/literal}
+
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}"><span class="title">首页</span></a>
+		</div>
+		
+		<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+		
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+
+	<div class="tabcrooll">
+		<span class="tabbar on">
+		&nbsp;&nbsp;</span>
+		<span style="color:black;font-size:13px;">{$all}件中&nbsp;<em>|</em> 第{$start}件～第{if $start+$end > 1}{$start+$end-1}{else}0{/if}件表示</span>
+		<a	id="selecTool" class="botton_a f_r" href="">
+		<span class="ico ico_reflesh"></span>筛选</a>
+	</div>
+</div>
+<div style="display:none;">
+		<img src="{$BASE_URL}_templates/{$THEME}/img/8n8n.jpg" style="max-width: 228px;">
+</div>
+<div id="wrapper_list" style="overflow: hidden; left: 0px;">
+	<div id="scroller">
+		
+		<div id="hasSelected">
+				
+				{if $date neq ""}
+					<span>
+					{if $date eq "today"}
+					今天
+					{elseif $date eq "tom"}
+					明天
+					{elseif $date eq "after"}
+					后天
+					{/if}
+					</span>
+				{/if}
+				{if $sea_day neq ""}
+					<span>{$sea_day}</span>
+				{/if}
+				{if $areaid neq ""}
+					<span>
+					{section name="list" loop="$areas"}
+														
+						{if $areas[list].area_cd eq $areaid}
+							{$areas[list].area_name}
+						{/if}
+					{/section}
+					</span>
+				{/if}
+				{if $pref neq ""}
+					<span>
+				 {getname name='pref' value=$pref}
+					</span>
+				{/if}
+				{if $jobls_key_ser neq ""}
+					<span>{$jobls_key_ser}</span>
+				{/if}
+				{if $date neq "" or $areaid neq "" or $pref neq "" or $sea_day neq "" or $jobls_key_ser neq ""}
+					<a href="{$BASE_URL}job/ls/"><span> 清除选择×</span></a>
+				{/if}
+		</div>
+		<div id="maincon" class="maincon">
+			<ul id="tasklist" data-role="listview">
+				
+				{section name="list" loop="$job_ls"}
+				<li>
+					<a href="{$BASE_URL}job/lsshow/{$job_ls[list].job_ls_id}/{$url1}">
+							<div class="listcont">
+								<h2>
+									<span style="border-bottom: 1px solid #FDFCFC;color:#1c5fa5">{$job_ls[list].job_ls_title|mb_truncate:16}</span>
+									 <span 	class="hoverinfobox" style="display: none;">
+										<div id="arrow">
+											<em></em> <span></span>
+										</div>
+									</span> 
+									{if $smarty.now|date_format:'%Y/%m/%d' eq
+									$job_ls[list].create_date|date_format:"%Y/%m/%d"}<span
+										class="icocl ico_j">新</span>&nbsp;{/if}
+									</h2>
+									<div class="lins">
+										<span class="cEB2">{$job_ls[list].pref_name}</span>&nbsp;&nbsp; 
+										
+										<span class="c999"> 
+										{if $job_ls[list].date_star|date_format:'%Y-%m-%d' eq $job_ls[list].date_end|date_format:'%Y-%m-%d'}
+											{$job_ls[list].date_star|date_format:'%Y-%m-%d'}
+										{else}
+											{$job_ls[list].date_star|date_format:'%Y-%m-%d'} 到 {$job_ls[list].date_end|date_format:'%Y-%m-%d'}
+										{/if}
+										</span>
+										<span class="c999 f_r" > 
+										{if	$job_ls[list].create_date|date_format:'%Y-%m-%d' eq $today} 
+										<font color="red">今天</font>
+										{elseif $job_ls[list].create_date|date_format:'%Y-%m-%d' eq $yestoday}
+										 昨天
+										{elseif $job_ls[list].create_date|date_format:'%Y-%m-%d' eq $bfyestoday} 
+										前天 
+										{else}
+											{$job_ls[list].create_date|date_format:'%m月 %d日'}
+										{/if}
+										</span>
+									</div>
+							</div>
+						</a>
+				</li> 
+				{/section}
+			</ul>
+			<br>
+			<div style="text-align: center;padding:8px;">
+				{if $all gt 10}
+				<span style="font-size: 18px;"> {$subPages} </span>
+				{/if}
+				
+			</div>
+				<br>
+		</div>
+		
+	</div>
+</div>
+	<form action="{$BASE_URL}job/ls" accept-charset="utf-8" id="searchform" name="searchform" method="get">
+
+			<div style="overflow:auto;" id="condition_list" class="condition_list pad10">
+				<div id="condison_relat">
+					<div id="condison_absolut" style="overflow: hidden;">
+						<dl class="condition clearfix">
+							<dt class="f_l">选择区域：</dt>
+								<dd>
+									
+										<select name="areaid" id="areaid" onchange="showPref();">
+											<option value="">不指定</option>
+											<option value="">---------------</option>
+											{section name="list" loop="$areas"}
+												<option value="{$areas[list].area_cd}"
+												{if $areas[list].area_cd eq $areaid}
+													selected='selected'
+												{/if}
+												>{$areas[list].area_name}</option>
+											{/section}
+										</select>
+										<select name="pref" id="pref" onchange="">
+											<option value="">不指定</option>
+											<option value="">---------------</option>
+											{if $prefSearch}
+												{section name="list" loop="$prefSearch"}
+													<option value="{$prefSearch[list].pref_cd}"
+														{if $prefSearch[list].pref_cd eq $pref}
+															selected='selected'
+														{/if}
+													>
+													{$prefSearch[list].name}
+													</option>
+												{/section}
+											{/if}
+										</select>
+										<input type="hidden" name="searchEki">
+										<input type="hidden" name="reqType" value="">
+										<input type="hidden" name="mid_area_cd" value="">
+										<input type="hidden" name="mid_area_cds" value="">
+										<input type="hidden" name="comp_mgr_no" value="">
+										<input type="hidden" name="base_mgr_no" value="">
+										<input type="hidden" name="id_ad" value="">
+										<input type="hidden" name="new_flg" value="">
+										<input type="hidden" name="query_str" value="?">
+										<input type="hidden" name="query_flg" value="">
+										<p id="js-detailSearch-search-animation" class="animate" ></p>
+										<ul>
+										<span class="ensn_list" id="ensn_list">
+											{if $ensn}
+												{section name="list" loop="$ensn"}
+													<li style="margin-left:-6px;"><label><input type="checkbox" class="ensn-chk" id="{getname name='ensn' value='$ensn[list]'}" name="ensn[]" value="{$ensn[list]}" checked >{getname name="ensn" value="$ensn[list]"}</label></li><br/>
+												{/section}
+											{/if}
+											{if $eki}
+												{section name="list" loop="$eki"}
+													<li style="margin-left:-6px;"><label><input type="checkbox" class="ensn-chk" id="{getname name='eki' value='$eki[list]'}" name="eki[]" value="{$eki[list]}" checked >{getname name="eki" value="$eki[list]"}</label></li><br/>
+												{/section}
+											{/if}
+										</span>
+										</ul>
+									
+								</dd>
+							</dl>
+							<dl class="condition clearfix">
+								<dt class="f_l">工作时间：</dt>
+								<dd>
+									<a href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}job/ls?date=today'" class="pxa {if $date eq 'today'}on{/if}">&nbsp;今天&nbsp;</a>
+										<a href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}job/ls?date=tom'" class="pxa {if $date eq 'tom'}on{/if}">&nbsp;明天&nbsp;</a>
+										<a href="javascript:void(0);" onclick="javascript:window.location.href='{$BASE_URL}job/ls?date=after'" class="pxa {if $date eq 'after'}on{/if}">&nbsp;后天&nbsp;</a>
+										{$date_star}
+								</dd>
+							</dl>
+							<dl class="condition clearfix">
+								<dt class="f_l">搜关键字：</dt>
+								<dd>
+									<input type="text" name="jobls_key_ser"  class="txt_input mr_5 ml_10" value="{$jobls_key_ser}" original-title="" id="jobls_key_ser">
+								</dd>
+							</dl>
+						<div class="conditbot">
+								<div class="submit">
+									<input name="search" class="bt" type="submit" value="确定"/>
+									<a style='background: #FFFFFF;' href="{$BASE_URL}job/ls/"><input  type="button" value="清除选择"/></a>
+									<input id="cacelSelect" type="button" value="取消"/>
+								</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+	</form>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklist2.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commsetlive.js"></script>
+{include file="./mobile/footer.html"}

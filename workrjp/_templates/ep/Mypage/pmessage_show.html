@@ -1,0 +1,90 @@
+{include file="./header.html" title="帮帮网-送信箱"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class="on hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}mypage/">我的地盘</a></li>
+	<li>&gt; <a href="{$BASE_URL}mypage/pmessage/">个人信箱</a></li>
+	<li>&gt; 查看信件</li>
+</ul>
+<!-- //pan -->
+<h1 class="title">查看信件</h1>
+<form name="form1" action="{$BASE_URL}mypage/pmessage_re/" method="post">
+<section id="jobEntryRegist">
+<table summary="求人応募" class="tableStyle">
+	<tr>
+		<th>发信人</th>
+		<td class="alLeft">
+		<a href="{$BASE_URL}people/show/company_{$message.message_from}/" target="_blank">{getname name="company_name" value=$message.message_from}</a>
+		<a href="{$BASE_URL}people/show/user_{$message.message_from}/" target="_blank">{getname name="username" value=$message.message_from}</a>
+		</td>
+	</tr>
+	<tr>
+		<th>收信人</th>
+		<td class="alLeft">
+		<a href="{$BASE_URL}people/show/company_{$message.message_to}/" target="_blank">{getname name="company_name" value=$message.message_to}</a>
+		<a href="{$BASE_URL}people/show/user_{$message.message_to}/" target="_blank">{getname name="username" value=$message.message_to}</a>
+		</td>
+	</tr>
+	<tr>
+		<th>信件标题</th>
+		<td class="alLeft">{$message.message_title}</td>
+	</tr>
+	<tr>
+		<th>信件内容</th>
+		<td class="alLeft">{$message_content}</td>
+	</tr>
+</table>
+<br>
+<input type="hidden" name="rem_id" id="rem_id" value="{$message.message_id}">
+{if $message.message_from neq "000001"}
+<table summary="求人応募" class="tableStyle">
+	<tr>
+		<th>返信</th>
+		<td class="alLeft">
+			<textarea name="re_message" id="re_message" rows="12" cols="90"></textarea>
+		</td>
+	</tr>
+</table>
+<p class="alCenter">
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_remessage.gif" alt="返信" onclick="return remessageCheck();">
+</p>
+{/if}
+</section>
+</form>
+
+<p id="pagetop"><a href="#container">TOPへ戻る</a></p>
+</div></div>
+{include file="./footer.html"}

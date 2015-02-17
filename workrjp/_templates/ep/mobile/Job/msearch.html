@@ -1,0 +1,114 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}job/"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}job/"><span class="title">返回</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}job/msearch/"><span class="ico ico_sec"></span></a>&nbsp;
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+		
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		
+		</div>
+	</div>
+
+	<div class="tabcrooll">
+		<div class="serch_ind">
+		<form action="{$BASE_URL}job/msearch/" accept-charset="utf-8" id="searchform" name="searchform" method="post">
+			
+				<input id="serchIput" class="serc_c" type="text"  name="keyword" value="{$keyword}" id="keyword">
+				
+							<label class="clerserc">
+								<span class="ico ico_serc" style="width:40px;">
+								<input class="hiden" type="submit">
+								</span>
+							</label>
+							
+							
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="wrapper_list" style="overflow: hidden; left: 0px;">
+	<div id="scroller">
+		
+		
+		<div id="maincon" class="maincon">
+		<ul id="tasklist" data-role="listview"  style="background:red;text-align: center;">
+		<li>
+			<br>
+			<span style="color:black;font-size:13px;">{$all}件中&nbsp;<em>|</em> 第{$start}件～第{if $start+$end > 1}{$start+$end-1}{else}0{/if}件表示</span>
+		</li>
+		</ul>
+			<ul id="tasklist" data-role="listview">
+				{section name="list" loop="$jobs"}
+				<li>
+					<a href="{$BASE_URL}job/show/{$jobs[list].job_id}/"> 
+							<div class="listcont">
+								<h2>
+									{$jobs[list].job_title|mb_truncate:16} <span
+										class="hoverinfobox" style="display: none;">
+										<div id="arrow">
+											<em></em> <span></span>
+										</div>
+									</span> {if $jobs[list].read_num > 15} <span class="icocl ico_r">热</span>&nbsp;{/if}
+									{if $jobs[list].job_photo neq ""}<span class="icocl ico_yr">图</span>&nbsp;{/if}
+									{if $smarty.now|date_format:'%Y/%m/%d' eq
+									$jobs[list].create_date|date_format:"%Y/%m/%d"}<span
+										class="icocl ico_j">新</span>&nbsp;{/if}
+								</h2>
+								<div class="lins">
+									<span class="cEB2">{$jobs[list].pref_name}</span>&nbsp;&nbsp; <span
+										class="c999"> {if
+										$jobs[list].create_date|date_format:'%Y-%m-%d' eq $today} <font
+										color="red">今天</font> {elseif
+										$jobs[list].create_date|date_format:'%Y-%m-%d' eq $yestoday} 昨天
+										{elseif $jobs[list].create_date|date_format:'%Y-%m-%d' eq
+										$bfyestoday} 前天 {else}
+										{$jobs[list].create_date|date_format:'%m月 %d日'} {/if} 更新
+									</span>
+								</div>
+							</div>
+						</a>
+				</li> 
+				{/section}
+			</ul>
+			<br>
+			<div style="text-align: center;">
+				{if $all gt 10}
+				<span style="font-size: 18px;"> {$subPages} </span>
+				{/if}
+			</div>
+				<br>
+				<br>
+		</div>
+		
+	</div>
+</div>
+
+<script type="text/javascript" 	src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklist2.js"></script>
+<script type="text/javascript" 	src="{$BASE_URL}_templates/{$THEME}/mobile/js/commset.js"></script>
+</div>
+{include file="./mobile/footer.html"}

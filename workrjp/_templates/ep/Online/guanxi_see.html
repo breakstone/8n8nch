@@ -1,0 +1,1564 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|闲聊吧"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+{literal}
+<script type="text/javascript">
+
+</script>
+{/literal}
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+<br>
+
+<form name="form1" action="" method="post">
+<!-- 
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">{$event_day}おせち料理的工作信息</h1>
+	
+		<div class="box normal clearfix">
+		
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 120px;">现场</li>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+						
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 200px;">附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+				
+						{section name="list" loop="$kiwa_event1"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">おせち料理白班</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1[list].name}({$kiwa_event1[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event1[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event1[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event1[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event1[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event1[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event1[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event1[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event1[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event1[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event1[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event1[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event1[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+						{section name="list" loop="$kiwa_event3"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">おせち料理夜班 </li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3[list].name}({$kiwa_event3[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event3[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event3[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event3[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event3[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event3[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event3[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event3[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event3[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event3[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event3[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event3[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event3[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+				</dl>
+			</div>
+		</div>
+	</div>
+</section>
+ -->
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">{$today}的工作信息</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 120px;">现场</li>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+						
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 200px;">附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+					
+					{section name="list" loop="$kiwa_event1_0"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">芳野台</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_0[list].name}({$kiwa_event1_0[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event1_0[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							
+							
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_0[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_0[list].tel}</li>
+						
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event1_0[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event1_0[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_0[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event1_0[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_0[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event1_0[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_0[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event1_0[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_0[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event1_0[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_0[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event1_0[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_0[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event1_0[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_0[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event1_0[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event1_0[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					
+					
+						{section name="list" loop="$kiwa_event2_0"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">{$event2_name}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_0[list].name}({$kiwa_event2_0[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event2_0[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 120px;">{$kiwa_event2_0[list].visa}</li>
+							<li style="width: 120px;">{$kiwa_event2_0[list].tel}</li>
+							
+							<li style="width: 100px;">{$kiwa_event2_0[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event2_0[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_0[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event2_0[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_0[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event2_0[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_0[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event2_0[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_0[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event2_0[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_0[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event2_0[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_0[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event2_0[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_0[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event2_0[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event2_0[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+				</dl>
+			</div>
+		</div>
+	</div>
+</section>
+<br><br><br>
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">{$day1}的工作信息</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 120px;">现场</li>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+						
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 200px;">附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+	
+					{section name="list" loop="$kiwa_event1_1"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">芳野台</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_1[list].name}({$kiwa_event1_1[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event1_1[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event1_1[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_1[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event1_1[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event1_1[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_1[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event1_1[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_1[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event1_1[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_1[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event1_1[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_1[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event1_1[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_1[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event1_1[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_1[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event1_1[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_1[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event1_1[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event1_1[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event2_1"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">{$event2_name}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_1[list].name}({$kiwa_event2_1[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event2_1[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event2_1[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_1[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event2_1[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event2_1[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_1[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event2_1[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_1[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event2_1[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_1[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event2_1[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_1[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event2_1[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_1[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event2_1[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_1[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event2_1[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_1[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event2_1[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event2_1[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event3_1"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">川越蔬菜加工下午 </li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_1[list].name}({$kiwa_event3_1[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event3_1[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event3_1[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_1[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event3_1[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event3_1[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_1[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event3_1[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_1[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event3_1[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_1[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event3_1[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_1[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event3_1[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_1[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event3_1[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_1[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event3_1[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_1[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event3_1[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event3_1[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+						</dl>
+			</div>
+		</div>
+	</div>
+</section>
+<br><br><br>
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">{$day2}的工作信息</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+						<li style="width: 120px;">现场</li>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+							
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 200px;">附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+						{section name="list" loop="$kiwa_event1_2"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">芳野台</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_2[list].name}({$kiwa_event1_2[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event1_2[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event1_2[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_2[list].tel}</li>
+							
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event1_2[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event1_2[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_2[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event1_2[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_2[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event1_2[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_2[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event1_2[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_2[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event1_2[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_2[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event1_2[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_2[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event1_2[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_2[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event1_2[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event1_2[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event2_2"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">{$event2_name}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_2[list].name}({$kiwa_event2_2[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event2_2[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event2_2[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_2[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event2_2[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event2_2[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_2[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event2_2[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_2[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event2_2[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_2[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event2_2[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_2[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event2_2[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_2[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event2_2[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_2[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event2_2[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_2[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event2_2[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event2_2[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event3_2"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">川越蔬菜加工下午 </li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_2[list].name}({$kiwa_event3_2[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event3_2[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event3_2[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_2[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event3_2[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event3_2[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_2[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event3_2[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_2[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event3_2[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_2[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event3_2[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_2[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event3_2[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_2[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event3_2[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_2[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event3_2[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_2[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event3_2[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event3_2[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+
+			</dl>
+			</div>
+		</div>
+	</div>
+</section>
+<br><br><br>
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">{$day3}的工作信息</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 120px;">现场</li>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+						
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 200px;">附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+					{section name="list" loop="$kiwa_event1_3"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">芳野台</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_3[list].name}({$kiwa_event1_3[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event1_3[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event1_3[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_3[list].tel}</li>
+						
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event1_3[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event1_3[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_3[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event1_3[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_3[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event1_3[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_3[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event1_3[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_3[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event1_3[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_3[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event1_3[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_3[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event1_3[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_3[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event1_3[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event1_3[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event2_3"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">{$event2_name}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_3[list].name}({$kiwa_event2_3[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event2_3[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event2_3[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_3[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event2_3[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event2_3[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_3[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event2_3[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_3[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event2_3[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_3[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event2_3[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_3[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event2_3[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_3[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event2_3[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_3[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event2_3[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_3[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event2_3[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event2_3[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event3_3"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">川越蔬菜加工下午 </li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_3[list].name}({$kiwa_event3_3[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event3_3[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event3_3[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_3[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event3_3[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event3_3[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_3[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event3_3[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_3[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event3_3[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_3[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event3_3[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_3[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event3_3[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_3[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event3_3[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_3[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event3_3[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_3[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event3_3[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event3_3[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+			</dl>
+			</div>
+		</div>
+	</div>
+</section>
+<br><br><br>
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">{$day4}的工作信息</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+						<li style="width: 120px;">现场</li>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+							
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 200px;">附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+					{section name="list" loop="$kiwa_event1_4"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">芳野台</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_4[list].name}({$kiwa_event1_4[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event1_4[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event1_4[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_4[list].tel}</li>
+						
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event1_4[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event1_4[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_4[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event1_4[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_4[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event1_4[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_4[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event1_4[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_4[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event1_4[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_4[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event1_4[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_4[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event1_4[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_4[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event1_4[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event1_4[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event2_4"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">{$event2_name}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_4[list].name}({$kiwa_event2_4[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event2_4[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event2_4[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_4[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event2_4[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event2_4[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_4[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event2_4[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_4[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event2_4[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_4[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event2_4[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_4[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event2_4[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_4[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event2_4[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_4[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event2_4[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_4[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event2_4[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event2_4[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event3_4"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">川越蔬菜加工下午 </li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_4[list].name}({$kiwa_event3_4[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event3_4[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event3_4[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_4[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event3_4[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event3_4[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_4[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event3_4[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_4[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event3_4[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_4[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event3_4[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_4[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event3_4[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_4[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event3_4[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_4[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event3_4[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_4[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event3_4[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event3_4[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+			</dl>
+			</div>
+		</div>
+	</div>
+</section>
+<br><br><br>
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">{$day5}的工作信息</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 120px;">现场</li>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+						
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 200px;">附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+						{section name="list" loop="$kiwa_event1_5"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">芳野台</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_5[list].name}({$kiwa_event1_5[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event1_5[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event1_5[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_5[list].tel}</li>
+						
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event1_5[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event1_5[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_5[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event1_5[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_5[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event1_5[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_5[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event1_5[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_5[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event1_5[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_5[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event1_5[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_5[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event1_5[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_5[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event1_5[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event1_5[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event2_5"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">{$event2_name}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_5[list].name}({$kiwa_event2_5[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event2_5[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event2_5[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_5[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event2_5[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event2_5[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_5[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event2_5[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_5[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event2_5[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_5[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event2_5[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_5[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event2_5[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_5[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event2_5[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_5[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event2_5[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_5[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event2_5[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event2_5[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event3_5"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">川越蔬菜加工下午 </li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_5[list].name}({$kiwa_event3_5[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event3_5[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event3_5[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_5[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event3_5[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event3_5[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_5[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event3_5[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_5[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event3_5[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_5[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event3_5[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_5[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event3_5[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_5[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event3_5[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_5[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event3_5[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_5[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event3_5[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event3_5[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+			</dl>
+			</div>
+		</div>
+	</div>
+</section>
+<br><br><br>
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">{$day6}的工作信息</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+						<li style="width: 120px;">现场</li>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+							
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 200px;">附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+					{section name="list" loop="$kiwa_event1_6"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">芳野台</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_6[list].name}({$kiwa_event1_6[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event1_6[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event1_6[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_6[list].tel}</li>
+						
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event1_6[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event1_6[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_6[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event1_6[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_6[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event1_6[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_6[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event1_6[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_6[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event1_6[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_6[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event1_6[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_6[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event1_6[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_6[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event1_6[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event1_6[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event2_6"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">{$event2_name}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_6[list].name}({$kiwa_event2_6[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event2_6[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event2_6[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_6[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event2_6[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event2_6[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_6[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event2_6[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_6[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event2_6[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_6[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event2_6[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_6[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event2_6[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_6[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event2_6[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_6[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event2_6[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_6[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event2_6[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event2_6[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event3_6"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">川越蔬菜加工下午 </li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_6[list].name}({$kiwa_event3_6[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event3_6[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event3_6[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_6[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event3_6[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event3_6[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_6[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event3_6[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_6[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event3_6[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_6[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event3_6[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_6[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event3_6[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_6[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event3_6[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_6[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event3_6[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_6[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event3_6[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event3_6[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+			</dl>
+			</div>
+		</div>
+	</div>
+</section>
+<br><br><br>
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">{$day7}的工作信息</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 120px;">现场</li>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+						
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 200px;">附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+							{section name="list" loop="$kiwa_event1_7"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">芳野台</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_7[list].name}({$kiwa_event1_7[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event1_7[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event1_7[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_7[list].tel}</li>
+							
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event1_7[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event1_7[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_7[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event1_7[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_7[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event1_7[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_7[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event1_7[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_7[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event1_7[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_7[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event1_7[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_7[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event1_7[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_7[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event1_7[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event1_7[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event2_7"}
+										<dd class="po_re pad10 clearfix odd">
+											<ul>
+											<li style="width: 120px;">{$event2_name}</li>
+												<li style="width: 120px;">&nbsp;{$kiwa_event2_7[list].name}({$kiwa_event2_7[list].sex})</li>
+												<li style="width: 120px;">
+												&nbsp;
+												{if $kiwa_event2_7[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+												</li>
+												<li style="width: 100px;">&nbsp;{$kiwa_event2_7[list].visa}</li>
+												<li style="width: 120px;">&nbsp;{$kiwa_event2_7[list].tel}</li>
+												<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event2_7[list].birth}</li>
+												<li style="width: 200px;">
+												{if $kiwa_event2_7[list].hu1_picture}
+												<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_7[list].hu1_picture}" target="_blank">护照1</a>
+												{/if}
+												{if $kiwa_event2_7[list].hu2_picture}
+												<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_7[list].hu2_picture}" target="_blank">护照2</a>
+												{/if}
+												{if $kiwa_event2_7[list].zai1_picture}
+												<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_7[list].zai1_picture}" target="_blank">在留1</a>
+												{/if}
+												{if $kiwa_event2_7[list].zai2_picture}
+												<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_7[list].zai2_picture}" target="_blank">在留2</a>
+												{/if}
+												{if $kiwa_event2_7[list].cun_picture}
+												<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_7[list].cun_picture}" target="_blank">存折</a>
+												{/if}
+												{if $kiwa_event2_7[list].bao_picture}
+												<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_7[list].bao_picture}" target="_blank">保险</a>
+												{/if}
+												{if $kiwa_event2_7[list].xue_picture}
+												<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_7[list].xue_picture}" target="_blank">学生证</a>
+												{/if}
+												</li>
+												<li style="width: 58px;">
+												{if $smarty.session.kiwa_companyid eq "151007451666"}
+													<button type="submit" name="del" value="{$kiwa_event2_7[list].Id}" onclick="return deleteConfirm();">删除</button>
+													<button type="button" name="dao" value="{$kiwa_event2_7[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+												{/if}
+												</li>
+											</ul>
+										</dd>
+										{/section}
+										{section name="list" loop="$kiwa_event3_7"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">川越蔬菜加工下午 </li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_7[list].name}({$kiwa_event3_7[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event3_7[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event3_7[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_7[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event3_7[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event3_7[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_7[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event3_7[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_7[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event3_7[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_7[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event3_7[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_7[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event3_7[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_7[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event3_7[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_7[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event3_7[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_7[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event3_7[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event3_7[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+			</dl>
+			</div>
+		</div>
+	</div>
+</section>
+<br><br><br>
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">{$day8}的工作信息</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 120px;">现场</li>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+						
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 200px;">附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+					{section name="list" loop="$kiwa_event1_8"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">芳野台</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_7[list].name}({$kiwa_event1_8[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event1_8[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event1_8[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event1_8[list].tel}</li>
+					
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event1_8[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event1_8[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_8[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event1_8[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_8[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event1_8[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_8[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event1_8[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_8[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event1_8[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_8[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event1_8[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_8[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event1_8[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event1_8[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event1_8[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event1_8[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event2_8"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">{$event2_name}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_8[list].name}({$kiwa_event2_8[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event2_8[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event2_8[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event2_8[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event2_8[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event2_8[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_8[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event2_8[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_8[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event2_8[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_8[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event2_8[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_8[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event2_8[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_8[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event2_8[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_8[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event2_8[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event2_8[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event2_8[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event2_8[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{section name="list" loop="$kiwa_event3_8"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 120px;">川越蔬菜加工下午 </li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_8[list].name}({$kiwa_event3_8[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;
+							{if $kiwa_event3_8[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$kiwa_event3_8[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$kiwa_event3_8[list].tel}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$kiwa_event3_8[list].birth}</li>
+							<li style="width: 200px;">
+							{if $kiwa_event3_8[list].hu1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_8[list].hu1_picture}" target="_blank">护照1</a>
+							{/if}
+							{if $kiwa_event3_8[list].hu2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_8[list].hu2_picture}" target="_blank">护照2</a>
+							{/if}
+							{if $kiwa_event3_8[list].zai1_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_8[list].zai1_picture}" target="_blank">在留1</a>
+							{/if}
+							{if $kiwa_event3_8[list].zai2_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_8[list].zai2_picture}" target="_blank">在留2</a>
+							{/if}
+							{if $kiwa_event3_8[list].cun_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_8[list].cun_picture}" target="_blank">存折</a>
+							{/if}
+							{if $kiwa_event3_8[list].bao_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_8[list].bao_picture}" target="_blank">保险</a>
+							{/if}
+							{if $kiwa_event3_8[list].xue_picture}
+							<a href="{$BASE_URL}upload/online/kiwa/{$kiwa_event3_8[list].xue_picture}" target="_blank">学生证</a>
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "151007451666"}
+								<button type="submit" name="del" value="{$kiwa_event3_8[list].Id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$kiwa_event3_8[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+			</dl>
+			</div>
+		</div>
+	</div>
+</section>
+<br><br><br>
+
+</form>
+<br><br><br>
+{include file="./footer.html"}

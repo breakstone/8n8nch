@@ -1,0 +1,136 @@
+{include file="./mobile/Mypage/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/live.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/check.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$users.page_color}">
+{literal}
+<script>
+function null_check(){
+	if(document.getElementById("title").value==""){
+		alert("请输入商品名称！");
+		return false;
+	}
+	if(document.getElementById("title").value.length > 20){
+		alert("商品名称超过20个字！");
+		return false;
+	}
+	var files = document.getElementById("photo_url");
+	if(files.value!=""){
+		var strTemp = files.value.split(".");
+		var fileCheck = strTemp[strTemp.length-1];
+		if(fileCheck.toUpperCase()!='JPG' && fileCheck.toUpperCase()!='PNG' && fileCheck.toUpperCase()!='GIF' && fileCheck.toUpperCase()!='JPEG'){
+			alert("上传图片图片格式不对！");
+			return false;
+		}
+	}else{
+		alert("请上传商品图片！");
+		return false;
+	}
+	return true;
+}
+</script>
+{/literal}
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}"><span class="title">首页</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+		
+	</div>
+</div>
+	<div id="wrapper_release">
+		<div id="scroller">
+			<div class="us_tabtl">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a href="#">添加照片</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="table_form">
+		<form name="form2" action="{$BASE_URL}people/p_adddo/" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="user_id" id="user_id" value="{$users.user_id}">
+								<input type="hidden" name="type" id="type" value="user">
+							<table width="100%" border="0" cellspacing="1" cellpadding="1">
+									
+							<tr>
+								<td style="width:30%"><span class="f_l c999" >照片名称 <SPAN class=att>※</SPAN></span></td>
+								<td>
+									
+									<input type="text" name="title" id="title" size="25" value="" limit="len:4-50" msg="照片名称" msgArea="span_company_name"/>
+									<span id="span_company_name" class="red">※ 限定在20字内</span>
+									
+								</td>
+							</tr>
+							<tr>
+								<td style="width:30%"><span class="f_l c999" >上传照片 <SPAN class=att>※</SPAN></span></td>
+								<td>
+									<span id="span_company_name" class="red">※ 最佳尺寸:300*300 或者 长=宽</span>
+									<br>
+									<input type="file" style="width:180px"  name="photo_url" id="photo_url" value="">
+									<br><br>
+									
+								</td>
+							</tr>
+								<tr>
+								<td style="width:30%"><span class="f_l c999" >照片描述 <SPAN class=att>※</SPAN></span></td>
+								<td>
+									<span id="span_company_name" class="red">※ 小提示: 描述越精炼，越能吸引他人</span>
+									<textarea name="content" id="content" cols="32" rows="6"></textarea>
+									
+								</td>
+							</tr>
+						<tr>
+							<td colspan="2" style="text-align: center;">
+								{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+										{if $smarty.session.kiwa_userid eq $users.user_id}
+										<button class="button submit block mt_10" type="submit" onclick="return null_check();">添加照片</button>
+										{/if}
+									{/if}
+							</td>
+							
+						</tr>
+					</tbody>
+				</table>
+					
+				</form>
+				<br><br>
+			</div>
+			
+		</div>
+		</div>
+	
+	<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commsetmypage.js"></script>
+	
+{include file="./mobile/footer.html"}

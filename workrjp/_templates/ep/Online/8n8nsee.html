@@ -1,0 +1,93 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|闲聊吧"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+{literal}
+<script type="text/javascript">
+
+</script>
+{/literal}
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+<br>
+<form name="form1" action="" method="post">
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 120px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+							<li style="width: 120px;">最近车站</li>
+							<li style="width: 120px;">其他附件</li>
+							<li style="width: 120px;">新人教育</li>
+							<li style="width: 100px;">审核</li>
+						</ul>
+					</dd>
+					{if $b_online}
+					{section name="list" loop="$b_online"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">&nbsp;{$b_online[list].name}({$b_online[list].sex})</li>
+							<li style="width: 120px;">&nbsp;{if $b_online[list].tou_picture neq ""}<img src="{$BASE_URL}upload/online/kiwa/{$b_online[list].tou_picture}" width="110px;">{/if}</li>
+							<li style="width: 120px;">&nbsp;{$b_online[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$b_online[list].tel}</li>
+							<li style="width: 120px;">&nbsp;{getname name="eki" value=$b_online[list].eki}</li>
+							<li style="width: 120px;">
+							{if $b_online[list].hu_picture neq ""}<a href="{$BASE_URL}upload/online/kiwa/{$b_online[list].hu_picture}" target="_blank">护照</a><br>{/if}
+							{if $b_online[list].zai1_picture neq ""}<a href="{$BASE_URL}upload/online/kiwa/{$b_online[list].zai1_picture}" target="_blank">再留1</a><br>{/if}
+							{if $b_online[list].zai1_picture neq ""}<a href="{$BASE_URL}upload/online/kiwa/{$b_online[list].zai1_picture}" target="_blank">再留2</a><br>{/if}
+							{if $b_online[list].cun_picture neq ""}<a href="{$BASE_URL}upload/online/kiwa/{$b_online[list].cun_picture}" target="_blank">存折</a><br>{/if}
+							{if $b_online[list].bao_picture neq ""}<a href="{$BASE_URL}upload/online/kiwa/{$b_online[list].bao_picture}" target="_blank">保险</a><br>{/if}
+							&nbsp;
+							</li>
+							<li style="width: 120px;">&nbsp;{if $b_online[list].xin eq 1}已阅读{/if}</li>
+							<li style="width: 100px;">
+							{if $b_online[list].checkflag eq "1"}
+								已通过
+							{else}
+								{if $smarty.session.kiwa_companyid eq "000001"}
+									<button type="submit" name="check_ok" value="{$b_online[list].user_id}">审核通过</button>
+								{/if}
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{else}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<font color="red">&nbsp;抱歉，还没有你索搜的信息！</font>
+						</ul>
+					</dd>
+					{/if}
+				</dl>
+			</div>
+		</div>
+	</div>
+</section>
+</form>
+<br><br><br>
+{include file="./footer.html"}

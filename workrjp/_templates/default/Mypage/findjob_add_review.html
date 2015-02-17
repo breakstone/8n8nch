@@ -1,0 +1,269 @@
+{include file="./header.html" title="求职管理-发表求职"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}mypage/">MyPage</a></li>
+	<li>&gt; <a href="{$BASE_URL}mypage/findjob/">求职管理</a></li>
+	<li>&gt; 求职信息-确认</li>
+</ul>
+<!-- //pan -->
+
+<!-- main -->
+<h1 class="title">求职信息-确认</h1>
+<form name="form1" action="{$BASE_URL}mypage/adddo/" method="post">
+<section id="jobEntryRegist">
+<table summary="求人応募" class="tableStyle">
+	<tr>
+		<th>氏名</th>
+		<td class="alLeft">
+			<font size="3">{$USERID} / {$USERNAME}</font>
+		</td>
+	</tr>
+	<tr>
+		<th>求职标题</th>
+		<td class="alLeft">
+		{$people_title}
+		<input type="hidden" value="{$people_title}" id="people_title" name="people_title">
+		</td>
+	</tr>
+	<tr>
+		<th>求职描述</th>
+		<td class="alLeft">
+		<textarea style="BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;" name="people_pr" id="people_pr" rows="5" cols="90" readonly="readonly">{$people_pr}</textarea>
+		</td>
+	</tr>
+</table>
+<table class="tableStyle">
+	<tr>
+		<th>希望工作地</th>
+		<td class="alLeft">
+		区域:<br>
+			&nbsp;&nbsp;&nbsp;{getname name="area" value=$pref}
+		&nbsp;&nbsp;&nbsp;
+		<br>城市:<br>
+			&nbsp;&nbsp;&nbsp;{getname name="pref" value=$pref}
+		<input type="hidden" value="{$areaid}" id="areaid" name="areaid">
+		<input type="hidden" value="{$pref}" id="pref" name="pref">
+		{if $ensn}
+			&nbsp;&nbsp;&nbsp;
+			<br>线路:<br>
+			{section name="list" loop="$ensn"}
+				&nbsp;&nbsp;&nbsp;{getname name="ensn" value=$ensn[list]}
+				<input type="hidden" value="{$ensn[list]}" id="ensn" name="ensn[]">
+			{/section}
+		{/if}
+		{if $eki}
+			&nbsp;&nbsp;&nbsp;
+			<br>车站:<br>
+			{section name="list" loop="$eki"}
+				&nbsp;&nbsp;&nbsp;{getname name="eki" value=$eki[list]}
+				<input type="hidden" value="{$eki[list]}" id="eki" name="eki[]">
+			{/section}
+		{/if}
+		
+		</td>
+	</tr>
+	<tr>
+		<th>业种・职业选择</th>
+		<td class="alLeft">
+		业种:
+			{getname name="kind" value="$types[0]"}
+			<input type="hidden" value="{$kinds}" id="kinds" name="kinds">
+		&nbsp;&nbsp;&nbsp;<br>
+		职种:<br>
+			{section name="list" loop="$types"}
+				{getname name="type" value="$types[list]"}<br>
+				<input type="hidden" value="{$types[list]}" id="types" name="types[]">
+			{/section}
+		</td>
+	</tr>
+	<tr>
+		<th>薪资选择</th>
+		<td class="alLeft">
+			{getname name="money" value="$moneyid"}
+			<input type="hidden" value="{$moneyid}" id="moneyid" name="moneyid">
+		</td>
+	</tr>
+	<tr>
+		<th>雇用形式选择</th>
+		<td class="alLeft">
+			{getname name="employ" value="$employid"}
+			<input type="hidden" value="{$employid}" id="employid" name="employid">
+		</td>
+	</tr>
+	<tr>
+		<th>希望的工作时间</th>
+		<td class="alLeft">
+			{getname name="hope" value="$hopeid"}
+			<input type="hidden" value="{$hopeid}" id="hopeid" name="hopeid">
+		</td>
+	</tr>
+</table>
+
+<h2 class="title">个人简历信息</h2>
+<table class="tableStyle">
+	<tr>
+		<th>氏名（汉字）</th>
+		<td class="alLeft">
+			{$USERNAME}
+		</td>
+	</tr>
+	<tr>
+		<th>生年月日</th>
+		<td class="alLeft">
+			{$birthYear} 年 {$birthMonth} 月 {$birthDay} 日
+			<input type="hidden" value="{$birthYear}-{$birthMonth}-{$birthDay}" id="birth" name="birth">
+		</td>
+	</tr>
+	<tr>
+		<th>性別</th>
+		<td class="alLeft">
+			{if $sex eq 1}男{/if}
+			{if $sex eq 2}女{/if}
+			<input type="hidden" value="{$sex}" id="sex" name="sex">
+		</td>
+	</tr>
+	<tr>
+		<th>邮件信箱地址</th>
+		<td class="alLeft">
+			{if $per_status eq 1}
+				{$email}
+			{/if}
+			{if $per_status eq 2}
+				非公开
+			{/if}
+			<input type="hidden" value="{$email}" id="email" name="email">
+			<input type="hidden" value="{$per_status}" id="per_status" name="per_status">
+		</td>
+	</tr>
+	<tr>
+		<th>自我PR</th>
+		<td class="alLeft">
+			<textarea style="BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;" name="pr" cols="90" rows="5" style="ime-mode: active" id="pr" readonly="readonly">{$pr}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<th>资格,取得成绩</th>
+		<td class="alLeft">
+			<textarea style="BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;" name="zige" cols="90" rows="5" style="ime-mode: active" id="zige" readonly="readonly">{$zige}</textarea>
+		</td>
+	</tr>
+</table>
+<table class="tableStyle">
+	<tr>
+		<th>最近车站</th>
+		<td class="alLeft">
+			{$zj_eki}
+			<input type="hidden" value="{$zj_eki}" id="zj_eki" name="zj_eki">
+		</td>
+	</tr>
+	<tr>
+		<th>邮政编号</th>
+		<td class="alLeft">
+			{if $zip01 or $zip02}
+				〒
+				{$zip01}
+				-
+				{$zip02}
+			{/if}
+			<input type="hidden" value="{$zip01}" id="zip01" name="zip01">
+			<input type="hidden" value="{$zip02}" id="zip02" name="zip02">
+		</td>
+	</tr>
+	<tr>
+		<th>住址（都道府县）</th>
+		<td class="alLeft">
+			{$add_pref}
+			<input type="hidden" value="{$add_pref}" id="add_pref" name="add_pref">
+		</td>
+	</tr>
+	<tr>
+		<th>住址（市区町村）</th>
+		<td class="alLeft">
+			{$addr01}
+			<input type="hidden" value="{$addr01}" id="addr01" name="addr01">
+		</td>
+	</tr>
+	<tr>
+		<th>住址（丁番建物）</th>
+		<td class="alLeft">
+			{$addr02}
+			<input type="hidden" value="{$addr02}" id="addr02" name="addr02">
+		</td>
+	</tr>
+	<tr>
+		<th>联络电话（手机/固定）</th>
+		<td class="alLeft">
+			{if $tel01 or $tel02 or $tel03}
+				{if $tel_flag eq 1}
+					{$tel01}-{$tel02}-{$tel03}
+				{/if}
+				{if $tel_flag eq 2}
+					非公开
+				{/if}
+			{/if}
+			<input type="hidden" value="{$tel01}" id="tel01" name="tel01">
+			<input type="hidden" value="{$tel02}" id="tel02" name="tel02">
+			<input type="hidden" value="{$tel03}" id="tel03" name="tel03">
+			<input type="hidden" value="{$tel_flag}" id="tel_flag" name="tel_flag">
+		</td>
+	</tr>
+</table>
+<table class="tableStyle">
+	<tr>
+		<th>最终学历</th>
+		<td class="alLeft">
+			{getname name="education" value="$last_education"}
+			<input type="hidden" value="{$last_education}" id="last_education" name="last_education">
+		</td>
+	</tr>
+	<tr>
+		<th>所学专业</th>
+		<td class="alLeft">
+			{$zhuanye}
+			<input type="hidden" value="{$zhuanye}" id="zhuanye" name="zhuanye">
+		</td>
+	</tr>
+</table>
+<table class="tableStyle">
+	<tr>
+		<th>就职年限</th>
+		<td class="alLeft">
+			{$job_experiencetimes}
+			<input type="hidden" value="{$job_experiencetimes}" id="job_experiencetimes" name="job_experiencetimes">
+		</td>
+	</tr>
+	<tr>
+		<th>现在就职状况</th>
+		<td class="alLeft">
+			{if $job_nowstatus eq 1}已退职{/if}
+			{if $job_nowstatus eq 2}就职中{/if}
+			<input type="hidden" value="{$job_nowstatus}" id="job_nowstatus" name="job_nowstatus">
+		</td>
+	</tr>
+	<tr>
+		<th>转职次数</th>
+		<td class="alLeft">
+			{$job_experience}
+			<input type="hidden" value="{$job_experience}" id="job_experience" name="job_experience">
+		</td>
+	</tr>
+</table>
+<p class="alCenter">
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_correction.gif" id="modify" onclick="return findjob_addchoose();" alt="修正" style="width: auto !important;" />
+&nbsp;&nbsp;&nbsp;
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_conf.gif" alt="确认">
+</p>
+</section>
+<input type="hidden" value="1" id="review" name="review">
+<input type="hidden" value="{$BASE_URL}" id="url" name="url">
+</form>
+
+<p id="pagetop"><a href="#container">TOPへ戻る</a></p>
+</div>
+</div>
+{include file="./footer.html"}

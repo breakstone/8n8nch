@@ -1,0 +1,102 @@
+{include file="./header.html" title="生活服务"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/live.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/box.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/css3buttons.css">
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}requirement/">发布需求</a></li>
+	<li>&gt; 生活服务</li>
+</ul>
+<!-- //pan -->
+<h1 class="title">发表「生活服务」需求</h1>
+<form name="form1" action="{$BASE_URL}requirement/live_add_review/" method="post">
+<div style="font-size: 16px;">
+	<b>请选择需求所在的类目：</b>
+	<select style="font-size: 16px;" name="service" id="service">
+		<option value="">请选择分类</option>
+		{section name="list" loop="$life_service"}
+		<option value="{$life_service[list].service_id}">{$life_service[list].service_name}</option>
+		{/section}
+	</select>
+	&nbsp;&nbsp;&nbsp;
+	<label for="have"><input type="radio" name="fenlei" id="have">我有，我提供</label>
+	&nbsp;
+	<label for="want"><input type="radio" name="fenlei" id="want">我要，我需求</label>
+	<br><br>
+	<b>用一句话来描述你的需求：</b>&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;">(任务标题最多30字)</font>
+	<br>
+	<input type="text" name="title" id="title" value="" style="width:100%;margin-top:10px;background:#fff; color:#333; border:1px solid #ccc; padding:6px 4px 6px 8px; font:12px Arial, Helvetica, sans-serif;vertical-align:middle;">
+	<br><br>
+	<b>请把要求说得具体一些：</b>&nbsp;<a href="javascript:void(0);" style="font-size: 12px;" onclick="moban();">(使用系统提供的模板)</a>
+	<br>
+	<textarea style="height:170px;width:100%;margin-top:10px;" name="content" id="content"></textarea>
+	<br><br>
+	<b>联系方式:</b>&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;">(真实的联系方式有助于更快的完成您的需求)</font>
+	<br>
+	<select style="margin-top:10px;" name="lianxi_type" id="lianxi_type">
+		<option value="電話">電話</option>
+		<option value="Email">Email</option>
+		<option value="QQ号">QQ号</option>
+		<option value="微信">微信</option>
+	</select>
+	<input type="text" style="width: 91%;margin-top:10px;" name="lianxi_hao" id="lianxi_hao">
+	<br><br>
+	{if $smarty.session.kiwa_userid eq '' and $smarty.session.kiwa_companyid eq ''}
+	<div style="text-align: center;">
+	<b>已经是注册用户？</b>&nbsp;&nbsp;&nbsp;<button type="button" id="logB" onclick="loginshow();">已注册</button>&nbsp;<button type="button" id="regB" class="big button" onclick="registershow();">未注册</button>
+	</div>
+	<br>
+	<div id="login" style="display: none;line-height: 35px;">
+		邮箱地址 : <input type="text" style="width: 90%;" name="login_email" id="login_email">
+		<br>
+		密　　码 : <input type="password" style="width: 90%;" name="login_pw" id="login_pw">
+	</div>
+	<div id="register" style="display: none;line-height: 35px;">
+		用户类型 : &nbsp;&nbsp;
+		<label for="user"><input type="radio" name="usertype" id="user" value="user">个人用户</label>
+		&nbsp;&nbsp;&nbsp;
+		<label for="company"><input type="radio" name="usertype" id="company" value="company">企业用户</label>
+		<br>
+		用户名称 : <input type="text" style="width: 90%;" name="register_name" id="register_name">
+		<br>
+		邮箱地址 : <input type="text" style="width: 90%;" name="register_email" id="register_email">
+		<br>
+		密　　码 : <input type="password" style="width: 90%;" name="register_pw" id="register_pw">
+		<br>
+		确认密码 : <input type="password" style="width: 90%;" name="register_repw" id="register_repw">
+	</div>
+	<br>
+	<center><button type="submit" id="next" style="display: none;" onclick="return send_requirement_check();">　　发　表　需　求　　</button></center>
+	{else}
+	<center><button type="submit" id="next" onclick="return send_requirement_check();">　　发　表　需　求　　</button></center>
+	{/if}
+
+	<textarea style="height:170px;width:100%;display: none" id="style1">
+标题：喜和工業 招白班打工人员
+公司名称：株式会社　喜和工業
+经营范围：人才派遣，请付业务，国际贸易
+
+内容：蔬菜的加工，包装
+
+具体要求：
+1、男女都可。
+2、地点川越车站。
+3、时给900，有研修期。
+4、一周最少上3天班。（根据现场的情况而定）。
+5、具体事宜，请联系:049-242-0442。
+	</textarea>
+</div>
+</form>
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+</div>
+<!-- //container -->
+</div>
+<!-- //wrapper -->
+{include file="./footer.html"}

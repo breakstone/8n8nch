@@ -1,0 +1,375 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|在日生活互助"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/jquery.min.js"></script>
+
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class="hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class="on hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				{if $smarty.session.kiwa_userid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/">个人空间</a></em></li>
+				{elseif $smarty.session.kiwa_companyid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/">企业空间</a></em></li>
+				{else}
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">个人空间</a></em></li>
+				{/if}
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; 生活互助</li>
+</ul>
+<!-- //pan -->
+{if $smarty.session.kiwa_userid eq '' and $smarty.session.kiwa_companyid eq ''}
+<div id="mypage">
+
+</div>
+{/if}
+<form action="{$BASE_URL}live/s17/" accept-charset="utf-8" id="searchform" name="searchform" method="post">
+<!-- rightBox -->
+<div id="rightBox">
+<div id="job" style="margin-bottom:8px;">
+<section>
+<table id="s1" class="tableStyle" style="width: 100%;">
+<tr>
+	<th style="width:50px;">机票供求</th>
+	<td colspan="2">
+	<label class="form-label"><input type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" checked="checked" value="0" data-parent=".p-line" {if $wanted eq 0}checked="checked"{/if}>机票贩卖</label>
+	<label class="form-label"><input type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" value="1" data-parent=".p-line" {if $wanted eq 1}checked="checked"{/if}>机票求购</label>
+	&nbsp;&nbsp;&nbsp;
+	<button type="submit" name="searchB" class="big button"> 筛 选 </button>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<label class="p-label">区域：</label>
+		<label><input type="checkbox" name="type[]" value="上海" {if $type}{if in_array("上海",$type)}checked="checked"{/if}{/if}>上海</label>
+		<label><input type="checkbox" name="type[]" value="北京" {if $type}{if in_array("北京",$type)}checked="checked"{/if}{/if}>北京</label>
+		<label><input type="checkbox" name="type[]" value="广州" {if $type}{if in_array("广州",$type)}checked="checked"{/if}{/if}>广州</label>
+		<label><input type="checkbox" name="type[]" value="大连" {if $type}{if in_array("大连",$type)}checked="checked"{/if}{/if}>大连</label>
+		<label><input type="checkbox" name="type[]" value="中国各地" {if $type}{if in_array("中国各地",$type)}checked="checked"{/if}{/if}>中国各地</label>
+		<label><input type="checkbox" name="type[]" value="日本境内" {if $type}{if in_array("日本境内",$type)}checked="checked"{/if}{/if}>日本境内</label>
+		<label><input type="checkbox" name="type[]" value="亚洲" {if $type}{if in_array("亚洲",$type)}checked="checked"{/if}{/if}>亚洲</label>
+		<label><input type="checkbox" name="type[]" value="欧美" {if $type}{if in_array("欧美",$type)}checked="checked"{/if}{/if}>欧美</label>
+	</td>
+</tr>
+</table>
+<p id="number"><span>{$all}件中</span> {$start}件～{if $start+$end > 1}{$start+$end-1}{else}0{/if}件表示</p>
+</section>
+</div>
+
+<div class="infolist">
+    <div id="recomInfocon" class="maincon">
+        <div id="maincon" class="maincon">
+        {section name="list" loop="$lives"}
+            <div id="infolist" class="tablist cleft">
+              	<dl logr="q_2_12813556_5442195267587_4_2" id="jingzhun" class="">
+                    <dt>
+                        <a href="{$BASE_URL}live/show/{$lives[list].live_id}/" target="_blank" class="t" _t="jingzhun" rel="nofollow" tips="t">
+                        	{$lives[list].live_title|mb_truncate:17}
+						</a>
+						&nbsp;{if $lives[list].live_want eq 0}提供方{else}需求方{/if}
+						<span class="hoverinfobox" style="display: none;">
+                            <div id="arrow">
+                                <em></em>
+                                <span></span>
+                            </div>
+                            <div id="tipsbox" class="tipsbox" style="top: -18px;">
+                                <div class="xboxcontent">
+                                    <div class="posCom">
+                                       	由 {$lives[list].user_name|mb_truncate:9} 发布
+                                    </div>
+									<h2>{$lives[list].service_name}</h2>
+                                    <ul class="zhanshi clearfix">
+                                        <li class="mar30" style="word-wrap:break-word;">
+                                            <span style="font-size:13px;color:#1874CD;">内容大概：</span>
+											{$lives[list].live_content|mb_truncate:58}
+                                        </li>
+                                        <li class="mar30">
+                                            <span></span>
+                                        </li>
+                                        <li class="mar30">
+                                            <span></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </span>
+                        <a class="ico jingpin"></a>
+                    </dt>
+                    <dd class="w271" style="height:30px;line-height:30px;">
+                    	区域 :{$lives[list].type}
+                    </dd>
+                    <dd class="w96" style="height:30px;line-height:30px;"></dd>
+                    <dd class="w96" style="height:30px;line-height:30px;">
+                     {if $lives[list].create_date|date_format:'%Y-%m-%d' eq $today}
+						<font color="red">今天</font>
+					{elseif $lives[list].create_date|date_format:'%Y-%m-%d' eq $yestoday}
+						昨天
+					{elseif $lives[list].create_date|date_format:'%Y-%m-%d' eq $bfyestoday}
+						前天
+					{else}
+						{$lives[list].create_date|date_format:'%m月%d日'}
+					{/if}
+                    </dd>
+                    <dd class="w68" style="height:30px;line-height:30px;">&nbsp;&nbsp;&nbsp;关注度: {$lives[list].read_num} 次</dd>
+                </dl>
+            </div>
+        {/section}
+        </div>
+    </div>
+</div>
+
+<ul id="pagenav" style="float: right !important">
+	{$subPages}
+</ul>
+<script src="{$BASE_URL}js/listpage.js"></script>
+<br><br>
+</div>
+<!-- //rightBox -->
+<!-- leftBox -->
+<div id="leftBox"><!-- search -->
+<div id="leftSearch">
+<section>
+<h3><img src="{$BASE_URL}_templates/{$THEME}/img/common_txt_live.gif" width="286" height="46" alt="生活服务" /></h3>
+<div class="wrap">
+	<div id="keywordSearch">
+		<input name="keyword" size="40" class="txt" type="text" value="{$keyword}" id="keyword" />
+		<input name="searchKey" class="bt" type="submit" value=""/>
+	</div>
+<h4>分类选择</h4>
+<dl>
+	<dt name="acc" style="background-image: url({$BASE_URL}_templates/{$THEME}/img/common_icon_minus.gif);">类别选择</dt>
+	<dd style='display: block;'>
+		<input type="hidden" name="service_id" id="service_id" value="{$service_id}">
+		<table width="100%" style="font-size:14px;margin-left: -8px;">
+			<tr><td colspan="3"><img src="{$BASE_URL}_templates/{$THEME}/img/fcxg.jpg" alt="房产相关" style="margin-bottom:3px;margin-bottom:3px;margin-left:12px;"></td></tr>
+			{section name="list" loop=$fangchan}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td width="98px">&nbsp;<a href="{$BASE_URL}live/{$fangchan[list].service_id}/">{$fangchan[list].service_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+			{/section}
+			<tr><td colspan="3"><img src="{$BASE_URL}_templates/{$THEME}/img/tzsc.jpg" alt="跳蚤市场" style="margin-bottom:3px;margin-left:12px;"></td></tr>
+			{section name="list" loop=$tiaozao}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td width="98px">&nbsp;<a href="{$BASE_URL}live/{$tiaozao[list].service_id}/">{$tiaozao[list].service_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+			{/section}
+			
+			<tr><td colspan="3"><img src="{$BASE_URL}_templates/{$THEME}/img/clfw.jpg" alt="车辆服务" style="margin-bottom:3px;margin-left:12px;"></td></tr>
+			{section name="list" loop=$cheliang}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td width="98px">&nbsp;<a href="{$BASE_URL}live/{$cheliang[list].service_id}/">{$cheliang[list].service_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+			{/section}
+			
+			<tr><td colspan="3"><img src="{$BASE_URL}_templates/{$THEME}/img/jzfw.jpg" alt="家政服务" style="margin-bottom:3px;margin-left:12px;"></td></tr>
+			{section name="list" loop=$jiazheng}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td width="98px">&nbsp;<a href="{$BASE_URL}live/{$jiazheng[list].service_id}/">{$jiazheng[list].service_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+			{/section}
+			
+			<tr><td colspan="3"><img src="{$BASE_URL}_templates/{$THEME}/img/shxg.jpg" alt="生活相关" style="margin-bottom:3px;margin-left:12px;"></td></tr>
+			{section name="list" loop=$shenghuo}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td width="98px">&nbsp;<a href="{$BASE_URL}live/{$shenghuo[list].service_id}/">{$shenghuo[list].service_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+			{/section}
+			
+			<tr><td colspan="3"><img src="{$BASE_URL}_templates/{$THEME}/img/msly.jpg" alt="美食旅游" style="margin-bottom:3px;margin-left:12px;"></td></tr>
+			{section name="list" loop=$meishi}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td width="98px">&nbsp;<a href="{$BASE_URL}live/{$meishi[list].service_id}/">{$meishi[list].service_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+			{/section}
+			
+			<tr><td colspan="3"><img src="{$BASE_URL}_templates/{$THEME}/img/sjxg.jpg" alt="设计相关" style="margin-bottom:3px;margin-left:12px;"></td></tr>
+			{section name="list" loop=$sheji}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td width="98px">&nbsp;<a href="{$BASE_URL}live/{$sheji[list].service_id}/">{$sheji[list].service_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+			{/section}
+			
+			<tr><td colspan="3"><img src="{$BASE_URL}_templates/{$THEME}/img/flbz.jpg" alt="法律帮助" style="margin-bottom:3px;margin-left:12px;"></td></tr>
+			{section name="list" loop=$falv}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td width="98px">&nbsp;<a href="{$BASE_URL}live/{$falv[list].service_id}/">{$falv[list].service_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+			{/section}
+		</table>
+		{if $service_name neq ""}
+		<br>
+		<font>【已选择】</font>:  <b style="font-size: 19px;">{$service_name}</b>&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}live/">×清除选择</a>
+		{/if}
+	</dd>
+</dl>
+</div>
+</section>
+</div>
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+<!-- //search -->
+</div>
+</form>
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+</div>
+<!-- //container -->
+</div>
+<!-- //wrapper -->
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_ensn_requirement.js"></script>
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+<!-- 線・駅 -->
+<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 780px; z-index: 1004; top: 76px; left: 242px; display: none;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+<!-- common-dialog-conditionSelect -->
+<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+<div class="pattern-2">
+	<div class="bg01">
+		<div class="pt01">
+			<h2>选择沿线</h2>
+			<p><a href="javascript:void(0);" id="js-dialog-station-close">
+			<img src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+		</div>
+		
+		<div id="ensn-tdfk-view" style="display: block;">
+		<span id="ensn-tdfk-data">
+			<div class="pt03" id="js-ensn-tdfk-tabs">
+			<ul>
+				<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);" id="eki_pref_title">{if $pref}{getname name="pref" value=$pref}{/if}</a></li>
+			</ul>
+			</div>
+			<!-- tab start -->
+			<div class="ensn-01" id="ensn-tab1">
+			<div class="pt05" id="js-dialog-station-lists">
+			<div class="bg02">
+				<h3 class="close"><a href="javascript:void(0);" id="eki_pref">{if $pref}{getname name="pref" value=$pref}{/if}</a></h3>
+				<section id="station-lists">
+				</section>
+			</div>
+			</div>
+			</div>
+			<!-- //tab end -->
+		</span>
+		</div>
+		<div class="pt07">
+			<div class="pt07a"><dl><dt>已经选择的沿线：</dt><dd><div id="selected-ensn">请选择沿线</div></dd></dl></div>
+			<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+		</div>
+		<div class="pt08">
+			<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+		</div>
+	</div>
+</div>
+</div>
+<!-- //common-dialog-conditionSelect -->
+</div>
+</div>
+
+<!-- その他 -->
+<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 780px; z-index: 1002; top: 89px; left: 242px; display: none; " class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-job">
+<div id="js-dialog-job" style="width: auto; min-height: 150px; height: auto; " class="ui-dialog-content ui-widget-content">
+	<!-- common-dialog-conditionSelect -->
+	<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+	<div class="pattern-3">
+		<div class="bg01">
+			<div class="pt01">
+				<h2>选择其他</h2>
+				<p><a href="javascript:void(0);" id="js-dialog-job-close"><img src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+			</div>
+			<span id="shok-data">
+			<div class="pt06" id="js-dialog-job-lists">
+			<div class="bg02">
+			<div class="pt06a" style="display: block;">
+			<div class="parents">
+			<dl>
+				<dt><label><input type="hidden" class="level-1s" id="99" name="99" value="1:99:其他">其他</label></dt>
+				<dd>
+				<ul>
+				{section name="list" loop="$condition"}
+					<li><label><input type="checkbox" class="level-3s" id="{$condition[list].Id}" name="{$condition[list].Id}" value="3:99:{$condition[list].name}">{$condition[list].name}</label></li>
+				{/section}
+				</ul>
+				</dd>
+			</dl>
+			</div></div></div></div></span>
+			<div class="pt07">
+				<div class="pt07a">
+					<dl>
+					<dt>已经选择：</dt>
+					<dd><div id="selected-shok">请选择</div></dd>
+					</dl>
+				</div>
+				<div class="pt07b"><input type="button" value="清　空" id="allclear-shok"></div>
+			</div>
+			<div class="pt08">
+				<p><a href="javascript:void(0);" id="shokSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- //common-dialog-conditionSelect -->
+</div></div>
+
+{include file="./footer.html"}

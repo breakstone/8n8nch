@@ -1,0 +1,204 @@
+{include file="./header.html" title="《临时工作活动》 新人教育"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+
+{literal}
+<script type="text/javascript">
+function checkx(){
+	var xin = document.getElementsByName("xin[]");               
+    var flag = false ;               
+    for(var i=0;i<xin.length;i++){ 
+        if(!xin[i].checked){ 
+            alert("新人教育前面请全部打钩！");
+            return false; 
+        } 
+    }
+	return true;
+}
+</script>
+{/literal}
+	<div class="navouterbox">
+		<nav id="mainnavfix" class="mainav">
+			<div class="container_24 clearfix">
+				<ul id="navlisbox" class="clearfix">
+					<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+				</ul>
+				<div class="specinavli fl_r">
+					<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+					<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+<br>
+	<div id="wrapper"><!-- container -->
+	<div id="container">
+	<!-- main -->
+	<h1 class="title">&nbsp;《临时工作活动》 新人教育</h1>
+	<form name="form1" action="" method="post">
+		<input name="url" id="url" type="hidden" value="{$BASE_URL}"/>
+		<section id="jobEntryRegist">
+		<p style="font-size: 18px;">「<SPAN class=att>※</SPAN>」<b>请认真阅读新人教育，打钩后代表您已经阅读了新人教育。</b></p>
+		<br>
+		<table class="tableStyle">
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">1.集合时间为工作开始前的一个小时15分钟前（电车晚点除外）</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">2.损坏，弄丢公司借予的物品，一律自行赔偿</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">3.在工厂内，一律听从责任者指挥，不服从者，一律按辞退处理，若责任者有问题则先进行上报上级管理，由上级管理进行处理，不允许在工厂内与责任者进行争吵</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">4.在工厂内，与任何员工发生争执时，必须通报责任者，禁止私自解决，否则双方同时处罚</label>
+				</td>
+			</tr>
+		</table>
+		<table class="tableStyle">
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">1.粉色帽套，在工厂范围内，必须佩戴，每次出勤时，必须随身携带，出现破损予以更换</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">2.工作服，不要放在地上，不要与鞋子放在一起</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">3.袜子和长裤是必须的，女生不允许穿丝袜子</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">4.个人卫生，指甲不要超过2毫米，胡子不可留，香水也是禁止的</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">5.当手指受伤时，不允许出勤</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">6.进入工厂时，要进行酒精消毒和全身除尘，包括袜子</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">7.在工厂内，手机必须关机或静音，行李可以放到办公室或二楼更衣室，重要物品，统一保管</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">8.口罩和围裙，在领取时，只可各领取一个，不允许替其他人领取</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">9.工厂内，禁止大声喧哗，禁止非通话区域，打电话</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">10.饮食要在食堂，不要在其他区域吃喝，包括走廊，更衣室等</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">11.不要用工厂内任何插座充电，包括食堂，更衣室，走廊等等</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">12.在工厂内，垃圾要按要求分类摆放，丢之前，要先确认</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">13.工厂内的任何物品，使用后都要放回原位，包括食堂的椅子，饭后桌子要清理干净等</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">14.关于厕所的使用，首先要脱下工作服上衣，完事后要将手洗干净，进行酒精消毒</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">15.每次进入检查室时，必须要做工作服除尘，同时要戴好口罩，不允许露脸进入室内接受检查后，要完全按照说明洗手，烘干，戴手套，并进行酒精消毒，缺一不可</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">16.现场内，要完全听从社员指示，禁止私自选工作，私自更换工作，不明确时询问责任者</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">17.工作中，禁止戴手套去摸其他部位，包括口罩，帽子等</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">18.工作时，不要大声说话，不要一直说话</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">19.去厕所时，一定要和社员或者上货的人打招呼，得到允许后方可离岗</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">20.工作中，一定要保持一个良好的工作态度，不允许偷懒，不许偷偷离岗休息</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">21.工作结束后，要将所有公司的物品归还，鞋子上下两面要刷干净，套袖清理后归还</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">22.日报，一定要本人签写，禁止代笔，而且要保持字迹工整，否则工资出现问题，不予受理</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">23.私人物品严禁带入工作现场内，更衣后，衣裤的兜里不允许有任何东西，包括私服和工作服</label>
+				</td>
+			</tr>
+		</table>
+		
+		</section>
+	</form>
+	</div>
+	</div>
+</div>
+</body>
+</html>

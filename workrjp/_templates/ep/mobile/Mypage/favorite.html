@@ -1,0 +1,138 @@
+{include file="./mobile/Mypage/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}mypage/"><span class="title">我的地盘</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+				<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+</div>
+	<div id="wrapper_list"  >
+		<div id="scroller">
+		<div id="pullDown">
+			</div>
+			<div class="us_tabtl">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a href="{$BASE_URL}mypage/favorite/?Which_Show=2" {if $Which_Show eq 2}class="on"{/if} >工作信息( <b>{if $fa_um_j}{$fa_um_j}{else}0{/if}</b> )</a></td>
+							<td><a href="{$BASE_URL}mypage/favorite/?Which_Show=3"  {if $Which_Show eq 3}class="on"{/if} >人才/企业( <b>{if $fa_um}{$fa_um}{else}0{/if}</b> )</a></td>
+							<td><a href="{$BASE_URL}mypage/favorite/?Which_Show=1" {if $Which_Show eq 1}class="on"{/if}  >生活互助( <b>{if $fa_um_l}{$fa_um_l}{else}0{/if}</b> ) </a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			{if $Which_Show eq 2}
+		
+			<ul id="tasklist" data-role="listview">
+			{section name="list" loop="$favorite"}
+									
+				<li style="padding: 1em;border-bottom: 1px solid #dfdfdf;">
+					
+						
+						<div class="listcont" style="padding-left:0em;">
+							<h2><a style="color:#87CEFA;background:#fff;" href="{$BASE_URL}job/show/{$favorite[list].favorite_id}/" style="background:#fff;">{getallfavorite name="job_title" value=$favorite[list].favorite_id}</a></h2>
+							<div class="lins">
+								<span class="cEB2">雇佣者:{getallfavorite name="job_user" value=$favorite[list].favorite_id}</span>&nbsp;&nbsp;
+								
+								<span class="f_r" style="padding-right:20px;"><a style="background:#fff;" href="{$BASE_URL}mypage/favorite_delete/{$favorite[list].Id}/?Which_Show=2" onclick="return deleteConfirm();">删除</a></span>
+								<br>
+								<span class="c999">{getname name="favorite" value=$favorite[list].favorite_id}</span>
+							</div>
+							
+						</div>
+					
+				</li>
+			{/section}
+			</ul>
+				{/if}
+				{if $Which_Show eq 3}
+			<ul id="tasklist" data-role="listview">
+			{section name="list" loop="$favorite"}
+									
+				<li style="padding: 1em;border-bottom: 1px solid #dfdfdf;">
+					
+						
+						<div class="listcont" style="padding-left:0em;">
+							<h2>名称(类别):<a style="color:#87CEFA;background:#fff;" href="{$BASE_URL}people/show/{$favorite[list].flag}_{$favorite[list].favorite_id}" style="background:#fff;">{getallfavorite name="user_name" value=$favorite[list].favorite_id type=$favorite[list].flag}</a></h2>
+							<div class="lins">
+								<span class="cEB2">职业:{getallfavorite name="user_types" value=$favorite[list].favorite_id type=$favorite[list].flag}</span>&nbsp;&nbsp;
+								
+								<span class="f_r" style="padding-right:20px;"><a style="background:#fff;"  href="{$BASE_URL}mypage/favorite_delete/{$favorite[list].Id}/?Which_Show=3" onclick="return deleteConfirm();">删除</a></span>
+								<br>
+								<span class="c999">擅长:{getallfavorite name="user_skill" value=$favorite[list].favorite_id type=$favorite[list].flag}</span>
+							</div>
+							
+						</div>
+					
+				</li>
+			{/section}
+			</ul>
+				{/if}
+				
+					{if $Which_Show eq 1}
+			<ul id="tasklist" data-role="listview">
+			{section name="list" loop="$favorite"}
+									
+				<li style="padding: 1em;border-bottom: 1px solid #dfdfdf;">
+					
+						
+						<div class="listcont" style="padding-left:0em;">
+							<h2>标题:<a style="color:#87CEFA;background:#fff;" href="{$BASE_URL}live/show/{$favorite[list].favorite_id}/" style="background:#fff;">{getallfavorite name="live_title" value=$favorite[list].favorite_id}</a></h2>
+							<div class="lins">
+								<span class="cEB2">类别:{getallfavorite name="live_type" value=$favorite[list].favorite_id}</span>&nbsp;&nbsp;
+								
+								<span class="f_r" style="padding-right:20px;"><a style="background:#fff;"  href="{$BASE_URL}mypage/favorite_delete/{$favorite[list].Id}/?Which_Show=1" onclick="return deleteConfirm();">删除</a></span>
+							</div>
+							
+						</div>
+					
+				</li>
+			{/section}
+			</ul>
+				{/if}
+				{if $favorite[0].favorite_id eq ''}
+				<br>
+				<h2>该选项、您还没有收藏任何信息！<h2>
+			
+				{/if}
+			<br><br>
+			<div style="text-align: center;">
+				{if $all gt 10}
+				<span style="font-size: 18px;"> {$subPages} </span>
+				{/if}
+			</div>
+		
+			<div id="pullUp">
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklistmypage.js"></script>
+
+{include file="./mobile/footer.html"}

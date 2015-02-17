@@ -1,0 +1,126 @@
+{include file="./header.html" title="《临时工作活动》 在线简历填写"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+
+{literal}
+<script type="text/javascript">
+function check(){
+	if(document.getElementById("name").value==""){
+		alert("请输入「名字」！");
+		return false;
+	}
+	if(document.getElementById("birthY").value == ""||document.getElementById("birthM").value == ""||document.getElementById("birthD").value == ""){
+		alert("请选择「生年月日」！");
+		return false;
+	}
+	if(document.getElementById("tel").value==""){
+		alert("请输入「联系电话」！");
+		return false;
+	}
+	return true;
+}
+function showbang(flag){
+	
+	if(flag == "login"){
+		document.getElementById("login").style.display = "block";
+		document.getElementById("bang").style.display = "none";
+	}
+	if(flag == "bang"){
+		document.getElementById("bang").style.display = "block";
+		document.getElementById("login").style.display = "none";
+	}
+}
+</script>
+{/literal}
+	<div class="navouterbox">
+		<nav id="mainnavfix" class="mainav">
+			<div class="container_24 clearfix">
+				<ul id="navlisbox" class="clearfix">
+					<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+				</ul>
+				<div class="specinavli fl_r">
+					<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+					<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+<br>
+	<div id="wrapper"><!-- container -->
+	<div id="container">
+	<!-- main -->
+	<h1 class="title">&nbsp;《临时工作活动》 在线简历填写</h1>
+	<form name="form1" action="" method="post">
+		<input name="url" id="url" type="hidden" value="{$BASE_URL}"/>
+		<p>「<SPAN class=att>※</SPAN>」必填信息</p>
+		<section id="jobEntryRegist">
+		<table class="tableStyle">
+			<tr>
+				<th style="vertical-align: middle;width: 20%;">氏名 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;width: 80%;">
+					<input type="text" class="input" id="name" name="name" value="">
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;width: 20%;">生年月日 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;width: 80%;">
+                    {html_select_date prefix='birth' year_empty='選択' time=$user.birth field_order="Y" start_year='-61' end_year='-13' all_extra='id="birthY"'}年
+		            {html_select_date prefix='birth' month_empty='選択' time=$user.birth month_format="%m" field_order="M" all_extra='id="birthM"'}月
+		            {html_select_date prefix='birth' day_empty='選択' time=$user.birth field_order="D" all_extra='id="birthD"'}日
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">性别 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<select name="sex" id="sex" class="input">
+						<option value="男">男</option>	
+						<option value="女">女</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">在留資格 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<select name="visa" id="visa">
+                    {section name="list" loop="$zailiuziges"}
+                    	<option value="{$zailiuziges[list]}">{$zailiuziges[list]}</option>
+                    {/section}
+                    </select>
+				</td>
+			</tr>
+			
+			<tr>
+				<th style="vertical-align: middle;">联络电话<SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<input type="text" class="input" id="tel" name="tel" alt="連絡電話" value="">
+				</td>
+			</tr>
+		</table>
+		<p style="font-size: 18px;">「<SPAN class=att>※</SPAN>」<b>报名成功后，你需要在 【工作场所】 提交以下材料:<font color="red">护照</font>，<font color="red">在留卡</font>，<font color="red">银行存折</font>，<font color="red">保险证</font>，<font color="red">学生证</font></b>
+		<br><br>
+		<p class="alCenter">
+		<button type="submit" id="next" class="big button" name="sendB" onclick="return check();">　下一步　</button>
+		</p>
+		<br><br><br>
+		</section>
+	</form>
+	</div>
+	</div>
+</div>
+</body>
+</html>

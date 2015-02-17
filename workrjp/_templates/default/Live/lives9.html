@@ -1,0 +1,353 @@
+{include file="./header.html" title="生活服务"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/hirelist20130228.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/puerh2.css">
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; 生活服务</li>
+</ul>
+<!-- //pan -->
+{if $smarty.session.kiwa_userid eq '' and $smarty.session.kiwa_companyid eq ''}
+<div id="mypage">
+<h2 class="title">
+浏览客户
+</h2>
+<p class="more"><a href="#"><font style="font-size:14px;">注册/登录</font></a></p>
+<table class="tableStyle" style="width: 100%">
+	<tbody>
+	<tr><td nowrap="nowrap">
+	<ul id="iconbar">
+		<li><a href="{$BASE_URL}requirement/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu1.png" alt="发表需求" />
+			{if $smarty.session.kiwa_companyid eq ''}
+			<span style="margin-left:-55px;"><strong>发表需求</strong>&nbsp;有需求？千百人响应你！</span>
+			{/if}
+		</a></li>
+		<li><a href="#">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu2.png" alt="我的需求" />
+			{if $smarty.session.kiwa_companyid eq ''}
+			<span style="margin-left:-55px;"><strong>我的需求</strong>&nbsp;登录后，管理你的需求！</span>
+			{/if}
+		</a></li>
+		<li><a href="#">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu3.png" alt="收藏夹" />
+			{if $smarty.session.kiwa_companyid eq ''}
+			<span style="margin-left:-55px;"><strong>收 藏 夹</strong>&nbsp;登录后，收藏你喜欢的！</span>
+			{/if}
+		</a></li>
+		<li><a href="#">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu4.png" alt="加入 人才/企业 库" />
+			{if $smarty.session.kiwa_companyid eq ''}
+			<span style="margin-left:-55px;"><strong>加入 人才/企业 库</strong>&nbsp;信息越多，机会越多！</span>
+			{/if}
+		</a></li>
+		<li><a href="#">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu5.png" alt="信 箱" />
+			{if $smarty.session.kiwa_companyid eq ''}
+			<span style="margin-left:-55px;"><strong>信 箱</strong>&nbsp;甲乙双方尽情交流！</span>
+			{/if}
+		</a></li>
+	</ul>
+	</td></tr>
+	</tbody>
+</table>
+</div>
+{/if}
+<form action="{$BASE_URL}live/s9/" accept-charset="utf-8" id="searchform" name="searchform" method="post">
+<!-- rightBox -->
+<div id="rightBox">
+<div id="job" style="margin-bottom:8px;">
+<section>
+<table id="s1" class="tableStyle" style="width: 100%;">
+<tr>
+	<th style="width:50px;">搬家车务</th>
+	<td colspan="2">
+	<label class="form-label"><input type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" checked="checked" value="0" data-parent=".p-line" {if $wanted eq 0}checked="checked"{/if}>提供 搬家车务</label>
+	<label class="form-label"><input type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" value="1" data-parent=".p-line" {if $wanted eq 1}checked="checked"{/if}>找 搬家车务</label>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<label class="p-label">地点：</label>
+		<select name="areaid" id="areaid" onchange="showPref();" class="input">
+			<option value="">不指定</option>
+			<option value="">---------------</option>
+			{section name="list" loop="$areas"}
+				<option value="{$areas[list].area_cd}"
+				{if $areas[list].area_cd eq $areaid}
+					selected='selected'
+				{/if}
+				>{$areas[list].area_name}</option>
+			{/section}
+		</select>
+		<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+		<select name="pref" id="pref" onchange="giveToeki()" class="input">
+			<option value="">不指定</option>
+			<option value="">---------------</option>
+			{if $prefSearch}
+				{section name="list" loop="$prefSearch"}
+					<option value="{$prefSearch[list].pref_cd}"
+						{if $prefSearch[list].pref_cd eq $pref}
+							selected='selected'
+						{/if}
+					>
+					{$prefSearch[list].name}
+					</option>
+				{/section}
+			{/if}
+		</select>
+		<a href="javascript:void(0);" id="js-dialog-station-open" onclick="showStation(document.getElementById('pref').value)">选择沿线车站</a>
+		&nbsp;&nbsp;&nbsp;
+		<button type="submit" name="searchB" class="big button"> 筛 选 </button>
+		<input type="hidden" name="searchEki">
+		<input type="hidden" name="reqType" value="">
+		<input type="hidden" name="mid_area_cd" value="">
+		<input type="hidden" name="mid_area_cds" value="">
+		<input type="hidden" name="comp_mgr_no" value="">
+		<input type="hidden" name="base_mgr_no" value="">
+		<input type="hidden" name="id_ad" value="">
+		<input type="hidden" name="new_flg" value="">
+		<input type="hidden" name="query_str" value="?">
+		<input type="hidden" name="query_flg" value="">
+		<p id="js-detailSearch-search-animation" class="animate" ></p>
+		<span class="ensn_list" id="ensn_list" style="width: 550px;">
+			{if $ensn}
+				{section name="list" loop="$ensn"}
+					<label><input type="checkbox" class="ensn-chk" id="{getname name='ensn' value='$ensn[list]'}" name="ensn[]" value="{$ensn[list]}" checked >{getname name="ensn" value="$ensn[list]"}</label>
+				{/section}
+			{/if}
+			{if $eki}
+				{section name="list" loop="$eki"}
+					<label><input type="checkbox" class="ensn-chk" id="{getname name='eki' value='$eki[list]'}" name="eki[]" value="{$eki[list]}" checked >{getname name="eki" value="$eki[list]"}</label>
+				{/section}
+			{/if}
+		</span>
+	</td>
+</tr>
+</table>
+<p id="number"><span>{$all}件中</span> {$start}件～{if $start+$end > 1}{$start+$end-1}{else}0{/if}件表示</p>
+</section>
+</div>
+
+<div class="infolist">
+    <div id="recomInfocon" class="maincon">
+        <div id="maincon" class="maincon">
+        {section name="list" loop="$lives"}
+            <div id="infolist" class="tablist cleft">
+              	<dl logr="q_2_12813556_5442195267587_4_2" id="jingzhun" class="">
+                    <dt>
+                        <a href="{$BASE_URL}live/show/{$lives[list].live_id}/" target="_blank" class="t" _t="jingzhun" rel="nofollow" tips="t">
+                        	{$lives[list].live_title|mb_truncate:17}
+						</a>
+						&nbsp;{if $lives[list].live_want eq 0}提供方{else}需求方{/if}
+						<span class="hoverinfobox" style="display: none;">
+                            <div id="arrow">
+                                <em></em>
+                                <span></span>
+                            </div>
+                            <div id="tipsbox" class="tipsbox" style="top: -18px;">
+                                <div class="xboxcontent">
+                                    <div class="posCom">
+                                       	由 {$lives[list].user_name} 发布
+                                    </div>
+									<h2>{$lives[list].service_name}</h2>
+                                    <ul class="zhanshi clearfix">
+                                        <li class="mar30">
+                                            <span style="font-size:13px;color:#1874CD;">内容大概：</span>
+											{$lives[list].live_content|mb_truncate:58}
+                                        </li>
+                                        <li class="mar30">
+                                            <span></span>
+                                        </li>
+                                        <li class="mar30">
+                                            <span></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </span>
+                        <a class="ico jingpin"></a>
+                    </dt>
+                    <dd class="w271">
+                        <a href="javascript:void(0);" class="fl">{$lives[list].pref_name} {$lives[list].station_name|mb_truncate:18}</a>
+                    </dd>
+                    <dd class="w133"></dd>
+                    <dd class="w96">{$lives[list].create_date|date_format:"%Y/%m/%d"} 更新</dd>
+                    <dd class="w68">&nbsp;&nbsp;&nbsp;关注度: {$lives[list].read_num} 次</dd>
+                </dl>
+            </div>
+        {/section}
+        </div>
+    </div>
+</div>
+
+<ul id="pagenav" style="float: right !important">
+	{$subPages}
+</ul>
+<script src="{$BASE_URL}js/listpage.js"></script>
+<br><br>
+</div>
+<!-- //rightBox -->
+<!-- leftBox -->
+<div id="leftBox"><!-- search -->
+<div id="leftSearch">
+<section>
+<h3><img src="{$BASE_URL}_templates/{$THEME}/img/common_txt_live.gif" width="286" height="46" alt="生活服务" /></h3>
+<div class="wrap">
+	<div id="keywordSearch">
+		<input name="keyword" size="40" class="txt" type="text" value="{$keyword}" id="keyword" />
+		<input name="searchKey" class="bt" type="submit" value=""/>
+	</div>
+<h4>分类选择</h4>
+<dl>
+	<dt name="acc" style="background-image: url({$BASE_URL}_templates/{$THEME}/img/common_icon_minus.gif);">类别选择</dt>
+	<dd style='display: block;'>
+		<input type="hidden" name="service_id" id="service_id" value="{$service_id}">
+		<table width="100%">
+			<tr><td colspan="3"><font>【生活相关】</font></td></tr>
+			{section name="list" loop=$shenghuo}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td>&nbsp;&nbsp;<a href="{$BASE_URL}live/{$shenghuo[list].service_id}/">{$shenghuo[list].service_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+			{/section}
+			<tr><td colspan="3"><font>【赚钱相关】</font></td></tr>
+			{section name="list" loop=$zhuanqian}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td>&nbsp;&nbsp;<a href="{$BASE_URL}live/{$zhuanqian[list].service_id}/">{$zhuanqian[list].service_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+			{/section}
+		</table>
+		{if $service_name neq ""}
+		<br>
+		<font>【已选择】</font>:  <b style="font-size: 19px;">{$service_name}</b>&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}live/">×清除选择</a>
+		{/if}
+	</dd>
+</dl>
+</div>
+</section>
+</div>
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+<!-- //search -->
+</div>
+</form>
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+</div>
+<!-- //container -->
+</div>
+<!-- //wrapper -->
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_ensn_requirement.js"></script>
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+<!-- 線・駅 -->
+<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 780px; z-index: 1004; top: 76px; left: 242px; display: none;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+<!-- common-dialog-conditionSelect -->
+<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+<div class="pattern-2">
+	<div class="bg01">
+		<div class="pt01">
+			<h2>选择沿线</h2>
+			<p><a href="javascript:void(0);" id="js-dialog-station-close">
+			<img src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+		</div>
+		
+		<div id="ensn-tdfk-view" style="display: block;">
+		<span id="ensn-tdfk-data">
+			<div class="pt03" id="js-ensn-tdfk-tabs">
+			<ul>
+				<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);" id="eki_pref_title">{if $pref}{getname name="pref" value=$pref}{/if}</a></li>
+			</ul>
+			</div>
+			<!-- tab start -->
+			<div class="ensn-01" id="ensn-tab1">
+			<div class="pt05" id="js-dialog-station-lists">
+			<div class="bg02">
+				<h3 class="close"><a href="javascript:void(0);" id="eki_pref">{if $pref}{getname name="pref" value=$pref}{/if}</a></h3>
+				<section id="station-lists">
+				</section>
+			</div>
+			</div>
+			</div>
+			<!-- //tab end -->
+		</span>
+		</div>
+		<div class="pt07">
+			<div class="pt07a"><dl><dt>已经选择的沿线：</dt><dd><div id="selected-ensn">请选择沿线</div></dd></dl></div>
+			<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+		</div>
+		<div class="pt08">
+			<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+		</div>
+	</div>
+</div>
+</div>
+<!-- //common-dialog-conditionSelect -->
+</div>
+</div>
+
+<!-- その他 -->
+<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 780px; z-index: 1002; top: 89px; left: 242px; display: none; " class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-job">
+<div id="js-dialog-job" style="width: auto; min-height: 150px; height: auto; " class="ui-dialog-content ui-widget-content">
+	<!-- common-dialog-conditionSelect -->
+	<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+	<div class="pattern-3">
+		<div class="bg01">
+			<div class="pt01">
+				<h2>选择其他</h2>
+				<p><a href="javascript:void(0);" id="js-dialog-job-close"><img src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+			</div>
+			<span id="shok-data">
+			<div class="pt06" id="js-dialog-job-lists">
+			<div class="bg02">
+			<div class="pt06a" style="display: block;">
+			<div class="parents">
+			<dl>
+				<dt><label><input type="hidden" class="level-1s" id="99" name="99" value="1:99:其他">其他</label></dt>
+				<dd>
+				<ul>
+				{section name="list" loop="$condition"}
+					<li><label><input type="checkbox" class="level-3s" id="{$condition[list].Id}" name="{$condition[list].Id}" value="3:99:{$condition[list].name}">{$condition[list].name}</label></li>
+				{/section}
+				</ul>
+				</dd>
+			</dl>
+			</div></div></div></div></span>
+			<div class="pt07">
+				<div class="pt07a">
+					<dl>
+					<dt>已经选择：</dt>
+					<dd><div id="selected-shok">请选择</div></dd>
+					</dl>
+				</div>
+				<div class="pt07b"><input type="button" value="清　空" id="allclear-shok"></div>
+			</div>
+			<div class="pt08">
+				<p><a href="javascript:void(0);" id="shokSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- //common-dialog-conditionSelect -->
+</div></div>
+
+{include file="./footer.html"}

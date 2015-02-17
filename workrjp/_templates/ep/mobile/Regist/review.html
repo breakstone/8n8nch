@@ -1,0 +1,70 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+{literal}
+<style type="text/css">
+.tableStyle {
+	margin:auto;font-size:15px;BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-BOTTOM: #ccc 1px solid;
+}
+.tableStyle TH {
+	 BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 15px; BORDER-TOP: #ccc 1px solid; PADDING-LEFT: 15px; BACKGROUND: #e5ebf2; PADDING-BOTTOM: 7px; BORDER-LEFT: #ccc 1px solid; PADDING-TOP: 7px; BORDER-BOTTOM: #ccc 1px solid
+}
+.tableStyle TD {
+	width: 150px;BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 15px; BORDER-TOP: #ccc 1px solid; PADDING-LEFT: 15px; PADDING-BOTTOM: 7px; BORDER-LEFT: #ccc 1px solid; PADDING-TOP: 7px; BORDER-BOTTOM: #ccc 1px solid
+}
+</style>
+
+{/literal}
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+
+<div class="headbar clearfix" style="background:#B2DFEE;">
+					<div class="f_l">
+						<a href="{$BASE_URL}/regist"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+						<a  href="{$BASE_URL}/regist" onclick="return RegistChoose(1);">
+						<span class="title">返回	</span>
+						</a>
+					</div>
+</div>
+<div style="text-align:center;">
+<br><br><br><br><br>
+
+<form action="{$BASE_URL}regist/registdo" id="from" name="from" method="post" accept-charset="utf-8">
+
+
+<h1 class="title">新规个人会员注册 确认</h1>
+
+<table summary="新规会员登录" class="tableStyle">
+	<tr>
+		<th>姓名</th>
+		<td colspan="4">{$Cname01}　{$Cname02}</td>
+	</tr>
+	<!--<tr>
+		<th>氏名（カタカナ）</th>
+		<td colspan="4">{$Ckana01}　{$Ckana02}</td>
+	</tr>-->
+	<tr>
+		<th>邮箱地址</th>
+		<td colspan="4">{$Cemail}</td>
+	</tr>
+	<tr>
+		<th>密码</th>
+		<td colspan="4">{$Cpassword}</td>
+	</tr>
+</table>
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+<input type="hidden" name="name01" value="{$Cname01}">
+<input type="hidden" name="name02" value="{$Cname02}">
+<input type="hidden" name="kana01" value="{$Ckana01}">
+<input type="hidden" name="kana02" value="{$Ckana02}">
+<input type="hidden" name="email" value="{$Cemail}">
+<input type="hidden" name="password" value="{$Cpassword}">
+<p>确认以上内容登陆吗？</p>
+<p style="text-align:center;">
+
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_correction.gif" id="modify" onclick="return RegistChoose(1);" alt="修正" style="width: auto !important;" />
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_entry.gif" id="regist" alt="登録" style="width: auto !important;" />
+</p>
+</form>
+
+</div>
+{include file="./mobile/footer.html"}

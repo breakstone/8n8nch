@@ -1,0 +1,78 @@
+{include file="./header.html" title="生活服务"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+<script type="text/javascript" src="{$BASE_URL}js/live.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/puerh2.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/grid.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/css3buttons.css">
+<link href="{$BASE_URL}_templates/{$THEME}/css/publish.css" rel="stylesheet">
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+{literal}
+<style>
+b{
+	margin-left: 20px;
+	padding-top: 10px;
+	padding-right: 10px;
+	margin-right: 10px;
+}
+table td{
+	padding:5px;
+}
+</style>
+{/literal}
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}requirement/">发布需求</a></li>
+	<li>&gt; 生活服务</li>
+</ul>
+<form action="" name="form01">
+<!-- //pan -->
+<h1 class="title">发表「生活服务」需求</h1>
+<ul class="flow clearfix sep-big" style="margin-top: -12px;">
+	<li class="flow-item flow-item-current">1. 选择类目</li>
+	<li class="flow-item ">2. 填写信息</li>
+	<li class="flow-item flow-item-last">3. 完成发布</li>
+</ul>
+<div class="clearfix " style="margin-top: -15px;">
+<!-- 选择类目-->
+	<div id="select" class="tab tab-vertical clearfix">
+		<div class="grid grid-4">
+			<ul class="tab-title" style="height:410px;">
+				<li class="tab-title-item active">
+				<a href="#container" data-toggle="tab" data-target="#live_about">❤&nbsp;生活相关</a>
+				</li>
+				<li class="tab-title-item">
+				<a href="#container" data-toggle="tab" data-target="#work_about">＄&nbsp;赚钱相关</a>
+				</li>
+			</ul>
+		</div>
+		<div class="grid grid-16 last">
+			<div class="tab-content" style="font-size: 16px;">
+				<div id="live_about" class="tab-content-pane clearfix active">
+					{section name="list" loop=$shenghuo}
+						<a href="{$BASE_URL}requirement/live/{$shenghuo[list].service_id}/">{$shenghuo[list].service_name}{if $shenghuo[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+				</div>
+				<div id="work_about" class="tab-content-pane clearfix">
+					{section name="list" loop=$zhuanqian}
+						<a href="{$BASE_URL}requirement/live/{$zhuanqian[list].service_id}/">{$zhuanqian[list].service_name}{if $zhuanqian[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br><br><br>
+<script src="{$BASE_URL}js/bootstrap.9f69faf1.js"></script>
+</form>
+<br>
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+</div>
+<!-- //container -->
+</div>
+<!-- //wrapper -->
+{include file="./footer.html"}

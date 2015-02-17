@@ -1,0 +1,90 @@
+{include file="./header.html" title="企业信箱"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}companypage/">企业Page</a></li>
+	<li>&gt; 企业信箱</li>
+</ul>
+<!-- //pan -->
+<div id="mypage">
+<h2 class="title">
+Wellcom To 企业Page!&nbsp;&nbsp;{$COMPANYNAME}&nbsp;&nbsp;&nbsp;会員番号 ：{$COMPANYID}
+</h2>
+<p class="more"><a href="{$BASE_URL}control/companypageC.php?logout">退出</a></p>
+<table class="tableStyle" style="width: 100%">
+	<tbody>
+	<tr><td nowrap="nowrap">
+	<ul id="iconbar">
+		<li><a href="{$BASE_URL}requirement/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu1.png" alt="发表需求" />
+		</a></li>
+		<li><a href="{$BASE_URL}companypage/myrequirement/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu2.png" alt="我的需求" />
+		</a></li>
+		<li><a href="{$BASE_URL}companypage/favorite/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu3.png" alt="收藏夹" />
+		</a></li>
+		<li><a href="{$BASE_URL}companypage/company/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu4.png" alt="企业简历" />
+		</a></li>
+		<li><a href="{$BASE_URL}companypage/cmessage/">
+		{if $unread > 0}
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu_5_new.png" alt="企业信箱" />
+		{else}
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu5.png" alt="企业信箱" />
+		{/if}
+		</a></li>
+	</ul>
+	</td></tr>
+	</tbody>
+</table>
+
+<!-- main -->
+<h1 class="title">收信箱</h1>
+<h2 class="title">
+企业信箱--收信箱&nbsp;<font color="red">{$all_nums}</font>&nbsp;件
+</h2>
+<p class="more"><a href="{$BASE_URL}companypage/cmessageSend/">发信箱</a></p>
+<table class="tableStyle" style="width: 100%">
+	<tbody>
+		<tr>
+			<th style="width:40px;">状态</th>
+			<th>标题</th>
+			<th>发信人</th>
+			<th style="width:60px;">收信日</th>
+			<th style="width:60px;">操作</th>
+		</tr>
+		{section name="list" loop="$message"}
+		<tr>
+			<td>
+			{if $message[list].read_flag eq 0}<font style="font-weight: bold;color: red;">未读</font>{/if}
+			{if $message[list].read_flag eq 1}已读{/if}
+			</td>
+			<td class="alLeft" nowrap="nowrap">
+			{if $message[list].read_flag eq 0}<font style="font-weight: bold">{/if}
+			{if $message[list].read_flag eq 0}<font>{/if}
+			&nbsp;<a href="{$BASE_URL}companypage/cmessage_show/{$message[list].message_id}/">{$message[list].message_title|mb_truncate:40}</a>
+			</font>
+			</td>
+			<td nowrap="nowrap">
+			{getname name="company_name" value=$message[list].message_from}
+			{getname name="username" value=$message[list].message_from}
+			</td>
+			<td>{$message[list].create_date}</td>
+			<td><a href="{$BASE_URL}companypage/cmessage_delete/{$message[list].message_id}/" onclick="return deleteConfirm();"><img src="{$BASE_URL}_templates/{$THEME}/img/delete_bt.jpg"></a></td>
+		</tr>
+		{/section}
+	</tbody>
+</table>
+<ul id="pagenav" style="float: right !important">
+{$subPages}
+</ul>
+</div>
+
+<p id="pagetop"><a href="#container">TOPへ戻る</a></p>
+</div>
+</div>
+{include file="./footer.html"}

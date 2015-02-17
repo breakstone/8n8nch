@@ -1,0 +1,318 @@
+{include file="./header.html" title="企业会员注册"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+<!-- wrapper -->
+<div id="wrapper">
+	<!-- container -->
+	<div id="container">
+		<!-- pan -->
+		<ul id="pan">
+			<li><a href="{$BASE_URL}">HOME</a></li>
+			<li>&gt; 企业会员注册</li>
+		</ul>
+		<!-- //pan -->
+		<!-- box -->
+		<div id="box">
+
+			<form action="{$BASE_URL}regist/companyreview/"
+				accept-charset="utf-8" id="indexForm" method="post">
+				<div style="display: none;"></div>
+				<div id="applicant">
+					<section>
+						<h1 class="title">企业会员注册</h1>
+						<div>
+							<img src="{$BASE_URL}_templates/{$THEME}/img/companys.png">
+						</div>
+						<p>
+							会员情报 「<SPAN class=att>※</SPAN>」必须入力项目
+						</p>
+						<font color="red">{$_error}</font>
+						<table summary="新规会员注册" class="tableStyle">
+							<tbody>
+								<tr>
+									<th>企业名称<SPAN class=att>※</SPAN></th>
+									<td colspan="4"><input name="company_name" size="40"
+										style="ime-mode: active" type="text" id="company_name"
+										value="{$company_name}"> 例：株式会社 喜和工业</td>
+								</tr>
+								<tr>
+									<th>代表者名<SPAN class=att>※</SPAN></th>
+									<td colspan="4"><input name="company_manager" size="40"
+										style="ime-mode: active" type="text" id="company_manager"
+										value="{$company_manager}"> 例：喜和 花子</td>
+								</tr>
+								<tr>
+									<TH>成立年月</TH>
+									<TD><input name="foundation_dateYear" maxLength=4 size="4"
+										style="IME-MODE: disabled;" type="text"
+										id="foundation_dateYear" value="{$foundation_dateYear}">
+										年 <input name="foundation_dateMonth" maxLength=2 size="2"
+										style="IME-MODE: disabled;" type="text"
+										id="foundation_dateMonth" value="{$foundation_dateMonth}">
+										月 （西历・半角数字）</TD>
+								</tr>
+								<tr>
+									<TH>注册资金</TH>
+									<TD><input name="company_money" size="20"
+										style="ime-mode: disabled;" type="text" id="company_money"
+										value="{$company_money}"> 万円 （半角数字・外资企业请换算成日元）</TD>
+								</tr>
+								<tr>
+									<TH>主页</TH>
+									<TD><input name="company_url" size="40"
+										style="ime-mode: disabled;" type="text" id="company_url"
+										value="{$company_url}"> （半角英数字）</TD>
+								</tr>
+								<TR>
+									<TH>住址（都道府县）<SPAN class=att>※</SPAN></TH>
+									<TD colSpan=4>
+										<select name="areaid" id="areaid" onchange="showPref();">
+											<option value="">请指定</option>
+											<option value="">---------------</option>
+											{section name="list" loop="$areas"}
+												<option value="{$areas[list].area_cd}"
+												{if $areas[list].area_cd eq $area_cd}selected='selected'{/if}
+												>{$areas[list].area_name}</option>
+											{/section}
+										</select>
+										<select name="pref" id="pref" onchange="giveToeki()">
+											<option value="">请指定</option>
+											<option value="">---------------</option>
+											{if $prefSearch}
+												{section name="list" loop="$prefSearch"}
+													<option value="{$prefSearch[list].pref_cd}"
+													{if $prefSearch[list].pref_cd eq $pref_cd}selected='selected'{/if}
+													>{$prefSearch[list].name}</option>
+												{/section}
+											{/if}
+										</select>
+									</TD>
+								</TR>
+								<TR>
+									<TH>邮政编码</TH>
+									<TD colSpan=4>
+									&nbsp;〒
+									<input name="zip01" id="zip01" size="3" maxlength="3" style="ime-mode: disabled" type="text" value="{$zip01}"/>
+									-
+									<input name="zip02" id="zip02" size="4" maxlength="4" style="ime-mode: disabled" type="text" value="{$zip02}"/>
+									<input type="button" value="住所を検索" onclick="zipToaddr();">
+									（半角数字）
+									<div id="tellNO"></div>
+						    		<input type="hidden" value="{$BASE_URL}" id="url" name="url">
+									</TD>
+								</TR>
+								<TR>
+									<TH>住址（市区町村）<SPAN class=att>※</SPAN></TH>
+									<TD colSpan=4>
+									<input type="hidden" value="" name="add_pref" id="add_pref">
+									<INPUT style="IME-MODE: active" id=addr01 size=60 type=text name=addr01 value="{$addr01}">
+									</TD>
+								</TR>
+								<TR>
+									<TH>住址（丁番建物）<SPAN class=att>※</SPAN></TH>
+									<TD colSpan=4><INPUT style="IME-MODE: active" id=addr02
+										size=60 type=text name=addr02 value="{$addr02}"></TD>
+								</TR>
+								<TR>
+									<th>最近駅 <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										<a href="javascript:void(0);" id="js-dialog-station-open">
+										<img src="{$BASE_URL}js/ek_files/ek.png" onclick="showStation(document.getElementById('pref').value)">
+										</a>
+									
+										<input type="hidden" name="searchEki">
+										<input type="hidden" name="reqType" value="">
+										<input type="hidden" name="mid_area_cd" value="">
+										<input type="hidden" name="mid_area_cds" value="">
+										<input type="hidden" name="comp_mgr_no" value="">
+										<input type="hidden" name="base_mgr_no" value="">
+										<input type="hidden" name="id_ad" value="">
+										<input type="hidden" name="new_flg" value="">
+										<input type="hidden" name="query_str" value="?">
+										<input type="hidden" name="query_flg" value="">
+										<p id="js-detailSearch-search-animation" class="animate" ></p>
+										<ul style="margin-left: 3px; line-height: 2px;">
+										<span class="ensn_list" id="ensn_list">
+										{if $ensn}
+											{section name="list" loop="$ensn"}
+												<li style="margin-left: -5px;"><label><input type="checkbox" class="ensn-chk" id="{getname name='ensn' value='$ensn[list]'}" name="ensn[]" value="{$ensn[list]}" checked >{getname name="ensn" value="$ensn[list]"}</label></li><br/>
+											{/section}
+										{/if}
+										{if $eki}
+											{section name="list" loop="$eki"}
+												<li style="margin-left: -5px;"><label><input type="checkbox" class="ensn-chk" id="{getname name='eki' value='$eki[list]'}" name="eki[]" value="{$eki[list]}" checked >{getname name="eki" value="$eki[list]"}</label></li><br/>
+											{/section}
+										{/if}
+										</span>
+										</ul>
+									</td>
+								</TR>
+								
+								<TR>
+									<TH>职业种类<SPAN class=att>※</SPAN></TH>
+									<TD>
+										<select name="kinds" id="kinds" onchange="showTypes();">
+											<option value="">请指定</option>
+											<option value="">---------------</option>
+										{section name="list" loop="$companyfrom"}
+											<option value="{$companyfrom[list].kindsID}"
+											{if $companyfrom[list].kindsID eq $kinds}selected='selected'{/if}
+											>{$companyfrom[list].kindsname}</option>
+										{/section}
+										</select>
+										<div id="typecheck" style="margin-top: 8px;">
+											{if $types}
+												{section name="list" loop="$types"}
+													<label for="{$smarty.section.list.index}">
+										            <input class="radioInput" type="checkbox" name="types[]" value="{$types[list].typesID}" id="{$smarty.section.list.index}"
+										            {if $select_types} 
+										            {if in_array($types[list].typesID,$select_types)}checked="checked"{/if}
+										            {/if}
+										            > {$types[list].typesname}</label><br>
+												{/section}
+											{/if}
+										</div>
+									</TD>
+								</TR>
+								<TR>
+									<TH>电话号码<SPAN class=att>※</SPAN></TH>
+									<TD>
+									<INPUT style="IME-MODE: disabled" id=tel01 maxLength=3 size=5 type=text name=tel01 value="{$tel01}"> - 
+									<INPUT style="IME-MODE: disabled" id=tel02 maxLength=4 size=6 type=text name=tel02 value="{$tel02}"> - 
+									<INPUT style="IME-MODE: disabled" id=tel03 maxLength=4 size=6 type=text name=tel03 value="{$tel03}">(半角数字)
+									</TD>
+								</tr>
+								<tr>
+									<TH class=right>FAX号码</TH>
+									<TD>
+									<INPUT style="IME-MODE: disabled;" id=fax01 maxLength=3 size=5 type=text name=fax01 value="{$fax01}"> - 
+									<INPUT style="IME-MODE: disabled;" id=fax02 maxLength=4 size=6 type=text name=fax02 value="{$fax02}"> - 
+									<INPUT style="IME-MODE: disabled;" id=fax03 maxLength=4 size=6 type=text name=fax03 value="{$fax03}">(半角数字)
+									</TD>
+								</TR>
+								<tr>
+									<th>我的擅长 <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										<table>
+											{section name="list" loop="$life_service"}
+												{if ($smarty.section.list.index+1) mod 7 == 1}<tr>{/if}
+												<td style="padding-left: 0px;"><label><input name="skills[]" id="skills" type="checkbox" value="{$life_service[list].service_name}"
+												{if $skill}
+												{if in_array($life_service[list].service_name,$skill)}checked="checked"{/if}
+												{/if}
+												>&nbsp;{$life_service[list].service_name}</label></td>
+												{if ($smarty.section.list.index+1) mod 7 == 0}</tr>{/if}
+											{/section}
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="tableStyle">
+							<tbody>
+								<tr>
+									<th>邮箱地址<SPAN class=att>※</SPAN></th>
+									<td colspan="4"><SPAN style="COLOR: blue">※作为登录ID的同时，我们也会将一些MYPAGE的重要更新信息发送到这个邮箱，请务必正确填写。</SPAN><br>
+										<input name="company_email" size="40" style="ime-mode: inactive" type="text" id="company_email" onblur="CompanyEmailAjax();" value="{$company_email}">
+										※手机的邮箱地址利用不可
+										<div id="tellOk"></div>
+									</td>
+								</tr>
+								<tr>
+									<th>邮箱地址（确认）<SPAN class=att>※</SPAN></th>
+									<td colspan="4"><input name="recompany_email" size="40" style="ime-mode: inactive" type="text" id="recompany_email" value="{$company_email}"></td>
+								</tr>
+								<tr>
+									<th>密码<SPAN class=att>※</SPAN></th>
+									<td colspan="4"><SPAN style="COLOR: blue">※密码在登录时必须输入，请务必保管好您的密码。</SPAN><br>
+										<input name="password" size="32" type="password" id="password" value="{$password}"> ※8位～32位的半角英数字</td>
+								</tr>
+								<tr>
+									<th>密码（确认）<SPAN class=att>※</SPAN></th>
+									<td colspan="4"><input name="repassword" size="32" type="password" id="repassword" value="{$password}"> ※8位～32位的半角英数字</td>
+								</tr>
+								<tr>
+									<th>利用规约和关于个人情报管理</th>
+									<td colspan="4"><label for="ApplicantDataTempPrivacy">
+											<input type="checkbox" name="privacy" id="privacy"{$privacy} >
+											<a href="{$BASE_URL}regist/terms/" target="_blank">利用规约</a>と
+											<a href="{$BASE_URL}regist/perfams/" target="_blank">关于个人情报管理</a>同意
+									</label></td>
+								</tr>
+							</tbody>
+						</table>
+						<p class="alCenter">
+							<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_conf.gif" alt="确认" onclick="return CompanyRegistCheck()">
+						</p>
+					</section>
+				</div>
+			</form>
+		</div>
+		<p id="pagetop">
+			<a href="#container">返回顶部</a>
+		</p>
+	</div>
+	<!-- //container -->
+</div>
+<!-- //wrapper -->
+
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_shok.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_ensn_nosubmit.js"></script>
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+<!-- 線・駅 -->
+<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 780px; z-index: 1004; top: 76px; left: 242px; display: none;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+<!-- common-dialog-conditionSelect -->
+<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+<div class="pattern-2">
+	<div class="bg01">
+		<div class="pt01">
+			<h2>选择沿线</h2>
+			<p><a href="javascript:void(0);" id="js-dialog-station-close">
+			<img src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+		</div>
+		
+		<div id="ensn-tdfk-view" style="display: block;">
+		<span id="ensn-tdfk-data">
+			<div class="pt03" id="js-ensn-tdfk-tabs">
+			<ul>
+				<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);" id="eki_pref_title">{if $pref_cd}{getname name="pref" value=$pref_cd}{/if}</a></li>
+			</ul>
+			</div>
+			<!-- tab start -->
+			<div class="ensn-01" id="ensn-tab1">
+			<div class="pt05" id="js-dialog-station-lists">
+			<div class="bg02">
+				<h3 class="close"><a href="javascript:void(0);" id="eki_pref">{if $pref_cd}{getname name="pref" value=$pref_cd}{/if}</a></h3>
+				<section id="station-lists">
+				</section>
+			</div>
+			</div>
+			</div>
+			<!-- //tab end -->
+		</span>
+		</div>
+
+		<div class="pt07">
+			<div class="pt07a"><dl><dt>已经选择的沿线：</dt><dd><div id="selected-ensn">请选择沿线</div></dd></dl></div>
+			<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+		</div>
+		
+		<div class="pt08">
+			<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+		</div>
+	</div>
+</div>
+</div>
+<!-- //common-dialog-conditionSelect -->
+</div>
+</div>
+{include file="./footer.html"}

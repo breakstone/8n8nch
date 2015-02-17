@@ -1,0 +1,160 @@
+{include file="./mobile/header.html"  title=$company.company_name}
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll-probe.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$company.page_color}">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/layout.css">
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/html5.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link  type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/user.css">
+{literal}
+
+<script type="text/javascript">
+function changeColor(){
+	var color="green|blue";
+	var color1="#FF00FF|#5CACEE";
+	color=color.split("|");
+	color1=color1.split("|");
+	document.getElementById("blink").style.color=color[parseInt(Math.random() * color.length)];
+	document.getElementById("blink1").style.color=color1[parseInt(Math.random() * color1.length)];
+	}
+	setInterval("changeColor()",200); 
+</script>
+<style>
+.xingqu a:link {color:red;}
+.xingqu a:visited {color:black;}
+.xingqu a:hover {color:black;}
+.xingqu a:active {color:yellow;}
+</style>
+{/literal}
+</head>
+<body >
+<div id="header">
+		<div class="headbar clearfix">
+			<div style="display:block;top:5px;">
+			{if $company.company_id eq $smarty.session.kiwa_companyid}
+				<div class="f_l">
+					<a href="{$BASE_URL}"><img style="max-width:45px;vertical-align:-7px;padding-left:-10px;" src="{$BASE_URL}_templates/{$THEME}/mobile/images/mlogo1.png" alt=""></a>
+					<a  href="{$BASE_URL}mypage/">
+					<span class="title">我的地盘</span>
+					</a>
+				</div>
+			{else}
+				<div class="f_l">
+					<a href="{$BASE_URL}"><img style="max-width:45px;vertical-align:-7px;padding-left:-10px;" src="{$BASE_URL}_templates/{$THEME}/mobile/images/mlogo1.png" alt=""></a>
+					<a  href="{$BASE_URL}">
+					<span class="title">首页</span>
+					</a>
+				</div>
+			{/if}
+				<div class="f_r" id="rg" >
+					<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+					<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+				</div>
+			</div>
+		</div>
+		<div class="shopbanner " style="z-index:-5;line-height: 55px; background-color: black;font-size: 25px;height:55px;color: white;text-align: center;">
+			<b>{if $company_page.header_title neq ""}{$company_page.header_title}{else}{$company.company_name}{/if}</b>
+			{if $company.company_id eq $smarty.session.kiwa_companyid}
+			<a href="{$BASE_URL}cadmin/headpic/" target="_blank"><button>主页管理</button></a>
+			{/if}
+		</div>
+</div>
+<div style="display:none;">
+		<img src="{$BASE_URL}_templates/{$THEME}/img/8n8n.jpg" style="max-width: 228px;">
+</div>
+<div id="wrapper_shop" >
+	<div id="scroller_index" >
+		<a href="{$BASE_URL}"><img src="{$BASE_URL}_templates/{$THEME}/img/banner1.jpg" style="max-width: 100%;"/></a>
+		<div class="xingqu">
+					<ul style="border-top: 2px solid #f90;">
+						<li style="color:red;margin-top: 8px;font-size:15px;" id='blink' >&nbsp;&nbsp;你可能感兴趣的工作信息！！！！</li>
+							{section name="list" loop=6}
+					            <li style="margin: 2px;font-size:14px;" >
+				                	&nbsp;&nbsp;{if $job1[list].job_id}<a href="{$BASE_URL}job/show/{$job1[list].job_id}/?jid={$smarty.section.list.index+$start1}&kinds={$job1[list].kindsID}" >{$job1[list].job_title|mb_truncate:16}&nbsp;&nbsp;<span style="color:#f90">{$job1[list].pref_name}</span></span></a>{/if}
+								</li>
+				           	{/section}
+					</ul>
+			</div>
+		<div class="shop_tags">
+			<div class="shoptabbox" style="padding-left: 0px;">
+				<form name="form1" action="{$BASE_URL}people/kiwalogin/logindo.php" method="post">
+				<input type="hidden" value="{$id}" name="id" id="id">
+				<input type="hidden" value="{$manager_id}" name="kid" id="kid">
+				<input type="hidden" value="{$manager_password}" name="password" id="password">
+				<div class="intros" style="background: #F4F4F4; display: block;" id="tab1">
+					<li><strong>选择月份:&nbsp;</strong>
+					<select name="year" id="year" height="28px;">
+						<option value="2014" {if $year eq "2014"}selected="selected"{/if}>2014年</option>
+						<option value="2015" {if $year eq "2015"}selected="selected"{/if}>2015年</option>
+						<option value="2016" {if $year eq "2016"}selected="selected"{/if}>2016年</option>
+					</select>
+					<select name="month" id="month">
+						<option value="01" {if $month eq "01"}selected="selected"{/if}>1月</option>
+						<option value="02" {if $month eq "02"}selected="selected"{/if}>2月</option>
+						<option value="03" {if $month eq "03"}selected="selected"{/if}>3月</option>
+						<option value="04" {if $month eq "04"}selected="selected"{/if}>4月</option>
+						<option value="05" {if $month eq "05"}selected="selected"{/if}>5月</option>
+						<option value="06" {if $month eq "06"}selected="selected"{/if}>6月</option>
+						<option value="07" {if $month eq "07"}selected="selected"{/if}>7月</option>
+						<option value="08" {if $month eq "08"}selected="selected"{/if}>8月</option>
+						<option value="09" {if $month eq "09"}selected="selected"{/if}>9月</option>
+						<option value="10" {if $month eq "10"}selected="selected"{/if}>10月</option>
+						<option value="11" {if $month eq "11"}selected="selected"{/if}>11月</option>
+						<option value="12" {if $month eq "12"}selected="selected"{/if}>12月</option>
+					</select>
+					&nbsp;&nbsp;
+					<button type="submit" name="xianchangbutton">查    詢</button>
+					</li>
+					<br>
+					<li><strong><font color="red" size="3px">{$message}</font></strong></li>
+					<li><strong>姓名:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.name}</strong></li>
+					<li><strong>工资月份:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.moneymonth|date_format:"%Y年%m月"}</strong></li>
+					<li><strong>実動時間:</strong>&nbsp;&nbsp;&nbsp;{$shidong}</strong></li>
+					<li><strong>基本给月给:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.money}</strong></li>
+					<li><strong>通勤费:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.koysuhi}</strong></li>
+					<li><strong>能力手当:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.shoudang}</strong></li>
+					<li><strong>洗衣费（控除）:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.xiyifei}</strong></li>
+					<li><strong>健康保险（控除）:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.jiankang}</strong></li>
+					<li><strong>介护保险（控除）:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.jihu}</strong></li>
+					<li><strong>厚生年金（控除）:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.nianjin}</strong></li>
+					<li><strong>雇用保险（控除）:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.guyu}</strong></li>
+					<li><strong>所得税（控除）:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.shui}</strong></li>
+					<li><strong>支給形式:</strong>&nbsp;&nbsp;&nbsp;{$zhigei}</strong></li>
+					<li><strong>最终工资:</strong>&nbsp;&nbsp;&nbsp;{$gongzi.gongzi}</strong></li>
+					<br>
+				</div>
+					<br>
+					<!-- 手机版 -->
+					<!--  
+					{if $company.company_id eq "141113009425"}
+					<center style="font-size: 16px;"><a href="http://8n8n.co.jp/people/kiwalogin/lzactivity.php?user_id={$manager_id}&pwd={$manager_password}&id={$company.company_id}" target="_blank"><span style="font-size:22px;color:blue;font-weight:bold;">《喜和员工》  抽奖页面 >>></span></a></center>
+					{/if}
+					-->
+					<br>
+				</form>
+				<div class="intros" style="display: none" id="tab1">
+				</div>
+			</div>
+			<a href="{$BASE_URL}"><img src="{$BASE_URL}_templates/{$THEME}/img/banner2.jpg" style="max-width: 100%;"/></a>
+			<div class="xingqu">
+				<ul style="border-top: 2px solid #f90;">
+			           	<li style="color:red;font-size:15px;" id='blink1' >&nbsp;&nbsp;你可能感兴趣的话题！！！！</li>
+						{section name="list" loop="$bbs"}
+						
+				            <li style="margin: 2px;font-size:14px;" >
+		        				{if $bbs[list].bbs_type eq ""}
+									<font style="color:green">【闲聊】</font>
+								{else}
+									<font style="color:blue">【{$bbs[list].bbs_type}】</font>
+								{/if}
+			                	<a href="{$BASE_URL}bbs/show/{$bbs[list].bbs_id}/" >{$bbs[list].bbs_title|mb_truncate:14}&nbsp;&nbsp;</span></a>
+							</li>
+			           	{/section}
+				</ul>
+				<hr/>
+				<br><br>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll-companyshow1.js"></script>
+{include file="./mobile/footer.html"}

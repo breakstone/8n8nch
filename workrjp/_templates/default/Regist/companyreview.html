@@ -1,0 +1,140 @@
+{include file="./header.html" title="企业会员注册确认"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; 企业会员注册</li>
+</ul>
+<!-- //pan --> <!-- box -->
+<div id="box">
+<form action="{$BASE_URL}regist/companyregistdo/" id="from" name="from" method="post" accept-charset="utf-8">
+<div style="display: none;"></div>
+<div id="applicant">
+<section>
+<table summary="新规企业会员注册" class="tableStyle">
+	<tr>
+		<th>企业名称</th>
+		<td colspan="4">{$company_name}</td>
+	</tr>
+
+	<tr>
+		<th>企业代表名</th>
+		<td colspan="4">{$company_manager}</td>
+	</tr>
+	
+	<tr>
+		<th>成立年月</th>
+		<td colspan="4">{if $foundation_dateYear}{$foundation_dateYear}　年　{$foundation_dateMonth}　月{/if}</td>
+	</tr>
+	<tr>
+		<th>注册资本金</th>
+		<td colspan="4">{if $company_money}{$company_money}万円{/if}</td>
+	</tr>
+	<tr>
+		<th>企业主业</th>
+		<td colspan="4">{$company_url}</td>
+	</tr>
+	<tr>
+		<th>邮政编码</th>
+		<td colspan="4">{if $zip01}〒 {$zip01} - {$zip02}{/if}</td>
+	</tr>
+	<tr>
+		<th>住址</th>
+		<td colspan="4">{$add_pref} {$addr01}<br>{$addr02}</td>
+	</tr>
+	<tr>
+		<th>最近车站</th>
+		<td colspan="4">
+			{if $ensn}
+				{section name="list" loop="$ensn"}
+					<input type="hidden" name="ensn[]" value="$ensn[list]">
+					{getname name="ensn" value="$ensn[list]"}&nbsp;&nbsp;&nbsp;
+				{/section}
+			{/if}
+			{if $eki}
+				{section name="list" loop="$eki"}
+					<input type="hidden" name="eki[]" value="{$eki[list]}">
+					{getname name="eki" value="$eki[list]"}&nbsp;&nbsp;&nbsp;
+				{/section}
+			{/if}
+		</td>
+	</tr>
+	<tr>
+		<th>职业种类</th>
+		<td colspan="4">
+		{$kindsname}
+		<input type="hidden" name="kindsname" value="{$kindsname}">
+		<br>
+		{$typesname_str}
+		<input type="hidden" name="typesname_str" value="{$typesname_str}">
+		</td>
+	</tr>
+	<tr>
+		<th>电话号码</th>
+		<td colspan="4">{$tel01}-{$tel02}-{$tel03}</td>
+	</tr>
+	<tr>
+		<th>FAX号码</th>
+		<td colspan="4">{if $fax01}{$fax01}-{$fax02}-{$fax02}{/if}</td>
+	</tr>
+	<tr>
+		<th>我的擅长</th>
+		<td colspan="4">
+			{$skills_str}
+		</td>
+	</tr>
+</table>
+<table class="tableStyle">
+	<tr>
+		<th>登陆邮箱</th>
+		<td colspan="4">{$company_email}</td>
+	</tr>
+	<tr>
+		<th>密码</th>
+		<td colspan="4">{$password}</td>
+	</tr>
+</table>
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+<input type="hidden" name="company_name" value="{$company_name}">
+<input type="hidden" name="company_manager" value="{$company_manager}">
+<input type="hidden" name="foundation_dateYear" value="{$foundation_dateYear}">
+<input type="hidden" name="foundation_dateMonth" value="{$foundation_dateMonth}">
+<input type="hidden" name="company_money" value="{$company_money}">
+<input type="hidden" name="company_url" value="{$company_url}">
+<input type="hidden" name="zip01" value="{$zip01}">
+<input type="hidden" name="zip02" value="{$zip02}">
+<input type="hidden" name="add_pref" value="{$add_pref}">
+<input type="hidden" name="addr01" value="{$addr01}">
+<input type="hidden" name="addr02" value="{$addr02}">
+
+<input type="hidden" name="areaid" value="{$areaid}">
+<input type="hidden" name="pref" value="{$pref}">
+<input type="hidden" name="kinds" value="{$kinds}">
+<input type="hidden" name="types_str" value="{$types_str}">
+<input type="hidden" name="skills_str" value="{$skills_str}">
+
+<input type="hidden" name="tel01" value="{$tel01}">
+<input type="hidden" name="tel02" value="{$tel02}">
+<input type="hidden" name="tel03" value="{$tel03}">
+<input type="hidden" name="fax01" value="{$fax01}">
+<input type="hidden" name="fax02" value="{$fax02}">
+<input type="hidden" name="fax03" value="{$fax03}">
+<input type="hidden" name="company_email" value="{$company_email}">
+<input type="hidden" name="password" value="{$password}">
+<p>以上の内容で登録しますか？</p>
+<p class="alCenter">
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_correction.gif" id="modify" onclick="return RegistChoose(2);" alt="修正" style="width: auto !important;" />
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_entry.gif" id="regist" alt="注册" style="width: auto !important;" />
+</p>
+</form>
+</div>
+</div>
+<p id="pagetop"><a href="{$BASE_URL}regist/companyreview/#container">返回顶部</a></p>
+</div>
+<!-- //container -->
+</div>
+<!-- //wrapper -->
+{include file="./footer.html"}

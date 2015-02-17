@@ -1,0 +1,145 @@
+{include file="./header.html" title="人才检索结果一览"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt;<a href="{$BASE_URL}people/">检索结果一览</a></li>
+	<li>&gt; {$people.people_title}</li>
+</ul>
+<!-- //pan --> <!-- box -->
+<!-- //pan -->
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+<!-- box -->
+<div id="box">
+<div id="job_detail">
+<section>
+<h2>{$company.company_name}</h2>
+<p class="title">{$company.job_title}</p>
+<!--<ul class="status">
+	<li>{$company.hope_date_name}&nbsp;&nbsp;&nbsp;{$company.employed_method_name}&nbsp;&nbsp;&nbsp;{$company.money_name}</li>
+</ul>-->
+<div id="company">
+<h3 style="padding-right: 3px;"><img src="{$BASE_URL}{$company.company_photo_url}" alt="{$company.company_name}" width="140" height="120" class="fixAspect" /></h3>
+<dl class="left">
+	<dt>企业名：</dt>
+	<dd><a href="{$company.company_url}" target="_blank">{$company.company_name}</a></dd>
+	<dt>成立时间：</dt>
+	<dd>{$company.foundation_date|date_format:'%Y 年%m 月'}</dd>
+	<dt>资本金：</dt>
+	<dd>{$company.company_money}万円</dd>
+	<dt>代表者：</dt>
+	<dd>{$company.company_manager}</dd>
+	<dt>员工数：</dt>
+	<dd>{$company.employees_num}</dd>
+</dl>
+<dl>
+	<dt>公司地址：</dt>
+	<dd>
+	{$company.pref}
+	<br/>
+	{$company.addr01} {$company.addr02}
+	</dd>
+	<dt>公司主页：</dt>
+	<dd>
+		{$company.company_url}
+	</dd>
+	<dt>联系电话：</dt>
+	<dd>
+		{if $company.tel01}
+			{$company.tel01}-{$company.tel02}-{$company.tel03}
+		{/if}
+	</dd>
+	<dt>联系邮件：</dt>
+	<dd>
+		{$company.company_email}
+	</dd>
+</dl>
+</div>
+<h4>公司信息</h4>
+<table summary="公司信息" class="tableStyle" style="font-size:16px;">
+	<tr>
+		<th><font style="font-size:16px; color:red;">公司 业种・职种</font></th>
+		<td><font style="font-size:16px;">{$company.kindsname}&nbsp;&nbsp;&nbsp;{$company.typesname}</font></td>
+	</tr>
+	<tr>
+		<th><font style="font-size:16px; color:red;">我最擅长</font></th>
+		<td colspan="2"><font style="font-size:16px;">{$company.skill}</font></td>
+	</tr>
+	<tr>
+		<th>公司地址</th>
+		<td>{$company.pref}<br>{$company.addr01} {$company.addr02}</td>
+	</tr>
+	<tr>
+		<th>联系电话/FAX</th>
+		<td>
+			{if $company.tel01}
+			TEL : {$company.tel01}-{$company.tel02}-{$company.tel03}
+			{/if}
+			{if $company.fax01}
+			 / FAX : {$company.fax01}-{$company.fax02}-{$company.fax03}
+			{/if}
+		</td>
+	</tr>
+	<tr>
+		<th>联系邮件</th>
+		<td>{$company.company_email}</td>
+	</tr>
+	<tr>
+		<th>公司主页</th>
+		<td>{$company.company_url}</td>
+	</tr>
+	<tr>
+		<th>企业PR</th>
+		<td>{$company.company_text|nl2br}</td>
+	</tr>
+</table>
+<div class="nav">
+<ul>
+	<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+	{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+		{if $smarty.session.kiwa_companyid}
+			{if $flag eq "user"}
+			<li><a href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/send_message.gif" width="164" height="34" alt="发送信息" />
+			</a></li>
+			{/if}
+			{if $flag eq "company"}
+			<li><a href="{$BASE_URL}companypage/cmessage_send/{$company.company_id}/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/send_message.gif" width="164" height="34" alt="发送信息" />
+			</a></li>
+			{/if}
+		{/if}
+		{if $smarty.session.kiwa_userid}
+			{if $flag eq "user"}
+			<li><a href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/send_message.gif" width="164" height="34" alt="发送信息" />
+			</a></li>
+			{/if}
+			{if $flag eq "company"}
+			<li><a href="{$BASE_URL}mypage/pmessage_send/{$company.company_id}/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/send_message.gif" width="164" height="34" alt="发送信息" />
+			</a></li>
+			{/if}
+		{/if}
+		<li class="favorite"><a href="javascript:void(0)" onclick="favorite('{$company.company_id}','{$flag}');">→ 收藏他</a></li>
+	{/if}
+	{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+		<li><a href="{$BASE_URL}login/">
+		<img src="{$BASE_URL}_templates/{$THEME}/img/send_message.gif" width="164" height="34" alt="发送信息" />
+		</a></li>
+	{/if}
+</ul>
+</div>
+</section></div>
+</div>
+<!-- //box -->
+
+
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+
+</div>
+<!-- //container --></div>
+<!-- //wrapper -->
+{include file="./footer.html"}

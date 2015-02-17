@@ -1,0 +1,245 @@
+﻿{include file="./header.html" title=$company.company_name}
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/People/KiwaLogin/zhuan/css/lzloto.css">
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/People/KiwaLogin/zhuan/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/People/KiwaLogin/zhuan/js/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/People/KiwaLogin/zhuan/js/jquery.easing.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/People/KiwaLogin/zhuan/js/lzactivity_tijiao.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$company.page_color}">
+{literal}
+<style>
+.simple_style {
+	background: black;
+}
+</style>
+{/literal}
+<!--头部 end-->
+<div class="tombgroud clearfix">
+	{if $company_page.header_pic neq ""}
+	<div class="shopbanner " style="background:#efefef url({$BASE_URL}{$company_page.header_pic}) no-repeat center top;padding-bottom: -50xp;"></div>
+	{else}
+	<div class="shopbanner " style="background-color: black;font-size: 48px;color: white;text-align: center;"><br><br>
+	<b>{if $company_page.header_title neq ""}{$company_page.header_title}{else}{$company.company_name}{/if}</b>
+	{if $company.company_id eq $smarty.session.kiwa_companyid}
+	<a href="{$BASE_URL}cadmin/headpic/" target="_blank"><button>编辑</button></a>
+	{/if}
+	</div>
+	{/if}
+	<div class="flagnav" style="width: 100%">
+		<div class="container_24">
+			<ul class="clearfix" id="ajax_shop_myshop">
+				<li><a class="" href="{$BASE_URL}people/show/company_{$company.company_id}/" target="_self">公司首页</a></li>
+				<li><a class="" href="{$BASE_URL}people/photo/company_{$company.company_id}/" target="_self">商品展示</a></li>
+				<li><a class="" href="{$BASE_URL}people/msg/company_{$company.company_id}/" target="_self">Ta的留言</a></li>
+				<li><a class="" href="{$BASE_URL}people/live/company_{$company.company_id}/" target="_self">Ta的生活服务</a></li>
+				<li><a class="" href="{$BASE_URL}people/job/company_{$company.company_id}/" target="_self">Ta的工作信息</a></li>
+				<li><a class="" href="{$BASE_URL}people/bbs/company_{$company.company_id}/" target="_self">Ta的闲聊</a></li> 
+				<li><a class="" href="{$BASE_URL}people/company_pr/{$company.company_id}/" target="_self">关于我们</a></li>
+				{if $company.company_id eq "141113009425" || $company.company_id eq "071445274801" || $company.company_id eq "161559139290"}
+				<li><a class="select" href="{$BASE_URL}people/kiwalogin/klogin.php?id={$company.company_id}" target="_self">员工查询</a></li>
+				{/if}
+				{if $company.company_id eq $smarty.session.kiwa_companyid}
+					{if $company_page.newFunction neq ""}
+					<li><a class="" href="{$BASE_URL}online/login/" target="_self">{$company_page.newFunction}</a></li>
+					{/if}
+				{/if}
+				{if $company.company_id eq $smarty.session.kiwa_companyid}
+				<li style="float: right;">
+				<a href="{$BASE_URL}cadmin/" target="_blank"><img src="{$BASE_URL}_templates/{$THEME}/img/seti.png" style="margin-top: -5px;"><button>主页管理</button></a></li>
+				{/if}
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="container_24 clearfix">
+	<span class="blank10"></span>
+	<!--内容主体-->
+	<div class="detaileft wid230 fl_l">
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span><img src="{$BASE_URL}{$company.company_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;"></span>
+				<h2>{$company.company_name}</h2>
+				<div class="c666">
+				
+				</div>
+				<div class="c666">
+				{if $company.points}
+					积分状况：&nbsp;<font style="font-size:16px;">{$company.points}</font> 积分
+				{/if}
+				</div>
+				<div class="c666">
+					认证状况： 
+					{if $company.status eq 1}
+						<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span>
+					{else}
+						还没有任何认证
+					{/if}
+					<!-- 
+					<span class="icoident icosm_on" title="实名认证">&nbsp;</span>
+					<span class="icoident icosj_on" title="手机认证">&nbsp;</span>
+					 -->
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							{if $flag eq "user"}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">我要联系TA</a></span>
+							{/if}
+							{if $flag eq "company"}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$company.company_id}/">我要联系TA</a></span>
+							{/if}
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							{if $flag eq "user"}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">我要联系TA</a></span>
+							{/if}
+							{if $flag eq "company"}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$company.company_id}/">我要联系TA</a></span>
+							{/if}
+						{/if}
+						<div class="invita clearfix">
+							<a href="{$BASE_URL}people/msg/company_{$company.company_id}/" style="width: 98px;">评价TA</a>
+							<a href="javascript:void(0);" style="width: 98px;color: red;" onclick="favorite('{$company.company_id}','{$flag}');">加 TA 好友</a>
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$company.create_date|date_format:'%Y年%m月%d日'}</span><br>
+				<span class="c666">访问人数：<strong>{$company.see_page}</strong></span>
+			</div>
+		</div>
+		
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>联系方式</strong></em>
+				{if $company.company_id eq $smarty.session.kiwa_companyid}
+				<a href="{$BASE_URL}cadmin/clian/" target="_blank" style="float:right;"><button>编辑</button></a>
+				{/if}
+			</div>
+			<ul class="pad10">
+				<li><strong>{$company.company_name}</strong></li>
+				<li id="left_phone">{if $company.tel01}电话：{$company.tel01}-{$company.tel02}-{$company.tel03}{/if}</li>
+				<li id="left_phone">{if $company.fax01}FAX ：{$company.fax01}-{$company.fax02}-{$company.fax03}{/if}</li>
+				<li id="left_email">邮箱：{$company.company_email}</li>
+				<li>
+				{if $company.pref}
+				地址：{$company.pref} {$company.addr01} {$company.addr02}
+				{/if}
+				</li>
+				<li>
+				{if $yuming neq ""}
+				网址: <a href="http://{$yuming}.8n8n.co.jp" target="_blank">http://{$yuming}.8n8n.co.jp</a>
+				{/if}
+				</li>
+			</ul>
+			{if $yuming neq ""}
+			<center><iframe src="{$BASE_URL}cadmin/qr.php?url={$yuming}" height="220px;" width="220px;"></iframe></center>
+			{else}
+				{if $company.company_id eq $smarty.session.kiwa_companyid}
+				<center><a href="{$BASE_URL}cadmin/set2domain/" target="_blank"><button>申请二级域名</button></a></center><br>
+				{/if}
+			{/if}
+		</div>
+		{if $company.company_id eq $smarty.session.kiwa_companyid}
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>更改版本颜色</strong></em>
+			</div>
+			<ul class="pad10">
+				<div style="padding-top:5px;">
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=red" title="红"><img src="{$BASE_URL}_templates/{$THEME}/img/red.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=black" title="黑"><img src="{$BASE_URL}_templates/{$THEME}/img/black.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=blue" title="蓝"><img src="{$BASE_URL}_templates/{$THEME}/img/blue.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=green" title="绿"><img src="{$BASE_URL}_templates/{$THEME}/img/green.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=orange" title="橙"><img src="{$BASE_URL}_templates/{$THEME}/img/orange.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=purple" title="紫"><img src="{$BASE_URL}_templates/{$THEME}/img/purple.jpg"></a>
+				</div>
+			</ul>
+		</div>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+	<form name="form1" action="{$BASE_URL}people/kiwalogin/logindo.php" method="post">
+	<div class="wid750 fl_r">
+		<div class="tz_details">
+			<div class="tz_detailcon clearfix">
+				<div class="conx" style="text-align:center">
+				<!--  <span style="font-size:20px;color:red;">本次活动限定喜和工业中国员工、活动最终解释权归株式会社喜和工业所有。</span><br>-->
+					{if $mess2}
+						<span style="font-size:30px;">{$mess2}</span><br>
+							<span style="font-size:20px;color:blue;">抽奖前请先阅读活动详细内容</span><br>
+							<div class="demo">
+								<div id="disk"></div>
+								<div id="start"><img src="{$BASE_URL}_templates/{$THEME}/People/KiwaLogin/zhuan/images/start.png" onclick="alert('活动还未开始')"></div>
+							</div>
+					{else}
+						{if $mess}
+						<span style="font-size:30px;color:blue">{$mess}</span><br>
+						<span style="font-size:24px;color:blue">{$mess1}</span>
+						{else}
+							<span style="font-size:20px;color:blue;">抽奖前请先阅读活动详细内容</span><br>	
+							<div class="demo">
+								<div id="disk"></div>
+								<div id="start"><img src="{$BASE_URL}_templates/{$THEME}/People/KiwaLogin/zhuan/images/start.png" id="startbtn"></div>
+								<input name="userid" id="userid" type="hidden" value="{$user_id}"/>
+								<input name="pwd" id="pwd" type="hidden" value="{$pwd}"/>
+								<input type="hidden" value="{$BASE_URL}" id="url" name="url">
+							</div>
+						{/if}			
+					{/if}
+				
+			 		<br><span style="font-size:30px;">	喜和工业员工抽奖活动</span>
+				</div>
+				<div>
+					<p>
+					<font style="font-size:18px;text-indent:2em;">
+						大家好!<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;喜和工业的成长与进步都离不开每一位员工，因为有了你们的辛勤付出，才有了今天成绩，公司表示忠心的感谢.<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;我们辞别收获的2014，迎来充满希望的2015。在新的一年，我们有许许多多的事情要做，有许许多的任务要去完成.在工作之余,公司推出了一系列的活动,一是丰富大家的在日生活,二是回馈公司新老员工.<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;最后祝大家新的一年里身体健康，工作愉快，家庭幸福!<br>
+						
+						抽奖活动细节:<br>
+						1.	每月每个人有1次抽奖机会,本月20日到月末有1次机会.
+						(每月抽奖时间是:20日24:00 开始 - 月末24:00结束)<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;1)	中奖名单每月1日在帮帮网首页公布,可以自己查询.<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;2)	兑奖期限截止为第二个月的月末,过期作废.<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;3)	抽奖活动1月20日零点开始,到3月末24:00为止,还请踊跃参加.<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;4)	本次抽奖活动奖品1000円-30000円不等,
+						<b>*每月活动的奖品不同,还请随时关注帮帮网抽奖活动主页.*</b><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;5)	活动的最终解释权归 株式会社 喜和工业 所有.<br>
+						2.	在喜和工业工作的员工都有参与抽奖活动的机会(本次活动中国人限定)<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;1)	在喜和工业工作的 离职 或 没有工资 的人员没有参加资格.
+						<b>*兑奖时现场系统查询在职状况,离职人员不能兑奖*</b><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;2)	如果发现违规操作或有损公司利益的情况,立即取消资格,并追究其法律责任.<br>
+						3.	第一期抽奖活动奖金:(每期奖品不同,请查看帮帮网主页)<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;1)	一等奖 30000円 1名<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;2)	二等奖 10000円 2名<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;3)	三等奖 1000円  50名<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;4)	每期奖金100\%放出,也就是说肯定会有人中一等奖和二等奖.<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;5)	注意:领取奖金需要个人 印章 和 身份证明(护照 或 在留卡),没有印章和身份证明,不能兑奖,出门前再次请确认.<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;6)	兑奖地点：川越办公室（别馆）049-293-3322 / 京都办公室 075-352-7293<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;7)	兑奖时间:周一至周五 9:00- 18:00(土日休息)/联系电话:049-293-3322(中文)<br>
+						株式会社 喜和工业<br>
+						联系电话:049-293-3322 (川越)<br>
+						联系电话:075-352-7293 (京都)<br>
+						<span style="color:red">*यो क्याम्पेन आहिलेको लागि चाइनिजहरुको लागि मात्र उपलब्द छ । नेपालीहरुको लागि उपलब्द छैन धन्येबाद </span><br>
+						<span style="color:red">*Chú ý, phần mềm của chúng tôi chưa được hoàn thiện, nên phần bốc thăm trúng thưởng chưa thể thực hiện được, khi nào hoàn thiện chúng tôi sẽ thông báo cho các bạn sau.!.</span>
+					</font>
+					</p>
+				</div>
+			</div>
+		</div>
+		</form>
+		
+		<span class="blank10"></span><br>
+	</div>
+</div>
+<!--头部 end-->
+{include file="./footer.html"}

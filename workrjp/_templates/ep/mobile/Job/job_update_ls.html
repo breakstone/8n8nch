@@ -1,0 +1,325 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|闲聊吧"}
+<link  type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/user.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/live.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/check.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+{literal}
+<script>
+function yanzheng()
+{
+		if(document.getElementById("areaid").value=="" || document.getElementById("pref").value==""){
+			alert("请选择「住址（都道府县）」");
+		}
+		else
+			{
+			$("#condition_list1").show().animate( { left: "0"}, 200 );
+			}
+}
+</script>
+{/literal}
+
+{literal}
+<style>
+.table1 td{padding:0px}
+.inputstyle{
+    width: 144px;
+    height: 41px;
+    cursor: pointer;
+    font-size: 30px;
+    outline: medium none;
+    position: absolute;
+    filter:alpha(opacity=0);
+    -moz-opacity:0;
+    opacity:0; 
+    left:0px;
+    top: 0px;
+}
+</style>
+<script type="text/javascript">
+function sendcheck(){
+	if(document.getElementById("job_title").value==""){
+		alert("请输入标题！");
+		return false;
+	}
+	if(document.getElementById("job_title").value.length>50){
+		alert("题目不得超过50个字！");
+		return false;
+	}
+	//勤务工作地-空校验
+	if(document.getElementById("areaid").value == "" || document.getElementById("pref").value == ""){
+		alert("请选择勤务工作地");
+		return false;
+	}
+	//车站
+	if(document.getElementById("ensn_list").innerHTML == ""){
+		alert("请选择勤务车站");
+		return false;
+	}
+	
+	if(document.getElementById("starttime").value == ""){
+		alert("开始时间不能为空");
+		return false;
+	}
+	if(document.getElementById("endtime").value == ""){
+		alert("结束时间不能为空");
+		return false;
+	}
+	
+	var   d1   = new  Date(document.getElementById('starttime').value.replace(/\-/g, "\/"));
+    var   d2   = new  Date(document.getElementById('endtime').value.replace(/\-/g, "\/"));    
+    if(d1>d2)
+   	{
+    	alert("开始时间不能大于结束时间");
+		return false;
+   	}
+	if(document.getElementById("lianxi").value == ""){
+		alert("请输入联系方式");
+		return false;
+	}
+	
+    if(document.getElementById("contents").value == ""){
+		alert("请输入工作内容");
+		return false;
+	}
+	return true;
+}
+</script>
+{/literal}
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}"><span class="title">首页</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+		<a href="{$BASE_URL}bbs/mbbs/"><span class="ico ico_sec"></span></a>&nbsp;
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+		
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+</div>
+<div id="wrapper_release" style="overflow: hidden; left: 0px;" class="bg_f4">
+	<div id="scroller">
+		<div class="us_tabtl" style="padding-top:4.5em;" >
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a href="#" >修改临时工信息</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		<div class="fabuxuqiu1 clearfix">
+	
+			<form action="{$BASE_URL}job/update_lsdo/" method="post" name="form1" id="form1" enctype="multipart/form-data">
+				<input type="hidden" value="{$job.job_ls_id}" name="id" id="id">
+			<input type="hidden" id="flag" name="flag" value="">
+				<input name="url" id="url" type="hidden" value="{$BASE_URL}"/>
+			<div class="container_24 clearfix pt_10">
+				
+				<table class="table1" width="100%" cellspacing="0" cellpadding="1" border="0">
+						<tr>
+							<td colspan=2>
+									 <input style="width:100%" placeholder="工作标题 " type="text" name="job_title" id="job_title" size="42"  class="txt_input mr_5 ml_0" value="{$job_ls_title}">
+							</td>
+						</tr>
+						<tr>
+							<td  colspan=2>
+								<span style="font-size: 14px;">工作地点： </span>
+							</td>
+						</tr>
+						<tr >
+							<td  colspan=2 >
+								<select name="areaid" id="areaid" onchange="showPref();" class="input">
+									<option value="">請指定</option>
+									<option value="">---------------</option>
+									{section name="list" loop="$areas"}
+										<option value="{$areas[list].area_cd}"
+										{if $areas[list].area_cd eq $areaid}selected='selected'{/if}
+										>{$areas[list].area_name}</option>
+								{/section}
+								</select>
+								<select name="pref" id="pref" onchange="giveToeki()" class="input">
+								<option value="">請指定</option>
+								<option value="">---------------</option>
+								{if $prefSearch}
+									{section name="list" loop="$prefSearch"}
+										<option value="{$prefSearch[list].pref_cd}"
+										{if $prefSearch[list].pref_cd eq $pref}selected='selected'{/if}
+										>{$prefSearch[list].name}</option>
+									{/section}
+								{/if}
+								</select><br>
+									<a	onclick="yanzheng()"  href="javascript:void(0);" >
+										<img  style="padding:8px;" src="{$BASE_URL}js/ek_files/ek.png" onclick="showStation(document.getElementById('pref').value)">
+									</a>
+									
+										<input type="hidden" name="searchEki">
+										<input type="hidden" name="reqType" value="">
+										<input type="hidden" name="mid_area_cd" value="">
+										<input type="hidden" name="mid_area_cds" value="">
+										<input type="hidden" name="comp_mgr_no" value="">
+										<input type="hidden" name="base_mgr_no" value="">
+										<input type="hidden" name="id_ad" value="">
+										<input type="hidden" name="new_flg" value="">
+										<input type="hidden" name="query_str" value="?">
+										<input type="hidden" name="query_flg" value="">
+										<p id="js-detailSearch-search-animation" class="animate" ></p>
+											<ul style="margin-left: 3px; line-height: 2px;">
+										<span class="ensn_list" id="ensn_list">
+										{if $ensn}
+											{section name="list" loop="$ensn"}
+												<li style="margin-left: -5px;"><label><input type="checkbox" style="display: inline;" class="ensn-chk" id="{getname name='ensn' value='$ensn[list]'}" name="ensn[]" value="{$ensn[list]}" checked >{getname name="ensn" value="$ensn[list]"}</label></li><br/>
+											{/section}
+										{/if}
+										{if $eki}
+											{section name="list" loop="$eki"}
+												<li style="margin-left: -5px;"><label><input type="checkbox" style="display: inline;" class="ensn-chk" id="{getname name='eki' value='$eki[list]'}" name="eki[]" value="{$eki[list]}" checked >{getname name="eki" value="$eki[list]"}</label></li><br/>
+											{/section}
+										{/if}
+										</span>
+										</ul>
+							</td>
+						</tr>
+						<tr>
+								<td >
+									<span style="font-size: 14px;">联系<br>方式:</span>
+								</td>
+								<td >
+									 <input name="lianxi" id="lianxi" size="22" type="text" value="{$lianxi}" class="input"/>
+								</td>
+						</tr>	
+						<tr>
+								<td >
+									<span style="font-size: 14px;">开始<br>时间：</span>
+								</td>
+								<td >
+									{$date_star}
+								</td>
+						</tr>	
+						<tr >
+								<td>
+									<span style="font-size: 14px;" >结束<br>时间： </span>
+								</td>
+								<td >
+									{$date_end}
+								</td>
+						</tr>	
+						<tr>
+								<td colspan=2>
+								
+								<textarea rows="11"  name="contents" id="contents" >{$contents}</textarea>
+								</td>
+							</tr>
+					</table>
+				
+						
+					</div>
+					<br>
+						<div class="login_botton">
+							<button class="red" href="#" onclick="return sendcheck();">  修改工作信息 </button>
+						</div>
+					<br><br>
+				</div>
+			</div>
+			</form>
+		
+			</div>
+	</div>
+</div>
+	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/css_other/car.css">
+	<!-- //wrapper -->
+
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_shok.js"></script>
+
+ <script src="{$BASE_URL}_templates/{$THEME}/mobile/js/layer_ensn_requirement.js"></script><!--此处修改了关闭 -->
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+			<div style="overflow:scroll;position:fixed;top:0px;" id="condition_list1" class="condition_list1 pad10">
+				<div id="condison_relat">
+					<div id="condison_absolut" style="overflow: hidden;">
+							<dl class="condition clearfix">
+								<!-- 線・駅 -->
+								<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height:auto; width: 100%; z-index: 1004; top: 0px; left: 0px;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+<!-- common-dialog-conditionSelect -->
+<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+<div class="pattern-2">
+	<div class="bg01">
+		<div class="pt01">
+			<h2>选择沿线</h2>
+			<p><a href="javascript:void(0);" id="js-dialog-station-close">
+			<img id="cacelSelect" src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+		</div>
+		
+		<div id="ensn-tdfk-view" style="display: block;">
+		<span id="ensn-tdfk-data">
+			<div class="pt03" id="js-ensn-tdfk-tabs">
+			<ul>
+				<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);" id="eki_pref_title">{if $user.pref_cd}{getname name="pref" value=$user.pref_cd}{/if}</a></li>
+			</ul>
+			</div>
+			<!-- tab start -->
+			<div class="ensn-01" id="ensn-tab1">
+			<div class="pt05" id="js-dialog-station-lists">
+			<div class="bg02">
+				<h3 class="close"><a href="javascript:void(0);" id="eki_pref">{if $user.pref_cd}{getname name="pref" value=$user.pref_cd}{/if}</a></h3>
+				<section id="station-lists">
+				</section>
+			</div>
+			</div>
+			</div>
+			<!-- //tab end -->
+		</span>
+		</div>
+						<div class="pt07">
+											<div class="pt07a">已经选择的沿线：<div id="selected-ensn">请选择沿线</div></div>
+											<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+										</div>
+		
+		<div class="pt08">
+			<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+		</div>
+	</div>
+</div>
+</div>
+<!-- //common-dialog-conditionSelect -->
+</div>
+</div>
+						
+							</dl>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commsetrequirement.js"></script>
+{include file="./mobile/footer.html"}

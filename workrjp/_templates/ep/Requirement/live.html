@@ -1,0 +1,156 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|在日生活互助"}
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/grid.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/publish.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/puerh2.css">
+
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/live.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				{if $smarty.session.kiwa_userid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/">个人空间</a></em></li>
+				{elseif $smarty.session.kiwa_companyid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/">企业空间</a></em></li>
+				{else}
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">个人空间</a></em></li>
+				{/if}
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+
+{literal}
+<style>
+b{
+	margin-left: 20px;
+	padding-top: 10px;
+	padding-right: 10px;
+	margin-right: 10px;
+}
+table td{
+	padding:5px;
+}
+</style>
+{/literal}
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}requirement/">发布需求</a></li>
+	<li>&gt; 生活互助</li>
+</ul>
+<form action="" name="form01">
+<!-- //pan -->
+<h1 class="title">发表「生活互助」需求</h1>
+<ul class="flow clearfix sep-big" style="margin-top: -12px;">
+	<li class="flow-item flow-item-current">1. 选择类目</li>
+	<li class="flow-item ">2. 填写信息</li>
+	<li class="flow-item flow-item-last">3. 完成发布</li>
+</ul>
+<div class=" " style="margin-top: -15px;">
+<!-- 选择类目-->
+	<div id="select" class="tab tab-vertical clearfix">
+		<div class="grid grid-4">
+			<ul class="tab-title" style="height:410px;">
+				<li class="tab-title-item active">
+				<a href="#container" data-toggle="tab" data-target="#fangchan_about">☗&nbsp;房产相关</a>
+				</li>
+				<li class="tab-title-item">
+				<a href="#container" data-toggle="tab" data-target="#tiaozao_about">＄&nbsp;跳蚤市场</a>
+				</li>
+				<li class="tab-title-item">
+				<a href="#container" data-toggle="tab" data-target="#cheliang_about">➽&nbsp;车辆服务</a>
+				</li>
+				<li class="tab-title-item">
+				<a href="#container" data-toggle="tab" data-target="#jiazheng_about">☎&nbsp;家政服务</a>
+				</li>
+				<li class="tab-title-item">
+				<a href="#container" data-toggle="tab" data-target="#live_about">❤&nbsp;生活相关</a>
+				</li>
+				<li class="tab-title-item">
+				<a href="#container" data-toggle="tab" data-target="#meishi_about">✈&nbsp;美食旅游</a>
+				</li>
+				<li class="tab-title-item">
+				<a href="#container" data-toggle="tab" data-target="#sheji_about">✐&nbsp;设计相关</a>
+				</li>
+				<li class="tab-title-item">
+				<a href="#container" data-toggle="tab" data-target="#falv_about">★&nbsp;法律帮助</a>
+				</li>
+			</ul>
+		</div>
+		<div class="grid grid-16 last">
+			<div class="tab-content" style="font-size: 16px;">
+				<div id="fangchan_about" class="tab-content-pane clearfix active">
+					{section name="list" loop=$fangchan}
+						<a href="{$BASE_URL}requirement/live/{$fangchan[list].service_id}/">{$fangchan[list].service_name}{if $fangchan[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+				</div>
+				
+				<div id="tiaozao_about" class="tab-content-pane clearfix ">
+					{section name="list" loop=$tiaozao}
+						<a href="{$BASE_URL}requirement/live/{$tiaozao[list].service_id}/">{$tiaozao[list].service_name}{if $tiaozao[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+				</div>
+				<div id="cheliang_about" class="tab-content-pane clearfix ">
+					{section name="list" loop=$cheliang}
+						<a href="{$BASE_URL}requirement/live/{$cheliang[list].service_id}/">{$cheliang[list].service_name}{if $cheliang[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+				</div>
+				<div id="jiazheng_about" class="tab-content-pane clearfix ">
+					{section name="list" loop=$jiazheng}
+						<a href="{$BASE_URL}requirement/live/{$jiazheng[list].service_id}/">{$jiazheng[list].service_name}{if $jiazheng[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+				</div>
+				<div id="live_about" class="tab-content-pane clearfix ">
+					{section name="list" loop=$shenghuo}
+						<a href="{$BASE_URL}requirement/live/{$shenghuo[list].service_id}/">{$shenghuo[list].service_name}{if $shenghuo[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+				</div>
+				<div id="meishi_about" class="tab-content-pane clearfix ">
+					{section name="list" loop=$meishi}
+						<a href="{$BASE_URL}requirement/live/{$meishi[list].service_id}/">{$meishi[list].service_name}{if $meishi[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+				</div>
+				<div id="sheji_about" class="tab-content-pane clearfix ">
+					{section name="list" loop=$sheji}
+						<a href="{$BASE_URL}requirement/live/{$sheji[list].service_id}/">{$sheji[list].service_name}{if $sheji[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+				</div>
+				<div id="falv_about" class="tab-content-pane clearfix ">
+					{section name="list" loop=$falv}
+						<a href="{$BASE_URL}requirement/live/{$falv[list].service_id}/">{$falv[list].service_name}{if $falv[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br><br><br>
+<script src="{$BASE_URL}js/bootstrap.9f69faf1.js"></script>
+</form>
+<br>
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+</div>
+<!-- //container -->
+</div>
+<!-- //wrapper -->
+{include file="./footer.html"}

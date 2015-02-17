@@ -1,0 +1,152 @@
+{include file="./header.html" title="求人管理-发表求人"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}companypage/">企业page</a></li>
+	<li>&gt; <a href="{$BASE_URL}companypage/findpeople/">求人管理</a></li>
+	<li>&gt; 求人信息-确认</li>
+</ul>
+<!-- //pan -->
+
+<!-- main -->
+<h1 class="title">求人信息-确认</h1>
+<form name="form1" action="{$BASE_URL}companypage/adddo/" method="post">
+<section id="jobEntryRegist">
+<table summary="求人応募" class="tableStyle">
+	<tr>
+		<th>公司名</th>
+		<td class="alLeft">
+			<font size="3">{$COMPANYID} / {$COMPANYNAME}</font>
+		</td>
+	</tr>
+	<tr>
+		<th>求人标题</th>
+		<td class="alLeft">
+		{$job_title}
+		<input type="hidden" value="{$job_title}" id="job_title" name="job_title">
+		</td>
+	</tr>
+	<tr>
+		<th>工作内容</th>
+		<td class="alLeft">
+		{$contents}
+		<input name="contents" id="contents" type="hidden" value="{$contents}"/>
+		</td>
+	</tr>
+	<tr>
+		<th>招收对象</th>
+		<td class="alLeft">
+		{$requirements}
+		<input name="requirements" id="requirements" type="hidden" value="{$requirements}"/>
+		</td>
+	</tr>
+	<tr>
+		<th>采用人数 </th>
+		<td class="alLeft">
+		{if $numbers}
+		{$numbers}&nbsp;&nbsp;&nbsp;人
+		{/if}
+		<input name="numbers" id="numbers" type="hidden" value="{$numbers}"/>
+		</td>
+	</tr>
+	<tr>
+		<th>截止日期 </th>
+		<td class="alLeft">
+		{$over_date} 天后
+		<input name="over_date" id="over_date" type="hidden" value="{$over_date}"/>
+		</td>
+	</tr>
+</table>
+<table class="tableStyle">
+	<tr>
+		<th>业种・职业选择</th>
+		<td class="alLeft">
+		业种:<br>
+			&nbsp;&nbsp;&nbsp;{getname name="kind" value="$types[0]"}
+			<input type="hidden" value="{$kinds}" id="kinds" name="kinds">
+		&nbsp;&nbsp;&nbsp;<br>
+		职种:<br>
+			{section name="list" loop="$types"}
+				&nbsp;&nbsp;&nbsp;{getname name="type" value="$types[list]"}
+				<input type="hidden" value="{$types[list]}" id="types" name="types[]">
+			{/section}
+		</td>
+	</tr>
+	<tr>
+		<th>勤务工作地</th>
+		<td class="alLeft">
+		区域:<br>
+			&nbsp;&nbsp;&nbsp;{getname name="area" value=$pref}
+		&nbsp;&nbsp;&nbsp;
+		<br>城市:<br>
+			&nbsp;&nbsp;&nbsp;{getname name="pref" value=$pref}
+		<input type="hidden" value="{$areaid}" id="areaid" name="areaid">
+		<input type="hidden" value="{$pref}" id="pref" name="pref">
+		{if $ensn}
+			&nbsp;&nbsp;&nbsp;
+			<br>线路:<br>
+			{section name="list" loop="$ensn"}
+				&nbsp;&nbsp;&nbsp;{getname name="ensn" value=$ensn[list]}
+				<input type="hidden" value="{$ensn[list]}" id="ensn" name="ensn[]">
+			{/section}
+		{/if}
+		{if $eki}
+			&nbsp;&nbsp;&nbsp;
+			<br>车站:<br>
+			{section name="list" loop="$eki"}
+				&nbsp;&nbsp;&nbsp;{getname name="eki" value=$eki[list]}
+				<input type="hidden" value="{$eki[list]}" id="eki" name="eki[]">
+			{/section}
+		{/if}
+		</td>
+	</tr>
+	<tr>
+		<th>薪资选择</th>
+		<td class="alLeft">
+			{getname name="money" value="$moneyid"}
+			<input type="hidden" value="{$moneyid}" id="moneyid" name="moneyid">
+		</td>
+	</tr>
+	<tr>
+		<th>雇用形式选择</th>
+		<td class="alLeft">
+			{getname name="employ" value="$employid"}
+			<input type="hidden" value="{$employid}" id="employid" name="employid">
+		</td>
+	</tr>
+	<tr>
+		<th>勤务时间</th>
+		<td class="alLeft">
+			{getname name="hope" value="$hopeid"}
+			<input type="hidden" value="{$hopeid}" id="hopeid" name="hopeid">
+		</td>
+	</tr>
+	<tr>
+		<th>其他条件</th>
+		<td class="alLeft">
+		{section name="list" loop="$conditions"}
+			{getname name="condition" value="$conditions[list]"}&nbsp;&nbsp;&nbsp;
+			<input type="hidden" value="{$conditions[list]}" id="conditions" name="conditions[]">
+		{/section}
+		</td>
+	</tr>
+</table>
+
+<p class="alCenter">
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_correction.gif" id="modify" onclick="return findpeople_addchoose();" alt="修正" style="width: auto !important;" />
+&nbsp;&nbsp;&nbsp;
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_conf.gif" alt="确认">
+</p>
+</section>
+<input type="hidden" value="1" id="review" name="review">
+<input type="hidden" value="{$BASE_URL}" id="url" name="url">
+</form>
+
+<p id="pagetop"><a href="#container">TOPへ戻る</a></p>
+</div>
+</div>
+{include file="./footer.html"}

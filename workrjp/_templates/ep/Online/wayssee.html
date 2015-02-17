@@ -1,0 +1,92 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|闲聊吧"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+{literal}
+<script type="text/javascript">
+
+</script>
+{/literal}
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+<br>
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 170px;">姓名 </li>
+							<li style="width: 120px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+							<li style="width: 120px;">最近车站</li>
+							<li style="width: 120px;">生年月日</li>
+							<li style="width: 200px;">工作时间</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+					{if $ways_online}
+					{section name="list" loop="$ways_online"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 170px;">&nbsp;{$ways_online[list].name}({$ways_online[list].sex})</li>
+							<li style="width: 120px;">&nbsp;{$ways_online[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$ways_online[list].tel}</li>
+							<li style="width: 120px;">&nbsp;{getname name="eki" value=$ways_online[list].eki}</li>
+							<li style="width: 120px;">&nbsp;&nbsp;{$ways_online[list].birth}</li>
+							<li style="width: 200px;">
+							{if $ways_online[list].day neq ""}
+								{assign var=day value="#"|explode:$ways_online[list].day}
+								{section name="lists" loop=$day}
+									{if $day[lists] neq ""}
+										{$day[lists]}<br>
+									{/if}
+								{/section}
+							{else}
+								&nbsp;
+							{/if}
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_companyid eq "071445274801"}
+							<!-- 
+								<a href="#" onclick="return deleteConfirm()">删除</a>
+								<a href="#" onclick="return deleteConfirm()">导入</a>
+							 -->
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{else}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<font color="red">&nbsp;抱歉，还没有你索搜的信息！</font>
+						</ul>
+					</dd>
+					{/if}
+				</dl>
+			</div>
+		</div>
+	</div>
+</section>
+<br><br><br>
+{include file="./footer.html"}

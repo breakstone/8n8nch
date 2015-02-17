@@ -1,0 +1,55 @@
+{include file="./header.html" title="信 箱"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}mypage/">MyPage</a></li>
+	<li>&gt; <a href="{$BASE_URL}mypage/pmessage/">信 箱</a></li>
+	<li>&gt; 发送信件</li>
+</ul>
+<!-- //pan -->
+<h1 class="title">发送信件</h1>
+<form name="form1" action="{$BASE_URL}mypage/pmessage_senddo/" method="post">
+<section id="jobEntryRegist">
+<table summary="求人応募" class="tableStyle">
+	<tr>
+		<th>发信人</th>
+		<td class="alLeft">
+		{$USERNAME}
+		<input type="hidden" name="message_from" value="{$USERID}">
+		</td>
+	</tr>
+	<tr>
+		<th>收信人</th>
+		<td class="alLeft">
+		{getname name="username" value=$toid}
+		{getname name="company_name" value=$toid}
+		<input type="hidden" name="message_to" value="{$toid}">
+		</td>
+	</tr>
+	<tr>
+		<th>信件标题</th>
+		<td class="alLeft">
+			<input type="text" name="message_title" id="message_title" size="120px;">
+		</td>
+	</tr>
+	<tr>
+		<th>信件内容</th>
+		<td class="alLeft">
+			<textarea name="message_content" id="message_content" rows="12" cols="90"></textarea>
+		</td>
+	</tr>
+</table>
+<br>
+<p class="alCenter">
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_send.gif" alt="送信" onclick="return messageSCheck();">
+</p>
+</section>
+</form>
+
+<p id="pagetop"><a href="#container">TOPへ戻る</a></p>
+</div></div>
+{include file="./footer.html"}

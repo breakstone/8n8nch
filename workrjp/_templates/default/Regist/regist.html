@@ -1,0 +1,98 @@
+{include file="./header.html" title="个人会员注册"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; 个人会员注册</li>
+</ul>
+<!-- //pan -->
+<!-- box -->
+<div id="box">
+
+<form action="{$BASE_URL}regist/review/" accept-charset="utf-8" id="indexForm" method="post">
+<div style="display: none;"></div>
+<div id="applicant"><section>
+<h1 class="title">新规个人会员注册</h1>
+<p><img src="{$BASE_URL}_templates/{$THEME}/img/gantanhao.jpg" style="width:20px;height:25px;" />以下项目是必须填写项目</p>
+<font color="red">{$_error}</font>
+<table summary="新规会员注册" class="tableStyle">
+	<tbody>
+		<tr>
+			<th>姓</th>
+			<td colspan="4">
+			<input name="name01" size="40" style="ime-mode: active" type="text" id="name01" value="{$name01}">
+			</td>
+		</tr>
+		 <tr>
+			<th>名</th>
+			<td colspan="4">
+			<input name="name02" size="40" style="ime-mode: active" type="text" id="name02" value="{$name02}">
+			</td>
+		</tr>
+		<!-- <tr>
+			<th>名字</th>
+			<td colspan="4">
+			<input name="kana01" size="40" style="ime-mode: active" type="text" id="kana01" value="{$kana01}">
+			</td>
+		</tr>
+		<tr>
+			<th>名（カタカナ）</th>
+			<td colspan="4">
+			<input name="kana02" size="40" style="ime-mode: active" type="text" id="kana02" value="{$kana02}">
+			</td>
+		</tr>-->
+		<tr>
+			<th>邮箱地址</th>
+			<td colspan="4"><SPAN style="COLOR: blue">※作为登录ID的同时，我们也会将一些MYPAGE的重要更新信息发送到这个邮箱，请务必正确填写。</SPAN><br>
+			<input name="email" size="40" style="ime-mode: inactive" type="text" id="email" onblur="EmailAjax()" value="{$email}">
+			<input type="hidden" value="{$BASE_URL}" id="url" name="url">
+			※手机的邮箱地址利用不可
+			<div id="tellOk"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>邮箱地址（确认）</th>
+			<td colspan="4">
+			<input name="reemail" size="40" type="text" id="reemail" value="{$email}">
+			</td>
+		</tr>
+		<tr>
+			<th>密码</th>
+			<td colspan="4"><SPAN style="COLOR: blue">※密码在登录时必须输入，请务必保管好您的密码。</SPAN><br>
+			<input name="password" size="32" type="password" id="password" value="{$password}">
+			※8位～32位半角英数字
+			</td>
+		</tr>
+		<tr>
+			<th>密码（确认）</th>
+			<td colspan="4">
+			<input name="repassword" size="32" type="password" id="repassword" value="{$password}">
+			※8位～32位半角英数字
+			</td>
+		</tr>
+		<tr>
+			<th style="width: 280px !important;">利用规约和关于个人情报管理</th>
+			<td colspan="4">
+			<label for="ApplicantDataTempPrivacy">
+			<input type="checkbox" name="privacy" id="privacy" {$privacy} >
+			<a href="{$BASE_URL}regist/terms/" target="_blank">利用规约</a>と
+			<a href="{$BASE_URL}regist/perfams/" target="_blank">关于个人情报管理</a>同意
+			</label>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p class="alCenter">
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_conf.gif" alt="确认" onclick="return RegistCheck()">
+</p>
+</section>
+</div>
+</form>
+</div>
+<p id="pagetop"><a href="{$BASE_URL}regist/#container">返回顶部</a></p>
+</div>
+<!-- //container --></div>
+<!-- //wrapper -->
+{include file="./footer.html"}

@@ -1,0 +1,225 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<link href="{$BASE_URL}_templates/{$THEME}/mobile/css/ad.css" rel="stylesheet"/>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll-lite.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/artDialog.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/keke.js"></script>
+<link rel="stylesheet" type="text/css" 	href="{$BASE_URL}_templates/{$THEME}/mobile/css/royalslider.css">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/style2013.css">
+{literal}
+<script type="text/javascript">
+var width1= document.body.scrollWidth-20;
+_record = 0;
+var myTitle = document.title;
+function titleBlink(){
+	document.getElementById("rg").className="frg";
+	_record++;
+	if(_record==3){//当变量_record累加到3是，将其赋值为1。相当于无限循环。
+		_record=1;
+	}
+	if(_record==1){
+		document.title='【      】'+myTitle;
+	}
+	if(_record==2){
+		document.title='【新消息】'+myTitle;
+	}
+	setTimeout("titleBlink()",800);//调节时间，单位毫秒。
+}
+</script>
+{/literal}
+{literal}
+<script type="text/javascript">
+$(document).ready(function () {
+	$(".main_visual").hover(function(){
+		$("#btn_prev,#btn_next").fadeIn()
+		},function(){
+		$("#btn_prev,#btn_next").fadeOut()
+		})
+	$dragBln = false;
+	$(".main_image").touchSlider({
+		flexible : true,
+		speed : 200,
+		btn_prev : $("#btn_prev"),
+		btn_next : $("#btn_next"),
+		paging : $(".flicking_con a"),
+		counter : function (e) {
+			$(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+		}
+	});
+	$(".main_image").bind("mousedown", function() {
+		$dragBln = false;
+	})
+	$(".main_image").bind("dragstart", function() {
+		$dragBln = true;
+	})
+	$(".main_image a").click(function() {
+		if($dragBln) {
+			return false;
+		}
+	})
+	timer = setInterval(function() { $("#btn_next").click();}, 5000);
+	$(".main_visual").hover(function() {
+		clearInterval(timer);
+	}, function() {
+		timer = setInterval(function() { $("#btn_next").click();}, 5000);
+	})
+	$(".main_image").bind("touchstart", function() {
+		clearInterval(timer);
+	}).bind("touchend", function() {
+		timer = setInterval(function() { $("#btn_next").click();}, 5000);
+	})
+});
+</script>
+{/literal}
+
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/jquery.event.drag-1.5.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/jquery.touchSlider.js"></script>
+
+<div id="header">
+	<div class="headbar index clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><img src="{$BASE_URL}_templates/{$THEME}/mobile/images/mlogo.png" alt=""></a>
+		</div>
+		<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+		
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+</div>
+<div id="wrapper_index" style="	overflow: auto;">
+<div id="scroller_index" style="transition: transform 0ms; -webkit-transition: transform 0ms; transform-origin: 0px 0px 0px; transform: translate(0px, 0px) translateZ(0px);">
+	<div class="main_visual">
+		<div class="flicking_con">
+			<div class="flicking_inner" >
+	            <a href="#">1</a>
+	            <a href="#">2</a>
+	            <a href="#">3</a>
+	            <a href="#">4</a>
+	            <a href="#">5</a>
+			</div>
+					 </div>
+			<div class="main_image" style="width:100%; height: 177px;">
+				<ul>					
+					<li><a href="{$BASE_URL}online/kiwa_znq/" target="_blank"><span class="img_1"></span></a></li>				
+					<li><a href="{$BASE_URL}online/event2/" rel="nofollow" target="_blank"><span class="img_3"></span></a></li>
+					<li><a href="{$BASE_URL}people/show/company_301759188819/" rel="nofollow" target="_blank"><span class="img_5"></span></a></li>
+					<li><a href="{$BASE_URL}people/show/company_021144338093/" target="_blank"><span class="img_2"></span></a></li>
+					<li><a href="http://www.kakyo.net/" rel="nofollow" target="_blank"><span class="img_4"></span></a></li>
+				</ul>
+				<a href="javascript:;" id="btn_prev"></a>
+				<a href="javascript:;" id="btn_next"></a>
+			</div>
+	</div>
+	<div class="toolenter">
+		<table width="101%" border="0" cellspacing="1" cellpadding="1">
+			<tbody>
+				<tr>
+					<td><a href="{$BASE_URL}job/"><span class="ico ico_1"></span><br>工作信息</a></td>
+					<td><a href="{$BASE_URL}live/"><span class="ico ico_4"></span><br>生活互助</a></td>
+					<td><a href="{$BASE_URL}requirement/"><span class="ico ico_2"></span><br>发布信息</a></td>
+				</tr>
+				<tr>
+					<td><a href="{$BASE_URL}bbs/"><span class="ico ico_5"></span><br>闲聊吧</a></td>
+					<td><a href="{$BASE_URL}people/?Which_Show=1"><span class="ico ico_3"></span><br>企业秀</a></td>
+				    <td><a href="{$BASE_URL}people/?Which_Show=2"><span class="ico ico_6"></span><br>人才秀</a></td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
+	<div class="findus" style="padding:0.2em 1em 0 1em;">
+		<img id="contentshow" src="{$BASE_URL}_templates/{$THEME}/Online/images/map/img_1054.jpg">
+		<img id="contentshow1" src="{$BASE_URL}_templates/{$THEME}/Online/images/map/img_1055.jpg">
+		<img id="contentshow2" src="{$BASE_URL}_templates/{$THEME}/Online/images/map/img_1056.jpg">
+		<img id="contentshow3" src="{$BASE_URL}_templates/{$THEME}/Online/images/map/img_1057.jpg">
+		<img id="contentshow4" src="{$BASE_URL}_templates/{$THEME}/Online/images/map/img_1058.jpg">
+		<img id="contentshow5" src="{$BASE_URL}_templates/{$THEME}/Online/images/map/img_1059.jpg">
+		<img id="contentshow6" src="{$BASE_URL}_templates/{$THEME}/Online/images/map/img_1060.jpg">
+		<img id="contentshow7" src="{$BASE_URL}_templates/{$THEME}/Online/images/map/img_1061.jpg">
+		<img id="contentshow8" src="{$BASE_URL}_templates/{$THEME}/Online/images/map/img_1062.jpg">
+		<img id="contentshow9" src="{$BASE_URL}_templates/{$THEME}/Online/images/map/img_1063.jpg">
+		
+			
+	</div>
+
+	
+		
+		<div id="footer" style="text-align: center;">
+				<div class="innerft" >
+							<!--footer链接 start-->
+							<a href="{$BASE_URL}netshow/aboutus/">关于我们 |</a>
+							<a href="{$BASE_URL}netshow/wantj/">玩转帮帮网 |</a>
+							<a href="#">友情链接</a><br>
+							<a href="{$BASE_URL}netshow/kefu/">客服中心 |</a>
+							<a href="{$BASE_URL}netshow/points/">积分规则 |</a>
+							<a href="{$BASE_URL}regist/terms/" class="bor_n">网站协议</a>
+							<!--footer链接 end--><br>
+						帮帮网 http://8n8n.co.jp
+				</div>
+				<div class="f_r"></div>
+		</div>
+	</div>
+</div>
+{literal}
+<script type="text/javascript">
+
+var contentshow=document.getElementById("contentshow");
+var contentshow1=document.getElementById("contentshow1");
+var contentshow2=document.getElementById("contentshow2");
+var contentshow3=document.getElementById("contentshow3");
+var contentshow4=document.getElementById("contentshow4");
+var contentshow5=document.getElementById("contentshow5");
+var contentshow6=document.getElementById("contentshow6");
+var contentshow7=document.getElementById("contentshow7");
+var contentshow8=document.getElementById("contentshow8");
+var contentshow9=document.getElementById("contentshow9");
+var contentshow10=document.getElementById("contentshow10");
+var contentshow11=document.getElementById("contentshow11");
+var contentshow12=document.getElementById("contentshow12");
+var contentshow13=document.getElementById("contentshow13");
+
+
+
+contentshow.style.cssText='width:'+width1.toString()+'px;';
+contentshow1.style.cssText='width:'+width1.toString()+'px;';
+contentshow2.style.cssText='width:'+width1.toString()+'px;';
+contentshow3.style.cssText='width:'+width1.toString()+'px;';
+contentshow4.style.cssText='width:'+width1.toString()+'px;';
+contentshow5.style.cssText='width:'+width1.toString()+'px;';
+contentshow6.style.cssText='width:'+width1.toString()+'px;';
+contentshow7.style.cssText='width:'+width1.toString()+'px;';
+contentshow8.style.cssText='width:'+width1.toString()+'px;';
+contentshow9.style.cssText='width:'+width1.toString()+'px;';
+contentshow10.style.cssText='width:'+width1.toString()+'px;';
+contentshow11.style.cssText='width:'+width1.toString()+'px;';
+contentshow12.style.cssText='width:'+width1.toString()+'px;';
+contentshow13.style.cssText='width:'+width1.toString()+'px;';
+
+
+</script>
+{/literal}
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/masonry.pkgd.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/imagesloaded.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/index.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commset.js"></script>
+{include file="./mobile/footer.html"}

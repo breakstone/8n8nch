@@ -1,0 +1,92 @@
+<link rel="shortcut icon" type="image/ico" href="{$BASE_URL}_templates/{$THEME}/img/minilogo.jpg">
+<link rel="apple-touch-icon" href="{$BASE_URL}_templates/{$THEME}/img/minilogo.jpg">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/base.css">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/layout.css">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/newsimple_style2013.css">
+<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/960.min.css" />
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/html5.js"></script>
+<![endif]-->
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/header_top.js" async=""></script>
+{literal}
+<style>
+a{ text-decoration:none;}
+a:hover{ text-decoration:none;}
+</style>
+{/literal}
+	<!--[if IE 8]><div id="ie8"><![endif]-->
+	<!--[if IE 7]><div id="ie7"><![endif]-->
+	<!--[if IE 6]><div id="ie6"><![endif]-->
+	<div class="simple_style" id="wrapper">
+		<div id="toptoolbar" class="message tool clearfix">
+			<div class="container_24">
+				<div class="fl_l" id="index_r_bar" style="width: 700px;text-align: left;">
+					{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+					<span class="pl_5 pr_10">
+					<a class="s_lz" href="{$BASE_URL}netshow/mobile/" target="_blank">
+					<img style="vertical-align: -2px; margin-right: 5px;" src="{$BASE_URL}_templates/{$THEME}/img/ico-12x150.png" alt="" original-title="">手机版&nbsp;|&nbsp;
+					</a>
+					欢迎您，<a href="{$BASE_URL}mypage/">
+					{$smarty.session.kiwa_username}{$smarty.session.kiwa_companyname}
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/>站内信<font class='cc00 fontb' id='messagecount_1'>[$um]</font></a>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "<a href=".APP_URL."mypage/pmessage/>站内信<font class='cc00 fontb' id='messagecount_1'>[$um]</font></a>";
+							}
+						}
+					{/php}
+					</a>
+					</span>
+					<a href="{$BASE_URL}control/mypageC.php?logout" class="ea5e00">退出</a>
+					{else}
+					<span class="pl_5 pr_10">
+					<a class="s_lz" href="{$BASE_URL}netshow/mobile/" target="_blank">
+					<img style="vertical-align: -2px; margin-right: 5px;" src="{$BASE_URL}_templates/{$THEME}/img/ico-12x150.png" alt="" original-title="">帮帮网&nbsp;|&nbsp;
+					</a>
+					企业主页自助平台
+					</span>
+					<a href="{$BASE_URL}login/" class="ea5e00">请登录</a>
+					<a href="{$BASE_URL}regist/chose/" class="ea5e00">免费注册</a>
+					{/if}
+				</div>
+				<div class="fl_r link po_re">
+					<span id="nav_pull1" class="po_re">
+					<a href="{$BASE_URL}netshow/wantj/" class="pl_5 pr_5">教您玩转本网站</a>
+					</span>
+					<em class="lines"></em>
+					<span id="nav_pull4" class="po_re">
+						<a href="javascript:void(0);" class="pl_5 pr_5">导航<span>▼</span></a>
+						<div class="option_two t_l hidden">
+							<div class="title_again ">
+								<a href="javascript:void(0);">导航<span>▼</span></a>
+							</div>
+							<dl>
+								<dt>导航</dt>
+								<dd>
+									<h2 class="border_b_c c06c">我们的服务</h2>
+									<ul class="release_task clearfix">
+										<li><a href="{$BASE_URL}requirement/work/">发布工作信息 需求</a></li>
+										<li><a href="{$BASE_URL}requirement/live/">发布生活信息 需求</a></li>
+										<li><a href="{$BASE_URL}people/?Which_Show=2">找人才</a></li>
+										<li><a href="{$BASE_URL}people/?Which_Show=1">找企业</a></li>
+									</ul>
+								</dd>
+							</dl>
+						</div>
+					</span> 
+					<em class="lines"></em> <a href="{$BASE_URL}netshow/kefu/" class="pl_5 pr_5 rel">客服中心</a>
+				</div>
+			</div>
+			<div class="transprentbg"></div>
+		</div>
+		<!--顶部部分 end-->
+		<div class="t_c"></div>
+		<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/topbannerset.js"></script>
+	</div>

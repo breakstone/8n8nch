@@ -1,0 +1,421 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/css_other/car.css">
+{literal}
+<script>
+function yanzheng()
+{
+		if(document.getElementById("areaid").value=="" || document.getElementById("pref").value==""){
+			alert("请选择「住址（都道府县）」");
+		}
+		else
+			{
+			$("#condition_list1").show().animate( { left: "0"}, 200 );
+			//myScroll.refresh();
+			}
+}
+	function form_submit(){
+		document.getElementById("searchform").submit();
+	}
+	function job_biao_submit(biaoname){
+		document.getElementById("biaoname").value = biaoname;
+		//document.getElementById("searchform").submit();
+	}
+	function company_type_submit(qiname){
+		document.getElementById("qiname").value = qiname;
+		//document.getElementById("searchform").submit();
+	}
+</script>
+{/literal}
+
+
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}"><span class="title">首页</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+<div class="tabcrooll">
+		<span class="tabbar on">
+		&nbsp;&nbsp;</span>
+		<span style="color:black;font-size:13px;">{$all}件&nbsp;</span>
+		<a	id="selecTool" class="botton_a f_r" href="">
+		<span class="ico ico_reflesh"></span>筛选</a>
+	</div>
+</div>
+	<form action="{$BASE_URL}people/"accept-charset="utf-8" id="searchform" name="searchform" method="get">
+<div id="wrapper_list" style="overflow: hidden; left: 0px;">
+	<div id="scroller">
+		
+		<div id="hasSelected">
+		
+				{if $biaoname neq ""}
+					<span>
+					{$biaoname}
+					</span>
+				{/if}
+				{if $qiname neq ""}
+					<span>
+					{$qiname}
+					</span>
+				{/if}
+				{if $areaid neq ""}
+					<span>
+					{section name="list" loop="$areas"}
+														
+						{if $areas[list].area_cd eq $areaid}
+							{$areas[list].area_name}
+						{/if}
+					{/section}
+					</span>
+				{/if}
+				{if $pref neq ""}
+					<span>
+				 {getname name='pref' value=$pref}
+					</span>
+				{/if}
+				
+				{if $kindsid neq ""}
+					<span>
+						{section name="list" loop="$companyfrom"}
+											
+									{if $companyfrom[list].kindsID eq $kindsid}
+											{$companyfrom[list].kindsname}
+									{/if}
+						{/section}
+					</span>
+				{/if}
+				{if $biaoname neq "" or $areaid neq "" or $pref neq "" or $kindsid neq "" or $qiname neq ""}
+				{if $Which_Show eq 2}
+						<a href="{$BASE_URL}people/?Which_Show=2"><span> 清除选择×</span></a>								
+							{/if}
+									{if $Which_Show eq 1}
+						<a href="{$BASE_URL}people/?Which_Show=1"><span> 清除选择×</span></a>								
+							{/if}
+					
+				{/if}
+		</div>
+		<div id="maincon" class="maincon">
+	
+			<ul id="thelist"  data-role="listview">
+			<input type="hidden" name="Which_Show" value="{$Which_Show}">
+				{if $companyuser}
+					{section name="list" loop="$companyuser"}
+							<li>
+							<a href="{$BASE_URL}people/show/company_{$companyuser[list].company_id}/{$url1}" >
+								<span class="imgsub">
+													<img src="{$BASE_URL}{$companyuser[list].company_photo_url}" style="max-width: 80px;"alt="个人照片"/>
+								</span>
+								<div class="listcont">
+									<h2>{$companyuser[list].company_name}</h2>
+									<div class="lins">
+										<span>地址</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$companyuser[list].pref},{$companyuser[list].addr01}</span>
+									</div>
+							
+									<div class="lins">
+											<span>经营范围</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$companyuser[list].skill}</span>
+									</div>
+								</div>
+								<span class="clear"></span>
+								<div class="tages" style="padding-left:0em;">
+									<strong></strong>
+									<span>{$companyuser[list].company_text|mb_truncate:60}</span>
+								</div>
+							</a>
+							</li>	
+							
+					{/section}
+				{/if}
+			
+				{if $peoples}
+
+				{section name="list" loop="$peoples"}
+				<li>
+					<a class="" href="{$BASE_URL}people/show/user_{$peoples[list].user_id}/{$url1}">
+								<span class="imgsub">
+									{if $peoples[list].user_photo_url}
+									<img src="{$BASE_URL}{$peoples[list].user_photo_url}" style="max-width: 80px;"alt="个人照片"/>
+									{else}
+									<img src="{$BASE_URL}_templates/{$THEME}/img/nopicture.png" style="max-width: 80px;" alt="个人照片"/>
+									{/if}
+								</span>
+								<div class="listcont">
+										<h2>{$peoples[list].name01} {$peoples[list].name02} {if $peoples[list].birth neq "0000-00-00"}{$now-$peoples[list].birth} 岁{/if}
+															&nbsp;&nbsp;&nbsp;
+															{if $peoples[list].sex eq 1}男{/if}
+															{if $peoples[list].sex eq 2}女{/if}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</h2>
+										<div class="lins">
+											<span>地址</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{getname name="area" value=$peoples[list].pref_cd}，{getname name="pref" value=$peoples[list].pref_cd}</span>
+										</div>
+										<div class="lins">
+											<span>职业信息</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$peoples[list].typesname|mb_truncate:50}</span>
+										</div>
+										<div class="lins">
+											<span>就职意向</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$peoples[list].skill}</span>
+										</div>
+								</div>
+								<span class="clear"></span>
+								<div class="tages" style="padding-left: 0em;">
+									<strong></strong>
+									<span>{$peoples[list].mypr|mb_truncate:60}</span>
+								</div>
+						</a>
+					</li>
+						{/section}
+					{/if}
+						
+			</ul>
+			<div style="text-align: center;">
+				{if $all gt 12}
+				<span style="font-size: 18px;"> {$subPages} </span>
+				{/if}
+			</div>
+		</div>
+		<br>	<br>
+	</div>
+</div>
+	<input type="hidden" name="service_id" id="service_id" value="{$service_id}">
+		<div style="overflow:auto;"  id="condition_list" class="condition_list pad10">
+		
+				<div id="condison_relat">
+					<div id="condison_absolut" >
+					{if $Which_Show eq 2}
+						<dl class="condition clearfix" >
+							<input type="hidden" value="{$biaoname}" id="biaoname" name="biaoname">
+					 		<dt class="f_l">人才分类：</dt>
+							<dd >
+							{section name="list" loop=$biao}
+								
+									<a  style="display: inline;" href="javascript:void(0);" onclick="job_biao_submit('{$biao[list].biao_name}');">
+									{$biao[list].biao_name}
+									</a>
+							{if $smarty.section.list.rownum mod 4 eq 0}
+								</br>
+								{/if}
+							
+							{/section}
+								
+							</dd>
+							
+						</dl>
+						<dl class="condition clearfix">
+								<dt class="f_l">选择业种：</dt>
+								
+								<select name="kinds" id="kinds" onchange="showTypes();">
+									<option value="">不指定</option>
+									<option value="">---------------</option>
+								{section name="list" loop="$companyfrom"}
+									<option value="{$companyfrom[list].kindsID}"
+									{if $companyfrom[list].kindsID eq $kindsid}
+										selected='selected'
+									{/if}
+									>{$companyfrom[list].kindsname}</option>
+								{/section}
+								</select>
+							</dl>
+							<dl class="condition clearfix">
+								<dt class="f_l">选择职种：</dt>
+								<dd id="typecheck">
+								{$types_str}
+								</dd>
+							</dl>
+					{/if}
+					{if $Which_Show eq 1}
+						<dl class="condition clearfix" >
+						<input type="hidden" value="{$qiname}" id="qiname" name="qiname">
+					 		<dt class="f_l">业务分类：</dt>
+							<dd >
+							{section name="list" loop=$qi}
+								
+									<a  style="display: inline;" href="javascript:void(0);" onclick="company_type_submit('{$qi[list].type_name}');">
+									{$qi[list].type_name}
+									</a>
+							{if $smarty.section.list.rownum mod 3 eq 0}
+								</br>
+								{/if}
+							
+							{/section}
+								
+							</dd>
+							
+						</dl>
+					{/if}
+						
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">地点：</dt>
+							<dd>
+							<select name="areaid" id="areaid" onchange="showPref();" class="input">
+								<option value="">不指定</option>
+								<option value="">---------------</option>
+								{section name="list" loop="$areas"}
+									<option value="{$areas[list].area_cd}"
+									{if $areas[list].area_cd eq $areaid}
+										selected='selected'
+									{/if}
+									>{$areas[list].area_name}</option>
+								{/section}
+							</select>
+							<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+							<select name="pref" id="pref" onchange="giveToeki()" class="input">
+								<option value="">不指定</option>
+								<option value="">---------------</option>
+								{if $prefSearch}
+									{section name="list" loop="$prefSearch"}
+										<option value="{$prefSearch[list].pref_cd}"
+											{if $prefSearch[list].pref_cd eq $pref}
+												selected='selected'
+											{/if}
+										>
+										{$prefSearch[list].name}
+										</option>
+									{/section}
+								{/if}
+							</select>
+							</dd>
+							</dl>
+							<dl class="condition clearfix" >
+					 		<dt class="f_l">车站：</dt>
+					 		<dd>
+							<a	style='background: #FFFFFF;' onclick="yanzheng()"  href="javascript:void(0);" >
+										<img   src="{$BASE_URL}js/ek_files/ek.png" onclick="showStation(document.getElementById('pref').value)">
+							</a>
+									<input type="hidden" name="searchEki">
+									<input type="hidden" name="reqType" value="">
+									<input type="hidden" name="mid_area_cd" value="">
+									<input type="hidden" name="mid_area_cds" value="">
+									<input type="hidden" name="comp_mgr_no" value="">
+									<input type="hidden" name="base_mgr_no" value="">
+									<input type="hidden" name="id_ad" value="">
+									<input type="hidden" name="new_flg" value="">
+									<input type="hidden" name="query_str" value="?">
+									<input type="hidden" name="query_flg" value="">
+									<p id="js-detailSearch-search-animation" class="animate" ></p>
+									<span class="ensn_list" id="ensn_list" style="width: 550px;">
+										{if $ensn}
+											{section name="list" loop="$ensn"}
+												<label><input type="checkbox" class="ensn-chk" id="{getname name='ensn' value='$ensn[list]'}" name="ensn[]" value="{$ensn[list]}" checked >{getname name="ensn" value="$ensn[list]"}</label>
+											{/section}
+										{/if}
+										{if $eki}
+											{section name="list" loop="$eki"}
+												<label><input type="checkbox" class="ensn-chk" id="{getname name='eki' value='$eki[list]'}" name="eki[]" value="{$eki[list]}" checked >{getname name="eki" value="$eki[list]"}</label>
+											{/section}
+										{/if}
+									</span>
+							</dd>
+						</dl>
+						<div class="conditbot">
+								<div class="submit">
+										<input name="search" class="bt" type="submit" value="确定"/>
+									{if $Which_Show eq 2}
+									<a style='background: #FFFFFF;' href="{$BASE_URL}people/?Which_Show=2"><input  type="button" value="清除选择"/></a>
+									{/if}
+									{if $Which_Show eq 1}
+									<a style='background: #FFFFFF;' href="{$BASE_URL}people/?Which_Show=1"><input  type="button" value="清除选择"/></a>
+									{/if}
+									<input id="cacelSelect" type="button" value="取消"/>
+								</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+	</form>
+	<!-- //wrapper -->
+
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_shok.js"></script>
+<script src="{$BASE_URL}_templates/{$THEME}/mobile/js/layer_ensn_nosubmit_live.js"></script><!-- 此处修改了关闭 -->
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+			<div style="overflow:scroll;position:fixed; " id="condition_list1" class="condition_list1 pad10">
+				<div id="condison_relat">
+					<div id="condison_absolut" style="overflow: hidden;">
+							<dl class="condition clearfix">
+								<!-- 線・駅 -->
+								<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height:auto; width: 100%; z-index: 1004; top: 0px; left: 0px;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+								<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+								<!-- common-dialog-conditionSelect -->
+								<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+								<div class="pattern-2">
+									<div class="bg01">
+										<div class="pt01">
+											<h2>选择沿线</h2>
+											<p><a href="javascript:void(0);" id="js-dialog-station-close">
+											<img id="cacelSelect1" src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+										</div>
+										
+										<div id="ensn-tdfk-view" style="display: block;">
+										<span id="ensn-tdfk-data">
+											<div class="pt03" id="js-ensn-tdfk-tabs">
+											<ul>
+												<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);" id="eki_pref_title">{getname name="pref" value=$pref}</a></li>
+											</ul>
+											</div>
+											<!-- tab start -->
+											<div class="ensn-01" id="ensn-tab1">
+											<div class="pt05" id="js-dialog-station-lists">
+											<div class="bg02">
+												<h3 class="close"><a href="javascript:void(0);" id="eki_pref">{getname name="pref" value=$pref}</a></h3>
+												<section id="station-lists">
+												</section>
+											</div>
+											</div>
+											</div>
+											<!-- //tab end -->
+										</span>
+										</div>
+								
+										<div class="pt07">
+											<div class="pt07a">已经选择的沿线：<div id="selected-ensn">请选择沿线</div></div>
+											<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+										</div>
+										
+										<div style="text-align:center;" class="pt08">
+											<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+										</div>
+									</div>
+								</div>
+								</div>
+								<!-- //common-dialog-conditionSelect -->
+								</div>
+								</div>
+						
+							</dl>
+					</div>
+				</div>
+			</div>
+		<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklist2.js"></script>
+	<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commsetlive.js"></script>
+		
+{include file="./mobile/footer.html"}

@@ -1,0 +1,73 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|登录"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+					{if $smarty.session.kiwa_userid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/">个人空间</a></em></li>
+				{elseif $smarty.session.kiwa_companyid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/">企业空间</a></em></li>
+				{else}
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">个人空间</a></em></li>
+				{/if}
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+
+<!-- wrapper -->
+<DIV id=wrapper><!-- container -->
+<DIV id=container><!-- pan -->
+<UL id=pan>
+	<LI><A href="{$BASE_URL}">HOME</A>
+	<LI>&gt; 登录</LI>
+</UL>
+<!-- //pan --><!-- box -->
+<DIV id=box>
+<DIV id=login><SECTION>
+<FORM id=Form accept-charset=utf-8 action="{$BASE_URL}login/logindo/?url={$url}" method=post>
+<H1 class=title>登录</H1>
+<center><font color="red">{$_error}</font></center>
+<DL id=loginBox>
+	<DT>邮箱地址</DT>
+	<DD><INPUT class=txt id=email style="WIDTH: 270px" size=40 name=email value="{$smarty.get.e}"></DD>
+	<DT>密码</DT>
+	<DD><INPUT class=txt id=password style="WIDTH: 270px" type=password size=40 name=password></DD>
+	<DD><label><input type="checkbox" name="remember" id="remember" value="1" style="margin-left: -2px;"> 自动登录</label></DD>
+	<DD id=auto></DD>
+	<DD>忘记密码点<A href="{$BASE_URL}login/forget/">这里</A></DD>
+</DL>
+<P><INPUT class="submit bt" type=image alt=ログイン src="{$BASE_URL}_templates/{$THEME}/img/common_bt_login.gif" name=submit onclick="return loginCheck();"></P>
+</FORM>
+</SECTION></DIV>
+</DIV>
+<center>
+<h1 class=title>会员注册</h1>
+<a href="{$BASE_URL}regist/"><img alt="求人招聘" src="{$BASE_URL}_templates/{$THEME}/img/register1.jpg" height="50px;"></a>
+<a href="{$BASE_URL}regist/company/"><img alt="求人招聘" src="{$BASE_URL}_templates/{$THEME}/img/register2.jpg" height="50px;"></a>
+</center>
+<br>
+<P id=pagetop><A href="{$BASE_URL}login/#container">返回顶部</A></P>
+</DIV>
+</DIV>
+{include file="./footer.html"}

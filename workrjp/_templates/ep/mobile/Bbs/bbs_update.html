@@ -1,0 +1,206 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|闲聊吧"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+	<link  type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/user.css">
+<script type="text/javascript" src="{$BASE_URL}js/jquery.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/xheditor.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/xheditor-zh-cn.js"></script>
+{literal}
+<style>
+.table1 td{padding:0px}
+.inputstyle{
+    width: 144px;
+    height: 41px;
+    cursor: pointer;
+    font-size: 30px;
+    outline: medium none;
+    position: absolute;
+    filter:alpha(opacity=0);
+    -moz-opacity:0;
+    opacity:0; 
+    left:0px;
+    top: 0px;
+}
+</style>
+<script type="text/javascript">
+function sendcheck(){
+	//alert($('#content').val());
+	
+
+	if(document.getElementById("title").value==""){
+		alert("请输入题目！");
+		return false;
+	}
+	if(document.getElementById("title").value.length>50){
+		alert("题目不得超过50个字！");
+		return false;
+	}
+	if($('#content').val()==""){
+		alert("请输入闲聊内容！");
+		return false;
+	}
+	var files = document.getElementsByName("file_upload[]");
+	for(f = 0; f < files.length; f++){
+		if(files[f].value!=""){
+			var strTemp = files[f].value.split(".");
+			var fileCheck = strTemp[strTemp.length-1];
+			if(fileCheck.toUpperCase()!='JPG' && fileCheck.toUpperCase()!='PNG' && fileCheck.toUpperCase()!='GIF' && fileCheck.toUpperCase()!='JPEG'){
+				alert("上传图片图片格式不对！");
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+</script>
+{/literal}
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}"><span class="title">首页</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+		<a href="{$BASE_URL}bbs/mbbs/"><span class="ico ico_sec"></span></a>&nbsp;
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+		
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+</div>
+<div id="wrapper_list" style="overflow: hidden; left: 0px;" class="bg_f4">
+	<div id="scroller">
+		<div class="us_tabtl" >
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a href="#" >发表闲聊</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		<div class="fabuxuqiu clearfix">
+	
+			<form action="{$BASE_URL}bbs/updatedo/" method="post" name="form1" id="form1" enctype="multipart/form-data">
+			<input type="hidden" name="id" id="id" value="{ $bbs.bbs_id}">
+			<div class="container_24 clearfix pt_10">
+				
+				<table class="table1" width="100%" cellspacing="0" cellpadding="1" border="0">
+						
+							<tr>
+						
+								<td colspan=2>
+										话题分类： 
+									{if $bbs.bbs_type eq ""}
+										【闲聊】
+									{else}
+											{$bbs.bbs_type}
+									{/if}
+								</td>
+						</tr>
+						<tr>
+						
+							<td colspan=2>
+									 <input placeholder="题目" type="text" name="title" id="title" size="42"  class="txt_input mr_5 ml_0" value="{$bbs.bbs_title}">
+									<font style="color: red;">&nbsp;&nbsp;※ 题目不得超过50个字</font>
+							</td>
+						</tr>
+						<tr>
+								<td colspan=2>
+								{literal}
+								<textarea rows="14"  name="content" id="content" class="xheditor {tools:'FontSize,Bold,FontColor,BackColor,Align,Preview,Emot',skin:'default'}">{/literal} {$bbs.bbs_content}{literal}</textarea>
+								{/literal}
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<span style="font-size: 14px;">上传图片 </span>
+								</td>
+								<td><button type="button" id="addf" onclick="addfile();">再加一张？</button></td>
+							</tr>
+						<tr>
+							<td colspan=2>
+								
+											<span>
+												<input type='file' class='' name='file_upload[]' value=''>	
+																							</span>
+											
+											</span>
+											<font style="font-size: 12px;color: #4F4F4F;">(最多上传5张图片，格式为 jpg jpeg png gif)</font>
+						<div id="file2"></div>
+						<div id="file3"></div>
+						<div id="file4"></div>
+						<div id="file5"></div>
+										
+						{literal}
+						<script>
+						var t1 = null;//这个设置为全局
+						var index = 1;
+						function addfile(){
+						 /*  if (t1 == null){
+						        t1 = new Date().getTime();
+						    }else{       
+						        var t2 = new Date().getTime();
+						        if(t2 - t1 < 500){
+						            t1 = t2;
+						            return;
+						        }else{
+						            t1 = t2;
+						        }
+						    }*/
+							index = index +1;
+							if(index>5){
+								alert("最多上传5张图片！");
+								document.getElementById("addf").disabled='disabled';
+							}else{
+								document.getElementById("file"+index).innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='file'  name='file_upload[]' value=''>";
+							}
+						}
+						
+					
+						</script>
+					
+						{/literal}
+								
+							
+							</td>
+						</tr>
+					</table>
+				
+						
+					</div>
+					<br>
+						<div class="login_botton">
+							<button class="red" href="#" onclick="return sendcheck();">  发布帖子 </button>
+						</div>
+					<br><br><br><br><br><br><br><br><br><br><br>	<br><br><br><br>	<br><br>
+				</div>
+			</div>
+			</form>
+		
+			</div>
+	</div>
+</div>
+
+	<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklistbbs.js"></script>
+{include file="./mobile/footer.html"}

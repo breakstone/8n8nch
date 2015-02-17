@@ -1,0 +1,36 @@
+{include file="./header.html" title="登录"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<!-- wrapper -->
+<DIV id=wrapper><!-- container -->
+<DIV id=container><!-- pan -->
+<UL id=pan>
+	<LI><A href="{$BASE_URL}">HOME</A>
+	<LI>&gt; 登录</LI>
+</UL>
+<!-- //pan --><!-- box -->
+<DIV id=box>
+<DIV id=login><SECTION>
+<FORM id=Form accept-charset=utf-8 action="{$BASE_URL}login/logindo/?url={$url}" method=post>
+<H1 class=title>登录</H1>
+<center><font color="red">{$_error}</font></center>
+<DL id=loginBox>
+	<DT>邮箱地址</DT>
+	<DD><INPUT class=txt id=email style="WIDTH: 270px" size=40 name=email></DD>
+	<DT>密码</DT>
+	<DD><INPUT class=txt id=password style="WIDTH: 270px" type=password size=40 name=password></DD>
+	<DD id=auto>
+	<!-- <INPUT id=RememberMe type=checkbox value=1 name=remember_me>
+		<LABEL for=RememberMe>次回から自動でログインする</LABEL> -->
+	<DD>忘记密码点<A href="{$BASE_URL}login/forget/">这里</A>
+	</DD>
+</DL>
+<P><INPUT class="submit bt" type=image alt=ログイン src="{$BASE_URL}_templates/{$THEME}/img/common_bt_login.gif" name=submit onclick="return loginCheck();"></P>
+</FORM>
+<P id=entry>会员注册　　个人点<A href="{$BASE_URL}regist/">这里</A><br>企业点<A href="{$BASE_URL}regist/company">这里</A></P>
+</SECTION></DIV>
+</DIV>
+<P id=pagetop><A href="{$BASE_URL}login/#container">返回顶部</A></P>
+</DIV>
+
+<!-- //container --></DIV>
+{include file="./footer.html"}

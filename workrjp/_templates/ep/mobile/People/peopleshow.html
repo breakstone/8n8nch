@@ -1,0 +1,265 @@
+{include file="./mobile/header.html"  title="个人空间"}
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll-probe.js"></script>
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$users.page_color}">
+
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/layout.css">
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/html5.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+{literal}
+
+<script type="text/javascript">
+function ShowImage(page, tag)
+{
+    var i = 1;
+    var el;
+     var tab_tobar_no="tab_tobar_no";
+    while (el = document.getElementById(tag + i)) {
+        if (i == page)
+        	{
+        	document.getElementById(tab_tobar_no+i).style.background="#F4F4F4";
+            el.style.display = 'block';
+            
+        	}
+        else
+        	{
+        	document.getElementById(tab_tobar_no+i).style.background="#dfdfdf";
+            el.style.display = 'none';
+        	}
+        i++;
+    }
+    myScroll.refresh();
+}
+</script>
+{/literal}
+</head>
+<body >
+<div id="header">
+	
+		<div class="headbar clearfix">
+			<div style="display:block;top:5px;">
+			{if $users.user_id eq $smarty.session.kiwa_userid}
+				<div class="f_l">
+					<a href="{$BASE_URL}mypage/"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+					<a  href="{$BASE_URL}mypage/">
+					<span class="title">我的地盘</span>
+					</a>
+				</div>
+					{else}
+					<div class="f_l">
+					<a href="{$BASE_URL}people/?Which_Show=2&{$url1}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+					<a  href="{$BASE_URL}people/?Which_Show=2&{$url1}">
+					<span class="title">返回</span>
+					</a>
+				</div>
+				{/if}
+				<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+		
+				
+			</div>
+			
+		</div>
+</div>
+	<div id="wrapper_shop" style="overflow: scroll;top: 4.5em;">
+		<div id="scroller_index" >
+					
+					<div class="shopper clearfix" >
+						<div class="shoer_pimg f_l" style="margin-top: -1.5em;">
+							<img src="{$BASE_URL}{$users.user_photo_url}" original-title="" style="z-index: 0;max-width: 200px;max-height: 200px;">
+						</div>
+						<div class="shoer_cont">
+							<h2>{$users.name01}{$users.name02}</h2>
+							<div class="st_b">
+								{if $company.pref_cd}
+								<span>所在地区</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span> {getname name="area" value=$users.pref_cd} - {getname name="pref" value=$users.pref_cd}</span>
+								{/if}
+								<span class="c999">访问人数：
+									<span class="cEB2">{$users.see_page}</span>
+								</span>
+							</div>
+							<div class="st_b">
+								{$users.mypr|nl2br|mb_truncate:360}
+							</div>
+						</div>
+						
+					</div>
+				<div class="shop_tags" style="margin-top: 1.5em;">
+						<div class="shop_tags_tl" >擅长标签</div>
+						<div class="tagsbox" style="padding: 1em 0em 1em 1em">
+						{if $users.skill}
+							{assign var=skill value=","|explode:$users.skill}
+							{section name="list" loop=$skill}<a>{$skill[list]}</a>{/section}
+						{else}
+							Ta很懒，还没有填写擅长！
+						{/if}
+						</div>
+						<div class="shoptabbox" style="padding-left:0px;">
+							
+									<div class="tab_tobar_no casetab clearfix" >
+									<a href="#"  style="background:#F4F4F4" id="tab_tobar_no1" onclick="ShowImage(1, 'tab');">个人资料</a>
+									<a href="#"   id="tab_tobar_no2"  onclick="ShowImage(2, 'tab');">个人相册</a>
+									</div>
+									
+									<div class="itemcase" style="background:#F4F4F4;display:none;text-align:center;" id="tab2">
+									
+									{if $users.user_id eq $smarty.session.kiwa_userid}
+								{if $photo|@count <= 12}
+								<a href="{$BASE_URL}people/productadd/user_{$users.user_id}/" class="fl_r c333"><button>添加照片</button></a>
+								{else}
+									{if $users.user_id eq "031758092846"}<!-- 庞涛特权 -->
+									<a href="{$BASE_URL}people/productadd/user_{$users.user_id}/" class="fl_r c333"><button>添加照片</button></a>
+									{else}
+									<a href="javascript:void(0);" class="fl_r c333"><button>您的权限，最多只能发布12个照片</button></a>
+									{/if}
+								{/if}
+							{else}
+											<a href="{$BASE_URL}people/photo/user_{$users.user_id}/" class="f_r" ><button>更多</button></a><br>
+							{/if}	
+										<ul style="height: auto;background:#F4F4F4;margin-left: 25px;clear:both;">
+										
+										{if $photo}
+											{section name="list" loop="$photo"}
+											<li style="margin：0；margin-right: 20px;padding-top: 5px;"">
+												<a href="{$BASE_URL}people/photoshow/{$photo[list].Id}/" class="imsgcbx">
+												<img style="max-width:200px;" src="{$BASE_URL}{$photo[list].photo_url}" alt="" ></a>
+												<div class="">
+													<b class="cea5">{$photo[list].title|mb_truncate:14}</b>
+												</div>
+											</li>
+											{/section}
+										{else}
+										
+											<li>
+											<br><br>
+											<div class="">
+													<b class="">&nbsp;&nbsp;&nbsp;Ta 还没有发布任何照片！ </b>
+												</div>
+													<br>
+											</li>
+											
+										{/if}
+										</ul>
+									</div>
+									
+									<div class="intros" style="background:#F4F4F4;display:block" id="tab1">
+									<ul >
+										<li><strong>{$users.name01}{$users.name02}</strong></li>
+										<li>{if $users.sex}性别：{$usersex}{/if}</li>
+										<li>{if $users.birth neq "0000-00-00"}年龄：{$age}岁{/if}</li>
+										<li id="left_phone">
+										{if $users.tel01}
+										电话：{if $users.tel_flag eq 1}<font style="font-size:16px;">{if $users.tel01}{$users.tel01}-{$users.tel02}-{$users.tel03}{/if}</font>{/if}{if $users.tel_flag eq 2}非公开{/if}
+										{/if}
+										</li>
+										<li id="left_email">邮箱：{if $users.per_status eq 1}<font style="font-size:16px;word-break: break-all;">{$users.email}</font>{/if}{if $users.per_status eq 2}非公开{/if}</li>
+										<li>
+										{if $users.pref}
+										地址：{$users.pref}{$users.addr01}
+										{/if}
+										<br>
+										</li>
+											{if $users.want_day}
+											<li style="border-top: 1px solid #dfdfdf"><br><strong>期望工作时间:</strong></li>
+											<li >
+											{if in_array("周一上午",$want_day) or in_array("周一下午",$want_day) or in_array("周一夜班",$want_day)}
+												周一 : 
+												{if in_array("周一上午",$want_day)}上午{/if}
+												{if in_array("周一下午",$want_day)}下午{/if}
+												{if in_array("周一夜班",$want_day)}夜班{/if}<br>
+											{/if}
+											{if in_array("周二上午",$want_day) or in_array("周二下午",$want_day) or in_array("周二夜班",$want_day)}
+												周二 : 
+												{if in_array("周二上午",$want_day)}上午{/if}
+												{if in_array("周二下午",$want_day)}下午{/if}
+												{if in_array("周二夜班",$want_day)}夜班{/if}<br>
+											{/if}
+											{if in_array("周三上午",$want_day) or in_array("周三下午",$want_day) or in_array("周三夜班",$want_day)}
+												周三 : 
+												{if in_array("周三上午",$want_day)}上午{/if}
+												{if in_array("周三下午",$want_day)}下午{/if}
+												{if in_array("周三夜班",$want_day)}夜班{/if}<br>
+											{/if}
+											{if in_array("周四上午",$want_day) or in_array("周四下午",$want_day) or in_array("周四夜班",$want_day)}
+												周四 : 
+												{if in_array("周四上午",$want_day)}上午{/if}
+												{if in_array("周四下午",$want_day)}下午{/if}
+												{if in_array("周四夜班",$want_day)}夜班{/if}<br>
+											{/if}
+											{if in_array("周五上午",$want_day) or in_array("周五下午",$want_day) or in_array("周五夜班",$want_day)}
+												周五 : 
+												{if in_array("周五上午",$want_day)}上午{/if}
+												{if in_array("周五下午",$want_day)}下午{/if}
+												{if in_array("周五夜班",$want_day)}夜班{/if}<br>
+											{/if}
+											{if in_array("周六上午",$want_day) or in_array("周六下午",$want_day) or in_array("周六夜班",$want_day)}
+												<font color="red">周六</font> : 
+												{if in_array("周六上午",$want_day)}上午{/if}
+												{if in_array("周六下午",$want_day)}下午{/if}
+												{if in_array("周六夜班",$want_day)}夜班{/if}<br>
+											{/if}
+											{if in_array("周日上午",$want_day) or in_array("周日下午",$want_day) or in_array("周日夜班",$want_day)}
+												<font color="red">周日</font> : 
+												{if in_array("周日上午",$want_day)}上午{/if}
+												{if in_array("周日下午",$want_day)}下午{/if}
+												{if in_array("周日夜班",$want_day)}夜班{/if}<br>
+											{/if}
+											</li>
+											{/if}
+											<br>
+										</ul>
+									</div>
+						
+					</div>
+					<div class="shopboton">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+										{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+											{if $smarty.session.kiwa_companyid}
+												<a class="botton_b xuyaodenglu" href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">联系TA</a>
+											{/if}
+											{if $smarty.session.kiwa_userid}
+												<a class="botton_b xuyaodenglu" href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">联系TA</a>
+											{/if}
+											
+												&nbsp;&nbsp;<a href="#" class="botton_b xuyaodenglu" onclick="favorite('{$users.user_id}','{$flag}');">收藏TA</a>
+										{/if}
+										{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+											&nbsp;&nbsp;<a class="botton_b xuyaodenglu" href="{$BASE_URL}login/" >联系TA</a>
+											&nbsp;&nbsp;<a class="botton_b xuyaodenglu"  href="{$BASE_URL}login/" >收藏TA</a>
+										{/if}
+									  
+							<br><br>
+					</div>
+				</div>
+			
+				
+					
+					
+		</div>
+		
+</div>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll-companyshow1.js"></script>
+{include file="./mobile/footer.html"}

@@ -1,0 +1,304 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/index_map.css">
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<link type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/lrtk.css" rel="stylesheet" />
+
+<link href="{$BASE_URL}_templates/{$THEME}/css/ad.css" rel="stylesheet"/>
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class="on hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				{if $smarty.session.kiwa_userid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/">个人空间</a></em></li>
+				{elseif $smarty.session.kiwa_companyid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/">企业空间</a></em></li>
+				{else}
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">个人空间</a></em></li>
+				{/if}
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+<div class="navboto">
+<div class="container_24 clearfix">
+	<div class="jyxtongji fl_l">
+		<span class="icos_1_20_20 fl_l">&nbsp;</span>
+		<span class="fl_l">
+		<strong>帮帮指数：</strong>&nbsp;&nbsp;
+		<!-- 
+		需求总数： <strong>{$live_um+0}</strong> 个&nbsp;&nbsp;
+		工作总数： <strong>{$job_um+0}</strong> 个&nbsp;&nbsp;
+		人才数：  <strong>{$user_um+0}</strong> 位&nbsp;&nbsp;
+		企业数：  <strong>{$company_um+0}</strong> 家&nbsp;&nbsp;
+		 -->
+		浏览量:<strong>2,694,967</strong> 次&nbsp;&nbsp;
+		访问总数:<strong>582,253</strong> 个&nbsp;&nbsp;
+		信息总数:<strong>{$live_um+$job_um+$user_um+$company_um}</strong> 个&nbsp;&nbsp;
+		</span>
+		<div class="jxlritadver fl_r">
+			<div class="fl_r jxlrscroll" id="marqueebox1">
+			<a href="javascript:void(0);" class="red">专为在日华人服务,在日工作,在日生活</a><br>
+			<a href="javascript:void(0);" class="blue">注册帮帮网,为在日华人解决各种烦恼！</a><br>
+			<a href="javascript:void(0);" style="color: green;">帮帮网,在日华人的网,工作信息,生活互助！</a><br>
+			</div>
+			<span class="icos_2_20_20 fl_r">&nbsp;</span>
+		</div>
+	<script type="text/javascript">
+	startmarquee(24,100,2000,1);
+	/**startmarquee(一次滚动高度,速度,停留时间,图层标记);**/
+	</script>
+	</div>
+</div>
+</div>
+{literal}
+<script type="text/javascript">
+$(document).ready(function () {
+	$(".main_visual").hover(function(){
+		$("#btn_prev,#btn_next").fadeIn()
+		},function(){
+		$("#btn_prev,#btn_next").fadeOut()
+		})
+	$dragBln = false;
+	$(".main_image").touchSlider({
+		flexible : true,
+		speed : 200,
+		btn_prev : $("#btn_prev"),
+		btn_next : $("#btn_next"),
+		paging : $(".flicking_con a"),
+		counter : function (e) {
+			$(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+		}
+	});
+	$(".main_image").bind("mousedown", function() {
+		$dragBln = false;
+	})
+	$(".main_image").bind("dragstart", function() {
+		$dragBln = true;
+	})
+	$(".main_image a").click(function() {
+		if($dragBln) {
+			return false;
+		}
+	})
+	timer = setInterval(function() { $("#btn_next").click();}, 5000);
+	$(".main_visual").hover(function() {
+		clearInterval(timer);
+	}, function() {
+		timer = setInterval(function() { $("#btn_next").click();}, 5000);
+	})
+	$(".main_image").bind("touchstart", function() {
+		clearInterval(timer);
+	}).bind("touchend", function() {
+		timer = setInterval(function() { $("#btn_next").click();}, 5000);
+	})
+});
+</script>
+{/literal}
+
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/jquery.event.drag-1.5.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/jquery.touchSlider.js"></script>
+<div class="main_visual">
+	<div class="flicking_con">
+	<!-- 
+		<div class="flicking_inner">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+		</div>
+	-->
+    </div>
+	<div class="main_image">
+		<ul>	
+			<li><a href="{$BASE_URL}online/event2/" rel="nofollow" target="_blank"><span class="img_3"></span></a></li>
+			<li><a href="{$BASE_URL}people/show/company_061417187672/" target="_blank"><span class="img_7"></span></a></li>
+			<li><a href="{$BASE_URL}people/show/company_261053405767/" rel="nofollow" target="_blank"><span class="img_4"></span></a></li>
+			<li><a href="{$BASE_URL}people/show/company_301759188819/" rel="nofollow" target="_blank"><span class="img_5"></span></a></li>
+		</ul>
+		<a href="javascript:;" id="btn_prev"></a>
+		<a href="javascript:;" id="btn_next"></a>
+	</div>
+</div>
+
+<div class="indexritlogin" style="z-index:0;">
+	<div class="indloginer">
+		<div class="toel" style="margin-top: -15px;">
+			<div class="pt_15 pb_15 toel_a">找工作，发招聘，上帮帮</div>
+			{if $smarty.session.kiwa_username eq "" and $smarty.session.kiwa_companyname eq ""}
+			<a class="jianbcibton wid230" href="{$BASE_URL}login/?url=mypage_personal" target="_blank" style="margin-top: -12px;">
+				<span><img src="{$BASE_URL}_templates/{$THEME}/img/wyzgz_hove.jpg" alt="在日华人，找工作，发招聘，上帮帮" original-title=""></span>
+				<b style="display: block;"><img src="{$BASE_URL}_templates/{$THEME}/img/wyzgz.jpg" alt="在日华人，找工作，发招聘，上帮帮" original-title=""></b>
+			</a>
+			{/if}
+			{if $smarty.session.kiwa_username neq ""}
+			<a class="jianbcibton wid230" href="{$BASE_URL}mypage/personal/" target="_blank" style="margin-top: -12px;">
+				<span><img src="{$BASE_URL}_templates/{$THEME}/img/wyzgz_hove.jpg" alt="在日华人，找工作，发招聘，上帮帮" original-title=""></span>
+				<b style="display: block;"><img src="{$BASE_URL}_templates/{$THEME}/img/wyzgz.jpg" alt="在日华人，找工作，发招聘，上帮帮" original-title=""></b>
+			</a>
+			{/if}
+			{if $smarty.session.kiwa_companyname neq ""}
+			<a class="jianbcibton wid230" href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/" target="_blank" style="margin-top: -12px;">
+				<span><img src="{$BASE_URL}_templates/{$THEME}/img/mfzzy_hove.jpg" alt="在日华人，找工作，发招聘，上帮帮" original-title=""></span>
+				<b style="display: block;"><img src="{$BASE_URL}_templates/{$THEME}/img/mfzzy.jpg" alt="在日华人，找工作，发招聘，上帮帮" original-title=""></b>
+			</a>
+			{/if}
+			<div class="toel_b">
+				<strong>注册帮帮网</strong>，上万 『工作/人才』 随您挑!
+			</div>
+		</div>
+		<div class="box mb_10">
+			<div class="inner">
+				<!--公告 start-->
+				<div class="notice" style="height: 210px;">
+					<!-- 4个按钮 -->
+					<div class="center major-list-outer" style="margin-left: 30px;margin-top: 8px;">
+						<ul class="major-list">
+							<li class="major-item" id="dx"><a href="{$BASE_URL}job/?c=dd"><span class="txt-hide front-face"></span><span class="back-face"></span></a></li>
+							<li class="major-item" id="rj"><a href="{$BASE_URL}job/?c=zz"><span class="txt-hide front-face"></span><span class="back-face"></span></a></li>
+						</ul>
+					</div>
+					<br>
+					<div class="center major-list-outer" style="margin-left: 30px;margin-top: -140px;">
+						<ul class="major-list">
+							<li class="major-item" id="jx"><a href="{$BASE_URL}job/?c=sj"><span class="txt-hide front-face"></span><span class="back-face"></span></a></li>
+							<li class="major-item" id="gdz"><a href="{$BASE_URL}job/?c=gy"><span class="txt-hide front-face"></span><span class="back-face"></span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container_24 clearfix mb_10" style="margin-top: 6px;">
+	{if $smarty.session.kiwa_companyname neq ""}
+	<div class="in_tiltle clearfix">
+		<h2 class="fl_l">免费制作公司主页？</h2>
+		<span class="inpublistep"> 
+			<span class="stp"><em>1</em>填写公司简介</span>&gt;
+			<span class="stp"><em>2</em>上传商品图片</span>&gt;
+			<span class="stp"><em>3</em>完成企业主页</span>
+		</span>
+		<a class="fl_r in_publice" href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/"><font color="#fff">免费做主页&nbsp;&gt;</font></a>
+	</div>
+	{/if}
+	{if $smarty.session.kiwa_username neq ""}
+	<div class="in_tiltle clearfix">
+		<h2 class="fl_l">在日华人要找工作？</h2>
+		<span class="inpublistep"> 
+			<span class="stp"><em>1</em>填写个人简历</span>&gt;
+			<span class="stp"><em>2</em>个人秀里有你</span>&gt;
+			<span class="stp"><em>3</em>各大公司招你</span>
+		</span>
+		<a class="fl_r in_publice" href="{$BASE_URL}mypage/personal/"><font color="#fff">我要找工作&nbsp;&gt;</font></a>
+	</div>
+	{/if}
+	{if $smarty.session.kiwa_username eq "" and $smarty.session.kiwa_companyname eq ""}
+	<div class="in_tiltle clearfix">
+		<h1 class="fl_l" style="font-size: 24px;">在日华人找工作?在日企业免费制作主页?</h1>
+		<span class="inpublistep"> 
+			<span class="stp"><em>1</em>注册/登陆</span>&gt;
+			<span class="stp"><em>2</em>填写信息</span>&gt;
+			<span class="stp"><em>3</em>达成你的需求</span>
+		</span>
+		<a class="fl_r in_publice" href="{$BASE_URL}mypage/personal/"><font color="#fff">注册/登陆&nbsp;&gt;</font></a>
+	</div>
+	{/if}
+	<div class="guyongkb box default clearfix mb_10" style="background: #FCFCFC;">
+		<div class="pad10">
+			<ul id="marqueebox0" class="clearfix" style="height: 170px;">
+				{section name="list" loop=20}
+	            <li>
+                	{if $job1[list].job_id}<strong class="cea5">华人工作信息:</strong>&nbsp;<a href="{$BASE_URL}job/show/{$job1[list].job_id}/" target="_blank">{$job1[list].job_title|mb_truncate:30}</a>{/if}
+				</li>
+	            <li>
+	            	{if $job2[list].job_id}<strong class="cea5">华人工作信息:</strong>&nbsp;<a href="{$BASE_URL}job/show/{$job2[list].job_id}/" target="_blank">{$job2[list].job_title|mb_truncate:30}</a>{/if}
+	            </li>
+				{/section}
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+/**startmarquee(一次滚动高度,速度,停留时间,图层标记);**/
+startmarquee(48,100,2000,0);
+//startmarquee(24,100,4000,5);
+//startmarquee(24,100,4000,6);
+</script>
+
+<!--  <center><a href="http://8n8n.co.jp/online/kiwa_zxtz" target="_blank"><img src="{$BASE_URL}_templates/{$THEME}/images/banner.jpg"></a></center><br>-->
+
+<center><a href="http://8n8n.co.jp/online/guanxi/" target="_blank"><img src="{$BASE_URL}_templates/{$THEME}/images/guanxi_huo.jpg"></a></center>
+<div class="clitlilin mb_10" id="getwcxc">
+	<span class="on"></span>
+</div>
+<div class="container_24 clearfix" >
+	<div class="xcunlbox fl_l" style="height: 190px;text-align: left;border: 2px solid #dfdfdf;background: #FCFCFC;">
+		{section name="list" loop=$lives}
+           	<strong class="cea5">在日华人互助:</strong> <a href="{$BASE_URL}live/show/{$lives[list].live_id}/" target="_blank">{$lives[list].live_title|mb_truncate:26}</a><br>
+		{/section}
+		<div style="float: right;"><a href="{$BASE_URL}live/">更多生活互助</a></div>
+	</div>
+	<div class="xcunlbox fl_r" style="height: 190px;text-align: left;border: 2px solid #dfdfdf;background: #FCFCFC;">
+		{section name="list" loop=$lives}
+           	<strong class="cea5">在日华人闲聊:</strong> <a href="{$BASE_URL}bbs/show/{$bbs[list].bbs_id}/" target="_blank">{$bbs[list].bbs_title|mb_truncate:26}</a><br>
+		{/section}
+		<div style="float: right;"><a href="{$BASE_URL}bbs/">更多闲聊</a></div>
+	</div>
+</div>
+<div style="text-align: center;margin-top: 15px;margin-bottom: 15px;">
+<img src="{$BASE_URL}_templates/{$THEME}/img/{$banner}">
+</div>
+<div class="container_24 clearfix" >
+	<div class="xcunlbox fl_l" style="height: 270px;border: 2px solid #dfdfdf;background: #FCFCFC;">
+		<span class="xctil">我们对"在日华人"有什么帮助</span>
+		<ul class="bgx_1" style="height: 200px;">
+			<li><strong>免费提供在日工作信息</strong><br> 只要你完成你的简历，工作找你乐无忧！</li>
+			<li><strong>免费提供在日互助信息</strong><br> 生活有供需，发个需求，轻松解决！</li>
+			<li><strong>免费得到个人空间</strong><br> 注册帮帮网就有空间送，完成简历，会更精彩！</li>
+		</ul>
+	</div>
+	<div class="xcunlbox fl_r" style="height: 270px;border: 2px solid #dfdfdf;background: #FCFCFC;">
+		<span class="xctil">我们对"在日企业"有什么帮助</span>
+		<ul class="bgx_2" style="height: 200px;">
+			<li><strong>免费发布在日工作信息</strong><br> 企业需要人才，预算不多？OK，上帮帮！</li>
+			<li><strong>免费开通公司主页</strong><br> 有了公司没主页？OK，上帮帮！</li>
+			<li><strong>推广公司主页</strong><br> 帮帮和企业一起推广你们，让你们更有影响力！</li>
+		</ul>
+	</div>
+</div>
+<br>
+
+<!-- 地球代码 
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/earth.css">
+<div id="content" style="margin-top: -10px;">
+	<div class="earth" style="margin-top: -20px;">
+	<ul class="menu">
+		<li id="menu01"><a href="{$BASE_URL}job/"><img src="{$BASE_URL}_templates/{$THEME}/img/menu_01.jpg" width="195" height="195" alt="在日华人，找工作，发招聘，上帮帮" class="rollOver"/></a></li>
+		<li id="menu02"><a href="{$BASE_URL}live/"><img src="{$BASE_URL}_templates/{$THEME}/img/menu_02.png" width="195" height="195" alt="在日华人，找工作，发招聘，上帮帮" class="rollOver"/></a></li>
+		<li id="menu03"><a href="{$BASE_URL}people/?Which_Show=1"><img src="{$BASE_URL}_templates/{$THEME}/img/menu_03.jpg" width="195" height="195" alt="在日华人，找工作，发招聘，上帮帮" class="rollOver"/></a></li>
+		<li id="menu04"><a href="{$BASE_URL}people/?Which_Show=2"><img src="{$BASE_URL}_templates/{$THEME}/img/menu_04.png" width="195" height="195" alt="在日华人，找工作，发招聘，上帮帮" class="rollOver"/></a></li>
+	</ul>
+	</div>
+</div>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/over.js"></script>
+-->
+{include file="./footer.html"}

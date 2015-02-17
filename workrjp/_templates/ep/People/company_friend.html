@@ -1,0 +1,297 @@
+{include file="./header.html" title=$company.company_name}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$company.page_color}">
+{literal}
+<style>
+.people  a span{width: 98.2px;color: #630;height:30px; line-height: 30px; text-align: center;font-size:16px;background-color: #feda01;}
+.people  a:hover span{height:30px; line-height: 30px; text-align: center;font-size:20px;background:#fe7901;}
+</style>
+<script>
+function null_check(){
+	if(document.getElementById("msg_content").value==""){
+		alert("请输入回复内容！");
+		return false;
+	}
+	return true;
+}
+function re_msg(uid,uname){
+	document.getElementById("re_id").value=uid;
+	document.getElementById("msg_content").focus();
+	document.getElementById("msg_content").value="回复( "+uname+" ) : ";
+}
+function del_friend(uid,utype){
+	if(confirm("是否取消关注改好友?")){
+		document.getElementById("de_id").value=uid;
+		document.getElementById("de_type").value=utype;
+		return true;
+	}
+}
+</script>
+{/literal}
+<!--头部 end-->
+<div class="tombgroud clearfix">
+	{if $company_page.header_pic neq ""}
+	<div class="shopbanner " style="background:#efefef url({$BASE_URL}{$company_page.header_pic}) no-repeat center top;padding-bottom: -50xp;"></div>
+	{else}
+	<div class="shopbanner " style="background-color: black;font-size: 48px;color: white;text-align: center;"><br><br>
+	<b>{if $company_page.header_title neq ""}{$company_page.header_title}{else}{$company.company_name}{/if}</b>
+	</div>
+	{/if}
+	<div class="flagnav" style="width: 100%">
+		<div class="container_24">
+			<ul class="clearfix" id="ajax_shop_myshop">
+				<li><a class="" href="{$BASE_URL}people/show/company_{$company.company_id}/" target="_self">公司首页</a></li>
+				<li><a class="" href="{$BASE_URL}people/photo/company_{$company.company_id}/" target="_self">商品展示</a></li>
+				<li><a class="" href="{$BASE_URL}people/msg/company_{$company.company_id}/" target="_self">Ta的留言</a></li>
+				<li><a class="" href="{$BASE_URL}people/live/company_{$company.company_id}/" target="_self">Ta的生活服务</a></li>
+				<li><a class="" href="{$BASE_URL}people/job/company_{$company.company_id}/" target="_self">Ta的工作信息</a></li>
+				<li><a class="" href="{$BASE_URL}people/bbs/company_{$company.company_id}/" target="_self">Ta的闲聊</a></li> 
+				<li><a class="" href="{$BASE_URL}people/company_pr/{$company.company_id}/" target="_self">关于我们</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br>
+<div class="container_24 clearfix">
+	<!--内容主体-->
+	<div class="detaileft wid230 fl_l">
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span><img src="{$BASE_URL}{$company.company_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;"></span>
+				<h2>{$company.company_name}</h2>
+				<div class="c666">所在地区： {getname name="area"
+					value=$company.pref_cd} - {getname name="pref"
+					value=$company.pref_cd}</div>
+				<div class="c666">
+					积分状况：&nbsp;<font style="font-size: 16px;">{$company.points}</font>
+					积分
+				</div>
+				<div class="c666">
+					认证状况： {if $company.status eq 1}<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span> {/if}
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							{if $flag eq "user"}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">我要联系TA</a></span>
+							{/if}
+							{if $flag eq "company"}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$company.company_id}/">我要联系TA</a></span>
+							{/if}
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							{if $flag eq "user"}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">我要联系TA</a></span>
+							{/if}
+							{if $flag eq "company"}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$company.company_id}/">我要联系TA</a></span>
+							{/if}
+						{/if}
+						<div class="invita clearfix">
+							<a href="{$BASE_URL}people/msg/company_{$company.company_id}/" style="width: 98px;">评价TA</a>
+							<a href="javascript:;" style="width: 98px;color: red;" onclick="favorite('{$company.company_id}','{$flag}');">关注TA</a>
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$company.create_date|date_format:'%Y年%m月%d日'}</span><br>
+				<span class="c666">访问人数：<strong>{$company.see_page}</strong></span>
+			</div>
+		</div>
+		<!-- 
+		<span class="blank10"></span>
+		<div class="shopindex">
+			<div class="tztitle">
+				<em class="fl_l"><strong>Ta的综合评价</strong></em>
+			</div>
+			<ul>
+				<li
+					style="background-color: rgb(249, 249, 249); background-position: initial initial; background-repeat: initial initial;"><em>身份认证：</em>
+					<a original-title="10分" class="starsp" score="5"
+					style="width: 100px;"></a></li>
+				<li
+					style="background-color: rgb(249, 249, 249); background-position: initial initial; background-repeat: initial initial;"><em>Ta的评价：</em>
+					<a original-title="50分" class="starsp" score="5"
+					style="width: 100px;"></a></li>
+			</ul>
+		</div>
+		-->
+		<span class="blank10"></span>
+		
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>联系方式</strong></em>
+			</div>
+			<ul class="pad10">
+				<li><strong>{$company.company_name}</strong></li>
+				<li id="left_phone">{if $company.tel01}电话：{$company.tel01}-{$company.tel02}-{$company.tel03}{/if}</li>
+				<li id="left_phone">{if $company.fax01}FAX ：{$company.fax01}-{$company.fax02}-{$company.fax03}{/if}</li>
+				<li id="left_email">邮箱：{$company.company_email}</li>
+				<li>地址：{$company.pref} {$company.addr01} {$company.addr02}</li>
+			</ul>
+		</div>
+		
+		{if $company.company_id eq $smarty.session.kiwa_companyid}
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>更改版本颜色</strong></em>
+			</div>
+			<ul class="pad10">
+				<div style="padding-top:5px;">
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=red" title="红"><img src="{$BASE_URL}_templates/{$THEME}/img/red.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=black" title="黑"><img src="{$BASE_URL}_templates/{$THEME}/img/black.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=blue" title="蓝"><img src="{$BASE_URL}_templates/{$THEME}/img/blue.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=green" title="绿"><img src="{$BASE_URL}_templates/{$THEME}/img/green.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=orange" title="橙"><img src="{$BASE_URL}_templates/{$THEME}/img/orange.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/company_{$company.company_id}/?color=purple" title="紫"><img src="{$BASE_URL}_templates/{$THEME}/img/purple.jpg"></a>
+				</div>
+			</ul>
+		</div>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+	<form name="form1" id="form1" action="" method="post">
+	<input type="hidden" name="de_id" id="de_id" value="">
+	<input type="hidden" name="de_type" id="de_type" value="">
+	<div class="wid750 fl_r">
+		<div class="shopintroduce">
+			{if $friends_tj}
+			<div class="tztitle">
+					<em class="fl_l"><strong>为你推荐的好友</strong></em>
+			</div>
+			<ul class="clearfix">
+				{section name="list" loop="$friends_tj"}
+				<li style="height: 210px;width: 150px;text-align: center;padding-bottom: 10px;">
+					<a target="_blank" href="{$BASE_URL}people/show/{$friends_tj[list].user_type}_{$friends_tj[list].user_id}/" class="imsgcbx">
+						<img width="120" height="120" src="{$BASE_URL}{getname name='user_photo' value=$friends_tj[list].user_id}" alt="" style="display: inline;">
+					</a>
+					<div class="mb_5">
+						<b class="cea5">
+							<p style="text-align: center; width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							{getname name="username" value=$friends_tj[list].user_id}
+							</p>
+						</b>
+					</div>
+					<a  href="{$BASE_URL}people/friend/company_{$company.company_id}/"> </a>
+				<div style="margin-top: -5px;" class="people">
+				{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+					<a onclick="return favorite('{$friends_tj[list].user_id}','{$friends_tj[list].user_type}');" href="{$BASE_URL}people/friend/company_{$company.company_id}/">
+						<span style="padding:5px 10px 5px 10px;">关注TA</span>
+					</a>
+				{else}
+				<a href="javascript:void(0)" onclick="javascript:alert('请登录,再关注！');">
+					<span style="padding:5px 10px 5px 10px;">关注TA</span>
+				</a>
+				{/if}
+				
+				</div>
+				</li>
+				{/section}
+			</ul>
+			{else}
+		
+				<div class="tztitle">
+						<em class="fl_l"><strong>个人好友</strong></em>
+				</div>
+				<ul class="clearfix">
+					{section name="list" loop="$friends_user"}
+						<li style="height: 210px;width: 150px;text-align: center;padding-bottom: 10px;overflow: hidden;">
+								<a target="_blank" href="{$BASE_URL}people/show/user_{$friends_user[list].favorite_id}/" class="imsgcbx">
+									<img style="max-width:68px;max-height:68px" src="{$BASE_URL}{getname name='user_photo' value=$friends_user[list].favorite_id}" alt="" style="display: inline;">
+								</a>
+								<div class="mb_5" style="overflow: hidden;">
+									<b class="cea5">
+										<p style="text-align: center; width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+										{getname name="username" value=$friends_user[list].favorite_id}
+										</p>
+										<p>
+											{capture name="userpr"}{getname name="userpr" value=$friends_user[list].favorite_id}{/capture}
+											{if $smarty.capture.userpr}
+												{$smarty.capture.userpr|mb_truncate:10}
+											{else}
+												&nbsp;&nbsp;
+											{/if}
+										</p>
+									</b>
+								</div>
+							
+								{if $company.company_id eq $smarty.session.kiwa_companyid}
+									<div style="margin-top: -5px;"><button type="submit" onclick="return del_friend('{$friends_user[list].favorite_id}','user');" name="del">取消关注</button></div>
+									{if $friends_user[list].shield eq 1}
+								<div style="background: #cccccc;">已屏蔽&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}people/friend/company_{$company.company_id}/?jie={$friends_user[list].favorite_id}">解除屏蔽</a></div>
+									{/if}
+								{/if}
+						</li>
+				
+					{/section}
+				</ul>
+				<div class="tztitle">
+						<em class="fl_l"><strong>企业好友</strong></em>
+				</div>
+				<ul class="clearfix">
+				{section name="list" loop="$friends_company"}
+					<li style="height: 210px;width: 150px;text-align: center;padding-bottom: 10px;">
+						<a target="_blank" href="{$BASE_URL}people/show/company_{$friends_company[list].favorite_id}/" class="imsgcbx">
+							<img width="120" height="120" src="{$BASE_URL}{getname name='company_photo' value=$friends_company[list].favorite_id}" alt="" style="display: inline;">
+						</a>
+						<div class="mb_5">
+							<b class="cea5">
+							<p style="text-align: center; width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							{getname name="company_name" value=$friends_company[list].favorite_id}
+							</p>
+							<p>
+								{capture name="company_pr"}{getname name="company_pr" value=$friends_company[list].favorite_id}{/capture}
+								{if $smarty.capture.company_pr}
+									{$smarty.capture.company_pr|mb_truncate:10}
+								{else}
+									 &nbsp;&nbsp;
+								{/if}
+							</p>
+							</b>
+						</div>
+						
+						{if $company.company_id eq $smarty.session.kiwa_companyid}
+							<div style="margin-top: -5px;"><button type="submit" onclick="return del_friend('{$friends_company[list].favorite_id}','company');" name="del">取消关注</button></div>
+							{if $friends_company[list].shield eq 1}
+								<div style="background: #cccccc;">已屏蔽&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}people/friend/company_{$company.company_id}/?jie={$friends_company[list].favorite_id}">解除屏蔽</a></div>
+							{/if}
+						{/if}
+					</li>
+			
+				{/section}
+				</ul>
+				{if $company.company_id eq $smarty.session.kiwa_companyid}
+				<div class="tztitle">
+					<em class="fl_l"><strong>为你推荐的好友</strong></em>
+				</div>
+					<ul class="clearfix">
+						{section name="list" loop="$friends_user_tj"}
+						<li style="height: 210px;width: 150px;text-align: center;padding-bottom: 10px;">
+							<a target="_blank" href="{$BASE_URL}people/show/user_{$friends_user_tj[list].user_id}/" class="imsgcbx">
+								<img width="120" height="120" src="{$BASE_URL}{getname name='user_photo' value=$friends_user_tj[list].user_id}" alt="" style="display: inline;">
+							</a>
+							<div class="mb_5">
+								<b class="cea5">
+									<p style="text-align: center; width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+									{getname name="username" value=$friends_user_tj[list].user_id}
+									</p>
+								</b>
+							</div>
+						<div style="margin-top: -5px;" class="people"><a href="{$BASE_URL}people/friend/company_{$company.company_id}/" onclick="return favorite('{$friends_user_tj[list].user_id}','{$friends_user_tj[list].user_type}');" ><span style="padding:5px 10px 5px 10px;">关注TA</span></a></div>
+						</li>
+						{/section}
+					</ul>
+				{/if}	
+			{/if}
+			
+		</div>
+	</form>
+	</div>
+</div>
+{include file="./footer.html"}

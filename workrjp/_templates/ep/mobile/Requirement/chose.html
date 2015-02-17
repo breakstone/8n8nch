@@ -1,0 +1,153 @@
+{include file="./mobile/Requirement/header.html" title="帮帮网，在日华人工作信息互助平台|在日生活互助"}
+	<link href="{$BASE_URL}_templates/{$THEME}/mobile/css/user.css"	type="text/css" rel="stylesheet">
+	
+	<div id="wrapper_release" class="bg_f4"  style="overflow: hidden;">
+		<div id="scroller">
+			<div class="us_tabtl" style="padding-top: 5.0em;">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a class="on">第一步</a></td>
+							<td><a>第二步</a></td>
+							<td><a>第三步</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tlli_b">
+				<span class="fon1d5em">选择一个您需要选择发布的类别</span>
+			</div>
+			<div class="tabl_releas">
+				<table border="0" cellspacing="20" cellpadding="1">
+					<tbody>
+						
+						<tr>
+							<td><a class="#" href="{$BASE_URL}requirement/work/"><img
+									src="{$BASE_URL}_templates/{$THEME}/mobile/images/desi_6.png"
+									alt="发布工作"></a></td>
+							<td><a class="tab_relasbar" href=""><img
+									src="{$BASE_URL}_templates/{$THEME}/mobile/images/desi_4.png"
+									alt="发布生活"></a></td>
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+			
+<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			
+		</div>
+	</div>
+	<div id="releas_list" style="overflow:auto;position:fixed;">
+		<div id="condison_relat" class="condison_relat">
+			<div id="condison_absolut" >
+				<div class="condition_list">
+					<dl class="condition clearfix">
+						<dt class="f_l">
+							<a>房产相关</a>
+						</dt>
+						<dd>
+							{section name="list" loop=$fangchan}
+							<a href="{$BASE_URL}requirement/live/{$fangchan[list].service_id}/">{$fangchan[list].service_name}{if $fangchan[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+							{/section}
+						</dd>
+					</dl>
+					<dl class="condition clearfix">
+						<dt class="f_l">
+							<a>跳蚤市场</a>
+						</dt>
+						<dd>
+						{section name="list" loop=$tiaozao}
+						<a href="{$BASE_URL}requirement/live/{$tiaozao[list].service_id}/">{$tiaozao[list].service_name}{if $tiaozao[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+						{/section}
+						</dd>
+					</dl>
+					<dl class="condition clearfix">
+						<dt class="f_l">
+							<a>车辆服务</a>
+						</dt>
+						<dd>
+						{section name="list" loop=$cheliang}
+						<a href="{$BASE_URL}requirement/live/{$cheliang[list].service_id}/">{$cheliang[list].service_name}{if $cheliang[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+						{/section}
+						</dd>
+					</dl>
+					<dl class="condition clearfix">
+						<dt class="f_l">
+							<a>家政服务</a>
+						</dt>
+						<dd>
+								{section name="list" loop=$jiazheng}
+							<a href="{$BASE_URL}requirement/live/{$jiazheng[list].service_id}/">{$jiazheng[list].service_name}{if $jiazheng[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+						{/section}
+						</dd>
+					</dl>
+					<dl class="condition clearfix">
+						<dt class="f_l">
+							<a>生活相关</a>
+						</dt>
+						<dd>
+						{section name="list" loop=$shenghuo}
+						<a href="{$BASE_URL}requirement/live/{$shenghuo[list].service_id}/">{$shenghuo[list].service_name}{if $shenghuo[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+						{/section}
+						</dd>
+					</dl>
+					<dl class="condition clearfix">
+						<dt class="f_l">
+							<a>美食旅游</a>
+						</dt>
+						<dd>
+						{section name="list" loop=$meishi}
+						<a href="{$BASE_URL}requirement/live/{$meishi[list].service_id}/">{$meishi[list].service_name}{if $meishi[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+						</dd>
+					</dl>
+					<dl class="condition clearfix">
+						<dt class="f_l">
+							<a>设计相关</a>
+						</dt>
+						<dd>
+						{section name="list" loop=$sheji}
+						<a href="{$BASE_URL}requirement/live/{$sheji[list].service_id}/">{$sheji[list].service_name}{if $sheji[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+					{/section}
+						</dd>
+					</dl>
+					<dl class="condition clearfix">
+						<dt class="f_l">
+							<a>法律帮助</a>
+						</dt>
+						<dd>
+						{section name="list" loop=$falv}
+							<a href="{$BASE_URL}requirement/live/{$falv[list].service_id}/">{$falv[list].service_name}{if $falv[list].fire eq 1}<font color="red" style="font-size: 12px;">&nbsp;&nbsp;热门</font>{/if}</a>
+						{/section}
+						</dd>
+					</dl>
+					  
+				
+						<div class="conditbot">
+						<div class="submit">
+									<a class="cacelChoose">取消</a>
+						</div>
+					</div>
+				</div>
+			
+			
+			</div>
+		</div>
+	</div>
+	
+		<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commsetlive.js"></script>
+{include file="./mobile/footer.html"}

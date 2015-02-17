@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>《川越駅 麺工場》 临时工报名</title>
+<meta charset="utf-8">
+<meta name="keywords" content="帮帮网，在日华人，「在日华人工作信息，在日工作信息，日本华人工作」，「日本华人论坛，日本华人平台」，日本华人生活，日本留学，华人日本就职">
+<meta name="description" content="帮帮网，是提供给在日华人工作信息，在日华人互助，在日华人生活交流，免费发布华人求人信息的平台！帮帮网，在日本华人工作生活信息一点一滴开始！">
+<meta name="viewport" content="user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="copyright" content="">
+<link href="{$BASE_URL}_templates/{$THEME}/Event/css/css.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/css3buttons.css">
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/Event/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/Event/js/iepng.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<link href="{$BASE_URL}_templates/{$THEME}/Online/css/css.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/Online/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/Online/js/iepng.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/Online/js/daojishi.js"></script>
+
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/style2013.css">
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/keke.js"></script>
+
+{literal}
+<style type="text/css">
+.time-item strong{background:#C71C60;color:#fff;line-height:49px;font-size:36px;font-family:Arial;padding:0 10px;margin-right:10px;border-radius:5px;box-shadow:1px 1px 3px rgba(0,0,0,0.2);}
+.item-title .unit{background:none;line-height:49px;font-size:24px;padding:0 10px;float:left;}
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+	lxfEndtime();
+});
+function check(){
+	var url = document.getElementById("url").value;
+	if(document.getElementById("session").value == ""){
+		if(confirm("请先登录，再报名！现在登陆吗？")){
+			window.location.href= url+"login/?url=online_signup/";
+			return false;
+		}else{
+			return false;
+		}
+	}
+	if(document.getElementById("ol").value == ""){
+		if(confirm("您还没有填写简历！现在填写简历吗？")){
+			window.location.href= url+"kiwa/";
+			return false;
+		}else{
+			return false;
+		}
+	}
+	
+	if(document.getElementById("go").value == "no"){
+		alert("每天的报名时间是:12:00-14:00!");
+		window.location.reload();
+		return false;
+	}
+	
+	if(document.getElementById("count").value == 1){
+		alert("每人每周只允许报名2次，一共可以报名10次！");
+		return false;
+	}
+	
+	if(!confirm("确定报名并参加今天的临时工作吗？")){
+		return false;
+	}
+	
+	return true;
+}
+
+function tibu(){
+	var url = document.getElementById("url").value;
+	
+	if(document.getElementById("session").value == ""){
+		if(confirm("请先登录，再报名！现在登陆吗？")){
+			window.location.href= url+"login/?url=online_signup/";
+			return false;
+		}else{
+			return false;
+		}
+	}
+	if(document.getElementById("ol").value == ""){
+		if(confirm("您还没有填写简历！现在填写简历吗？")){
+			window.location.href= url+"kiwa/";
+			return false;
+		}else{
+			return false;
+		}
+	}
+	
+	if(!confirm("确定替补今天的临时工作吗？")){
+		return false;
+	}
+	
+	return true;
+}
+
+$(function(){
+  var i=0;
+  $('#tabnav span').each(
+      function(){
+		  if(i==0){
+		  	$(this).css({"background-position":"right -"+220*i+"px"});
+		  }else{
+			$(this).css({"background-position":"0 -"+220*i+"px"});  
+		  }
+		  i++;
+	  }
+  );
+  var i=0;
+  $('#tabnav2 span').each(
+      function(){
+		  if(i==0){
+		  	$(this).css({"background-position":"right -"+220*i+"px"});
+		  }else{
+			$(this).css({"background-position":"0 -"+220*i+"px"});  
+		  }
+		  i++;
+	  }
+  );
+  
+  var i=0;
+  $('#tabnav3 span').each(
+      function(){
+		  if(i==0){
+		  	$(this).css({"background-position":"right -"+220*i+"px"});
+		  }else{
+			$(this).css({"background-position":"0 -"+220*i+"px"});  
+		  }
+		  i++;
+	  }
+  );
+  
+  var i=0;
+  $('#tabnav4 span').each(
+      function(){
+		  if(i==0){
+		  	$(this).css({"background-position":"right -"+220*i+"px"});
+		  }else{
+			$(this).css({"background-position":"0 -"+220*i+"px"});  
+		  }
+		  i++;
+	  }
+  );
+  
+  var i=0;
+  $('#tabnav5 span').each(
+      function(){
+		  if(i==0){
+		  	$(this).css({"background-position":"right -"+220*i+"px"});
+		  }else{
+			$(this).css({"background-position":"0 -"+220*i+"px"});  
+		  }
+		  i++;
+	  }
+  );
+  
+  $('#tabnav span').mousemove(
+      function(){
+		  var n=$(this).index()-1;
+		  var k=0;
+		  $(this).parent().find('span').each(
+		     function(){
+				 $(this).css({"background-position":"0 -"+220*k+"px"});
+				 k++;
+			 }
+		  );
+		  $(this).css({"background-position":"right -"+220*n+"px"});
+		  $('#tabbox').find('.tabbox_li').hide();
+		  $('#tabbox').find('.tabbox_li').eq(n).show();
+		  }
+    );
+	
+	$('#tabnav5 span').mousemove(
+      function(){
+		  var n=$(this).index()-1;
+		  var k=0;
+		  $(this).parent().find('span').each(
+		     function(){
+				 $(this).css({"background-position":"0 -"+220*k+"px"});
+				 k++;
+			 }
+		  );
+		  $(this).css({"background-position":"right -"+220*n+"px"});
+		  $('#tabbox5').find('.tabbox_li').hide();
+		  $('#tabbox5').find('.tabbox_li').eq(n).show();
+		  }
+    );
+	
+	$('#tabnav2 span').mousemove(
+      function(){
+		  var n=$(this).index()-1;
+		  var k=0;
+		  $(this).parent().find('span').each(
+		     function(){
+				 $(this).css({"background-position":"0 -"+220*k+"px"});
+				 k++;
+			 }
+		  );
+		  $(this).css({"background-position":"right -"+220*n+"px"});
+		  $('#tabbox2').find('.tabbox_li').hide();
+		  $('#tabbox2').find('.tabbox_li').eq(n).show();
+		  }
+    );
+	
+	$('#tabnav3 span').mousemove(
+      function(){
+		  var n=$(this).index()-1;
+		  var k=0;
+		  $(this).parent().find('span').each(
+		     function(){
+				 $(this).css({"background-position":"0 -"+220*k+"px"});
+				 k++;
+			 }
+		  );
+		  $(this).css({"background-position":"right -"+220*n+"px"});
+		  $('#tabbox3').find('.tabbox_li').hide();
+		  $('#tabbox3').find('.tabbox_li').eq(n).show();
+		  }
+    );
+	
+	$('#tabnav4 span').mousemove(
+      function(){
+		  var n=$(this).index()-1;
+		  var k=0;
+		  $(this).parent().find('span').each(
+		     function(){
+				 $(this).css({"background-position":"0 -"+220*k+"px"});
+				 k++;
+			 }
+		  );
+		  $(this).css({"background-position":"right -"+220*n+"px"});
+		  $('#tabbox4').find('.tabbox_li').hide();
+		  $('#tabbox4').find('.tabbox_li').eq(n).show();
+		  }
+    );
+   
+})
+</script>
+{/literal}
+<div class="head" style="height: 480px;">
+  <div class="headbox">
+    <div class="logo"><a href="{$BASE_URL}" target="_blank"></a></div>
+  </div>
+</div>
+
+<span class="lxftime" endtime="{$event_start}"></span>
+<!--倒计时模块-->
+
+<center style="font-size: 48px;line-height: 58px;"><strong>《帮帮网第二期活动开始预告》</strong></center>
+<div style="font-size: 38px;width: 900px;margin-left:auto; margin-right:auto;line-height: 58px;">
+	<font color="red" size="+4">亲爱的</font> 帮帮会员们：<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新活动让大家，久等了！<font color="green">《帮帮网第二期活动》</font>预定<font size="+4" color="red"> 2014年9月27日（土）</font>马上就要开始了。<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了让大家<font color="blue" size="+4">「有钱赚・有工打」</font>。请大家时刻关注帮帮网<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果您对于我们网站有什么好的意见或者建议，也请随时联系我们的客服<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客服电话：<font color="blue">049-293-1208 (周一至周五9:00-18:00)</font><br>
+	<div style="float: right;">
+	帮帮网 运营团队<br>
+	2014年09月<font color="red">吉</font>日<br>
+	</div>
+</div> 
+
+
+
+<div class="footer">
+  <div class="footerbox">
+    <!--<div class="banqi">专题策划：林胡安　　视觉包装：遊 · 鱼</div>-->
+    <div class="footernav"> 
+   		<!--footer链接 start-->
+		<a href="{$BASE_URL}netshow/aboutus/">关于我们</a> | 
+		<a href="{$BASE_URL}netshow/wantj/">玩转帮帮网</a> | 
+		<a href="#">友情链接</a> | 
+		<a href="{$BASE_URL}netshow/kefu/">客服中心</a> | 
+		<a href="{$BASE_URL}netshow/points/">积分规则</a> | 
+		<a href="{$BASE_URL}regist/terms/" class="bor_n">网站协议</a> | 
+		<!--footer链接 end-->
+      </div>
+    <div class="footcontent"> copyright(c) 2012 TOYO co.,ltd. ALL Rights Reserved.<br>
+     	 服务QQ：130285388 地址：埼玉県川越市 <br>
+  	{literal}
+			<script type="text/javascript">
+			  var _gaq = _gaq || [];
+			  _gaq.push(['_setAccount', 'UA-46674455-1']);
+			  _gaq.push(['_trackPageview']);
+			
+			  (function() {
+			    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			  })();
+			</script>
+			{/literal}
+      </div>
+    <div class="clr"></div>
+  </div>
+  <div class="clr"></div>
+</div>
+</body>
+</html>

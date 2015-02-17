@@ -1,0 +1,221 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|闲聊吧"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+{literal}
+<script type="text/javascript">
+function sendconfirm(){
+	if(confirm("发布闲聊，需要先登陆！确定登陆吗？")){
+		return true;
+	}else{
+		return false;
+	}
+}
+</script>
+{/literal}
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class="on hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				{if $smarty.session.kiwa_userid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/">个人空间</a></em></li>
+				{elseif $smarty.session.kiwa_companyid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/">企业空间</a></em></li>
+				{else}
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">个人空间</a></em></li>
+				{/if}
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+<br>
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/lunzhuan.css">
+<section class="clearfix content">
+<div class="container_24 clearfix pt_10">
+	<div class="mb_10 box default" >
+		<div class="focus" style="width:380px;float:left;"> 
+		<!--focus--> 
+			<div class="turn" style="width:380px;"> 
+				<div id="adpica"> 
+				{section name="list" loop="$bbs_tp"}
+					{if $smarty.section.list.index eq 0}
+					<div class="show" style="width:380;height:210;"> 
+					{else}
+					<div style="display: none;width:380;height:210;" class="hidden"> 
+					{/if}
+					<a href="{$BASE_URL}bbs/show/{$bbs_tp[list].bbs_id}/"> 
+					<img  src="{$BASE_URL}{getname name="photo_explode" value=$bbs_tp[list].bbs_photo_html5}"></a><span>焦点图文字背景</span>
+					<p	href="{$BASE_URL}bbs/show/{$bbs_tp[list].bbs_id}/"> 
+					{$bbs_tp[list].bbs_title}</p> 
+					<!--[if !IE]>|xGv00|9f7171a0d436636945e9c21690c2ece8<![endif]--> 
+					</a>
+					</div> 
+				{/section}
+				</div> 
+				<div id="adtipa"> 
+				<ul onmouseout="change()"> 
+				<li class="current" onmouseover="adchangea(1)">1 </li> 
+				<li class="" onmouseover="adchangea(2)">2 </li> 
+				<li class="" onmouseover="adchangea(3)">3 </li> 
+				<li class="" onmouseover="adchangea(4)">4</li></ul> 
+				</div> 
+			</div> 
+			<!--[if !IE]>|xGv00|495624c0694083cdfaabbc0457f4f14e<![endif]--> 
+			<!--/focus--> 
+	
+		</div> 
+		<div style="float:left;">
+			<!--<div>
+				<nav id="" class="" style="background:#CFCFCF">
+					<div class="clearfix">
+						<ul id="navlisbox" class="clearfix" style="width:500px;color:black;">
+							<li><em><a  href="{$BASE_URL}">首页</a></em></li>
+							<li><em><a  href="{$BASE_URL}job/">工作信息</a></em></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+			  -->
+			<div>
+				<h1 style="padding-left:10px">最新热门话题</h1>
+				<ul >
+				{section name="list" loop="$bbs_zx"}
+					<li style="padding:2px 2px 2px 20px">
+						<a style="font-size:16px;" href="{$BASE_URL}bbs/show/{$bbs_zx[list].bbs_id}/ ">{$bbs_zx[list].bbs_title|mb_truncate:35}</a>
+					</li>
+				{/section}
+				</ul>
+			
+			</div>
+		</div>
+		<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/lunzhuan.js"></script>
+	</div>
+	</div>
+	<div class="container_24 clearfix pt_10">
+	
+		<div class="mb_10 box default">
+			<div class="usersneed" style="height: 58px;">
+				<h3><span class="fb_ico1"></span>马上发布一个话题？</h3>
+				<span class="stp"><em>1</em>发布一个话题</span>
+				<span class="stp"><em>2</em>大家一起参与回复</span>
+				<div class="usenecdis">
+				{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+					<a href="{$BASE_URL}bbs/send"><input type="button" value=" 发布话题 " class="combotton submit"></a>
+				{else}
+					<a href="{$BASE_URL}login/?url=bbs_send" onclick="return sendconfirm();"><input type="button" value=" 发布话题 " class="combotton submit"></a>
+				{/if}
+				</div>
+			</div>
+		</div>
+		<div class="select_condition clearfix pad10 mt_10">
+			<div class="fl_l mr_5">
+				<form action="{$BASE_URL}bbs/" method="post" id="form_task_search">
+					<h3 class="title">
+						分类： <a href="{$BASE_URL}bbs/?fenlei=闲聊" class="pxa {if $fenlei eq '闲聊'}on{/if}">&nbsp; 闲 聊 &nbsp;</a>
+						<a href="{$BASE_URL}bbs/?fenlei=工作相关" class="pxa {if $fenlei eq '工作相关'}on{/if}">工作相关</a>
+						<a href="{$BASE_URL}bbs/?fenlei=生活相关" class="pxa {if $fenlei eq '生活相关'}on{/if}">生活相关</a>
+						<a href="{$BASE_URL}bbs/?fenlei=法律相关" class="pxa {if $fenlei eq '法律相关'}on{/if}">法律相关</a>
+						<a href="{$BASE_URL}bbs/?fenlei=留学相关" class="pxa {if $fenlei eq '留学相关'}on{/if}">留学相关</a>
+						<a href="{$BASE_URL}bbs/?fenlei=签证相关" class="pxa {if $fenlei eq '签证相关'}on{/if}">签证相关</a>
+						<a href="{$BASE_URL}bbs/?fenlei=税务相关" class="pxa {if $fenlei eq '税务相关'}on{/if}">税务相关</a>
+						<a href="{$BASE_URL}bbs/?fenlei=劳灾相关" class="pxa {if $fenlei eq '劳灾相关'}on{/if}">劳灾相关</a>
+						<a href="{$BASE_URL}bbs/?fenlei=就职经验-参加活动" class="pxa {if $fenlei eq '就职经验-参加活动'}on{/if}">活动</a>
+						<a href="{$BASE_URL}bbs/?jp=1" class="pxa {if $jp eq '1'}on{/if}">精品</a>
+						<input type="text" name="keyword" class="txt_input mr_5 ml_10" value="{$keyword}" original-title=""><button class="submit">搜索</button>
+						<input type="hidden" name="fenlei" id="fenlei" value="{$fenlei}">
+					</h3>
+				</form>
+			</div>
+		</div>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li class="w5 t_l">标题 </li>
+							<li class="w1 t_c">点击/回复</li>
+							<li class="w2 t_c">发布者</li>
+							<li class="w1 t_c">发布时间</li>
+						</ul>
+					</dd>
+					{if $bbs}
+					{section name="list" loop="$bbs"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li class="w5 t_l">
+								<p class="ws_hide ws_title" style="margin-top: 11px;">
+									{if $bbs[list].bbs_type eq ""}
+										<a href="{$BASE_URL}bbs/?fenlei=闲聊"><font color="green">【闲聊】</font></a>
+									{else}
+										<a href="{$BASE_URL}bbs/?fenlei={$bbs[list].bbs_type}"><font color="blue">【{$bbs[list].bbs_type}】</font></a>
+									{/if}
+									<a href="{$BASE_URL}bbs/show/{$bbs[list].bbs_id}/" class="font14" original-title="{$bbs[list].bbs_title}">{$bbs[list].bbs_title}</a>
+									{if $jp eq '1'}<span class="icocl icocl_ji">精</span>&nbsp;{/if}
+									<!-- 
+									<span class="icocl icocl_ji">急</span>&nbsp;
+									<span class="icocl icocl_ding">顶</span>&nbsp;
+									<span id="248403" class="mywork"></span>
+									 -->
+								</p>
+							</li>
+							<li class="w1 t_c pt_15">{$bbs[list].read_num}/{getname name="bbs_num" value=$bbs[list].bbs_id}</li>
+							<li class="w2 t_c pt_15">	
+								{if $bbs[list].user_type eq "company"}
+								<a href="{$BASE_URL}people/show/company_{$bbs[list].user_id}/"> 
+								{else}
+								<a href="{$BASE_URL}people/show/user_{$bbs[list].user_id}/"> 
+								{/if}
+								{getname name="username" value=$bbs[list].user_id}{getname name="company_name" value=$bbs[list].user_id}</a>
+							</li>
+							<li class="w1 t_c pt_15">
+							{if $bbs[list].create_date|date_format:'%Y-%m-%d' eq $today}
+								今天
+							{elseif $bbs[list].create_date|date_format:'%Y-%m-%d' eq $yestoday}
+								昨天
+							{elseif $bbs[list].create_date|date_format:'%Y-%m-%d' eq $bfyestoday}
+								前天
+							{else}
+								{$bbs[list].create_date|date_format:'%m月%d日'}
+							{/if}
+							</li>
+							<li class="w1 t_c pt_15">
+							{if $smarty.session.kiwa_companyid eq "000001"}
+								<a href="{$BASE_URL}bbs/del/{$bbs[list].bbs_id}/" style="font-size: 20px;" onclick="return deleteConfirm();">×</a>
+							{/if}
+							{if $smarty.session.kiwa_userid eq $bbs[list].user_id}
+								<a href="{$BASE_URL}bbs/del/{$bbs[list].bbs_id}/" style="font-size: 20px;" onclick="return deleteConfirm();">×</a>
+							{/if}
+							{if $smarty.session.kiwa_companyid eq $bbs[list].user_id}
+								<a href="{$BASE_URL}bbs/del/{$bbs[list].bbs_id}/" style="font-size: 20px;" onclick="return deleteConfirm();">×</a>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					{else}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<font color="red">&nbsp;抱歉，还没有你索搜的信息！</font>
+						</ul>
+					</dd>
+					{/if}
+				</dl>
+			</div>
+			<div class="page_count fl_r mar10">{$subPages}</div>
+		</div>
+		
+	</div>
+</section>
+<br><br><br>
+{include file="./footer.html"}

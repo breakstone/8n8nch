@@ -1,0 +1,376 @@
+{include file="./mobile/header.html" title=$bbs.bbs_title}
+<link type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/black.css">
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+{literal}
+<script type="text/javascript">
+function sendconfirm(){
+	if(confirm("发布闲聊，需要先登陆！确定登陆吗？")){
+		return true;
+	}else{
+		return false;
+	}
+}
+function null_check(){
+	if($('#answer_content').val()==""){
+		alert("请输入回复内容！");
+		return false;
+	}
+	return true;
+}
+function niming_null_check(){
+	if(document.getElementById("niming_answer_content").value==""){
+		alert("请输入回复内容！");
+		return false;
+	}
+	return true;
+}
+</script>
+<script type="text/javascript">
+function changeColor(){
+	var color="green|blue";
+	var color1="#FF00FF|#5CACEE";
+	color=color.split("|");
+	color1=color1.split("|");
+	document.getElementById("blink").style.color=color[parseInt(Math.random() * color.length)];
+	document.getElementById("blink1").style.color=color1[parseInt(Math.random() * color1.length)];
+	}
+	setInterval("changeColor()",200); 
+</script>
+<style>
+.xingqu a:link {color:red;}
+.xingqu a:visited {color:black;}
+.xingqu a:hover {color:black;}
+.xingqu a:active {color:yellow;}
+</style>
+{/literal}
+
+<div id="header1">
+	<a href="{$BASE_URL}"><img src="{$BASE_URL}_templates/{$THEME}/img/banner2.jpg" style="max-width: 100%;height:40px;"/></a>
+	<div class="headbar clearfix" style="padding:0 1em">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><img style="vertical-align:-7px;padding-left:-10px;" src="{$BASE_URL}_templates/{$THEME}/mobile/images/mlogo.png" alt=""></a>
+			<a href="{$BASE_URL}bbs/{$url1}"><span class="title">&nbsp;闲聊吧</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+				{php}
+					if($_SESSION['kiwa_companyid']!=""){
+						$um = unreadMessage($_SESSION['kiwa_companyid']);
+						if($um>0){
+							echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+							echo "<script type='text/javascript'>titleBlink();</script>";
+						}
+					}else{
+						$um = unreadMessage($_SESSION['kiwa_userid']);
+						if($um>0){
+							echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+							echo "<script type='text/javascript'>titleBlink();</script>";
+						}
+					}
+				{/php}
+			{/if}					
+		</div>
+	</div>
+	<div class="xingqu">
+			<ul style="border-top: 2px solid #f90;">
+				<li style="color:red;margin-top: 8px;font-size:15px;" id='blink' >&nbsp;&nbsp;你可能感兴趣的工作信息,请点击↓↓↓↓↓↓</li>
+					{section name="list" loop="$job1"}
+		            <li style="margin:2px;font-size:14px;" >
+	                	&nbsp;&nbsp;{if $job1[list].job_id}<a href="{$BASE_URL}job/show/{$job1[list].job_id}/" >{$job1[list].job_title|mb_truncate:16}&nbsp;&nbsp;<span style="color:#f90">{$job1[list].pref_name}</span></span></a>{/if}
+					</li>
+		           	{/section}
+			</ul>
+			<hr/><br><br><br><br><br>
+		</div>	
+</div>
+<div id="wrapper_tasktail" >
+	<div id="" style="top:23em;position: absolute;">
+		<div class="tasktop" style="background-color:#c1d9f3;padding:0.8em;">
+			<div  style="z-index:-5;font-size: 22px;text-align: center;vertical-align: middle;">
+			<span class="cfc1">{$bbs.bbs_title} </span>
+			</div>
+		</div>
+		<div class="tasktitl clearfix">
+			<b class="f_l">
+			
+				
+				{if $smarty.session.kiwa_companyid eq "000001"}
+					<a href="{$BASE_URL}bbs/update?id={$bbs.bbs_id}" style="font-size: 15px;color:red;" >编辑</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}bbs/del/{$bbs.bbs_id}" style="font-size: 15px;color:red;" onclick="return deleteConfirm();" >删除</a>
+				{/if}
+				{if $smarty.session.kiwa_userid eq $bbs.user_id}
+					<a href="{$BASE_URL}bbs/update?id={$bbs.bbs_id}" style="font-size: 15px;color:red;" >编辑</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}bbs/del/{$bbs.bbs_id}" style="font-size: 15px;color:red;" onclick="return deleteConfirm();" >删除</a>
+				{/if}
+				{if $smarty.session.kiwa_companyid eq $bbs.user_id}
+					<a href="{$BASE_URL}bbs/update?id={$bbs.bbs_id}" style="font-size: 15px;color:red;">编辑</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}bbs/del/{$bbs.bbs_id}" style="font-size: 15px;color:red;" onclick="return deleteConfirm();">删除</a>
+				{/if}
+		
+			</b>
+			<span class="f_r">浏览数:{$bbs.read_num}</span>
+		</div>
+		<div class="task_detal">
+				{if $company}
+					<div class="task_tle clearfix">
+						<div class="f_l">
+							<a href="{$BASE_URL}people/show/company_{$bbs.user_id}/"><span class="c06c">{$company.company_name}</span></a>
+							发布于{$bbs.create_date|date_format:"%Y年%m月%d日"}
+						</div>
+						<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							<a style="color: #06c; float: right;" href="{$BASE_URL}companypage/cmessage_send/{$company.company_id}/">我要联系TA</a></span>
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							<a style="color: #06c; float: right;" href="{$BASE_URL}mypage/pmessage_send/{$company.company_id}/">我要联系TA</a></span>
+						{/if}
+							<a href="javascript:;" style="color: red; float: right;" onclick="favorite('{$company.company_id}','company');">收藏TA</a>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<a style="color: #06c; float: right;" href="{$BASE_URL}login/" >我要联系TA</a>
+					{/if}
+					</div>
+				{/if}
+				{if $user}
+					<div class="task_tle clearfix">
+							<div class="f_l">
+								<a href="{$BASE_URL}people/show/user_{$bbs.user_id}/""><span class="c06c">{$user.name01}{$user.name02}</span></a>
+								发布于{$bbs.create_date|date_format:"%Y年%m月 %d 日"}
+							</div>
+							<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+							{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+								{if $smarty.session.kiwa_companyid}
+									<a style="color: #06c; float: right;" href="{$BASE_URL}companypage/cmessage_send/{$user.user_id}/">我要联系TA</a>
+								{/if}
+								{if $smarty.session.kiwa_userid}
+								<a style="color: #06c; float: right;" href="{$BASE_URL}mypage/pmessage_send/{$user.user_id}/">我要联系TA</a>
+								{/if}
+									<a href="javascript:;" style="color: red; float: right;"  onclick="favorite('{$user.user_id}','user');">收藏TA</a>
+							{/if}
+							{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+								<a  style="color: #06c; float: right;"  href="{$BASE_URL}login/" >我要联系TA</a>
+							{/if}
+					</div>
+				{/if}
+				<div class="detail_box" id="contentshow" >
+				{strstr haystack=$bbs.bbs_content needle='img'}
+				{$content}
+				{section name="list" loop="$bbs_photo"}
+				{if $bbs_photo[list] neq ""}
+				<img src="{$BASE_URL}{$bbs_photo[list]}" style="max-width: 280px;"/>
+				{/if}
+				<br>
+				{/section}
+				</div>
+		</div>
+		<div class="pozrlate">
+			<div id="worklist" style="overflow: hidden; left: 0px;">
+				<div class="listwrapiner">
+					<ul>
+						<li>
+						</li>
+						{section name="list" loop="$answers"}
+						<li>
+							<div class="task_works">
+								{if $answers[list].answer_user_type eq "user"}
+								<div class="clearfix">
+									<div class="f_l wks_img" style="padding-top:2px;">
+										<a> <img src="{$BASE_URL}{getname name="user_photo" value=$answers[list].answer_user_id}"  style="max-width:17px;max-height:17px;"></a>
+									</div>
+									<div class="wok_tl">
+										<a 	href="{$BASE_URL}people/show/user_{$answers[list].answer_user_id}" class="fon1d5em c06c" style="display:inline;">
+											{getname name="username" value=$answers[list].answer_user_id}</a>
+											&nbsp;&nbsp;第 <font style="color: red;font-size:12px;">{$smarty.section.list.index+1+$lou}</font>
+											楼&nbsp;&nbsp;发表于: {$answers[list].create_date|date_format:'%m-%d %H:%M'}
+									</div>
+								</div>
+								{/if}
+								{if $answers[list].answer_user_type eq "company"}
+								<div class="clearfix">
+									<div class="f_l wks_img">
+										<a> <img src="{$BASE_URL}{getname name="
+											company_photo" value=$answers[list].answer_user_id}"></a>
+									</div>
+									<div class="wok_tl">
+										<a href="{$BASE_URL}people/show/company_{$answers[list].answer_user_id}"
+											class="fon1d5em c06c ">{getname name="company_name"
+											value=$answers[list].answer_user_id}</a><br>
+										<div class="c666">
+											第 <font style="color: red;">{$smarty.section.list.index+1+$lou}</font>
+											楼&nbsp;&nbsp;发表于: {$answers[list].create_date}
+										</div>
+									</div>
+								</div>
+								{/if}
+								{if $answers[list].answer_user_type eq "anony"}
+								<div class="clearfix">
+									<div class="f_l wks_img" style="padding-top:2px;">
+										<a> <img src="{$BASE_URL}{getname name="user_photo" value=$answers[list].answer_user_id}"  style="max-width:17px;max-height:17px;"></a>
+									</div>
+									<div class="wok_tl">
+											匿名用户  ({$answers[list].answer_user_id|truncate:12:"*"})
+											&nbsp;&nbsp;第 <font style="color: red;font-size:12px;">{$smarty.section.list.index+1+$lou}</font>
+											楼&nbsp;&nbsp;发表于: {$answers[list].create_date|date_format:'%m-%d %H:%M'}
+									</div>
+								</div>
+								{/if}
+								<div class="task_contbox" style="padding: 0 0 0 1em;min-height:35px;">
+									<div class="task_coin" style="padding: 0.3em 0 0">
+										<div class="work_xiangqing" >
+											<span > 
+											{if $answers[list].re_answer}
+												<div style="background: #eeeeee;">
+													<div style="color: #aaaaaa; margin-left: 0em;">
+														<img src="{$BASE_URL}_templates/{$THEME}/img/icon_quote_s.gif" style="max-width:12px;max-height:12px;">
+														{$answers[list].re_answer} 
+														<img src="{$BASE_URL}_templates/{$THEME}/img/icon_quote_e.gif" style="max-width:12px;max-height:12px;">
+													</div>
+												</div>
+												 {/if} 
+												 {strstr haystack=$answers[list].answer_content needle='img'}
+												{$content}
+												<input type="hidden" id="{$answers[list].Id}_fujia" name="{$answers[list].Id}_fujia" value='{$answers[list].answer_content}'>
+												{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+													<button style="float:right;" onclick="answer_ta('{$answers[list].answer_user_id}','{$answers[list].bbs_id}','{$answers[list].Id}','{$smarty.section.list.index+1+$lou}','{getname name="username" value=$answers[list].answer_user_id}','{getname name="company_name" value=$answers[list].answer_user_id}')">回复TA</button>
+												{else}
+													<a  href="{$BASE_URL}login/?url=bbs_show_{$bbs.bbs_id}/">
+													<button style="float: right;" onclick="javascript:alert('未登录状态，请先登录！');">回复TA</button>
+													</a>
+												{/if}
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li> 
+						{/section}
+						{if $all gt 10}
+						<br>
+							<li style='text-align: center;font-size: 18px;'>{$subPages}<li>
+						{/if}
+					</ul>
+					<ul>
+						<li>
+							<br>
+							<div class="">
+								<div class="clearfix">
+									<div class="wok_tl">
+										<div class="c666">
+										<div id="louj" style="background:#87CEFA;color: black;"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<form name="form2" action="{$BASE_URL}bbs/answertado/" method="post">
+								{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+								<div id="at" style="display: none;">
+									<input type="hidden" name="ta_id" id="ta_id" value="">
+									<input type="hidden" name="lid" id="lid" value="">
+									<input type="hidden" name="aId" id="aId" value="">
+									<!--互动交流部分  start-->
+										<div class="task_works">
+											<div class="clearfix">
+												<div class="wok_tl">
+													<div class="c666">
+														<div style="background: #eeeeee;">
+															<div style="color: #aaaaaa;">
+																<div class="f_l wks_img">
+																{if $smarty.session.kiwa_userid neq ""}
+																	<img src="{$BASE_URL}{getname name="user_photo" value=$smarty.session.kiwa_userid}" uid="724483" class="pic_small" width="54" height="54" style="z-index: 1;">
+																{/if}
+																{if $smarty.session.kiwa_companyid neq ""}
+																	<img src="{$BASE_URL}{getname name="company_photo" value=$smarty.session.kiwa_companyid}" uid="724483" class="pic_small" width="54" height="54" style="z-index: 1;">
+																{/if}
+																</div>
+																{literal}
+																<textarea name="answer_ta_content" id="answer_ta_content" style="width:70%;" rows="4" cols="" class="xheditor {tools:'FontSize,Bold,FontColor,BackColor,Align,Preview,Emot',skin:'default'}"></textarea>
+																{/literal}
+																<input type="hidden" name="fujia" id=fujia value="">
+																<br>
+																<button style="float:right;" type="submit" onclick="submitcomment()" href="#newcomment_box">回复TA</button>
+															</div>
+														</div> 
+													</div>
+												</div>
+											</div>
+										</div>
+									<!--互动交流部分  end-->
+								</div>
+								{/if}
+							</form>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 
+		<div style="display:none;">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/8n8n.jpg" style="max-width: 228px;">
+		</div>
+		 -->
+		<div class="xingqu">
+			<ul style="border-top: 2px solid #f90;">
+			 	<li style="color:red;font-size:15px;" id='blink1' >&nbsp;&nbsp;你可能感兴趣的话题,请点击↓↓↓↓↓↓</li>
+				{section name="list" loop="$bbs1"}
+		            <li style="margin:2px;font-size:14px;" >
+		          		{if $bbs1[list].bbs_type eq ""}
+							<font style="color:green">【闲聊】</font>
+							
+						{else}
+							<font style="color:blue">【{$bbs1[list].bbs_type}】</font>
+						{/if}
+	                	<a href="{$BASE_URL}bbs/show/{$bbs1[list].bbs_id}/?jid={$smarty.section.list.index+$start1}&type={$bbs1[list].bbs_type}" >{$bbs1[list].bbs_title|mb_truncate:14}&nbsp;&nbsp;</span></a>
+					</li>
+		           	{/section}
+			</ul>
+			<br><br>
+			<div class="tasktitl clearfix">
+				{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+					<b class="f_l" >已登录 : {getname name="username" value=$smarty.session.kiwa_userid} {getname name="company_name" value=$smarty.session.kiwa_companyid}</b>
+				{else}
+					<b class="f_l">您需要 <a style="color:red" href="{$BASE_URL}login/?url=bbs_show_{$bbs.bbs_id}/">登录</a> 后才能发表留言。</b>
+				{/if}
+				<b class="f_l">请严格遵守 《<a href="{$BASE_URL}regist/answer/" >留言规则</a>》 无效留言将被封号处理！</b>
+				<form name="form1" action="{$BASE_URL}bbs/answerdo/" method="post">
+					<div style="text-align: center;">
+						{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+							{literal}
+							<textarea rows="8"  style="width:90%;" name="answer_content" id="answer_content" class="xheditor {tools:'FontSize,Bold,FontColor,BackColor,Align,Preview,Emot',skin:'default'}"></textarea>
+							{/literal}
+							<input type="hidden" name="bbs_id" id="bbs_id" value="{$bbs.bbs_id}">
+							<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/answer.gif" alt="发表留言" onclick="return null_check();">
+						{else}
+							<a  href="{$BASE_URL}login/?url=bbs_show_{$bbs.bbs_id}/">
+								<textarea rows="5"  readonly="readonly" onclick="javascript:alert('请登录,再留言！');" style="width:90%;" name="answer_content" id="answer_content" ></textarea>
+							</a>
+							<a href="{$BASE_URL}login/?url=bbs_show_{$bbs.bbs_id}/" onclick="javascript:alert('请登录,再留言！');"><img src="{$BASE_URL}_templates/{$THEME}/img/answer.gif" width="164" height="34" alt="发表留言" /></a>
+						{/if}
+					</div>
+				</form>
+			</div>
+			<br><br><br>
+		</div>	
+	</div>
+</div>
+{literal}
+<script type="text/javascript">
+var contentshow=document.getElementById("contentshow");
+contentshow.style.cssText='width:'+width1.toString()+'px;table-layout: fixed;word-wrap: break-word;';
+</script>
+{/literal}
+{if !$smarty.session.kiwa_companyid and !$smarty.session.kiwa_userid}
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/mobile/css/dibu.css" />
+<form name="niming" action="{$BASE_URL}bbs/answerdo/" method="post">
+	<div class="wrap" style="width: 100%;height: 45px;background: #C0C0C0;">
+		<input type="hidden" name="niming_bbs_id" id="niming_bbs_id" value="{$bbs.bbs_id}">
+		<div class="menu" style="text-align: center;">
+		<input type="text" name="niming_answer_content" id="niming_answer_content" style="padding: 5px;margin-top: 4px;margin-left: 10px;font-size: 20px;width: 55%;">&nbsp;&nbsp;&nbsp;<input type="submit" style="font-size: 16px;" value="匿名留言" onclick="return niming_null_check();"/>
+		</div>
+	</div>
+</form>
+{/if}
+{include file="./mobile/footer.html"}

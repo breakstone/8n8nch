@@ -1,0 +1,157 @@
+{include file="./mobile/header.html" title="《临时工作活动》 在线简历填写"}
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll-lite.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/artDialog.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/keke.js"></script>
+<link rel="stylesheet" type="text/css" 	href="{$BASE_URL}_templates/{$THEME}/mobile/css/royalslider.css">
+<link type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/common.min.css">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/style2013.css">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/css3buttons.css">
+
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div id="header">
+	<div class="headbar index clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><img src="{$BASE_URL}_templates/{$THEME}/mobile/images/mlogo.png" alt=""></a>
+		</div>
+		<div class="f_r">
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+		</div>
+	</div>
+</div>
+{literal}
+<script type="text/javascript">
+function check(){
+	if(document.getElementById("name").value==""){
+		alert("请输入「名字」！");
+		return false;
+	}
+	if(document.getElementById("birthY").value == ""||document.getElementById("birthM").value == ""||document.getElementById("birthD").value == ""){
+		alert("请选择「生年月日」！");
+		return false;
+	}
+	if(document.getElementById("tel").value==""){
+		alert("请输入「联系电话」！");
+		return false;
+	}
+	return true;
+}
+function showbang(){
+	if(document.getElementById("bang").style.display == "none"){
+		document.getElementById("bang").style.display = "block";
+	}else{
+		document.getElementById("bang").style.display = "none";
+	}
+}
+</script>
+{/literal}
+	<div id="wrapper" style="width: 100%;"><!-- container -->
+	<div id="container" style="width: 100%;">
+	<br><br><br><br>
+	<!-- main -->
+	<h1 class="title" style="width: 100%;">&nbsp;《临时工作活动》 简历填写</h1>
+	<form name="form1" action="" method="post">
+		<input name="url" id="url" type="hidden" value="{$BASE_URL}"/>
+		<p>「<SPAN class=att>※</SPAN>」必填信息</p>
+		<section id="jobEntryRegist">
+		<table class="tableStyle" style="width: 100%;">
+			<tr>
+				<th style="vertical-align: middle;width: 35%;">氏名 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;width: 80%;">
+					<input type="text" class="input" id="name" name="name" value="">
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">生年月日 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;width: 80%;">
+                    {html_select_date prefix='birth' year_empty='選択' time=$user.birth field_order="Y" start_year='-61' end_year='-13' all_extra='id="birthY"'}年
+		            {html_select_date prefix='birth' month_empty='選択' time=$user.birth month_format="%m" field_order="M" all_extra='id="birthM"'}月
+		            {html_select_date prefix='birth' day_empty='選択' time=$user.birth field_order="D" all_extra='id="birthD"'}日
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">性别 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<select name="sex" id="sex" class="input">
+						<option value="男">男</option>	
+						<option value="女">女</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">在留資格 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<select name="visa" id="visa">
+                    {section name="list" loop="$zailiuziges"}
+                    	<option value="{$zailiuziges[list]}">{$zailiuziges[list]}</option>
+                    {/section}
+                    </select>
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">联络电话<SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<input type="text" class="input" id="tel" name="tel" alt="連絡電話" value="">
+				</td>
+			</tr>
+		</table>
+		<!-- 
+		<table class="tableStyle" style="width: 100%;">
+			<tr>
+				<th style="vertical-align: middle;">期望工作时间</th>
+			</tr>
+			<tr>
+				<td class="alLeft" style="vertical-align: middle;">
+					&nbsp;&nbsp;周一 &nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day1[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day1[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day1[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;周二 &nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day2[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day2[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day2[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;周三 &nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day3[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day3[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day3[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;周四 &nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day4[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day4[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day4[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;周五 &nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day5[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day5[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day5[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;<font color="red">周六 </font>&nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day6[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day6[]" value="下午">下午</label>
+					<label>	<input type="checkbox" class="input" name="day6[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;<font color="red">周日 </font>&nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day7[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day7[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day7[]" value="夜班">夜班</label><br>
+				</td>
+			</tr>
+		</table>
+		 -->
+	 	<p style="font-size: 18px;">「<SPAN class=att>※</SPAN>」<b>报名成功后，你需要在 【工作场所】 提交以下材料:<font color="red">护照</font>，<font color="red">在留卡</font>，<font color="red">银行存折</font>，<font color="red">保险证</font>，<font color="red">学生证</font></b>
+		 
+		<br><br>
+		<p class="alCenter">
+		<button type="submit" id="next" class="big button" name="sendB" onclick="return check();">　下一步　</button>
+		</p>
+		<br><br><br>
+		</section>
+	</form>
+	</div>
+	</div>
+</div>
+</body>
+</html>

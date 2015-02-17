@@ -1,0 +1,261 @@
+{include file="./mobile/Requirement/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/live.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+
+
+	<div id="wrapper_release">
+		<div id="scroller">
+			<div class="us_tabtl" style="padding-top:4.5em;">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a href="#" >求人信息-确认</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		
+			<div class="table_form">
+	<form name="form1" action="{$BASE_URL}requirement/workadddo/" method="post">
+					<table width="100%" border="0" cellspacing="1" cellpadding="1">
+						
+									
+							<tr>
+								<td style="width:30%"><span class="f_l c999" >求人标题 </span></td>
+								<td>
+								{$job_title}
+								<input type="hidden" value="{$job_title}" id="job_title" name="job_title">
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">工作标签</span></td>
+								<td>	
+								{section name="list" loop="$zzs"}
+									&nbsp;&nbsp;&nbsp;{$zzs[list]}
+									<input type="hidden" value="{$zzs[list]}" id="zz" name="zz[]">
+								{/section}
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">工作内容 </span></td>
+								<td>
+								{$contents}
+								<input name="contents" id="contents" type="hidden" value="{$contents}"/>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">招收对象 </span></td>
+								<td>
+								{$requirements}
+								<input name="requirements" id="requirements" type="hidden" value="{$requirements}"/>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">联系方式 </td>
+								<td>
+								{$lianxi}
+									<input name="lianxi" id="lianxi" type="hidden" value="{$lianxi}"/>
+								</td>
+							</tr>
+								<tr>
+								<td><span class="f_l c999">是否收费  </span></td>
+								<td>
+								{$shoufei}
+								<input name="shoufei" id="shoufei" type="hidden" value="{$shoufei}"/>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">采用人数 </span></td>
+								<td>
+								{if $numbers}
+								{$numbers}&nbsp;&nbsp;&nbsp;人
+								{/if}
+								<input name="numbers" id="numbers" type="hidden" value="{$numbers}"/>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">业种・职业 </span></td>
+								<td>
+									业种:<br>
+									&nbsp;&nbsp;&nbsp;{getname name="kind" value="$types[0]"}
+									<input type="hidden" value="{$kinds}" id="kinds" name="kinds">
+								&nbsp;&nbsp;&nbsp;<br>
+								职种:<br>
+									{section name="list" loop="$types"}
+										&nbsp;&nbsp;&nbsp;{getname name="type" value="$types[list]"}
+										<input type="hidden" value="{$types[list]}" id="types" name="types[]">
+									{/section}
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">工作地点  </span></td>
+								<td>
+										区域:<br>
+											&nbsp;&nbsp;&nbsp;{getname name="area" value=$pref}
+										&nbsp;&nbsp;&nbsp;
+										<br>城市:<br>
+											&nbsp;&nbsp;&nbsp;{getname name="pref" value=$pref}
+										<input type="hidden" value="{$areaid}" id="areaid" name="areaid">
+										<input type="hidden" value="{$pref}" id="pref" name="pref">
+										{if $ensn}
+											&nbsp;&nbsp;&nbsp;
+											<br>线路:<br>
+											{section name="list" loop="$ensn"}
+												&nbsp;&nbsp;&nbsp;{getname name="ensn" value=$ensn[list]}
+												<input type="hidden" value="{$ensn[list]}" id="ensn" name="ensn[]">
+											{/section}
+										{/if}
+										{if $eki}
+											&nbsp;&nbsp;&nbsp;
+											<br>Tên ga:<br>
+											{section name="list" loop="$eki"}
+												&nbsp;&nbsp;&nbsp;{getname name="eki" value=$eki[list]}
+												<input type="hidden" value="{$eki[list]}" id="eki" name="eki[]">
+											{/section}
+										{/if}
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">薪资选择 </span></td>
+								<td>
+									{getname name="money" value="$moneyid"}
+									<input type="hidden" value="{$moneyid}" id="moneyid" name="moneyid">
+								</td>
+							</tr>
+							
+								<tr>
+								<td><span class="f_l c999">雇用形式 </span></td>
+								<td>
+									{section name="list" loop="$employid"}
+									&nbsp;&nbsp;&nbsp;{getname name="employ" value=$employid[list]}
+									<input type="hidden" value="{$employid[list]}" id="employid" name="employid[]">
+									{/section}
+								</td>
+							</tr>
+								<tr>
+								<td><span class="f_l c999">勤务时间 </span></td>
+								<td >
+										{section name="list" loop="$hopeid"}
+									&nbsp;&nbsp;&nbsp;{getname name="hope" value=$hopeid[list]}
+									<input type="hidden" value="{$hopeid[list]}" id="hopeid" name="hopeid[]">
+									{/section}
+								</td>
+							</tr>
+								<tr>
+								<td><span class="f_l c999">勤務日数 </span></td>
+								<td>
+										&nbsp;&nbsp;&nbsp;{if $w_d eq 7}不限{else}週{$w_d}日以上{/if}
+										<input type="hidden" value="{$w_d}" id="w_d" name="w_d">
+								</td>
+							</tr>
+							
+							<tr>
+								<td colspan="2" style="text-align: center;">
+								<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+								发布即代表您已阅读并同意《<a href="{$BASE_URL}regist/terms/" target="_blank">帮帮网使用协议</a>》<br>
+								<button type="submit" class="big button" onclick="return work_addchoose();">内容修改</button>
+								</td>
+							</tr>
+							
+						
+							
+
+					</table>
+			{if $smarty.session.kiwa_userid eq '' and $smarty.session.kiwa_companyid eq ''}
+			<table width="100%" border="0" cellspacing="1" cellpadding="1">
+			<tr>
+								<td colspan="2" style="text-align: center;">
+								是否已经注册用户?
+								</td>
+							</tr>
+							<tr>
+								<td  style="width:50%;text-align: center;">
+								<button type="button" id="logB" class="big button" onclick="loginshow();">已 注 册 登 陆</button>&nbsp;
+								</td>
+								<td  >
+									<button type="button" id="regB" class="big button" onclick="registershow();">未 注 册 直 接 发 表 </button>
+								</td>
+							</tr>
+							</table>
+					<div id="login" style="display: none;">
+							<table width="100%" border="0" cellspacing="1" cellpadding="1">
+								<tr>
+									<td>邮箱地址:</td>
+									<td>
+										<input type="text" name="login_email" id="login_email" class="input input-60" size="25">
+									</td>
+								</tr>
+								<tr>
+									<td>密　　码:</td>
+									<td>
+										<input type="password" name="login_pw" id="login_pw" class="input input-60" size="25">
+									</td>
+								</tr>
+								
+							</table>
+							<div class="login_botton">
+							<button class="red" id="next"  id="next" name="nlogin_B" onclick="return work_login_check();">登 陆 并 发 表</button>
+							
+							</div>	
+					</div>
+					<div id="register" style="display: none;">
+							<table width="100%" border="0" cellspacing="1" cellpadding="1">
+							<tr>
+								<td>用户类型:</td>
+									<td>
+										<label for="user"><input type="radio" name="usertype" id="user" value="user">个人用户</label>
+										<label for="company"><input type="radio" name="usertype" id="company" value="company">企业用户</label>
+									</td>
+							</tr>
+								<tr>
+								<td>用户名称:</td>
+								<td>
+										<input type="text" class="input" name="register_name" id="register_name" size="25">
+								</td>
+								</tr>
+								<tr>
+								<td>邮箱地址:</td>
+									<td>
+										<div id="tellOk"></div>
+										<input type="text" class="input input-60" name="register_email" id="email" onblur="EmailAjax()" value="" size="25">
+									</td>
+								</tr>
+								<tr>
+								<td>密　　码:</td>
+								<td>
+										<input type="password" class="input input-60" name="register_pw" id="register_pw" size="25">
+									</td>
+								</tr>
+								<tr>
+								<td>确认密码:</td>
+									<td>
+										<input type="password" class="input input-60" name="register_repw" id="register_repw" size="25">
+									</td>
+								</tr>
+							
+							</table>
+							<div class="login_botton">
+							<button class="red" id="next"  name="rgister_B" onclick="return regisht_check();">注 册 并 发 表</button>
+							
+							</div>	
+					</div>
+					{else}
+						<div class="login_botton">
+						<button class="red" id="next"  name="hlogin_B">发　表　需　求</button>
+						
+						</div>	
+					{/if}
+					
+					<input type="hidden" value="1" id="review" name="review">
+					<input type="hidden" value="{$BASE_URL}" id="url" name="url">
+				</form>
+				<br><br>
+			</div>
+			
+		</div>
+{include file="./mobile/footer.html"}

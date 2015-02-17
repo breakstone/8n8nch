@@ -1,0 +1,86 @@
+{include file="./mobile/Mypage/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}mypage/"><span class="title">我的地盘</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+				<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+</div>
+	<div id="wrapper_list"  >
+		<div id="scroller">
+		<div id="pullDown">
+			</div>
+			<div class="us_tabtl">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a href="{$BASE_URL}mypage/pmessage/" class="on">受信箱( <b>{if $message_um_f}{$message_um_f}{else}0{/if}</b> ) {if $unread>0}<b class="red">new</b>{/if}</a></a></td>
+							<td><a href="{$BASE_URL}mypage/pmessageSend/" >送信箱( <b>{if $message_um_s}{$message_um_s}{else}0{/if}</b> ) </a></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		
+	
+		
+			<ul id="tasklist" data-role="listview">
+			<input type="hidden" value="" name="flg" id="flg">
+			{section name="list" loop="$message"}
+									
+				<li style="padding: 1em;border-bottom: 1px solid #dfdfdf;">
+					
+						
+						<div class="listcont" style="padding-left:0em;">
+							<h2>{if $message[list].read_flag eq 0}<font style="font-weight: bold;color: red;">未读</font>{/if}
+										{if $message[list].read_flag eq 1}已读{/if}<a style="color:#87CEFA;background:#fff;" href="{$BASE_URL}mypage/pmessage_show/{$message[list].message_id}/" >{$message[list].message_title|mb_truncate:40}</a></h2>
+							<div class="lins">
+								<span class="cEB2">{getname name="company_name" value=$message[list].message_from}
+										{getname name="username" value=$message[list].message_from}</span>&nbsp;&nbsp;{$message[list].create_date}
+								
+								<span class="f_r" style="padding-right:20px;"><a style="background:#fff;" href="{$BASE_URL}mypage/pmessage_delete/{$message[list].message_id}/" onclick="return deleteConfirm();">删除</a></span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<br>
+							</div>
+							
+						</div>
+					
+				</li>
+			{/section}
+			</ul>
+			<div style="text-align: center;">
+				{if $message_um_f gt 10}
+				<span style="font-size: 18px;"> {$subPages} </span>
+				{/if}
+			</div>
+		
+			<div id="pullUp">
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklistmypage.js"></script>
+{include file="./mobile/footer.html"}

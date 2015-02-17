@@ -1,0 +1,41 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|登录"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/black.css">
+	<div id="wrapper_notop" class="bac_grey">
+		<div class="inerlogin">
+			<div class="loginform">
+				<div class="loginimg">
+					<a href="{$BASE_URL}"><img src="{$BASE_URL}_templates/{$THEME}/mobile/images/mlogo.png"></a>
+						<br><br><font color="red">{$_error}</font>
+				</div>
+				<FORM id=Form accept-charset=utf-8 action="{$BASE_URL}login/logindo/?url={$url}" method=post>
+					<div class="formlogin clearfix">
+					<INPUT class="widtxt" class=txt id=email  size=40 name=email placeholder="邮箱地址" value="{$smarty.get.e}">
+					<INPUT  class="widtxt" id=password  type=password size=40 name=password placeholder="密码">
+						
+					</div>
+					<div class="login_check clearfix">
+						<div class="f_l">
+					     <input type="checkbox" name="remember" id="remember" value="1">自动登录
+						</div>
+						<div class="f_r">
+						<A href="{$BASE_URL}login/forget/">忘记密码</A>
+						</div>
+					</div>
+					<div class="login_botton">
+					
+						<button class="red" name=submit onclick="return loginCheck();">立即登录</button>
+					</div>
+				</form>
+				<div class="login_botton">
+					<a href="{$BASE_URL}regist/" class="grey">还没有账号？点此注册</a>
+				</div>
+				<br><br><br><br><br><br><br><br><br><br><br><br>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" 	src="{$BASE_URL}_templates/{$THEME}/mobile/js/commset.js"></script>
+	
+</body>
+</html>

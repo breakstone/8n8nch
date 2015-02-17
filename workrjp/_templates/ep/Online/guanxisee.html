@@ -1,0 +1,98 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|闲聊吧"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+{literal}
+<script type="text/javascript">
+
+</script>
+{/literal}
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+<br>
+<form name="form1" action="" method="post">
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+		<h1 class="title">《住之江公园》报名人员</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 120px;">姓名 </li>
+							<li style="width: 120px;">头像 </li>
+							<li style="width: 100px;">在留资格</li>
+							<li style="width: 120px;">联系电话</li>
+							<li style="width: 120px;">最近车站</li>
+							<li style="width: 100px;">生年月日</li>
+							<li style="width: 120px;">其他附件</li>
+							<li style="width: 58px;"></li>
+						</ul>
+					</dd>
+					{if $guanxi_online}
+					{section name="list" loop="$guanxi_online"}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<li style="width: 120px;">&nbsp;{$guanxi_online[list].name}({$guanxi_online[list].sex})</li>
+							<li style="width: 120px;">
+							&nbsp;{if $guanxi_online[list].tou_picture neq ""}<img src="{$BASE_URL}upload/online/kiwa/{$guanxi_online[list].tou_picture}" width="110px;">{/if}
+							{if $guanxi_online[list].baoming_type eq 2}<font color="red">今日备用人员</font>{/if}
+							</li>
+							<li style="width: 100px;">&nbsp;{$guanxi_online[list].visa}</li>
+							<li style="width: 120px;">&nbsp;{$guanxi_online[list].tel}</li>
+							<li style="width: 120px;">&nbsp;{getname name="eki" value=$guanxi_online[list].eki}</li>
+							<li style="width: 100px;">&nbsp;&nbsp;{$guanxi_online[list].birth}</li>
+							<li style="width: 120px;">
+							{if $guanxi_online[list].hu_picture neq ""}<a href="{$BASE_URL}upload/online/kiwa/{$guanxi_online[list].hu_picture}" target="_blank">护照</a><br>{/if}
+							{if $guanxi_online[list].zai1_picture neq ""}<a href="{$BASE_URL}upload/online/kiwa/{$guanxi_online[list].zai1_picture}" target="_blank">再留1</a><br>{/if}
+							{if $guanxi_online[list].zai1_picture neq ""}<a href="{$BASE_URL}upload/online/kiwa/{$guanxi_online[list].zai1_picture}" target="_blank">再留2</a><br>{/if}
+							{if $guanxi_online[list].cun_picture neq ""}<a href="{$BASE_URL}upload/online/kiwa/{$guanxi_online[list].cun_picture}" target="_blank">存折</a><br>{/if}
+							{if $guanxi_online[list].bao_picture neq ""}<a href="{$BASE_URL}upload/online/kiwa/{$guanxi_online[list].bao_picture}" target="_blank">保险</a><br>{/if}
+							&nbsp;
+							</li>
+							<li style="width: 58px;">
+							{if $smarty.session.kiwa_userid eq "111402198852"}
+								<button type="submit" name="del" value="{$guanxi_online[list].user_id}" onclick="return deleteConfirm();">删除</button>
+								<button type="button" name="dao" value="{$guanxi_online[list].user_id}" onclick="javascript:alert('此功能制作中...');">导入</button>
+							{/if}
+							</li>
+						</ul>
+					</dd>
+					{/section}
+					<dd>
+						<ul><center><button type="button" onclick="javascript:window.print();">打印今日名单</button></center><br></ul>
+					</dd>
+					{else}
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+							<font color="red">&nbsp;抱歉，还没有你索搜的信息！</font>
+						</ul>
+					</dd>
+					{/if}
+				</dl>
+			</div>
+		</div>
+	</div>
+</section>
+</form>
+<br><br><br>
+{include file="./footer.html"}

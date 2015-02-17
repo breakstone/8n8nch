@@ -1,0 +1,471 @@
+{include file="./header.html" title="帮帮网-企业简历"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class="on hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+
+<br>
+<form name="searchform" action="{$BASE_URL}companypage/companydo/" method="post" enctype="multipart/form-data">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/user_center.css">
+	<div class="container_24">
+		<!--main start-->
+		<section class="clearfix section">
+			<!--用户中心样式-->
+			<div class="second_menu ">
+				<div class="box default">
+					<div class="inner">
+						<header class="box_header clearfix">
+							<h2 class="box_title">企业用户</h2>
+						</header>
+						<div class="box_detail">
+							<nav class="minor_nav clearfix">
+								<ul class="clearfix">
+									<li>
+									<a href="{$BASE_URL}companypage/" original-title="我的地盘"> <span class="no_list"></span><strong>我的地盘</strong></a>
+									</li>
+									<li>
+									<a href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/" original-title="我的企业主页" target="_blank"><span class="no_list"></span><strong class="red">企业主页</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}cadmin/"><img src="{$BASE_URL}_templates/{$THEME}/img/seti.png" style="margin-top: 2px;"> 企业主页管理</a></li>
+									</ul>
+									</li>
+									<li>
+									<a href="javascript:void(0);" original-title="我的需求"> <span class="no_list"></span><strong>我的需求</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}companypage/myrequirement/?Which_Show=2" original-title="计件任务">工作信息需求( <b>{if $job_um}{$job_um}{else}0{/if}</b> ) </a></li>
+										<li><a href="{$BASE_URL}companypage/myrequirement/?Which_Show=1" original-title="招标任务">生活互助需求( <b>{if $live_um}{$live_um}{else}0{/if}</b> ) </a></li>
+									</ul>
+									</li>
+									<li>
+									<a href="javascript:void(0);" original-title="我的收藏"> <span class="no_list"></span><strong>我的收藏</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}companypage/favorite/?Which_Show=2" original-title="工作信息">工作信息( <b>{if $fa_um_j}{$fa_um_j}{else}0{/if}</b> ) </a></li>
+										<li><a href="{$BASE_URL}companypage/favorite/?Which_Show=3" original-title="人才/企业">人才/企业( <b>{if $fa_um}{$fa_um}{else}0{/if}</b> ) </a></li>
+										<li><a href="{$BASE_URL}companypage/favorite/?Which_Show=1" original-title="生活互助信息">生活互助信息( <b>{if $fa_um_l}{$fa_um_l}{else}0{/if}</b> ) </a></li>
+									</ul>
+									</li>
+									<li>
+									<a href="{$BASE_URL}companypage/company/" original-title="企业简介" class="selected"> <span class="no_list"></span><strong>企业简介</strong></a>
+									</li>
+									<li>
+									<a href="javascript:void(0);" original-title="我的信箱"> <span class="no_list"></span><strong>我的信箱</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}companypage/cmessage/" original-title="悬赏任务">受信箱( <b>{if $message_um_f}{$message_um_f}{else}0{/if}</b> ) {if $unread>0}<b class="red">new</b>{/if}</a></li>
+										<li><a href="{$BASE_URL}companypage/cmessageSend/" original-title="招标任务">送信箱( <b>{if $message_um_s}{$message_um_s}{else}0{/if}</b> ) </a></li>
+									</ul>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<!--雇佣任务-->
+				<div class="box b_orange mt_10 clearfix po_re">
+					<div class="inner clearfix">
+						<a class="clearfix" href="#">
+							<div class="user_side_icon hire"></div>
+							<div class="box_side">
+								<h2>诚征广告</h2>
+								<span>049-293-1208</span>
+							</div>
+						</a>
+					</div>
+					<span class="hire_hot"></span>
+				</div>
+				<!--雇佣任务 end-->
+				<div class="box default clearfix mt_10">
+					<div class="inner clearfix">
+						<ul class="user_side_guide clearfix">
+							<li class="n_m_t clearfix">
+							<a class="clearfix" href="#">
+									<div class="user_side_icon shore"></div>
+									<div class="box_side">
+										<h3>诚征广告</h3>
+										<span>049-293-1208</span>
+									</div>
+							</a></li>
+							<li class="clearfix"><a class="clearfix" href="#">
+								<div class="user_side_icon core"></div>
+								<div class="box_side">
+									<h3>诚征广告</h3>
+									<span>049-293-1208</span>
+								</div>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix box default mt_10">
+					<div class="inner">
+						<header class="box_title clearfix">
+							<h2>意见栏，给我们建议</h2>
+						</header>
+						<article class="pad10 clearfix">
+							<textarea name="comment_tent" id="comment_tent" cols="28" rows="4" class="c999" placeholder="有话您说,我们在倾听！"></textarea>
+							<button type="button" class="button mt_10" onclick="sub_shou_comment();">提交</button>
+						</article>
+					</div>
+				</div>
+			</div>
+			<div class="show_panel clearfix ml_5">
+				<div class=" clearfix box default">
+					<!--header内容头部 start-->
+					<header class="clearfix box_header">
+					<!-- 
+						<div class="page_count fl_r mr_20" style="margin-top: 1px;">
+							<span>每页显示：</span>
+							<a class="selected" href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=30">30</a>
+							<a href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=50">50</a>
+							<a href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=100">100</a>
+						</div>
+					 -->
+						<h2 class="box_title">我的简历</h2>
+					</header>
+					<!--header内容头部 end-->
+					<div class="box_detail">
+						<div class="data_list">
+							<p>「<SPAN class=att>※</SPAN>」必须入力项目</p>
+							{if $error}<SPAN class=att>{$error}</SPAN>{/if}
+							<section id="jobEntryRegist">
+							<table class="tableStyle" style="width: 100%;">
+								<tr>
+									<th>会社名称（汉字）</th>
+									<td class="alLeft">
+										&nbsp;{$company.company_name}
+									</td>
+								</tr>
+								<tr>
+									<th>会社代表者</th>
+									<td class="alLeft">
+										<input name="company_manager" id="company_manager" size="60" style="ime-mode: disabled" type="text" value="{$company.company_manager}" class="input"/>
+									</td>
+								</tr>
+								<tr>
+									<th>成立年月</th>
+									<td class="alLeft">
+										<input name="foundation_date" id="foundation_date" size="60" style="ime-mode: disabled" type="text" value="{$company.foundation_date}" class="input"/>
+									</td>
+								</tr>
+								<tr>
+									<th>注册资金</th>
+									<td class="alLeft">
+										<input name="company_money" id="company_money" size="60" style="ime-mode: disabled" type="text" value="{$company.company_money}" class="input"/> 万円  
+									</td>
+								</tr>
+							</table>
+							<table class="tableStyle" style="width: 100%;">
+								<tr>
+									<th>企业邮件 <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										&nbsp;{$company.company_email}
+									</td>
+								</tr>
+								<tr>
+									<th>登陆密码 <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										&nbsp;<input name="password" id="password" size="60" style="ime-mode: disabled" type="password" value="{$company.password}" class="input"/>
+										（8位～32位的半角英数字）
+									</td>
+								</tr>
+								<tr>
+									<th>密码（確認） <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										&nbsp;<input name="repassword" id="repassword" size="60" style="ime-mode: disabled" type="password" value="{$company.password}" class="input"/>
+										（8位～32位的半角英数字）
+									</td>
+								</tr>
+								<tr>
+									<th>咨询邮件</th>
+									<td class="alLeft">
+										&nbsp;<input name="right_email" id="right_email" size="60" style="ime-mode: disabled" type="text" value="{$company.right_email}" class="input"/>
+										（半角英数字）
+										<br>
+										<label for="per_status_1">
+							            <input class="radioInput" type="radio" name="per_status" value="1" id="per_status_1" checked="checked"> 公开</label>
+										<label for="per_status_2">
+										<input class="radioInput" type="radio" name="per_status" value="2" id="per_status_2"
+										{if $company.per_status eq 2}checked="checked"{/if}> 非公开</label>
+									</td>
+								</tr>
+								<tr>
+									<th>会社主页</th>
+									<td class="alLeft">
+										&nbsp;<input name="company_url" id="company_url" size="60" style="ime-mode: disabled" type="text" value="{$company.company_url}" class="input"/>
+										（半角英数字）
+									</td>
+								</tr>
+								<tr>
+									<th>住址（都道府县） <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										&nbsp;<select name="areaid" id="areaid" onchange="showPref();" class="input">
+											<option value="">請指定</option>
+											<option value="">---------------</option>
+											{section name="list" loop="$areas"}
+												<option value="{$areas[list].area_cd}"
+												{if $areas[list].area_cd eq $company.area_cd}selected='selected'{/if}
+												>{$areas[list].area_name}</option>
+											{/section}
+										</select>
+										<select name="pref" id="pref" onchange="giveToeki()" class="input">
+											<option value="">請指定</option>
+											<option value="">---------------</option>
+											{if $prefSearch}
+												{section name="list" loop="$prefSearch"}
+													<option value="{$prefSearch[list].pref_cd}"
+													{if $prefSearch[list].pref_cd eq $company.pref_cd}selected='selected'{/if}
+													>{$prefSearch[list].name}</option>
+												{/section}
+											{/if}
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th>邮政编号</th>
+									<td class="alLeft">
+										&nbsp;〒
+										<input name="zip01" id="zip01" size="3" maxlength="3" style="ime-mode: disabled" type="text" value="{$company.zip01}" class="input"/>
+										-
+										<input name="zip02" id="zip02" size="4" maxlength="4" style="ime-mode: disabled" type="text" value="{$company.zip02}" class="input"/>
+										<input type="button" value="住所を検索" onclick="zipToaddr();" class="input">
+										（半角数字）
+										<div id="tellNO"></div>
+							    		<input type="hidden" value="{$BASE_URL}" id="url" name="url">
+									</td>
+								</tr>
+								<tr>
+									<th>住址（市区町村） <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										<input name="add_pref" id="add_pref" type="hidden" value=""/>
+										&nbsp;<input name="addr01" id="addr01" size="90" style="ime-mode: disabled" type="text" value="{$company.addr01}" class="input"/>
+									</td>
+								</tr>
+								<tr>
+									<th>住址（丁番建物） <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										&nbsp;<input name="addr02" id="addr02" size="90" style="ime-mode: disabled" type="text" value="{$company.addr02}" class="input"/>
+									</td>
+								</tr>
+								<tr>
+									<th>最近駅 <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										<a href="javascript:void(0);" id="js-dialog-station-open">
+										<img src="{$BASE_URL}js/ek_files/ek.png" onclick="showStation(document.getElementById('pref').value)">
+										</a>
+									
+										<input type="hidden" name="searchEki">
+										<input type="hidden" name="reqType" value="">
+										<input type="hidden" name="mid_area_cd" value="">
+										<input type="hidden" name="mid_area_cds" value="">
+										<input type="hidden" name="comp_mgr_no" value="">
+										<input type="hidden" name="base_mgr_no" value="">
+										<input type="hidden" name="id_ad" value="">
+										<input type="hidden" name="new_flg" value="">
+										<input type="hidden" name="query_str" value="?">
+										<input type="hidden" name="query_flg" value="">
+										<p id="js-detailSearch-search-animation" class="animate" ></p>
+										<ul style="margin-left: 3px; line-height: 2px;">
+										<span class="ensn_list" id="ensn_list">
+										{if $ensn}
+											{section name="list" loop="$ensn"}
+												<li style="margin-left: -5px;"><label><input type="checkbox" class="ensn-chk" id="{getname name='ensn' value='$ensn[list]'}" name="ensn[]" value="{$ensn[list]}" checked >{getname name="ensn" value="$ensn[list]"}</label></li><br/>
+											{/section}
+										{/if}
+										{if $eki}
+											{section name="list" loop="$eki"}
+												<li style="margin-left: -5px;"><label><input type="checkbox" class="ensn-chk" id="{getname name='eki' value='$eki[list]'}" name="eki[]" value="{$eki[list]}" checked >{getname name="eki" value="$eki[list]"}</label></li><br/>
+											{/section}
+										{/if}
+										</span>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<th>电话番号 <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										&nbsp;<input name="tel01" id="tel01" size="4" maxlength="4" style="ime-mode: disabled" type="text" value="{$company.tel01}" class="input"/>
+										-
+										<input name="tel02" id="tel02" size="4" maxlength="4" style="ime-mode: disabled" type="text" value="{$company.tel02}" class="input"/>
+										-
+										<input name="tel03" id="tel03" size="4" maxlength="4" style="ime-mode: disabled" type="text" value="{$company.tel03}" class="input"/>
+										（半角数字）
+									</td>
+								</tr>
+								<tr>
+									<th>FAX番号</th>
+									<td class="alLeft">
+										&nbsp;<input name="fax01" id="fax01" size="4" maxlength="4" style="ime-mode: disabled" type="text" value="{$company.fax01}" class="input"/>
+										-
+										<input name="fax02" id="fax02" size="4" maxlength="4" style="ime-mode: disabled" type="text" value="{$company.fax02}" class="input"/>
+										-
+										<input name="fax03" id="fax03" size="4" maxlength="4" style="ime-mode: disabled" type="text" value="{$company.fax03}" class="input"/>
+										（半角数字）
+									</td>
+								</tr>
+								<!-- 
+								<tr>
+									<th>职业种类 <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										<select name="kinds" id="kinds" onchange="showTypes();" class="input">
+											<option value="">請指定</option>
+											<option value="">---------------</option>
+										{section name="list" loop="$companyfrom"}
+											<option value="{$companyfrom[list].kindsID}"
+											{if $companyfrom[list].kindsID eq $company.kindsID}selected='selected'{/if}
+											>{$companyfrom[list].kindsname}</option>
+										{/section}
+										</select>
+										<div id="typecheck" style="margin-top: 8px;">
+											{if $types}
+												{section name="list" loop="$types"}
+													<label for="{$smarty.section.list.index}">
+										            <input class="radioInput" type="checkbox" name="types[]" value="{$types[list].typesID}" id="{$smarty.section.list.index}"
+										            {if $select_types} 
+										            {if in_array($types[list].typesID,$select_types)}checked="checked"{/if}
+										            {/if}
+										            > {$types[list].typesname}</label><br>
+												{/section}
+											{/if}
+										</div>
+									</td>
+								</tr>
+								 -->
+								<tr>
+									<th>营业范围 <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										<table>
+											{section name="list" loop="$qi"}
+												{if ($smarty.section.list.index+1) mod 4 == 1}<tr>{/if}
+												<td><label><input name="skills[]" id="skills" type="checkbox" value="{$qi[list].type_name}"
+												{if $skill}
+												{if in_array($qi[list].type_name,$skill)}checked="checked"{/if}
+												{/if}
+												>&nbsp;{$qi[list].type_name}</label></td>
+												{if ($smarty.section.list.index+1) mod 4 == 0}</tr>{/if}
+											{/section}
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<th>从业员数</th>
+									<td class="alLeft">
+										&nbsp;<input name="employees_num" id="employees_num" size="6" style="ime-mode: disabled" type="text" value="{$company.employees_num}" class="input"/>　人
+										（半角数字）
+									</td>
+								</tr>
+							</table>
+							<table class="tableStyle" style="width: 100%;" id="photo">
+								<tr>
+									<th>企业描述 <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										&nbsp;<textarea name="company_text" id="company_text" cols="90" rows="12" style="ime-mode: active" class="input">{$company.company_text}</textarea>
+									</td>
+								</tr>
+								<tr>
+									<th>宣传照片 <SPAN class=att>※</SPAN></th>
+									<td class="alLeft">
+										{if $img_status eq 1}
+										&nbsp;<img src="{$BASE_URL}{$company.company_photo_url}?{$catch_img}" alt="{$company.company_name}" width="140" height="120" class="fixAspect" />
+										<input type="hidden" name="img_status" id="img_status" value="{$img_status}">
+										{/if}
+										&nbsp;上传: <input type="file" name="company_photo_url" id="company_photo_url">
+										<br>（图片类型:jpg,png,gif,jpeg）
+									</td>
+								</tr>
+								
+							</table>
+							<p class="alCenter">
+							<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_correction.gif" alt="修改" onclick="return company_check();">
+							</p>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</form>
+<Br>
+
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_shok.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_ensn_nosubmit.js"></script>
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+<!-- 線・駅 -->
+<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 780px; z-index: 1004; top: 76px; left: 242px; display: none;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+<!-- common-dialog-conditionSelect -->
+<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+<div class="pattern-2">
+	<div class="bg01">
+		<div class="pt01">
+			<h2>选择沿线</h2>
+			<p><a href="javascript:void(0);" id="js-dialog-station-close">
+			<img src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+		</div>
+		
+		<div id="ensn-tdfk-view" style="display: block;">
+		<span id="ensn-tdfk-data">
+			<div class="pt03" id="js-ensn-tdfk-tabs">
+			<ul>
+				<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);" id="eki_pref_title">{if $company.pref_cd}{getname name="pref" value=$company.pref_cd}{/if}</a></li>
+			</ul>
+			</div>
+			<!-- tab start -->
+			<div class="ensn-01" id="ensn-tab1">
+			<div class="pt05" id="js-dialog-station-lists">
+			<div class="bg02">
+				<h3 class="close"><a href="javascript:void(0);" id="eki_pref">{if $company.pref_cd}{getname name="pref" value=$company.pref_cd}{/if}</a></h3>
+				<section id="station-lists">
+				</section>
+			</div>
+			</div>
+			</div>
+			<!-- //tab end -->
+		</span>
+		</div>
+
+		<div class="pt07">
+			<div class="pt07a"><dl><dt>已经选择的沿线：</dt><dd><div id="selected-ensn">請选择沿线</div></dd></dl></div>
+			<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+		</div>
+		
+		<div class="pt08">
+			<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+		</div>
+	</div>
+</div>
+</div>
+<!-- //common-dialog-conditionSelect -->
+</div>
+</div>
+{include file="./footer.html"}

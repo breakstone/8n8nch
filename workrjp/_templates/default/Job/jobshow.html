@@ -1,0 +1,185 @@
+{include file="./header.html" title="工作检索结果一览"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt;<a href="{$BASE_URL}job/">检索结果一览</a></li>
+	<li>&gt; {$job.job_title}</li>
+</ul>
+<!-- //pan -->
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+<!-- box -->
+<div id="box">
+<div id="job_detail">
+<section>
+<p class="title">{$job.job_title}</p>
+<p class="celebration">浏览数:{$job.read_num}</p>
+<ul class="status">
+	<li>发表于:{$job.create_date|date_format:"%Y年%m月%d日"} </li>
+</ul>
+<div id="company">
+	{if $job.user_type eq "company"}
+	<h3 style="padding-right: 3px; width: 86px;">
+		<img src="{$BASE_URL}{getname name='company_photo' value=$job.company_id}" alt="{$job.company_name}" width="80" height="80" class="fixAspect" />
+		<center>
+			{if $smarty.session.kiwa_companyid}
+			<a href="{$BASE_URL}companypage/cmessage_send/{$job.company_id}/" target="_blank">　联系TA　</a>
+			{/if}
+			{if $smarty.session.kiwa_userid}
+			<a href="{$BASE_URL}mypage/pmessage_send/{$job.company_id}/" target="_blank">　联系TA　</a>
+			{/if}
+		</center>
+	</h3>
+	<dl class="left">
+		<dt>发布者：</dt>
+		<dd><a href="{$BASE_URL}people/show/company_{$job.company_id}/" target="_blank">{$job.company_name}</a></dd>
+		<dt>会员类别：</dt>
+		<dd>企业会员</dd>
+		<dt>发表于：</dt>
+		<dd> {$job.create_date|date_format:"%Y年%m月%d日"} </dd>
+	</dl>
+	{/if}
+	{if $job.user_type eq "user"}
+	<h3 style="padding-right: 3px;">
+		<img src="{$BASE_URL}{getname name='user_photo' value=$job.company_id}" alt="{$job.company_name}" width="80" height="80" class="fixAspect" />
+		<center>
+			{if $smarty.session.kiwa_companyid}
+			<a href="{$BASE_URL}companypage/cmessage_send/{$job.company_id}/" target="_blank">　联系TA　</a>
+			{/if}
+			{if $smarty.session.kiwa_userid}
+			<a href="{$BASE_URL}mypage/pmessage_send/{$job.company_id}/" target="_blank">　联系TA　</a>
+			{/if}
+		</center>
+	</h3>
+	<dl class="left">
+		<dt>发布者：</dt>
+		<dd><a href="{$BASE_URL}people/show/user_{$job.company_id}/" target="_blank">{$job.company_name}</a></dd>
+		<dt>会员类别：</dt>
+		<dd>个人</dd>
+		<dt>发表于：</dt>
+		<dd> {$job.create_date|date_format:"%Y年%m月%d日"} </dd>
+	</dl>
+	{/if}
+</div>
+<h4>募集要项</h4>
+<table summary="募集要项" class="tableStyle">
+	<tr>
+		<th>业种・职种</th>
+		<td>{$job.kindsname}&nbsp;&nbsp;&nbsp;{$job.typesname}</td>
+	</tr>
+	<tr>
+		<th>工作内容</th>
+		<td>{$job.contents|nl2br}</td>
+	</tr>
+	<tr>
+		<th>招收对象</th>
+		<td>{$job.requirements|nl2br}</td>
+	</tr>
+	
+	<tr>
+		<th>工作地点</th>
+		<td>
+		{$job.pref_name}
+		{if $job.station_name or $job.line_num}
+			( {assign var="line_array" value=","|explode:$job.line_num}
+			{section name="sb_list" loop="$line_array"}
+				{getname name="ensn" value=$line_array[sb_list]}
+			{/section}
+			 {$job.station_name} )
+		{/if}
+		</td>
+	</tr>
+	<tr>
+		<th>雇用形式</th>
+		<td>{$job.employed_method_name}</td>
+	</tr>
+	<tr>
+		<th>工作时间</th>
+		<td>{$job.hope_date_name}</td>
+	</tr>
+	<tr>
+		<th>工资</th>
+		<td>{$job.money_name}</td>
+	</tr>
+	<tr>
+		<th>待遇・福利厚生</th>
+		<td>{$job.condition_name}</td>
+	</tr>
+	<tr>
+		<th>采用人数</th>
+		<td>{$job.numbers}</td>
+	</tr>
+</table>
+<div class="nav">
+<ul>
+	{if $smarty.session.kiwa_userid}
+	<li><a href="{$BASE_URL}mypage/jobregist/{$job.job_id}/"><img src="{$BASE_URL}_templates/{$THEME}/img/search_bt_entry.gif" width="164" height="34" alt="応募する" /></a></li>
+	{/if}
+	{if $smarty.session.kiwa_companyid}
+	<li><a href="{$BASE_URL}companypage/jobregist/{$job.job_id}/"><img src="{$BASE_URL}_templates/{$THEME}/img/search_bt_entry.gif" width="164" height="34" alt="応募する" /></a></li>
+	{/if}
+	{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+	<li><a href="{$BASE_URL}login/?url=job_show_{$job.job_id}"><img src="{$BASE_URL}_templates/{$THEME}/img/search_bt_entry.gif" width="164" height="34" alt="応募する" /></a></li>
+	{/if}
+	{if $smarty.session.kiwa_userid or $smarty.session.kiwa_companyid}
+	<li class="favorite"><a href="javascript:void(0)" onclick="favorite('{$job.job_id}','job');">收藏此工作</a></li>
+	{/if}
+</ul>
+</div>
+<h4>应募·选考</h4>
+<table summary="应募·选考" class="tableStyle">
+	<tr>
+		<th>选考过程</th>
+		<td>投简历 <br />
+		点击【应募】投送简历<br />
+		▼ <br />
+		以登录资料作为选考材料<br />
+		▼ <br />
+		邮寄您的选考材料（履历书、职历书）<br />
+		▼ <br />
+		面试<br />
+		▼ <br />
+		内定 <br />
+		<br />
+		※面试次数会因情况有所不同</td>
+	</tr>
+	<tr>
+		<th>应募方法</th>
+		<td>请务必点击从本页面的【应募】进行应募 <br />
+		<br/>
+		材料选考结束后，会在5个工作日内联系所有应募者。 <br />
+		※关于简历投递之后的流程，本公司会以邮件或电话等方式进行通知。</td>
+	</tr>
+	<tr>
+		<th>面接地</th>
+		<td></td>
+	</tr>
+	<tr>
+		<th>联络先</th>
+		<td>{$job.accept_mail}</td>
+	</tr>
+</table>
+
+<div class="nav">
+<ul>
+	<li><a href="{$BASE_URL}mypage/jobregist/{$job.job_id}/">
+	<img src="{$BASE_URL}_templates/{$THEME}/img/search_bt_entry.gif" width="164" height="34" alt="応募する" />
+	</a></li>
+	{if $smarty.session.kiwa_userid}
+	<li class="favorite"><a href="#" id="link-1530699217">收藏追加</a></li>
+	{/if}
+</ul>
+</div>
+</section></div>
+</div>
+<!-- //box -->
+
+
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+
+</div>
+<!-- //container --></div>
+<!-- //wrapper -->
+{include file="./footer.html"}

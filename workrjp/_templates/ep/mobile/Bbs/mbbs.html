@@ -1,0 +1,122 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}bbs/"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}bbs/"><span class="title">返回</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}bbs/mbbs/"><span class="ico ico_sec"></span></a>&nbsp;
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+
+	<div class="tabcrooll">
+		<div class="serch_ind">
+		<form action="{$BASE_URL}bbs/mbbs/" method="post"  id="form_task_search">
+			
+				<input id="serchIput" class="serc_c" type="text" name="keyword" value="{$keyword}" id="keyword">
+				
+							<label class="clerserc">
+								<span class="ico ico_serc" style="width:40px;">
+								<input class="hiden" type="submit">
+								</span>
+							</label>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="wrapper_list" style="overflow: hidden; left: 0px;">
+	<div id="scroller">
+		
+		<div id="hasSelected">
+				
+		</div>
+		<div id="maincon" class="maincon">
+			<ul id="tasklist" data-role="listview">
+				{if $bbs}
+						{section name="list" loop="$bbs"}
+							<li>
+						
+								<div class="listcont" style='padding-left:0.2em;'>
+									<h2>
+										{if $bbs[list].bbs_type eq ""}
+											<font style="color:green">【闲聊】</font>
+											
+										{else}
+											<font style="color:blue">【{$bbs[list].bbs_type}】</font>
+										{/if}
+										&nbsp;&nbsp;&nbsp;浏览量：<span style="color:#FF9933;">{$bbs[list].read_num}</span>
+										
+											<a style="border-bottom: 1px solid #FDFCFC;display: block;color:#87CEFA" href="{$BASE_URL}bbs/show/{$bbs[list].bbs_id}/"  original-title="{$bbs[list].bbs_title}">
+											&nbsp;{$bbs[list].bbs_title}
+											</a>
+										<span style="border-bottom: 1px solid #dfdfdf;display: block;">
+											&nbsp;发布者：<span style="color:red;">{getname name="username" value=$bbs[list].user_id}{getname name="company_name" value=$bbs[list].user_id}</span>
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日期：<span class="c999"> 
+														{if $bbs[list].create_date|date_format:'%Y-%m-%d' eq $today}
+															<font color="red">今天</font>
+														{elseif $bbs[list].create_date|date_format:'%Y-%m-%d' eq $yestoday}
+															昨天
+														{elseif $bbs[list].create_date|date_format:'%Y-%m-%d' eq $bfyestoday}
+															前天
+														{else}
+															{$bbs[list].create_date|date_format:'%m-%d '}
+														{/if}
+														{if $smarty.session.kiwa_companyid eq "000001"}
+															<a href="{$BASE_URL}bbs/del/{$bbs[list].bbs_id}/">×</a>
+														{/if}
+												</span>
+													
+											</span>
+										
+											
+										
+									</h2>
+								</div>
+						</li> 
+						{/section}
+						{else}
+							<li>&nbsp;抱歉，还没有你索搜的信息！</li>
+						{/if}
+			</ul>
+			<br>
+			<div style="text-align: center;">
+				{if $all gt 20}
+				<span style="font-size: 18px;"> {$subPages} </span>
+				{/if}
+			</div>
+				<br><br>
+				<br>
+		</div>
+		
+	</div>
+</div>
+
+<script type="text/javascript"
+	src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklist2.js"></script>
+<script type="text/javascript"
+	src="{$BASE_URL}_templates/{$THEME}/mobile/js/commset.js"></script>
+</div>
+{include file="./mobile/footer.html"}

@@ -1,0 +1,146 @@
+{include file="./mobile/header.html"  title="个人空间"}
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll-probe.js"></script>
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$users.page_color}">
+
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/layout.css">
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/html5.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+
+</head>
+<body >
+<div id="header">
+	
+		<div class="headbar clearfix">
+			<div style="display:block;top:5px;">
+			{if $users.user_id eq $smarty.session.kiwa_userid}
+				<div class="f_l">
+					<a href="{$BASE_URL}mypage/"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+					<a  href="{$BASE_URL}mypage/">
+					<span class="title">我的地盘</span>
+					</a>
+				</div>
+					{else}
+					<div class="f_l">
+					<a href="{$BASE_URL}people/show/user_{$users.user_id}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+					<a  href="{$BASE_URL}people/show/user_{$users.user_id}">
+					<span class="title">返回</span>
+					</a>
+				</div>
+				{/if}
+				<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+		
+				
+			</div>
+			
+		</div>
+</div>
+	<div id="wrapper_shop" style="overflow: scroll;top: 4.5em;">
+		<div id="scroller_index" >
+					
+				
+				<div class="shop_tags" style="margin-top: 0em;">
+					
+						<div class="shoptabbox" style="padding-left:0px;">
+							
+									<div class="tab_tobar_no casetab clearfix" style="text-align: center;" >
+								
+									<span style="text-align: center;font-size:30px">个人相册</span>
+									</div>
+									
+									<div class="itemcase" style="background:#F4F4F4;text-align:center;" id="tab2">
+								
+							{if $users.user_id eq $smarty.session.kiwa_userid}
+								{if $photo|@count <= 12}
+								<a href="{$BASE_URL}people/productadd/user_{$users.user_id}/" class="fl_r c333"><button>添加照片</button></a>
+								{else}
+									{if $users.user_id eq "031758092846"}<!-- 庞涛特权 -->
+									<a href="{$BASE_URL}people/productadd/user_{$users.user_id}/" class="fl_r c333"><button>添加照片</button></a>
+									{else}
+									<a href="javascript:void(0);" class="fl_r c333"><button>您的权限，最多只能发布12个照片</button></a>
+									{/if}
+								{/if}
+						
+							{/if}	
+									
+								
+										<ul style="height: auto;background:#F4F4F4;margin-left: 25px;clear:both;">
+										
+										{if $photo}
+											{section name="list" loop="$photo"}
+											<li style="margin：0；margin-right: 20px;padding-top: 5px;"">
+												<a href="{$BASE_URL}people/photoshow/{$photo[list].Id}/" class="imsgcbx">
+												<img style="max-width:200px;" src="{$BASE_URL}{$photo[list].photo_url}" alt="" ></a>
+												<div class="">
+													<b class="cea5">{$photo[list].title|mb_truncate:14}</b>
+												</div>
+											</li>
+											{/section}
+										{else}
+										
+											<li>
+											<br><br>
+											<div class="">
+													<b class="">&nbsp;&nbsp;&nbsp;Ta 还没有发布任何照片！ </b>
+												</div>
+													<br>
+											</li>
+											
+										{/if}
+										</ul>
+									</div>
+									
+									
+					<div class="shopboton">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+										{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+											{if $smarty.session.kiwa_companyid}
+												<a class="botton_b xuyaodenglu" href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">联系TA</a>
+											{/if}
+											{if $smarty.session.kiwa_userid}
+												<a class="botton_b xuyaodenglu" href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">联系TA</a>
+											{/if}
+											
+												&nbsp;&nbsp;<a href="#" class="botton_b xuyaodenglu" onclick="favorite('{$users.user_id}','{$flag}');">收藏TA</a>
+										{/if}
+										{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+											&nbsp;&nbsp;<a class="botton_b xuyaodenglu" href="{$BASE_URL}login/" >联系TA</a>
+											&nbsp;&nbsp;<a class="botton_b xuyaodenglu"  href="{$BASE_URL}login/" >收藏TA</a>
+										{/if}
+									  
+							<br><br>
+					</div>
+				</div>
+			
+				
+					
+					
+		</div>
+		
+</div>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll-companyshow1.js"></script>
+{include file="./mobile/footer.html"}

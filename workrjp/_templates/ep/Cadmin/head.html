@@ -1,0 +1,188 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|主页管理"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+{literal}
+<script>
+	function titlecheck(){
+		if(document.getElementById("title").value == ""){
+			alert("请输入头部标题！");
+			return false;
+		}
+		return true;
+	}
+</script>
+{/literal}
+<br>
+<form action="" name="searchform" id="searchform" method="post">
+<input type="hidden" id="url" name="url" value="{$BASE_URL}">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/user_center.css">
+	<div class="container_24">
+		<!--main start-->
+		<section class="clearfix section">
+			<!--用户中心样式-->
+			<div class="second_menu ">
+				<div class="box default">
+					<div class="inner">
+						<header class="box_header clearfix">
+							<h2 class="box_title"><img src="{$BASE_URL}_templates/{$THEME}/img/seti.png" style="margin-top:6px;"> 主页管理</h2>
+						</header>
+						<div class="box_detail">
+							<nav class="minor_nav clearfix">
+								<a href="{$BASE_URL}cadmin/" original-title="主页管理"><strong><img src="{$BASE_URL}_templates/{$THEME}/img/seti.png" style="margin-top: 1px;"> 主页管理</strong></a>
+							<ul class="clearfix">
+								<li><a href="{$BASE_URL}cadmin/cpr/" original-title="企业简介">企业简介</a></li>
+								<li><a href="{$BASE_URL}cadmin/clian/" original-title="联系方式">联系方式</a></li>
+								<li><a href="{$BASE_URL}cadmin/set2domain/" original-title="二级域名申请">二级域名申请</a></li>
+								<li><a href="{$BASE_URL}cadmin/qrcode/" original-title="QR码查看">QR码查看</a></li>
+								<!-- 
+								<li><a href="{$BASE_URL}cadmin/moban/" original-title="模板选择">模板选择</a></li>
+								 -->
+								<li><a href="{$BASE_URL}cadmin/headpic/" original-title="头部图片更换" class="selected">头部文字更改</a></li>
+								<li><a href="{$BASE_URL}cadmin/turnpic/" original-title="首页图片幻灯片更换">首页轮转图片更换</a></li>
+								<li><a href="{$BASE_URL}cadmin/logo/" original-title="Logo更换">Logo头像更换</a></li>
+								<li><a href="{$BASE_URL}people/show/company_{$company.company_id}/" original-title="主页预览" target="_blank"><font color="red">预览主页</font></a></li>
+							</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<!--雇佣任务-->
+				<div class="box b_orange mt_10 clearfix po_re">
+					<div class="inner clearfix">
+						<a class="clearfix" href="#">
+							<div class="user_side_icon hire"></div>
+							<div class="box_side">
+								<h2>诚征广告</h2>
+								<span>049-293-1208</span>
+							</div>
+						</a>
+					</div>
+					<span class="hire_hot"></span>
+				</div>
+				<!--雇佣任务 end-->
+				<div class="box default clearfix mt_10">
+					<div class="inner clearfix">
+						<ul class="user_side_guide clearfix">
+							<li class="n_m_t clearfix">
+							<a class="clearfix" href="#">
+									<div class="user_side_icon shore"></div>
+									<div class="box_side">
+										<h3>诚征广告</h3>
+										<span>049-293-1208</span>
+									</div>
+							</a></li>
+							<li class="clearfix"><a class="clearfix" href="#">
+								<div class="user_side_icon core"></div>
+								<div class="box_side">
+									<h3>诚征广告</h3>
+									<span>049-293-1208</span>
+								</div>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix box default mt_10">
+					<div class="inner">
+						<header class="box_title clearfix">
+							<h2>意见栏，给我们建议</h2>
+						</header>
+						<article class="pad10 clearfix">
+							<textarea name="comment_tent" id="comment_tent" cols="28" rows="4" class="c999" placeholder="有话您说,我们在倾听！"></textarea>
+							<button type="button" class="button mt_10" onclick="sub_shou_comment();">提交</button>
+						</article>
+					</div>
+				</div>
+			</div>
+			<div class="show_panel clearfix ml_5">
+				<div class=" clearfix box default">
+					<!--header内容头部 start-->
+					<header class="clearfix box_header">
+					<!-- 
+						<div class="page_count fl_r mr_20" style="margin-top: 1px;">
+							<span>每页显示：</span>
+							<a class="selected" href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=30">30</a>
+							<a href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=50">50</a>
+							<a href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=100">100</a>
+						</div>
+					 -->
+						<h2 class="box_title">头部文字更改</h2>
+						<div class=" ">
+							<nav class="box_nav">
+								<ul>
+									<li class="selectedLava"><a href="#" original-title="头部文字更改">头部文字更改</a></li>
+								</ul>
+							</nav>
+						</div>
+						<div class="clear"></div>
+					</header>
+					<!--header内容头部 end-->
+					<div class="box_detail">
+						<div class="data_list">
+							<input type="hidden" value="" name="flg" id="flg">
+							<table class="data_table">
+								<thead>
+									<tr>
+										<th scope="col" style="width: 55px;">
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+									<td>
+										<font color="green">{$tell}</font>
+										{if $companypage.header_title neq ""}
+											<input id="title" name="title" type="text" value="{$companypage.header_title}" class="input" size="90">
+										{else}
+											<input id="title" name="title" type="text" value="{$company.company_name}" class="input" size="90">
+										{/if}
+									</td>
+									</tr>
+									<tr>
+									<td>
+										<font color="green">头部文字更改，默认是公司的名字 ~ 您也可以修改成贵公司的宣传语！</font>
+									</td>
+									</tr>
+									<tr>
+									<td style="text-align: center;">
+										<button type="submit" onclick="return titlecheck();">修 改 头 部 文 字</button>
+									</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</form>
+<Br>
+
+{include file="./footer.html"}

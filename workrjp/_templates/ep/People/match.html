@@ -1,0 +1,312 @@
+{include file="./header.html" title="个人空间-推荐工作"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$users.page_color}">
+
+
+
+<!--头部 end-->
+<div class=" tombgroud nohomshop clearfix">
+	<div class="flagnav">
+		<div class="container_24">
+			<ul class="clearfix" id="ajax_shop_myshop">
+				<li><a class="" href="{$BASE_URL}people/show/user_{$users.user_id}/" target="_self">个人首页</a></li>
+				<li><a class="" href="{$BASE_URL}people/photo/user_{$users.user_id}/" target="_self">个人相册</a></li>
+				<li><a class="" href="{$BASE_URL}people/msg/user_{$users.user_id}/" target="_self">留言板</a></li>
+				<li><a class="" href="{$BASE_URL}people/job/user_{$users.user_id}/" target="_self">Ta的动态</a></li>
+				<li><a class="" href="{$BASE_URL}people/user_pr/{$users.user_id}/" target="_self">Ta的简历</a></li>
+				<!-- 
+				<li><a class="" href="{$BASE_URL}people/live/user_{$users.user_id}/" target="_self">Ta的生活服务</a></li>
+				<li><a class="" href="{$BASE_URL}people/job/user_{$users.user_id}/" target="_self">Ta的工作信息</a></li>
+				<li><a class="" href="{$BASE_URL}people/bbs/user_{$users.user_id}/" target="_self">Ta的闲聊</a></li> 
+				 -->
+				<li class="fl_r c333"><a class="" href="{$BASE_URL}mypage/" target="_blank">我的地盘</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br>
+<div class="container_24 clearfix">
+	<!--内容主体-->
+	<div class="detaileft wid230 fl_l">
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span><img src="{$BASE_URL}{$users.user_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;"></span>
+				<h2>{$users.name01}{$users.name02}</h2>
+				<div class="c666">
+				{if $users.pref_cd}
+				所在地区： {getname name="area" value=$users.pref_cd} - {getname name="pref" value=$users.pref_cd}
+				{/if}
+				</div>
+				<div class="c666">
+				{if $users.points}
+					积分状况：&nbsp;<font style="font-size:16px;">{$users.points}</font> 积分
+				{/if}
+				</div>
+				<div class="c666">
+					认证状况： 
+					{if $users.status eq 1}
+						<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span>
+					{else}
+						还没有任何认证
+					{/if}
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">我要联系TA</a></span>
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">我要联系TA</a></span>
+						{/if}
+						<div class="invita clearfix">
+						<a style="width: 197px;color: red;" href="javascript:void(0);" onclick="favorite('{$users.user_id}','{$flag}');">加 TA 好友</a>
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$users.create_date|date_format:'%Y年%m月%d日'}</span><br>
+				<span class="c666">访问人数：<strong>{$users.see_page}</strong></span>
+			</div>
+		</div>
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>Ta的好友</strong>{if $um>0}&nbsp;( {$um}人 ){/if}</em>
+				<a href="{$BASE_URL}people/friend/user_{$users.user_id}/" class="fl_r c333">更多&nbsp;&gt;</a>
+			</div>
+			{section name="list" loop="$friend"}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<ul class="pad10" style="height: 80px;width: 210px;">
+			{/if}
+				<li style="float:left;display: inline;width:60px;padding-left: 5px;padding-right: 5px;">
+					{if $friend[list].flag eq "user"}
+						<a href="{$BASE_URL}people/show/user_{$friend[list].favorite_id}/" target="_blank">
+						<img src="{$BASE_URL}{getname name='user_photo' value=$friend[list].favorite_id}" width="60" height="60">
+						<p style="text-align: center;width:60px; overflow:hidden; text-overflow:clip; white-space:nowrap;">
+						{getname name="username" value=$friend[list].favorite_id}
+						</p>
+						</a>
+					{/if}
+					{if $friend[list].flag eq "company"}
+						<a href="{$BASE_URL}people/show/company_{$friend[list].favorite_id}/" target="_blank">
+						<img src="{$BASE_URL}{getname name='company_photo' value=$friend[list].favorite_id}" width="60" height="60">
+						<p style="text-align: center;width:60px; overflow:hidden; text-overflow:clip; white-space:nowrap;">
+						{getname name="company_name" value=$friend[list].favorite_id}
+						</p>
+						</a>
+					{/if}
+				</li>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</ul>
+			{/if}
+			{/section}
+		</div>
+		{if $users.user_id eq $smarty.session.kiwa_userid}
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>更改版本颜色</strong></em>
+			</div>
+			<ul class="pad10">
+				<div style="padding-top:5px;">
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=red" title="红"><img src="{$BASE_URL}_templates/{$THEME}/img/red.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=black" title="黑"><img src="{$BASE_URL}_templates/{$THEME}/img/black.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=blue" title="蓝"><img src="{$BASE_URL}_templates/{$THEME}/img/blue.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=green" title="绿"><img src="{$BASE_URL}_templates/{$THEME}/img/green.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=orange" title="橙"><img src="{$BASE_URL}_templates/{$THEME}/img/orange.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=purple" title="紫"><img src="{$BASE_URL}_templates/{$THEME}/img/purple.jpg"></a>
+				</div>
+			</ul>
+		</div>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+	<div class="wid750 fl_r">
+		<!-- 自己看主页 -->
+		{if $users.user_id eq $smarty.session.kiwa_userid}
+			<div class="tzlatset">
+				<div class="tztitle" style="height: 2px;">
+					<b style="font-size: 18px;line-height: 46px;">推荐的工作</b><br>
+					
+				</div>
+				
+				<div class="pad20">
+					<div class="box_detail">
+						<div class="data_list">
+							<input type="hidden" value="" name="flg" id="flg">
+							{if $job_tj}
+								<table class="data_table">
+									<tbody>
+									<tr>
+										<td>
+											<font color="red" style="font-size:16px"><b>你还没有添加个人简历,请去填写你的个人简历.</b></font>-->	
+											<a class=" c333" href="{$BASE_URL}mypage/personal/" target="_blank" style="font-size:18px;">我的简历</a>
+										</td>
+									</tr>
+										<tr>
+										<td>
+											<font color="green">以下是<font size="+2" color="red">系统推荐给你</font>的工作信息！</font>
+										</td>
+									</tr>
+									{section name="list" loop="$job_tj"}
+									<tr>
+									<td>
+										<div id="job">
+											<div id="infolist" class="tablist cleft">
+									              	<dl logr="q_2_12813556_5442195267587_4_2" id="jingzhun" class="">
+									                    <dt>
+									                        <a href="{$BASE_URL}job/show/{$job_tj[list].job_id}/" class="t" _t="jingzhun" rel="nofollow" tips="t">
+									                        	{$job_tj[list].job_title|mb_truncate:50}
+															</a>
+															<span class="hoverinfobox" style="display: none;">
+									                            <div id="arrow">
+									                                <em></em>
+									                                <span></span>
+									                            </div>
+									                        </span>
+									                        <div style="float: right;">{$job_tj[list].pref_name}</div>
+									                    </dt>
+									                </dl>
+									            </div>
+								          </div>
+									</td>
+									</tr>
+										{/section}
+									</tbody>
+								</table>
+							{/if}	
+							
+							{if $skill_1}
+							<table class="data_table">
+								<tbody>
+									<tr>
+									<td>
+										<font color="green">以下是<font size="+2" color="red">【 {$skill_1} 】</font>的工作信息！</font>
+									</td>
+									</tr>
+									<tr>
+									<td>
+										<div id="job">
+										{if $job_1}
+										{section name="list" loop="$job_1"}
+										<div id="infolist" class="tablist cleft">
+							              	<dl logr="q_2_12813556_5442195267587_4_2" id="jingzhun" class="">
+							                    <dt>
+							                        <a href="{$BASE_URL}job/show/{$job_1[list].job_id}/" class="t" _t="jingzhun" rel="nofollow" tips="t">
+							                        	{$job_1[list].job_title|mb_truncate:50}
+													</a>
+													<span class="hoverinfobox" style="display: none;">
+							                            <div id="arrow">
+							                                <em></em>
+							                                <span></span>
+							                            </div>
+							                        </span>
+							                        <div style="float: right;">{$job_1[list].pref_name}</div>
+							                    </dt>
+							                </dl>
+							            </div>
+										{/section}
+										{else}
+										<div style="text-align: center;font-size: 18px;">还没有适合您的工作，请别急，我们去收集！</div>
+										{/if}
+										</div>
+									</td>
+									</tr>
+								</tbody>
+							</table>
+							{/if}
+							{if $skill_2}
+							<table class="data_table">
+								<tbody>
+									<tr>
+									<td>
+										<font color="green">以下是<font size="+2" color="red">【 {$skill_2} 】</font>的工作信息！</font>
+									</td>
+									</tr>
+									<tr>
+									<td>
+										<div id="job">
+										{if $job_2}
+										{section name="list" loop="$job_2"}
+										<div id="infolist" class="tablist cleft">
+							              	<dl logr="q_2_12813556_5442195267587_4_2" id="jingzhun" class="">
+							                    <dt>
+							                        <a href="{$BASE_URL}job/show/{$job_2[list].job_id}/" class="t" _t="jingzhun" rel="nofollow" tips="t">
+							                        	{$job_2[list].job_title|mb_truncate:33}
+													</a>
+													<span class="hoverinfobox" style="display: none;">
+							                            <div id="arrow">
+							                                <em></em>
+							                                <span></span>
+							                            </div>
+							                        </span>
+							                        <div style="float: right;">{$job_2[list].pref_name}</div>
+							                    </dt>
+							                </dl>
+							            </div>
+										{/section}
+										{else}
+										<div style="text-align: center;font-size: 18px;">还没有适合您的工作，请别急，我们去收集！</div>
+										{/if}
+										</div>
+									</td>
+									</tr>
+								</tbody>
+							</table>
+							{/if}
+							{if $skill_3}
+							<table class="data_table">
+								<tbody>
+									<tr>
+									<td>
+										<font color="green">以下是<font size="+2" color="red">【 {$skill_3} 】</font>的工作信息！</font>
+									</td>
+									</tr>
+									<tr>
+									<td>
+										<div id="job">
+										{if $job_3}
+										{section name="list" loop="$job_3"}
+										<div id="infolist" class="tablist cleft">
+							              	<dl logr="q_2_12813556_5442195267587_4_2" id="jingzhun" class="">
+							                    <dt>
+							                        <a href="{$BASE_URL}job/show/{$job_3[list].job_id}/" class="t" _t="jingzhun" rel="nofollow" tips="t">
+							                        	{$job_3[list].job_title|mb_truncate:33}
+													</a>
+													<span class="hoverinfobox" style="display: none;">
+							                            <div id="arrow">
+							                                <em></em>
+							                                <span></span>
+							                            </div>
+							                        </span>
+							                        <div style="float: right;">{$job_3[list].pref_name}</div>
+							                    </dt>
+							                </dl>
+							            </div>
+										{/section}
+										{else}
+										<div style="text-align: center;font-size: 18px;">还没有适合您的工作，请别急，我们去收集！</div>
+										{/if}
+										</div>
+									</td>
+									</tr>
+								</tbody>
+							</table>
+							{/if}
+						</div>
+					</div>
+				</div>		
+			</div>
+			<span class="blank10"></span>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+</div>
+
+
+{include file="./footer.html"}

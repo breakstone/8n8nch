@@ -1,0 +1,44 @@
+{include file="./header.html" title="密码再设定"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; 密码再设定</li>
+</ul>
+<!-- //pan --> <!-- box -->
+<div id="box">
+<div id="forget">
+<div>
+<h1 class="title">密码再设定</h1>
+<form action="{$BASE_URL}login/pwlinkdo" accept-charset="utf-8" id="form" method="post">
+
+<table summary="パスワードリマインダー" class="tableStyle">
+	<tbody>
+		<tr><td colspan="2">{$username}
+		<input type="hidden" id="user_id" name="user_id" value="{$user_id}">
+		</td></tr>
+		<tr>
+			<th>新密码</th>
+			<td><input name="password" size="40" type="password" id="password"></td>
+		</tr>
+		<tr>
+			<th>再次输入新密码</th>
+			<td><input name="repassword" size="40" type="password" id="repassword"></td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="alCenter"><input type="image" alt="送信"
+	src="{$BASE_URL}_templates/{$THEME}/img/common_bt_send.gif"
+	onclick="return pwCheck();"></p>
+	
+</form>
+</div>
+</div>
+</div>
+<p id="pagetop"><a href="{$BASE_URL}login/pwlink/#container">返回顶部</a></p>
+</div>
+<!-- //container --></div>
+{include file="./footer.html"}

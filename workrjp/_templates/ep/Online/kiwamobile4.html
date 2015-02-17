@@ -1,0 +1,109 @@
+{include file="./mobile/header.html" title="《临时工作活动》 新人教育"}
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll-lite.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/artDialog.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/keke.js"></script>
+<link rel="stylesheet" type="text/css" 	href="{$BASE_URL}_templates/{$THEME}/mobile/css/royalslider.css">
+<link type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/common.min.css">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/style2013.css">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/css3buttons.css">
+
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div id="header">
+	<div class="headbar index clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><img src="{$BASE_URL}_templates/{$THEME}/mobile/images/mlogo.png" alt=""></a>
+		</div>
+		<div class="f_r">
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+		</div>
+	</div>
+</div>
+{literal}
+<script type="text/javascript">
+function checkx(){
+	var xin = document.getElementsByName("xin[]");               
+    var flag = false ;               
+    for(var i=0;i<xin.length;i++){ 
+        if(!xin[i].checked){ 
+            alert("新人教育前面请全部打钩！");
+            return false; 
+        } 
+    }
+	return true;
+}
+</script>
+{/literal}
+<br>
+	<div id="wrapper" style="width: 100%"><!-- container -->
+	<div id="container" style="width: 100%">
+	<!-- main -->
+	<h1 class="title" style="width: 100%">&nbsp;《临时工作活动》 新人教育</h1>
+	<form name="form1" action="" method="post">
+		<input name="url" id="url" type="hidden" value="{$BASE_URL}"/>
+		<section id="jobEntryRegist" style="width: 100%">
+		<p style="font-size: 18px;">「<SPAN class=att>※</SPAN>」<b>需要携带的证件</b></p>
+		<br>
+		<table class="tableStyle" style="width: 100%">
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">1.本人的 【在留卡】 （学生，家族的话需要有资格外活动许可）</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">2.本人的 【护照】 </label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">3.本人名义的 【银行存折】</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">4.本人的 【印章】</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">5.本人的 【国民健康保险】</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">6.学生的话需要携带 【学生证】</label>
+				</td>
+			</tr>
+		</table>
+		<table class="tableStyle" style="width: 100%">
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">1.集合时间按当日通知时间为准，如果出现迟到，有可能无法参加当日的工作。</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">2.不要携带太多的贵重物品，如有丢失本公司不任何负责任。</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="alLeft" style="vertical-align: middle;">
+					<label><input type="checkbox" name="xin[]" value="">3.长袜子（超过脚裸）和长裤是必须的，女生不允许穿丝袜，裙子，短裤。</label>
+				</td>
+			</tr>
+		</table>
+		</section>
+	</form>
+	</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,221 @@
+{include file="./header.html" title="帮帮网-企业信箱"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/selectcheckbox.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class="on hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+<br>
+<form action="" accept-charset="utf-8" id="searchform" name="searchform" method="post">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/user_center.css">
+	<div class="container_24">
+		<!--main start-->
+		<section class="clearfix section">
+			<!--用户中心样式-->
+			<div class="second_menu ">
+				<div class="box default">
+					<div class="inner">
+						<header class="box_header clearfix">
+							<h2 class="box_title">企业用户</h2>
+						</header>
+						<div class="box_detail">
+							<nav class="minor_nav clearfix">
+								<ul class="clearfix">
+									<li>
+									<a href="{$BASE_URL}companypage/" original-title="我的地盘"> <span class="no_list"></span><strong>我的地盘</strong></a>
+									</li>
+									<li>
+									<a href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/" original-title="我的企业主页" target="_blank"><span class="no_list"></span><strong class="red">企业主页</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}cadmin/"><img src="{$BASE_URL}_templates/{$THEME}/img/seti.png" style="margin-top: 2px;"> 企业主页管理</a></li>
+									</ul>
+									</li>
+									<li>
+									<a href="javascript:void(0);" original-title="我的需求"> <span class="no_list"></span><strong>我的需求</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}companypage/myrequirement/?Which_Show=2" original-title="工作信息">工作信息需求( <b>{if $job_um}{$job_um}{else}0{/if}</b> ) </a></li>
+										<li><a href="{$BASE_URL}companypage/myrequirement/?Which_Show=1" original-title="招标任务">生活互助需求( <b>{if $live_um}{$live_um}{else}0{/if}</b> ) </a></li>
+									</ul>
+									</li>
+									<li>
+									<a href="javascript:void(0);" original-title="我的收藏"> <span class="no_list"></span><strong>我的收藏</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}companypage/favorite/?Which_Show=2" original-title="工作信息">工作信息( <b>{if $fa_um_j}{$fa_um_j}{else}0{/if}</b> ) </a></li>
+										<li><a href="{$BASE_URL}companypage/favorite/?Which_Show=3" original-title="人才/企业">人才/企业( <b>{if $fa_um}{$fa_um}{else}0{/if}</b> ) </a></li>
+										<li><a href="{$BASE_URL}companypage/favorite/?Which_Show=1" original-title="生活互助信息">生活互助信息( <b>{if $fa_um_l}{$fa_um_l}{else}0{/if}</b> ) </a></li>
+									</ul>
+									</li>
+									<li>
+									<a href="{$BASE_URL}companypage/company/" original-title="企业简介"> <span class="no_list"></span><strong>企业简介</strong></a>
+									</li>
+									<li>
+									<a href="javascript:void(0);" original-title="我的信箱"> <span class="no_list"></span><strong>我的信箱</strong></a>
+									<ul class="clearfix">
+										<li><a href="{$BASE_URL}companypage/cmessage/" original-title="悬赏任务" class="selected">受信箱( <b>{if $message_um_f}{$message_um_f}{else}0{/if}</b> ) {if $unread>0}<b class="red">new</b>{/if}</a></li>
+										<li><a href="{$BASE_URL}companypage/cmessageSend/" original-title="招标任务">送信箱( <b>{if $message_um_s}{$message_um_s}{else}0{/if}</b> ) </a></li>
+									</ul>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<!--雇佣任务-->
+				<div class="box b_orange mt_10 clearfix po_re">
+					<div class="inner clearfix">
+						<a class="clearfix" href="#">
+							<div class="user_side_icon hire"></div>
+							<div class="box_side">
+								<h2>诚征广告</h2>
+								<span>049-293-1208</span>
+							</div>
+						</a>
+					</div>
+					<span class="hire_hot"></span>
+				</div>
+				<!--雇佣任务 end-->
+				<div class="box default clearfix mt_10">
+					<div class="inner clearfix">
+						<ul class="user_side_guide clearfix">
+							<li class="n_m_t clearfix">
+							<a class="clearfix" href="#">
+									<div class="user_side_icon shore"></div>
+									<div class="box_side">
+										<h3>诚征广告</h3>
+										<span>049-293-1208</span>
+									</div>
+							</a></li>
+							<li class="clearfix"><a class="clearfix" href="#">
+								<div class="user_side_icon core"></div>
+								<div class="box_side">
+									<h3>诚征广告</h3>
+									<span>049-293-1208</span>
+								</div>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix box default mt_10">
+					<div class="inner">
+						<header class="box_title clearfix">
+							<h2>意见栏，给我们建议</h2>
+						</header>
+						<article class="pad10 clearfix">
+							<textarea name="comment_tent" id="comment_tent" cols="28" rows="4" class="c999" placeholder="有话您说,我们在倾听！"></textarea>
+							<button type="button" class="button mt_10" onclick="sub_shou_comment();">提交</button>
+						</article>
+					</div>
+				</div>
+			</div>
+			<div class="show_panel clearfix ml_5">
+				<div class=" clearfix box default">
+					<!--header内容头部 start-->
+					<header class="clearfix box_header">
+					<!-- 
+						<div class="page_count fl_r mr_20" style="margin-top: 1px;">
+							<span>每页显示：</span>
+							<a class="selected" href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=30">30</a>
+							<a href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=50">50</a>
+							<a href="index.php?do=user&view=message&op=&msg_type=system&amp;p_s=100">100</a>
+						</div>
+					 -->
+						<h2 class="box_title">我的信箱</h2>
+						<div class=" ">
+							<nav class="box_nav">
+								<ul>
+									<li class="selectedLava"><a href="javascript:void(0);">受信箱</a></li>
+								</ul>
+							</nav>
+						</div>
+						<div class="clear"></div>
+					</header>
+					<!--header内容头部 end-->
+					<div class="box_detail">
+						<div class="data_list">
+							<input type="hidden" value="" name="flg" id="flg">
+							<table class="data_table">
+								<thead>
+									<tr>
+										<th style="width:15px;"></th>
+										<th style="width:40px;">状态</th>
+										<th>标题</th>
+										<th>发信人</th>
+										<th style="width:60px;">收信日</th>
+									
+									</tr>
+									<tr>
+										<th colspan=5>
+										<span style="float:left">
+										<a href="javascript:select()">全选</a>/<a href="javascript:fanselect()">反选</a>/<a href="javascript:noselect()">全不选</a>&nbsp;&nbsp;选中项:
+										<input  name="dels" type="image" title="删除" onClick="return confirm('你确定要删除选中的邮件吗?')"  src="{$BASE_URL}_templates/{$THEME}/images/delete.gif">
+										 </span>
+										 </th>
+									</tr>
+								</thead>
+								<tbody>
+									{section name="list" loop="$message"}
+									<tr>
+										<td>
+											<input type="checkbox" name="messageid[]" value="{$message[list].message_id}">
+										</td>
+										<td>
+										{if $message[list].read_flag eq 0}<font style="font-weight: bold;color: red;">未读</font>{/if}
+										{if $message[list].read_flag eq 1}已读{/if}
+										</td>
+										<td class="alLeft" nowrap="nowrap">
+										{if $message[list].read_flag eq 0}<font style="font-weight: bold">{/if}
+										{if $message[list].read_flag eq 0}<font>{/if}
+										&nbsp;<a href="{$BASE_URL}companypage/cmessage_show/{$message[list].message_id}/">{$message[list].message_title|mb_truncate:32}</a>
+										</font>
+										</td>
+										<td nowrap="nowrap">
+										{getname name="company_name" value=$message[list].message_from}
+										{getname name="username" value=$message[list].message_from}
+										</td>
+										<td>{$message[list].create_date|date_format:'%m-%d %H:%M'}</td>
+										<!-- <td><a href="{$BASE_URL}companypage/cmessage_delete/{$message[list].message_id}/" onclick="return deleteConfirm();">删除</a></td>
+									 -->
+									</tr>
+									{/section}
+								</tbody>
+							</table>
+							<span style="float:left">
+							<a href="javascript:select()">全选</a>/<a href="javascript:fanselect()">反选</a>/<a href="javascript:noselect()">全不选</a>&nbsp;&nbsp;选中项:
+							<input  name="dels" type="image" title="删除" onClick="return confirm('你确定要删除选中的邮件吗?')"  src="{$BASE_URL}_templates/{$THEME}/images/delete.gif">
+							 </span>
+							<span style="float:right">{$subPages}</span>
+							&nbsp;
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</form>
+<Br>
+
+{include file="./footer.html"}

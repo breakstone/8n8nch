@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>《说说你的就职经验》活动获奖者名单</title>
+<meta name="keywords" content="帮帮网，在日华人，「在日华人工作信息，在日工作信息，日本华人工作」，「日本华人论坛，日本华人平台」，日本华人生活，日本留学，华人日本就职">
+<meta name="description" content="帮帮网，是提供给在日华人工作信息，在日华人互助，在日华人生活交流，免费发布华人求人信息的平台！帮帮网，在日本华人工作生活信息一点一滴开始！">
+<link href="{$BASE_URL}_templates/{$THEME}/Online/css/event_css.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" type="image/ico" href="{$BASE_URL}_templates/{$THEME}/img/minilogo.jpg"><script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll-lite.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/artDialog.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/keke1.js"></script>
+<link rel="stylesheet" type="text/css" 	href="{$BASE_URL}_templates/{$THEME}/mobile/css/royalslider.css">
+<link rel="stylesheet" type="text/css" href="{$BASE_URL}_templates/{$THEME}/css/style2013.css">
+{literal}
+<script language="javascript" type="text/javascript">
+window.onload=function(){
+    var o=document.getElementById('marqueebox0');
+    window.setInterval(function(){scrollup(o,24,0);},3000);
+}
+///滚动主方法
+///参数:o 滚动块对象
+///参数:d 每次滚屏高度
+///参数:c 当前已滚动高度
+function scrollup(o,d,c){
+    if(d==c){
+        var t=getFirstChild(o.firstChild).cloneNode(true);
+        o.removeChild(getFirstChild(o.firstChild));
+        o.appendChild(t);
+        t.style.marginTop="0px";
+    }else{
+        c+=2;
+        getFirstChild(o.firstChild).style.marginTop=-c+"px";
+        window.setTimeout(function(){scrollup(o,d,c)},20);
+    }
+}
+//解决firefox下会将空格回车作为节点的问题
+function getFirstChild(node){
+  while (node.nodeType!=1)
+  {
+         node=node.nextSibling;
+  }
+  return node;
+}
+</script>
+{/literal}
+</head><body>
+
+<div class="head">
+  <div class="headbox">
+    <div class="logo"><a href="http://8n8n.co.jp/" target="_blank"></a></div>
+  </div>
+</div>
+<!-- 
+<div class="cntmain">
+	<div class="container_24 clearfix mb_10" style="margin-top: 6px;">
+		<div class="guyongkb box default clearfix mb_10" style="background: #FCFCFC;">
+			<div class="pad10">
+				<ul style="height: 32px;">
+					<li style="float:left;height: 32px;font-size: 28px;padding-right:5px"><span>&nbsp;以下为参加活动的文章</span></li>
+					<li style="float:right;height: 30px;font-size: 28px;padding-right:15px"><span style="float:right; "><a href="{$BASE_URL}bbs/?fenlei=就职经验-参加活动" target="_blank" style="color:red">查看发表过的所有文章</a></span></li></ul>
+				
+				<ul id="marqueebox0" class="clearfix" style="height: 170px;">
+				
+					{section name="list" loop=$bbs}
+		            <li style="width:95%;{if $mobile eq 1} margin-top:3px;height: 30px;line-height: 30px;font-size: 30px;	{else} font-size: 20px;{/if}">
+		            	<font color="green">【{$bbs[list].bbs_type}】</font><a href="{$BASE_URL}bbs/show/{$bbs[list].bbs_id}/" target="_blank" style="color:red">{$bbs[list].bbs_title}</a>
+					</li>
+					{/section}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+ -->
+<div class="title bg2"></div>
+<div class="cntmain">
+	  <div class="wordleft">
+	    <div class="textcom" style="height: 160px;">
+	      <i></i>
+	      <div class="textcombox" style="height: 140px;">
+	         <h3>【一等奖获得者】奖金6万円&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+	         <span><p>
+	         <table>
+	         	<tr><td> 
+	         	<a href="{$BASE_URL}bbs/show/59483744/" target="_blank" style="color:blue">一个人事主管10年的面试经验，相信会对同学们有很大的帮助.</a></td> <td>	&nbsp;	&nbsp; 作者：肖宁</td></tr>
+	         </table>
+	         </p>
+	        </span>
+	      </div>
+	    </div>
+	    <div class="clr"></div>
+	 </div>
+	 <div class="wordright">
+	    <div class="textcom" style="height: 160px;">
+	      <i></i>
+	      <div class="textcombox" style="height: 110px;">
+	         <h3>【二等奖获得者】２万円</h3>
+	         <span>
+	        	 <p>
+	        	 <table>
+	        		<tr><td> <a href="{$BASE_URL}bbs/show/50472763/" target="_blank" style="color:blue">面试自我介绍 牢记4原则助你过关砍将.</a></td> <td>&nbsp;&nbsp; 作者：温怡</td></tr>
+	        		<tr><td><a href="{$BASE_URL}bbs/show/29551171/" target="_blank" style="color:blue">面试中人事直接出红牌的几类人.</a></td> <td>&nbsp;&nbsp; 作者：大明</td></tr>
+	   			 </table>
+
+	         	</p>
+	         </span>
+	      </div>
+	    </div>
+	    <div class="clr"></div>
+	 </div>
+	 <div class="wordleft">
+	    <div class="textcom" style="height: 180px;">
+	      <i></i>
+	      <div class="textcombox" style="height: 160px;">
+	         <h3>【三等奖获得者】5千円</h3>
+	            <span>
+	        	 <p>
+	        	 <table>
+	    			<tr><td><a href="{$BASE_URL}bbs/show/15203043/" target="_blank" style="color:blue">要在日本找工作的小伙伴们快来看哪 面试教你怎么说.</a></td> <td>	&nbsp;	&nbsp;作者：大锤</td></tr>
+	    			<tr><td><a href="{$BASE_URL}bbs/show/21182832/" target="_blank" style="color:blue"> 【求职】日语简历怎么写？</a></td> <td>	&nbsp;	&nbsp;作者：赵姗姗</td></tr>
+	    			<tr><td><a href="{$BASE_URL}bbs/show/52118974/" target="_blank" style="color:blue">  如何准备就职，说明会，面试，内定详解.</td> <td>	&nbsp;	&nbsp;作者：小·豆</a></td></tr>
+	    			<tr><td><a href="{$BASE_URL}bbs/show/16568049/" target="_blank" style="color:blue">一份30字的简历，教会我没有什么是不可能的.</td> <td>	&nbsp;	&nbsp;作者：野木</a></td></tr>
+	     	  	</table>
+	     	  	</p>
+	         </span>
+	      </div>
+	    </div>
+	    <div class="clr"></div>
+	    <div style="display:none;">
+				<img src="{$BASE_URL}_templates/{$THEME}/img/8n8n.jpg" style="max-width: 228px;">
+	</div>
+	 </div>
+	   <div class="wordright">
+	    <div class="textcom" style="height: 160px;">
+	      <i></i>
+	      <div class="textcombox" style="height: 140px;">
+	         <h3>【领奖方式】&nbsp;&nbsp;&nbsp;<a href="http://8n8n.co.jp/bbs/send" style="color: blue;margin-left: 350px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;</h3>
+	         <span><p>请在2015年1月15日之前与帮帮网客服联系。&nbsp;&nbsp;&nbsp;&nbsp;联系电话：049-293-1028</p></span>
+	      </div>
+	    </div>
+	    <div class="clr"></div>
+	 </div>
+  <div class="clr"></div>
+</div>
+ <div class="height20"></div>
+ <div class="height20"></div>
+ <div class="clr"></div>
+</div>
+<div class="footer">
+	<div class="footerbox">
+		<div class="footernav">
+			<!--footer链接 start-->
+			<a href="{$BASE_URL}netshow/aboutus/">关于我们</a> | <a
+				href="{$BASE_URL}netshow/wantj/">玩转帮帮网</a> | <a href="#">友情链接</a> |
+			<a href="{$BASE_URL}netshow/kefu/">客服中心</a> | <a
+				href="{$BASE_URL}netshow/points/">积分规则</a> | <a
+				href="{$BASE_URL}regist/terms/" class="bor_n">网站协议</a> |
+			<!--footer链接 end-->
+		</div>
+		<div class="footcontent">
+			copyright(c) 2012 TOYO co.,ltd. ALL Rights Reserved.<br>
+			服务QQ：2954588611 地址：埼玉県川越市 <br> {literal}
+			<script type="text/javascript">
+							var _gaq = _gaq || [];
+							_gaq.push([ '_setAccount', 'UA-46674455-1' ]);
+							_gaq.push([ '_trackPageview' ]);
+
+							(function() {
+								var ga = document.createElement('script');
+								ga.type = 'text/javascript';
+								ga.async = true;
+								ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+										: 'http://www')
+										+ '.google-analytics.com/ga.js';
+								var s = document
+										.getElementsByTagName('script')[0];
+								s.parentNode.insertBefore(ga, s);
+							})();
+						</script>
+			<!-- 百度分享 -->
+			<script>
+				window._bd_share_config = {
+					"common" : {
+						"bdSnsKey" : {},
+						"bdText" : "",
+						"bdMini" : "2",
+						"bdMiniList" : [ "weixin", "qzone", "t163", "sqq", "tsina",
+								"renren", "tqq", "tqf", "tieba", "tsohu", "hi", "mail",
+								"fbook", "twi" ],
+						"bdPic" : "",
+						"bdStyle" : "0",
+						"bdSize" : "16"
+					},
+					"slide" : {
+						"type" : "slide",
+						"bdImg" : "6",
+						"bdPos" : "right",
+						"bdTop" : "200"
+					}
+				};
+				with (document)
+					0[(getElementsByTagName('head')[0] || body)
+							.appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='
+							+ ~(-new Date() / 36e5)];
+			</script>
+			<!-- 百度分享 -->
+			{/literal}
+		</div>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
+</div>
+</body>
+</html>

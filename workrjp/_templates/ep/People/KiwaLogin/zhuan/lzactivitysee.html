@@ -1,0 +1,77 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|闲聊吧"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+{literal}
+<script type="text/javascript">
+
+</script>
+{/literal}
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+<br>
+<form name="form1" action="" method="post">
+<section class="clearfix content">
+	<div class="container_24 clearfix pt_10">
+	<h1 class="title">中奖者名单</h1>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dt>任务列表</dt>
+					<dd class="tags">
+						<ul>
+							<li style="width: 20px;">  &nbsp; </li>
+							<li style="width: 120px;">奖项 </li>
+							<li style="width: 120px;">员工ID </li>
+							<li style="width: 120px;">姓名</li>
+							<li style="width: 120px;">抽奖月份</li>
+							<li style="width: 200px;">操作</li>
+						</ul>
+					</dd>
+				{section name="list" loop="$user"}
+					
+					<dd class="po_re pad10 clearfix odd">
+						<ul>
+						<li style="width: 20px;">
+						{$smarty.section.list.index+1}.
+						</li>
+						<li style="width: 120px;">&nbsp; 
+						{if $user[list].loto_num eq '1'} 一等奖{/if}	
+						{if $user[list].loto_num eq '2'} 二等奖{/if}	
+						{if $user[list].loto_num eq '3'} 三等奖{/if}	
+						</li>
+							<li style="width: 120px;">&nbsp; {$user[list].staff_id} </li>
+							<li style="width: 120px;">&nbsp; {$user[list].kiwaname}</li>
+							<li style="width: 120px;">{$user[list].loto_date}</li>
+							<li style="width: 200px;">
+								<button type="submit" name="del" value="{$user[list].Id}" onclick="return deleteConfirm();">删除</button>
+							</li>
+						</ul>
+					</dd>
+					{/section}
+				</dl>
+			</div>
+		</div>
+	</div>
+</section>
+</form>
+<br><br><br>
+{include file="./footer.html"}

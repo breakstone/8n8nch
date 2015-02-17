@@ -1,0 +1,450 @@
+{include file="./header.html" title=$job.job_title}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/sp_shop_red.css">
+
+<script type="text/javascript" src="{$BASE_URL}js/jquery.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/xheditor.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/xheditor-zh-cn.js"></script>
+{literal}
+<style>
+.people  a span{width: 98.2px;color:#fff;height:30px; line-height: 30px; text-align: center;font-size:20px;background-color: #af000b;background-image: -moz-linear-gradient(center top , #bb000b, #af000b);}
+.people  a:hover span{height:30px; line-height: 30px; text-align: center;font-size:20px;background-image: -webkit-gradient(linear, left top, left bottom, from(#EE4000), to(#EE2C2C));background-image: -webkit-linear-gradient(top, #EE4000, #EE2C2C);background-image:-moz-linear-gradient(top, #EE4000, #EE2C2C);background-image:-ms-linear-gradient(top, #EE4000, #EE2C2C);background-image:-o-linear-gradient(top, #EE4000, #EE2C2C);
+</style>
+<script>
+function null_check(){
+	if($('#answer_content').val()==""){
+		alert("请输入回复内容！");
+		return false;
+	}
+	return true;
+}
+</script>
+{/literal}
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class="on hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				{if $smarty.session.kiwa_userid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/">个人空间</a></em></li>
+				{elseif $smarty.session.kiwa_companyid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/">企业空间</a></em></li>
+				{else}
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">个人空间</a></em></li>
+				{/if}
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+
+
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li> &gt; <a href="{$BASE_URL}job/">工作信息</a></li>
+	<li> &gt; {$job.job_title}</li>
+</ul>
+<!-- //pan -->
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+
+<div class="container_24 clearfix">
+<!--内容主体-->
+	<div class="detaileft wid230 fl_l">
+		{if $job.user_type eq "company"}
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span>
+				<a href="{$BASE_URL}people/show/company_{$job.company_id}/" target="_blank">
+					<img src="{$BASE_URL}{$company.company_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;">
+				</a>
+				</span>
+				<h2><a href="{$BASE_URL}people/show/company_{$job.company_id}/" target="_blank">{$company.company_name}</a></h2>
+				<div class="c666">
+				{if $company.pref_cd}
+				所在地区： {getname name="area" value=$company.pref_cd} - {getname name="pref" value=$company.pref_cd}
+				{/if}
+				</div>
+				<div class="c666">
+				{if $company.points}
+					积分状况：&nbsp;<font style="font-size:16px;">{$company.points}</font> 积分
+				{/if}
+				</div>
+				<div class="c666">
+					认证状况： 
+					{if $company.status eq 1}<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span>{/if}
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$company.company_id}/">我要联系TA</a></span>
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$company.company_id}/">我要联系TA</a></span>
+						{/if}
+						<div class="invita clearfix">
+							{if $smarty.session.kiwa_userid neq $company.company_id and $smarty.session.kiwa_companyid neq $company.company_id}
+								<a style="width: 197px;color: red;" href="javascript:void(0);" onclick="favorite('{$company.company_id}','company');">关注Ta</a>
+							{/if}
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+						<div class="people clearfix">
+							<span class="blank10" style="height:3px;"></span>
+							<a href="{$BASE_URL}people/show/company_{$company.company_id}/"><span style="float:left;">公司主页</span></a>
+							<a href="{$BASE_URL}people/photo/company_{$company.company_id}/"><span style="float:right;">商品展示</span></a>
+							<span class="blank10" style="height:3px;"></span>
+							<a href="{$BASE_URL}people/job/company_{$company.company_id}/"><span style="float:left;">Ta的工作</span></a>
+							<a href="{$BASE_URL}people/msg/company_{$company.company_id}/"><span style="float:right;">留言板</span></a>
+						</div>
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$company.create_date|date_format:'%Y年%m月%d日'}</span><br>
+			</div>
+		</div>
+		<!-- 
+		<span class="blank10"></span>
+		<div class="shopindex">
+			<div class="tztitle">
+				<em class="fl_l"><strong>Ta的综合评价</strong></em>
+			</div>
+			<ul>
+				<li style="background-color: rgb(249, 249, 249); background-position: initial initial; background-repeat: initial initial;"><em>身份认证：</em>
+				<a original-title="10分" class="starsp" score="5" style="width: 100px;"></a></li>
+				<li style="background-color: rgb(249, 249, 249); background-position: initial initial; background-repeat: initial initial;"><em>Ta的评价：</em>
+				<a original-title="50分" class="starsp" score="5" style="width: 100px;"></a></li>
+			</ul>
+			<script type="text/javascript">$(".shopindex li:odd").css("background","#f9f9f9")</script>
+		</div>
+		 -->
+		{/if}
+		{if $job.user_type eq "user"}
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span>
+				<a href="{$BASE_URL}people/show/user_{$user.user_id}/" target="_blank">
+				<img src="{$BASE_URL}{$user.user_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;">
+				</a>
+				</span>
+				<h2><a href="{$BASE_URL}people/show/user_{$user.user_id}/" target="_blank">{$user.name01}{$user.name02}</a></h2>
+				<div class="c666">所在地区： {getname name="area" value=$user.pref_cd} - {getname name="pref" value=$user.pref_cd}</div>
+				<div class="c666">
+					积分状况：&nbsp;<font style="font-size:16px;">{$user.points}</font> 积分
+				</div>
+				<div class="c666">
+					{if $user.status eq 1}
+					认证状况： 
+					<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span>
+					{/if}
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$user.user_id}/">我要联系TA</a></span>
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$user.user_id}/">我要联系TA</a></span>
+						{/if}
+						<div class="invita clearfix">
+							{if $smarty.session.kiwa_userid neq $user.user_id and $smarty.session.kiwa_companyid neq $user.user_id}
+								<a style="width: 197px;color: red;" href="javascript:void(0);" onclick="favorite('{$user.user_id}','user');">关注Ta</a>
+							{/if}
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+						<div class="people clearfix">
+							<span class="blank10" style="height:3px;"></span>
+							<a href="{$BASE_URL}people/show/user_{$user.user_id}/"><span style="float:left;">Ta的空间</span></a>
+							<a href="{$BASE_URL}people/photo/user_{$user.user_id}/"><span style="float:right;">个人相册</span></a>
+							<span class="blank10" style="height:3px;"></span>
+							<a href="{$BASE_URL}people/job/user_{$user.user_id}/"><span style="float:left;">Ta的工作</span></a>
+							<a href="{$BASE_URL}people/msg/user_{$user.user_id}/"><span style="float:right;">留言板</span></a>
+						</div>
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$user.create_date|date_format:'%Y年%m月%d日'}</span><br>
+			</div>
+		</div>
+		{/if}
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>诚征广告位</strong></em>
+			</div>
+			<ul class="pad0">
+				<a href="{$BASE_URL}people/show/company_301759188819/" target="_blank"><img src="{$BASE_URL}_templates/{$THEME}/img/anisa.png" style="max-width: 230px;"></a>
+			</ul>
+			<ul class="pad0">
+				<img src="{$BASE_URL}_templates/{$THEME}/img/8n8n.jpg" style="max-width: 228px;">
+			</ul>
+		</div>
+		<!--地图标记 start-->
+		
+		<!--地图标记 end-->
+	</div>
+	<div class="wid750 fl_r">
+<div class="tz_detailcon clearfix">
+<div id="job_detail" style="width:690px;">
+<section style="width:690px;">
+<p class="title" style="width:580px;PADDING-RIGHT:110px;PADDING-TOP:0px;">{$job.job_title}</p>
+<p class="celebration" style="left:580px;">浏览数:{$job.read_num}</p>
+<ul class="status" style="width:690px;">
+	<li>
+	发表于:{$job.information_date|date_format:"%Y年%m月%d日"} 
+		<span style="float:right;font-weight:bold;">
+
+			{if $smarty.session.kiwa_companyid eq "000001"}
+				<a href="{$BASE_URL}job/update/{$job.job_id}"  ><button>编辑	</button></a>
+				<a href="{$BASE_URL}job/del/{$job.job_id}"  onclick="return deleteConfirm();" ><button>删除</button></a>
+			{/if}
+			{if $smarty.session.kiwa_userid eq $job.company_id}
+				<a href="{$BASE_URL}job/update/{$job.job_id}"  >	<button>编辑	</button></a>
+				<a href="{$BASE_URL}job/del/{$job.job_id}"  onclick="return deleteConfirm();" ><button>删除</button></a>
+			{/if}
+			{if $smarty.session.kiwa_companyid eq $job.company_id}
+				<a href="{$BASE_URL}job/update/{$job.job_id}" >	<button>编辑	</button></a>
+				<a href="{$BASE_URL}job/del/{$job.job_id}"  onclick="return deleteConfirm();"><button>删除</button></a>
+			{/if}
+		</span>
+	</li>
+</ul>
+<h4 style="width:690px;">募集要项</h4>
+<table summary="募集要项" class="tableStyle" style="width:690px;table-layout:fixed">
+	<tr>
+		<th nowrap="nowrap">业种・职种</th>
+		<td>{$job.kindsname}&nbsp;&nbsp;&nbsp;{$job.typesname}</td>
+	</tr>
+	<tr>
+		<th>工作内容</th>
+		<td style="font-size: 17px;word-wrap:break-word;">
+		{$job.contents|nl2br}
+		<br>
+		联系我时，请说是在帮帮网上看到的，谢谢！
+		</td>
+	</tr>
+	<tr>
+		<th>招收对象</th>
+		<td>{$job.requirements|nl2br}</td>
+	</tr>
+	{if $job.lianxi}
+	<tr>
+		<th>联系方式</th>
+		<td>{$job.lianxi}</td>
+	</tr>
+	{/if}
+	<tr>
+		<th>工作地点</th>
+		<td>
+		{$job.pref_name}
+		{if $job.station_name or $job.line_num}
+			( {assign var="line_array" value=","|explode:$job.line_num}
+			{section name="sb_list" loop="$line_array"}
+				{getname name="ensn" value=$line_array[sb_list]}
+			{/section}
+			 {$job.station_name} )
+		{/if}
+		</td>
+	</tr>
+	<tr>
+		<th>雇用形式</th>
+		<td>{$job.employed_method_name}</td>
+	</tr>
+	<tr>
+		<th>工作时间</th>
+		<td>{$job.hope_date_name}</td>
+	</tr>
+	<tr>
+		<th>工资</th>
+		<td>{$job.money_name}</td>
+	</tr>
+	<tr>
+		<th>待遇・福利厚生</th>
+		<td>{$job.condition_name}</td>
+	</tr>
+	<tr>
+		<th>采用人数</th>
+		<td>{$job.numbers}</td>
+	</tr>
+</table>
+<div class="nav" style="width:690px;">
+<ul>
+<li style="top:2px;">
+<font style="color:red">
+本网站不允许发布任何形式的收费信息！
+如有发现一律做删除处理。如果发现有违规信息请举报！<br>
+</font>
+<span >
+<font style="color:black">联系我们:</font>
+<a target="_blank" style="color:red;font:12px/12px Arial,Helvetica,sans-serif;" href="http://wpa.qq.com/msgrd?v=3&uin=2954588611&site=qq&menu=yes"><img style="vertical-align: -8px;"border="0" src="{$BASE_URL}_templates/{$THEME}/images/qq.jpg" alt="点击这里给我发消息" title="点击这里给我发消息"/></a><span style="color:black;">&nbsp;&nbsp;联系QQ：2954588611</span>
+</span>
+
+</li>
+<!-- 
+	{if $smarty.session.kiwa_userid}
+	<li><a href="{$BASE_URL}mypage/jobregist/{$job.job_id}/"><img src="{$BASE_URL}_templates/{$THEME}/img/search_bt_entry.gif" width="164" height="34" alt="递交简历" /></a></li>
+	{/if}
+	{if $smarty.session.kiwa_companyid}
+	<li><a href="{$BASE_URL}companypage/jobregist/{$job.job_id}/"><img src="{$BASE_URL}_templates/{$THEME}/img/search_bt_entry.gif" width="164" height="34" alt="联系他" /></a></li>
+	{/if}
+	{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+	<li><a href="{$BASE_URL}login/?url=job_show_{$job.job_id}"><img src="{$BASE_URL}_templates/{$THEME}/img/search_bt_entry.gif" width="164" height="34" alt="応募する" /></a></li>
+	{/if}
+	{if $smarty.session.kiwa_userid or $smarty.session.kiwa_companyid}
+	<li class="favorite"><a href="javascript:void(0)" onclick="favorite('{$job.job_id}','job');" style="color: #000">收藏此工作</a></li>
+	{/if}
+ -->	
+</ul>
+</div>
+<form name="form1" action="{$BASE_URL}job/answerdo/" method="post">
+<input type="hidden" name="job_id" id="job_id" value="{$job.job_id}">
+<img src="{$BASE_URL}_templates/{$THEME}/img/{$banner}" style="max-width: 690px;"/>
+<h4 style="margin-bottom: -20px;width: 690px;"></h4>
+{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+	已登录 : {getname name="username" value=$smarty.session.kiwa_userid} {getname name="company_name" value=$smarty.session.kiwa_companyid}
+{else}
+	您需要 <a href="{$BASE_URL}login/?url=job_show_{$job.job_id}/" target="_blank">登录</a> 后才能发表留言。
+{/if}
+<div style="float: right;">请严格遵守 《<a href="{$BASE_URL}regist/answer/" target="_blank">留言规则</a>》 无效留言将被封号处理！</div>
+{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+		{literal}
+		<textarea rows="8" cols=""  style="width:690px;" name="answer_content" id="answer_content" class="xheditor {tools:'FontSize,Bold,FontColor,BackColor,Align,Preview,Emot',skin:'default'}"></textarea>
+		{/literal}
+	{else}
+		{literal}
+		
+		<textarea rows="8"  cols="" style="width:690px;" name="answer_content" id="answer_content"  readonly="readonly" ></textarea>
+	
+		{/literal}
+{/if}
+
+<div class="nav" style="margin-top: 1px;width:690px;">
+<ul>
+	{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+		<input type="hidden" name="live_id" id="live_id" value="{$live.live_id}">
+		<li><input type="image" src="{$BASE_URL}_templates/{$THEME}/img/answer.gif" alt="发表留言" onclick="return null_check();"></li>
+		<li class="favorite"><a href="javascript:void(0)" onclick="favorite('{$live.live_id}','live');" style="color: #000">收藏此需求</a></li>
+	{else}
+		<li><a href="javascript:void(0)" onclick="javascript:alert('请登录,再留言！');"><img src="{$BASE_URL}_templates/{$THEME}/img/answer.gif" width="164" height="34" alt="报名留言" /></a></li>
+	{/if}
+</ul>
+</div>
+</form>
+<table summary="回复内容" class="tableStyle" id="answers" style="width:690px;">
+	{section name="list" loop="$answers"}
+		<tr>
+			<th rowspan="2" style="width:100px;text-align: center;" valign="top">
+				{if $answers[list].answer_user_type eq "user"}
+					<img src="{$BASE_URL}{getname name="user_photo" value=$answers[list].answer_user_id}" width="100" height="100">
+					<br>
+					<a href="{$BASE_URL}people/show/user_{$answers[list].answer_user_id}" target="_blank">{getname name="username" value=$answers[list].answer_user_id}</a>
+					<div>个人用户&nbsp;&nbsp;&nbsp;<a>举报</a></div>
+				{/if}
+				{if $answers[list].answer_user_type eq "company"}
+					<img src="{$BASE_URL}{getname name="company_photo" value=$answers[list].answer_user_id}" width="100" height="100">
+					<br>
+					<a href="{$BASE_URL}people/show/company_{$answers[list].answer_user_id}" target="_blank">{getname name="company_name" value=$answers[list].answer_user_id}</a>
+					<div>企业用户&nbsp;&nbsp;&nbsp;<a>举报</a></div>
+				{/if}
+			</th>
+			<td height="120px;" valign="top" id="{$answers[list].Id}">
+			{if $answers[list].re_answer}
+			<div style="background: #eeeeee;">
+				<div style="color: #aaaaaa;margin-left: 30px;">
+				<img src="{$BASE_URL}_templates/{$THEME}/img/icon_quote_s.gif">
+				{$answers[list].re_answer}
+				<img src="{$BASE_URL}_templates/{$THEME}/img/icon_quote_e.gif">
+				</div>
+			</div>
+			{/if}
+			{$answers[list].answer_content|nl2br}
+			<input type="hidden" id="{$answers[list].Id}_fujia" name="{$answers[list].Id}_fujia" value='{$answers[list].answer_content}'> 
+			</td>
+		</tr>
+		<tr>
+			<td style="font-size:12px;PADDING-BOTTOM:2px;PADDING-TOP:2px;PADDING-LEFT:10px;">
+				第 <font style="color: red;">{$smarty.section.list.index+1+$lou}</font> 楼&nbsp;&nbsp;发表于: {$answers[list].create_date}
+				{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+				<button style="float:right;" onclick="answer_ta('{$answers[list].answer_user_id}','{$answers[list].job_id}','{$answers[list].Id}','{$smarty.section.list.index+1+$lou}','{getname name="username" value=$answers[list].answer_user_id}','{getname name="company_name" value=$answers[list].answer_user_id}')">回复TA</button>
+				{else}
+				<button style="float:right;" onclick="javascript:alert('未登录状态，请先登录！');">回复TA</button>
+				{/if}
+			</td>
+		</tr>
+	{/section}
+</table>
+<div style="float: right;">{$subPages}</div>
+<br>
+<form name="form2" action="{$BASE_URL}job/answertado/" method="post">
+{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+<div id="at" style="display: none;">
+	<input type="hidden" name="ta_id" id="ta_id" value="">
+	<input type="hidden" name="lid" id="lid" value="">
+	<input type="hidden" name="aId" id="aId" value="">
+	<!--互动交流部分  start-->
+	<div class="pinlunlist box default" id="task_comment">
+		<div class="pad20 clearfix">
+			<div class="clearfix plhed" style="border-bottom: 1px dotted #ccc;padding-bottom: 15px;">
+				<div id="louj" style="color: #909090;"></div>
+			</div>
+			<div class="arwoperson clearfix" id="liuyanbox" style="margin: 10px auto;">
+				<div class="fl_l" id="myself">
+					{if $smarty.session.kiwa_userid neq ""}
+						<img src="{$BASE_URL}{getname name="user_photo" value=$smarty.session.kiwa_userid}" uid="724483" class="pic_small" width="54" height="54" style="z-index: 1;">
+					{/if}
+					{if $smarty.session.kiwa_companyid neq ""}
+						<img src="{$BASE_URL}{getname name="company_photo" value=$smarty.session.kiwa_companyid}" uid="724483" class="pic_small" width="54" height="54" style="z-index: 1;">
+					{/if}
+				</div>
+				<div class="wid840 fl_l" id="newcomment_box" style="padding-left: 10px;">
+				{literal}
+					<textarea name="answer_ta_content" id="answer_ta_content" style="width:560px;" rows="4" cols="" class="xheditor {tools:'FontSize,Bold,FontColor,BackColor,Align,Preview,Emot',skin:'default'}"></textarea>
+				{/literal}
+					<input type="hidden" name="fujia" id=fujia value="">
+					<br>
+					<button class="button submit block mt_10" type="submit" onclick="submitcomment()" href="#newcomment_box">回复TA</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--互动交流部分  end-->
+</div>
+{/if}
+</form>
+</section>
+</div>
+</div>
+</div>
+</div>
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+
+</div>
+<!-- //container --></div>
+<!-- //wrapper -->
+{include file="./footer.html"}

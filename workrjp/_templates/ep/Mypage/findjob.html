@@ -1,0 +1,86 @@
+{include file="./header.html" title="求职管理"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}mypage/">MyPage</a></li>
+	<li>&gt; 求职管理</li>
+</ul>
+<!-- //pan -->
+<div id="mypage">
+<h2 class="title">
+Wellcom To MyPage!&nbsp;&nbsp;{$USERNAME}&nbsp;&nbsp;&nbsp;会員番号 ：{$USERID}
+</h2>
+<p class="more"><a href="{$BASE_URL}control/mypageC.php?logout">退出</a></p>
+<table class="tableStyle" style="width: 100%">
+	<tbody>
+	<tr><td nowrap="nowrap">
+	<ul id="iconbar">
+		<li><a href="{$BASE_URL}mypage/findjob/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu1.png" alt="发表需求" />
+		</a></li>
+		<li><a href="{$BASE_URL}mypage/myrequirement/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu2.png" alt="我的需求" />
+		</a></li>
+		<li><a href="{$BASE_URL}mypage/favorite/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu3.png" alt="收藏夹" />
+		</a></li>
+		<li><a href="{$BASE_URL}mypage/personal/">
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu4.png" alt="个人简历" />
+		</a></li>
+		<li><a href="{$BASE_URL}mypage/pmessage/">
+		{if $unread > 0}
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu_5_new.png" alt="个人信箱" />
+		{else}
+			<img src="{$BASE_URL}_templates/{$THEME}/img/mypage_menu5.png" alt="个人信箱" />
+		{/if}
+		</a></li>
+	</ul>
+	</td></tr>
+	</tbody>
+</table>
+
+<!-- main -->
+<h1 class="title">求职管理</h1>
+
+<h2 class="title">
+{$USERNAME}&nbsp;&nbsp;&nbsp;
+求职发表&nbsp;<font color="red">{$all}</font>&nbsp;件
+</h2>
+<p class="more"><a href="{$BASE_URL}mypage/findjob_add/">发表求职</a></p>
+<table class="tableStyle" style="width: 100%">
+	<tbody>
+		<tr>
+			<th style="width: 80px;">求职号</th>
+			<th>求职标题</th>
+			<th>发表日时</th>
+			<th>编辑·删除</th>
+		</tr>
+		{section name="list" loop="$peoples"}
+		<tr>
+			<td>{$peoples[list].people_id}</td>
+			<td class="alLeft"><a href="{$BASE_URL}people/show/{$peoples[list].people_id}/" target="_blank">{$peoples[list].people_title|mb_truncate:20}</a></td>
+			<td>{$peoples[list].create_date}</td>
+			<td nowrap="nowrap" style="width: 200px;">
+			<a href="{$BASE_URL}mypage/findjob_update/{$peoples[list].people_id}/"><img src="{$BASE_URL}_templates/{$THEME}/img/update_bt.jpg"></a>
+			<a href="{$BASE_URL}mypage/findjob_delete/{$peoples[list].people_id}/" onclick="return deleteConfirm();"><img src="{$BASE_URL}_templates/{$THEME}/img/delete_bt.jpg"></a>
+			</td>
+		</tr>
+		{/section}
+	</tbody>
+</table>
+<ul id="pagenav" style="float: right !important">
+{$subPages}
+</ul>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<p id="pagetop"><a href="#container">TOPへ戻る</a></p>
+</div>
+</div>
+{include file="./footer.html"}

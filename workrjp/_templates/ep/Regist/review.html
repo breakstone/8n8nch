@@ -1,0 +1,86 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|个人会员注册确认"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+
+
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; 个人会员注册</li>
+</ul>
+<!-- //pan --> <!-- box -->
+<div id="box">
+<form action="{$BASE_URL}regist/registdo" id="from" name="from" method="post" accept-charset="utf-8">
+<div style="display: none;"></div>
+<div id="applicant">
+<section>
+<h1 class="title">新规个人会员注册 确认</h1>
+<table summary="新规会员登录" class="tableStyle">
+	<tr>
+		<th>姓名</th>
+		<td colspan="4">{$Cname01}　{$Cname02}</td>
+	</tr>
+	<!--<tr>
+		<th>氏名（カタカナ）</th>
+		<td colspan="4">{$Ckana01}　{$Ckana02}</td>
+	</tr>-->
+	<tr>
+		<th>邮箱地址</th>
+		<td colspan="4">{$Cemail}</td>
+	</tr>
+	<tr>
+		<th>密码</th>
+		<td colspan="4">{$Cpassword}</td>
+	</tr>
+</table>
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+<input type="hidden" name="name01" value="{$Cname01}">
+<input type="hidden" name="name02" value="{$Cname02}">
+<input type="hidden" name="kana01" value="{$Ckana01}">
+<input type="hidden" name="kana02" value="{$Ckana02}">
+<input type="hidden" name="email" value="{$Cemail}">
+<input type="hidden" name="password" value="{$Cpassword}">
+<p>确认以上内容登陆吗？</p>
+<p class="alCenter">
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_correction.gif" id="modify" onclick="return RegistChoose(1);" alt="修正" style="width: auto !important;" />
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_entry.gif" id="regist" alt="登録" style="width: auto !important;" />
+</p>
+</form>
+</div>
+</div>
+<p id="pagetop"><a href="{$BASE_URL}regist/review/#container">返回顶部</a></p>
+</div>
+<!-- //container -->
+</div>
+<!-- //wrapper -->
+{include file="./footer.html"}

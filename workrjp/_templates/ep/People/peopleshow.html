@@ -1,0 +1,692 @@
+{include file="./header.html" title="个人空间"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$users.page_color}">
+<link href="{$BASE_URL}_templates/{$THEME}/css/fb.css" rel="stylesheet">
+
+<script src="{$BASE_URL}_templates/{$THEME}/js/jquery.lazyload.js" type="text/javascript"></script> 
+{literal}
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+      $("img.lazy").lazyload({effect: "fadeIn"});
+  });
+</script>
+<script>
+//工作查找页面 -> 都道府県を選択 后提交
+function quanChange(){
+	var baseurl = document.getElementById("url").value;
+	document.searchform.submit();
+}
+//判断是否为空
+function null_check(){
+	if(document.getElementById("content").value==""){
+		alert("请输入要发表的状态！");
+		return false;
+	}
+	var files = document.getElementById("photo_url");
+	if(files.value!=""){
+		var strTemp = files.value.split(".");
+		var fileCheck = strTemp[strTemp.length-1];
+		if(fileCheck.toUpperCase()!='JPG' && fileCheck.toUpperCase()!='PNG' && fileCheck.toUpperCase()!='GIF' && fileCheck.toUpperCase()!='JPEG'){
+			alert("上传图片图片格式不对！");
+			return false;
+		}
+	}
+	return true;
+}
+//实现滚动
+window.onload=function(){
+    var o=document.getElementById('marqueebox0');
+    var j=document.getElementById('marqueebox1');
+    window.setInterval(function(){scrollup(o,20,0);},3300);
+    window.setInterval(function(){scrollup(j,20,0);},3300);
+}
+///滚动主方法
+///参数:o 滚动块对象
+///参数:d 每次滚屏高度
+///参数:c 当前已滚动高度
+function scrollup(o,d,c){
+    if(d==c){
+        var t=getFirstChild(o.firstChild).cloneNode(true);
+        o.removeChild(getFirstChild(o.firstChild));
+        o.appendChild(t);
+        t.style.marginTop="0px";
+    }else{
+        c+=2;
+        getFirstChild(o.firstChild).style.marginTop=-c+"px";
+        window.setTimeout(function(){scrollup(o,d,c)},20);
+    }
+}
+//解决firefox下会将空格回车作为节点的问题
+function getFirstChild(node){
+  while (node.nodeType!=1)
+  {
+         node=node.nextSibling;
+  }
+  return node;
+}
+//屏蔽ajax
+function pinbi(uid){
+	if(uid != ""){
+		var baseurl = document.getElementById("url").value;
+		var url = baseurl + "_includes/function.ajax.php?ajax=pingbi&user_id="+uid;
+		//共通函数
+		MyAjaxs(url,dopinbi);
+	}else{
+		alert("找不到id，请联系管理员！");
+	}
+}
+function dopinbi(){
+	if(xmlHttps.readyState == 4){
+		if(xmlHttps.status==200){
+			var session = xmlHttps.responseXML.getElementsByTagName("session")[0].firstChild.data;
+			if(session == 'yes'){
+				var pingbi = xmlHttps.responseXML.getElementsByTagName("pingbi")[0].firstChild.data;
+				if(pingbi == 'yes'){
+					alert("屏蔽成功！以后不会收到此好友的动态！");
+					
+				}else if(favorite == 'no'){
+					alert("屏蔽失败，请联系管理员！");
+				}
+			}else if(session == 'no'){
+				alert("登陆过期，请重新登陆！");
+			}
+			location.reload();
+		}
+	}
+}
+</script>
+{/literal}
+<!--头部 end-->
+<div class=" tombgroud nohomshop clearfix">
+	<div class="flagnav">
+		<div class="container_24">
+			<ul class="clearfix" id="ajax_shop_myshop">
+				<li><a class="select" href="{$BASE_URL}people/show/user_{$users.user_id}/" target="_self">个人首页</a></li>
+				<li><a class="" href="{$BASE_URL}people/photo/user_{$users.user_id}/" target="_self">个人相册</a></li>
+				<li><a class="" href="{$BASE_URL}people/msg/user_{$users.user_id}/" target="_self">留言板</a></li>
+				<li><a class="" href="{$BASE_URL}people/job/user_{$users.user_id}/" target="_self">Ta的动态</a></li>
+				<li><a class="" href="{$BASE_URL}people/user_pr/{$users.user_id}/" target="_self">Ta的简历</a></li>
+				<!-- 
+				<li><a class="" href="{$BASE_URL}people/live/user_{$users.user_id}/" target="_self">Ta的生活服务</a></li>
+				<li><a class="" href="{$BASE_URL}people/job/user_{$users.user_id}/" target="_self">Ta的工作信息</a></li>
+				<li><a class="" href="{$BASE_URL}people/bbs/user_{$users.user_id}/" target="_self">Ta的闲聊</a></li> 
+				 -->
+				<li class="fl_r c333"><a class="" href="{$BASE_URL}mypage/" target="_blank">我的地盘</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br>
+<div class="container_24 clearfix">
+	<!--内容主体-->
+	<div class="detaileft wid230 fl_l">
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span><img src="{$BASE_URL}{$users.user_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;"></span>
+				<h2>{$users.name01}{$users.name02}</h2>
+				<div class="c666">
+				{if $users.pref_cd}
+				所在地区： {getname name="area" value=$users.pref_cd} - {getname name="pref" value=$users.pref_cd}
+				{/if}
+				</div>
+				<div class="c666">
+				{if $users.points}
+					积分状况：&nbsp;<font style="font-size:16px;">{$users.points}</font> 积分
+				{/if}
+				</div>
+				<div class="c666">
+					认证状况： 
+					{if $users.status eq 1}
+						<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span>
+					{else}
+						还没有任何认证
+					{/if}
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">我要联系TA</a></span>
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">我要联系TA</a></span>
+						{/if}
+						<div class="invita clearfix">
+							{if $smarty.session.kiwa_userid neq $users.user_id and $smarty.session.kiwa_companyid neq $users.user_id}
+							<a style="width: 197px;color: red;" href="javascript:void(0);" onclick="favorite('{$users.user_id}','{$flag}');">关注Ta</a>
+							{/if}
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$users.create_date|date_format:'%Y年%m月%d日'}</span><br>
+				<span class="c666">访问人数：<strong>{$users.see_page}</strong></span>
+			</div>
+		</div>
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+			
+				{if $friend}
+					<em class="fl_l"><strong>Ta所关注的人</strong>&nbsp;( {$friend|@count}人 )</em>
+					<a href="{$BASE_URL}people/friend/user_{$users.user_id}/" class="fl_r c333">更多&nbsp;&gt;</a>
+				{else}
+					
+					{if $users.user_id eq $smarty.session.kiwa_userid}
+						<em class="fl_l"><strong>你暂时无关注的人</strong></em>
+						<a href="{$BASE_URL}people/friend/user_{$users.user_id}/" class="fl_r c333">为你推荐&nbsp;&gt;</a>
+					{else}
+						<em class="fl_l"><strong>Ta所关注的人（0）</strong></em>
+					{/if}
+				{/if}
+			</div>
+			{section name="list" loop="$friend" max=9}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<ul class="pad10" style="height: 80px;width: 210px;">
+			{/if}
+				<li style="float:left;display: inline;width:60px;padding-left: 5px;padding-right: 5px;">
+					{if $friend[list].flag eq "user"}
+						<a href="{$BASE_URL}people/show/user_{$friend[list].favorite_id}/" target="_blank">
+						<img src="{$BASE_URL}{getname name='user_photo' value=$friend[list].favorite_id}" width="60" height="60">
+						<p style="text-align: center;width:60px; overflow:hidden; text-overflow:clip; white-space:nowrap;">
+						{getname name="username" value=$friend[list].favorite_id}
+						</p>
+						</a>
+					{/if}
+					{if $friend[list].flag eq "company"}
+						<a href="{$BASE_URL}people/show/company_{$friend[list].favorite_id}/" target="_blank">
+						<img src="{$BASE_URL}{getname name='company_photo' value=$friend[list].favorite_id}" width="60" height="60">
+						<p style="text-align: center;width:60px; overflow:hidden; text-overflow:clip; white-space:nowrap;">
+						{getname name="company_name" value=$friend[list].favorite_id}
+						</p>
+						</a>
+					{/if}
+				</li>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</ul>
+			{/if}
+			{/section}
+		</div>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>个人资料</strong></em>
+			</div>
+			<ul class="pad10">
+				<li><strong>{$users.name01}{$users.name02}</strong></li>
+				<li>{if $users.sex}性别：{$usersex}{/if}</li>
+				<li>{if $users.birth neq "0000-00-00"}年龄：{$age}岁{/if}</li>
+				<li id="left_phone">电话：{if $users.tel_flag eq 1}<font style="font-size:16px;">{if $users.tel01}{$users.tel01}-{$users.tel02}-{$users.tel03}{/if}</font>{/if}{if $users.tel_flag eq 2}非公开{/if}</li>
+				<li id="left_email">邮箱：{if $users.per_status eq 1}<font style="font-size:16px;">{$users.email}</font>{/if}{if $users.per_status eq 2}非公开{/if}</li>
+				<li>地址：{$users.pref}{$users.addr01}</li>
+			</ul>
+		</div>
+		{if $users.user_id eq $smarty.session.kiwa_userid}
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>更改版本颜色</strong></em>
+			</div>
+			<ul class="pad10">
+				<div style="padding-top:5px;">
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=red" title="红"><img src="{$BASE_URL}_templates/{$THEME}/img/red.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=black" title="黑"><img src="{$BASE_URL}_templates/{$THEME}/img/black.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=blue" title="蓝"><img src="{$BASE_URL}_templates/{$THEME}/img/blue.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=green" title="绿"><img src="{$BASE_URL}_templates/{$THEME}/img/green.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=orange" title="橙"><img src="{$BASE_URL}_templates/{$THEME}/img/orange.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=purple" title="紫"><img src="{$BASE_URL}_templates/{$THEME}/img/purple.jpg"></a>
+				</div>
+			</ul>
+		</div>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+	<div class="wid750 fl_r">
+		<div class="tz_details">
+			<div class="tz_detailcon clearfix">
+				<div class="conx">
+					{$users.mypr|nl2br|mb_truncate:360}
+				</div>
+			</div>
+			<div class="tztags">
+				<span class="fl_l">擅长标签：</span>
+				<div class="tztagal">
+				{if $users.skill}
+					{assign var=skill value=","|explode:$users.skill}
+					{section name="list" loop=$skill}<a>{$skill[list]}</a>{/section}
+				{else}
+					Ta很懒，还没有填写擅长！
+				{/if}
+				</div>
+			</div>
+		</div>
+		<!-- 别人看主页 -->
+		{if $users.user_id neq $smarty.session.kiwa_userid}
+		<span class="blank0"></span>
+		<div class="tzlatset mt_10">
+			<div class="tztitle">
+				<em class="fl_l"><strong>我的最新动态</strong></em>
+			</div>
+			<div class="pad20">
+				<div class="tzla_topbg"></div>
+				<div class="tzdongtai">
+					{if $lives or $jobs or $bbs}
+						{section name="list" loop="$jobs"}
+						<div class="tzelement clearfix">
+							<div class="ematbg fl_l"></div>
+							<div class="pl_tz">
+								<span class="c999"></span>&nbsp;<span class="mtr_5 c396">{$users.name01}{$users.name02}</span>
+								在【工作信息】发表了 <span class="c06c"><a href="{$BASE_URL}job/show/{$jobs[list].job_id}/" target="_blank">{$jobs[list].job_title|mb_truncate:160}</a></span>
+							</div>
+						</div>
+						{/section}
+						{section name="list" loop="$lives"}
+						<div class="tzelement clearfix">
+							<div class="ematbg fl_l"></div>
+							<div class="pl_tz">
+								<span class="c999"></span>&nbsp;<span class="mtr_5 c396">{$users.name01}{$users.name02}</span>
+								在【生活互助】发表了 <span class="c06c"><a href="{$BASE_URL}live/show/{$lives[list].live_id}/" target="_blank">{$lives[list].live_title|mb_truncate:38}</a></span>
+							</div>
+						</div>
+						{/section}
+						{section name="list" loop="$bbs"}
+						<div class="tzelement clearfix">
+							<div class="ematbg fl_l"></div>
+							<div class="pl_tz">
+								<span class="c999"></span>&nbsp;<span class="mtr_5 c396">{$users.name01}{$users.name02}</span>
+								在【闲聊吧】发表了 <span class="c06c"><a href="{$BASE_URL}bbs/show/{$bbs[list].bbs_id}/" target="_blank">{$bbs[list].bbs_title|mb_truncate:38}</a></span>
+							</div>
+						</div>
+						{/section}
+					{else}
+						Ta很懒，还没有发布任何信息！
+					{/if}
+				</div>
+				<div class="tzla_btpbg"></div>
+			</div>
+		</div>
+		<span class="blank10"></span>
+		<div class="shopintroduce">
+			<div class="tztitle">
+				<em class="fl_l"><strong>个人相册</strong></em>
+				{if $users.user_id eq $smarty.session.kiwa_userid}
+					{if $photo|@count <= 12}
+					<a href="{$BASE_URL}people/productadd/user_{$users.user_id}/" class="fl_r c333">添加照片&nbsp;&gt;</a>
+					{else}
+						{if $users.user_id eq "031758092846"}<!-- 庞涛特权 -->
+						<a href="{$BASE_URL}people/productadd/user_{$users.user_id}/" class="fl_r c333">添加照片&nbsp;&gt;</a>
+						{else}
+						<a href="javascript:void(0);" class="fl_r c333"><button>您的权限，最多只能发布12个照片</button></a>
+						{/if}
+					{/if}
+				{else}
+					<a href="{$BASE_URL}people/photo/user_{$users.user_id}/" class="fl_r c333">更多&nbsp;&gt;</a>
+				{/if}
+			</div>
+			<ul class="clearfix">
+			{if $photo}
+				{section name="list" loop="$photo"}
+				<li style="height: auto;">
+					<a href="{$BASE_URL}people/photoshow/{$photo[list].Id}/" class="imsgcbx">
+					<div style="width: 220px;height: 220px;overflow:hidden;vertical-align:middle;text-align:center;background: #F0F0F0;">
+						<img width="220" src="{$BASE_URL}{$photo[list].photo_url}">
+					</div>
+					</a>
+					<div class="mb_5">
+						<b class="cea5">{$photo[list].title|mb_truncate:14}</b>
+					</div>
+				</li>
+				{/section}
+			{else}
+				&nbsp;&nbsp;&nbsp;Ta 还没有发布任何商品！
+				<br><br>
+			{/if}
+			</ul>
+		</div>
+		<span class="blank10"></span>
+		<div class="tzlatset mt_10">
+			<div class="tztitle">
+				<em class="fl_l"><strong>留言板</strong></em><a href="{$BASE_URL}people/msg/user_{$users.user_id}/" class="fl_r c333">更多&nbsp;&gt;</a>
+			</div>
+			<div class="pad20">
+				<div class="tzla_topbg"></div>
+				<div class="tzdongtai">
+					<div class="tzelement clearfix">
+						<div class="ematbg fl_l"></div>
+						{if $msgs}
+							{section name="list" loop="$msgs"}
+							<div class="pl_tz">
+								<span class="c999"></span>&nbsp;
+								<span class="mtr_5 c396">
+								{if $msgs[list].msg_user_type eq "user"}
+									{getname name="username" value=$msgs[list].msg_user_id}
+								{/if}
+								{if $msgs[list].msg_user_type eq "company"}
+									{getname name="company_name" value=$msgs[list].msg_user_id}
+								{/if}
+								</span>
+								留言了 <span class="c06c">{$msgs[list].msg_content}</span>
+							</div>
+							{/section}
+						{else}
+							还没有人给Ta留言!&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}people/msg/user_{$users.user_id}/">我来留言</a>
+						{/if}
+					</div>
+				</div>
+				<div class="tzla_btpbg"></div>
+			</div>
+		</div>
+		{/if}
+		
+		<!-- 自己看主页 -->
+		{if $users.user_id eq $smarty.session.kiwa_userid}
+			<div class="tzlatset">
+				<div class="tztitle" style="height: 2px;"></div>
+				<div class="pad20">
+					<div class="tzla_topbg"></div>
+					<div class="tzdongtai" style="width: 740px;">
+						<div class="talenthpbox clearfix" style="width: 342px;">
+							<div class="taletptop clearfix" style="background: #66B3FF;height: 200px;">
+								<span class="tlarrow">&nbsp;</span>
+								<div class="talexc clearfix" style="border-bottom: 1px solid #e9e9e9;height: 36px;z-index:1;">
+									<h3 class="f_l">推荐工作
+									<a class="mosc" href="{$BASE_URL}people/match/user_{$users.user_id}_job/" target="_blank">更多&nbsp;&gt;</a></h3>
+								</div>
+								<div class="tablelicx clearfix" style="background: #ffffff;overflow: hidden;">
+									<div class="tablelcon"   id="marqueebox0" style="overflow: hidden;width:100%">
+										{section name="list" loop="$job"}
+												<span class="xbt" style="overflow: hidden;width: 270px;"><a href="{$BASE_URL}job/show/{$job[list].job_id}/" target="_blank">{$job[list].job_title}</a></span>
+										{/section}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="talenthpbox clearfix" style="width: 342px;">
+							<div class="taletptop clearfix" style="background: #FF5151;height: 200px;">
+								<span class="tlarrow">&nbsp;</span>
+								<div class="talexc clearfix" style="border-bottom: 1px solid #e9e9e9;height: 36px;">
+									<h3 class="f_l">最新娱乐・闲聊
+									<a class="mosc" href="{$BASE_URL}bbs/" target="_blank">更多&nbsp;&gt;</a></h3>
+								</div>
+								<div class="tablelicx clearfix" style="background: #ffffff;overflow: hidden;">
+									<div class="tablelcon" id="marqueebox1" style="overflow: hidden;width:100%">
+									{section name="list" loop="$yule"}
+										<span id="marqueebox1" class="xbt" style="width: 270px;"><a href="{$BASE_URL}bbs/show/{$yule[list].bbs_id}/" target="_blank">{$yule[list].bbs_title}</a></span>
+									{/section}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tzla_btpbg"></div>
+				</div>
+			</div>
+			<div class="tzlatset">
+				<div class="tztitle" style="height: 2px;"></div>
+<div class="newpublisher marginRightForPager">
+	<div class="clearfix">
+		<div class="site-header clearfix">
+			<div class="global-publisher-box">
+				<div class="global-publisher-module">
+					<form name="form" id="form" class="status-global-publisher" action="{$BASE_URL}people/statusdo/" method="post" enctype="multipart/form-data">
+						<div id="global-publisher-status-box" class="global-publisher-status-box">
+							<div class="status-inputer">
+								<dl class="global-publisher-selector">
+									<dd class="global-publisher-selector-status active">
+										<a class="global-publisher-status-trigger" href="#" onclick="return false;">发状态</a>
+									</dd>
+									<dd class="global-publisher-selector-blog">
+										<a class="global-publisher-blog-trigger" href="{$BASE_URL}people/sendwork/user_{$users.user_id}/" target="_blank">发工作</a>
+									</dd>
+									<dd class="global-publisher-selector-share">
+										<a class="global-publisher-blog-trigger" href="{$BASE_URL}people/sendbbs?type=user_{$users.user_id}" target="_blank">发闲聊</a>
+									</dd>
+									<dd class="global-publisher-selector-film global-publisher-selector-last">
+										<a class="global-publisher-blog-trigger" href="{$BASE_URL}requirement/live/" target="_blank">发生活</a>
+									</dd>
+								</dl>
+								<div class="status-textarea">
+									<textarea name="content" id="content" placeholder="你正在干嘛？" class="status-content" style="background: #ffffff;margin-top: -1px;"></textarea>
+									<div class="usenecdis" style="padding:8px;">
+										{literal}
+										<script>
+										var index = 1;
+										function addfile(){
+											index = index +1;
+											if(index>5){
+												alert("最多上传5张图片！");
+												document.getElementById("addf").disabled='disabled';
+											}else{
+												document.getElementById("file"+index).innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='file' name='photo_url[]' value=''>";
+											}
+										}
+										</script>
+										{/literal}
+										<div id="file1" >
+										<font style="font-size: 12px;color: #4F4F4F;">(最多上传5张图片，格式为 jpg jpeg png gif)</font> 
+											<div>
+											上传图片：<input type="file"  name='photo_url[]' value="">
+											&nbsp;<button type="button" id="addf" onclick="addfile();">再加一张？</button>&nbsp;&nbsp;&nbsp;
+											<span style="float:right;"><input class="submit"  style="line-height:23px;height:23px;" type="submit" onclick="return null_check();" value="発表"></span>
+											</div>
+										</div>
+										<div id="file2"></div>
+										<div id="file3"></div>
+										<div id="file4"></div>
+										<div id="file5"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br><br><br>
+			</div>
+			<div class="tzlatset">
+				<form  name="searchform" id="searchform"  action="{$BASE_URL}people/show/user_{$users.user_id}/#searchform" method="post">
+				<input type="hidden" id=""/>
+					<div class="tztitle" style="height: 2px;">
+							<b style="font-size: 18px;line-height: 40px;">我的朋友圈</b>
+							{if $quannull neq '1'}
+							<input type="radio" id="quan_Change" name="quan_Change" value=""  onchange="quanChange()" {if $quan_hange eq ""} checked="checked"{/if}/>全部动态
+							<input type="radio" id="quan_Change" name="quan_Change"  value="user"  onchange="quanChange()" {if $quan_hange eq "user"} checked="checked"{/if}/>个人动态
+							<input type="radio" id="quan_Change" name="quan_Change"  value="company"  onchange="quanChange()" {if $quan_hange eq "company"} checked="checked"{/if}/>企业动态
+							
+							{/if}
+					</div>
+				</form>
+				<div class="pad20">
+					<div class="tzla_topbg"></div>
+					<div class="tzdongtai">
+<div class="plunlistbox clearfix" id="plunlistbox">
+	<div id="load_shop_comment">
+		{if $quannull eq '1'}
+			<div style="padding-top:10px">
+				<font style="color:red;font-size:14px;">&nbsp;你暂时没有好友，以下为系统自动推荐给你的圈子的最新动态！	</font>
+			</div>
+		{/if}
+		{section name="list" loop="$quan"}
+		<div class="arwoperson clearfix" id="{$msgs[list].Id}" style="break-word;border-bottom: 1px solid #e9e9e9;padding: 10px;">
+			<div class="fl_l">
+				{if $quan[list].user_type eq "user"}
+				<a href="{$BASE_URL}people/show/user_{$quan[list].user_id}/" target="_blank">
+				<img src="{$BASE_URL}{getname name="user_photo" value=$quan[list].user_id}" class="pic_small">
+				</a>
+				{/if}
+				{if $quan[list].user_type eq "company"}
+				<a href="{$BASE_URL}people/show/company_{$quan[list].user_id}/" target="_blank">
+				<img src="{$BASE_URL}{getname name="company_photo" value=$quan[list].user_id}" class="pic_small">
+				</a>
+				{/if}
+			</div>
+			<div class="wid540 fl_l">
+				<span class="c999">
+				<span class="c06c">
+					{if $quan[list].user_type eq "user"}
+					<a href="{$BASE_URL}people/show/user_{$quan[list].user_id}/" target="_blank">
+					{getname name="username" value=$quan[list].user_id}
+					</a>
+					{/if}
+					{if $quan[list].user_type eq "company"}
+					<a href="{$BASE_URL}people/show/company_{$quan[list].user_id}/" target="_blank">
+					{getname name="company_name" value=$quan[list].user_id}
+					</a>
+					{/if}
+					<font style="color:#8B8989;">
+						{if $quan[list].create_date|date_format:'%Y-%m-%d' eq $today}
+							{math equation="y - x" x =$quan[list].create_date|date_format:'%H'  y=$hour assign="update_date"}
+							{if $update_date lt  1}
+								刚刚
+							{else}
+								{$update_date}小时前	
+							{/if}	
+						{elseif $quan[list].create_date|date_format:'%Y-%m-%d' eq $yestoday}
+							昨天
+						{elseif $quan[list].create_date|date_format:'%Y-%m-%d' eq $bfyestoday}
+							前天 
+						{else}
+							{$quan[list].create_date|date_format:'%m-%d'}
+						{/if}
+					</font>
+				</span>
+				
+				<!-- 闲聊  -->
+				{if $quan[list].type eq "bbs"}
+					在<font color="green">【闲聊吧】</font>发布了          
+					{if $users.user_id eq $smarty.session.kiwa_userid}
+						{if $users.user_id neq $quan[list].user_id and $quannull neq '1'}
+							<button style="float: right;" onclick="pinbi('{$quan[list].user_id}');">屏蔽</button>
+						{/if}
+					{/if}
+					<div class="clearfix c666">
+						<a href="{$BASE_URL}bbs/show/{$quan[list].type_id}/" target="_blank">
+						{assign var=url value=$BASE_URL|cat:'bbs/show/'|cat:$quan[list].type_id|cat:'/'}
+						{getname name='url_pic' value=$url}
+						</a>
+						&nbsp;
+						<a href="{$BASE_URL}bbs/show/{$quan[list].type_id}/" target="_blank">
+							{$quan[list].type_title|mb_truncate:22}  
+							<a href="{$BASE_URL}bbs/show/{$quan[list].type_id}/#answers"  style="color:black;" >
+							{capture name="bbs_num"}{getname name="bbs_num" value=$quan[list].type_id}{/capture}
+							{if $smarty.capture.bbs_num gt 1}
+								(回帖:{$smarty.capture.bbs_num})
+							{/if}
+							</a>
+					</div>
+				{/if}
+				
+				<!-- 工作信息  -->
+				{if $quan[list].type eq "job"}
+					在<font color="green">【工作信息】</font>发布了
+					{if $users.user_id eq $smarty.session.kiwa_userid}
+						{if $users.user_id neq $quan[list].user_id and $quannull neq '1'}
+							<button style="float: right;" onclick="pinbi('{$quan[list].user_id}');">屏蔽</button>
+						{/if}
+					{/if}
+					<div class="clearfix c666">
+						<a href="{$BASE_URL}job/show/{$quan[list].type_id}/" target="_blank">
+						<img style='width: 80px;' src='http://8n8n.co.jp/_templates/ep/img/job.jpg'>
+						</a>
+						&nbsp;
+						<a href="{$BASE_URL}job/show/{$quan[list].type_id}/" target="_blank">
+							{$quan[list].type_title|mb_truncate:22}
+							<a href="{$BASE_URL}job/show/{$quan[list].type_id}/#answers"  style="color:black;"> 
+							{capture name="job_num"}{getname name="job_num" value=$quan[list].type_id}{/capture}
+							{if $smarty.capture.job_num gt 1}
+								(回帖:{$smarty.capture.job_num})
+							{/if}
+						</a>
+					</div>
+				{/if}
+				
+				<!-- 生活互助  -->
+				{if $quan[list].type eq "live"}
+					在<font color="green">【生活互助】</font>发布了
+					{if $users.user_id eq $smarty.session.kiwa_userid}
+						{if $users.user_id neq $quan[list].user_id and $quannull neq '1'}
+							<button style="float: right;" onclick="pinbi('{$quan[list].user_id}');" >屏蔽</button>
+						{/if}
+					{/if}
+					<div class="clearfix c666">
+						<a href="{$BASE_URL}live/show/{$quan[list].type_id}/" target="_blank">
+						<img style='width: 80px;' src='http://8n8n.co.jp/_templates/ep/img/live.jpg'>
+						</a>
+						&nbsp;
+						<a href="{$BASE_URL}live/show/{$quan[list].type_id}/" target="_blank">
+							{$quan[list].type_title|mb_truncate:22} 
+							<a href="{$BASE_URL}live/show/{$quan[list].type_id}/#answers" style="color:black;">
+							{capture name="live_num"}{getname name="live_num" value=$quan[list].type_id}{/capture}
+							{if $smarty.capture.live_num gt 1}
+								(回帖:{$smarty.capture.live_num})
+							{/if}
+							</a>
+						</a>
+					</div>
+				{/if}
+				
+				<!-- 状态  -->
+				{if $quan[list].type eq "status"}
+					更新了<font color="green">【状态】</font>
+					{if $quan[list].user_id eq $smarty.session.kiwa_userid}
+						
+						<a href="{$BASE_URL}people/status_delete/{$quan[list].type_id}/" onclick="return deleteConfirm();">
+						<button style="float: right;" >删除</button></a>
+					{else if $users.user_id eq $smarty.session.kiwa_userid}
+						<button style="float: right;" onclick="pinbi('{$quan[list].user_id}');">屏蔽</button>
+					{/if}
+					<div class="clearfix c666">
+					{capture name="status_photo"}{getname name="status_photo" value=$quan[list].type_id}{/capture}
+					{assign var=status_photo1 value=","|explode:$smarty.capture.status_photo}
+					{if $status_photo1[0]}
+					{section name="list1" loop=$status_photo1}
+						<a>
+						<img style='width: 80px;height:80px;'  src='{$BASE_URL}{$status_photo1[list1]}'>
+						</a>
+					{/section}
+					{/if}
+						{$quan[list].type_title}&nbsp;&nbsp;
+						<br><br>
+					</div>
+					<!-- 
+					<div id="newcomment_box">
+						<div class="global-publisher-module" style="width: 540px;">
+							<div id="global-publisher-status-box" class="global-publisher-status-box">
+								<div class="status-inputer">
+									<div class="status-textarea">
+										<textarea name="content" id="content" class="status-content" style="width: 524px;"></textarea>
+									</div>
+								</div>
+								<div style="padding: 5px;">
+									<button>评论</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					 -->
+				{/if}
+				</span>
+			</div>
+		</div>
+		{/section}
+		<div style="float: right;">{$subPages}</div>
+	</div>
+</div>
+					</div>
+					<div class="tzla_btpbg"></div>
+				</div>
+			</div>
+			<span class="blank10"></span>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+</div>
+
+
+{include file="./footer.html"}

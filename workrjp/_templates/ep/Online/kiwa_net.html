@@ -1,0 +1,416 @@
+{include file="./header.html" title=喜和在线面试"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+
+{literal}
+<script type="text/javascript">
+function check(){
+	if(document.getElementById("name").value==""){
+		alert("请输入「名字」！");
+		return false;
+	}
+	if(document.getElementById("pinyin").value==""){
+		alert("请输入「介绍人」！");
+		return false;
+	}
+	if(document.getElementById("birthY").value == ""||document.getElementById("birthM").value == ""||document.getElementById("birthD").value == ""){
+		alert("请选择「生年月日」！");
+		return false;
+	}
+	if(document.getElementById("tall").value == ""){
+		alert("请选择「身長」！");
+		return false;
+	}
+	if(document.getElementById("tizhong").value == ""){
+		alert("请选择「体重」！");
+		return false;
+	}
+	if(document.getElementById("shoenum").value == ""){
+		alert("请选择「鞋号」！");
+		return false;
+	}
+	var obj = document.getElementsByName("xuexing");
+	var flag_status = "";
+	for(i=0; i<obj.length;i++){   
+		if(obj[i].checked){flag_status = "ok";}
+    }
+	if(flag_status == ""){
+		alert("请选择「血型」！");
+		return false;
+	}
+	if(document.getElementById("tel").value==""){
+		alert("请输入「联系电话」！");
+		return false;
+	}
+	if(document.getElementById("eki").value==""){
+		alert("请选择「车站信息」！");
+		return false;
+	}
+	if(document.getElementById("8n8n").checked){
+		if(!emailCheck(document.getElementById("email").value)){
+			alert("请输入正确的「邮箱地址」！");
+			return false;
+		}
+		if(document.getElementById("tellOk").innerHTML != '<font color="green">这个邮箱地址可以使用！</font>'){
+			alert("「邮箱地址」不能使用！");
+			return false;
+		}
+		if(document.getElementById("register_pw").value == ""){
+			alert("请输入「密 码」！");
+			return false;
+		}
+		if(document.getElementById("register_pw").value != document.getElementById("register_repw").value){
+			alert("两次输入「密码」不一致！");
+			return false;
+		}
+		
+		//工作意向
+		var zz_obj = document.getElementsByName("skills[]");
+		var zz_count = "";
+		for(i=0; i<zz_obj.length;i++){   
+			if(zz_obj[i].checked){zz_count++;}
+	    }
+		if(zz_count > 3 || zz_count == 0){
+			alert("「工作意向」，需要选择，最多选择3个！");
+			return false;
+		}
+	}
+	return true;
+}
+function showbang(){
+	if(document.getElementById("bang").style.display == "none"){
+		document.getElementById("bang").style.display = "block";
+	}else{
+		document.getElementById("bang").style.display = "none";
+	}
+}
+</script>
+{/literal}
+	<div class="navouterbox">
+		<nav id="mainnavfix" class="mainav">
+			<div class="container_24 clearfix">
+				<ul id="navlisbox" class="clearfix">
+					<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">我的地盘</a></em></li>
+				</ul>
+				<div class="specinavli fl_r">
+					<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+					<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+				</div>
+			</div>
+		</nav>
+	</div>
+<div style="display:none;">
+	<img src="{$BASE_URL}_templates/{$THEME}/Online/images/zxtz.jpg" style="max-width: 228px;">
+</div>
+<br>
+	<div id="wrapper"><!-- container -->
+	<div id="container">
+	<!-- main -->
+	<h1 class="title">&nbsp;《喜和》 在线面试</h1>
+	<form name="form1" action="" method="post">
+		<input name="url" id="url" type="hidden" value="{$BASE_URL}"/>
+		<p>「<SPAN class=att>※</SPAN>」必填信息</p>
+		<section id="jobEntryRegist">
+		<table class="tableStyle">
+			<tr>
+				<th style="vertical-align: middle;width: 20%;">氏名 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;width: 80%;">
+					<input type="text" class="input" id="name" name="name" value="">
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;width: 20%;">介绍人 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;width: 80%;">
+					<input type="text" class="input" id="pinyin" name="pinyin" value="">
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;width: 20%;">生年月日 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;width: 80%;">
+                    {html_select_date prefix='birth' year_empty='選択' time=$user.birth field_order="Y" start_year='-61' end_year='-13' all_extra='id="birthY"'}年
+		            {html_select_date prefix='birth' month_empty='選択' time=$user.birth month_format="%m" field_order="M" all_extra='id="birthM"'}月
+		            {html_select_date prefix='birth' day_empty='選択' time=$user.birth field_order="D" all_extra='id="birthD"'}日
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">性别 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<select name="sex" id="sex" class="input">
+						<option value="男">男</option>	
+						<option value="女">女</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">国籍 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<select name="country" id="country">
+                    {section name="list" loop="$countrys"}
+                    	<option value="{$countrys[list]}">{$countrys[list]}</option>
+                    {/section}
+                    </select>
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">在留資格 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<select name="visa" id="visa">
+                    {section name="list" loop="$zailiuziges"}
+                    	<option value="{$zailiuziges[list]}">{$zailiuziges[list]}</option>
+                    {/section}
+                    </select>
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">身長 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<select name="tall" id="tall">
+                     <option value="">選択</option>
+                     {section name="list" loop="$talls"}
+                     	<option value="{$talls[list]}"
+                     	{if $talls[list] eq $tall}
+                     		selected="selected"
+                     	{/if}
+                     	>{$talls[list]}</option>
+                     {/section}
+                     </select> cm/厘米
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">体重 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<select name="tizhong" id="tizhong">
+                    <option value="">選択</option>
+                    {section name="list" loop="$tizhongs"}
+                    	<option value="{$tizhongs[list]}"
+                    	{if $tizhongs[list] eq $tizhong}
+                    		selected="selected"
+                    	{/if}
+                    	>{$tizhongs[list]}</option>
+                    {/section}
+                    </select> kg/公斤
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">鞋号 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<select name="shoenum" id="shoenum">
+                    <option value="">選択</option>
+					{section name="list" loop="$shoenums"}
+                     	<option value = "{$shoenums[list]}"
+                     	{if $shoenums[list] eq $shoenum}
+                     		selected="selected"
+                     	{/if}
+                     	>{$shoenums[list]}</option>
+                     {/section}
+                     </select>
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">血型 <SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<label for="blood_a">
+                    <input class="radioInput" type="radio" name="xuexing" value="A型" id="blood_a" {if $xuexing eq "A型"}checked="checked"{/if}>Ａ型</label>
+					<label for="blood_b">
+					<input class="radioInput" type="radio" name="xuexing" value="B型" id="blood_b" {if $xuexing eq "B型"}checked="checked"{/if}>Ｂ型</label>
+					<label for="blood_ab">
+					<input class="radioInput" type="radio" name="xuexing" value="AB型" id="blood_ab" {if $xuexing eq "AB型"}checked="checked"{/if}>ＡＢ型</label>
+					<label for="blood_o">
+					<input class="radioInput" type="radio" name="xuexing" value="O型" id="blood_o" {if $xuexing eq "O型"}checked="checked"{/if}>Ｏ型</label>
+					<label for="blood_other">
+					<input class="radioInput" type="radio" name="xuexing" value="其他" id="blood_other" {if $xuexing eq "其他"}checked="checked"{/if}>其他</label>
+					<label for="blood_unknow">
+					<input class="radioInput" type="radio" name="xuexing" value="不知道" id="blood_unknow" {if $xuexing eq "不知道"}checked="checked"{/if}>不知道</label>
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">联络电话<SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<input type="text" class="input" id="tel" name="tel" alt="連絡電話" value="">
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">住所车站名<SPAN class=att>※</SPAN></th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<div class="txtInput">
+                   	区域：
+                   <select name="areaid" id="areaid" onchange="showPref();" class="input">
+						<option value="">請指定</option>
+						<option value="">---------------</option>
+						{section name="list" loop="$areas"}
+							<option value="{$areas[list].area_cd}"
+							{if $areas[list].area_cd eq $areaid}selected='selected'{/if}
+							>{$areas[list].area_name}</option>
+						{/section}
+					</select>
+					&nbsp;&nbsp;&nbsp;
+                   	县：
+                 	<select name="pref" id="pref" onchange="showline()" class="input">
+						<option value="">請指定</option>
+						<option value="">---------------</option>
+					</select>
+					&nbsp;&nbsp;&nbsp;
+                   	线路：
+                   	<select name="line" id="line" onchange="showeki()" class="input">
+						<option value="">請指定</option>
+						<option value="">---------------</option>
+					</select><br><br>
+                   	駅：&nbsp;&nbsp;
+                    <select name="eki" id="eki" class="input">
+						<option value="">請指定</option>
+						<option value="">---------------</option>
+					</select>
+                    </div>
+				</td>
+			</tr>
+			<tr>
+				<th style="vertical-align: middle;">备注(希望工作)</th>
+				<td class="alLeft" style="vertical-align: middle;">
+					<div class="txtInput">
+                  	<textarea name="remark" id="remark" cols="90" rows="8" style="ime-mode: active" class="input"></textarea>
+                    </div>
+				</td>
+			</tr>
+			
+		</table>
+		<table class="tableStyle">
+			<tr>
+				<th colspan="2" style="vertical-align: middle;">期望工作时间</th>
+			</tr>
+			<tr>
+				<td class="alLeft" style="vertical-align: middle;">
+					&nbsp;&nbsp;周一 &nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day1[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day1[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day1[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;周二 &nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day2[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day2[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day2[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;周三 &nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day3[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day3[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day3[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;周四 &nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day4[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day4[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day4[]" value="夜班">夜班</label><br>
+				</td>
+				<td class="alLeft" style="vertical-align: middle;">
+					&nbsp;&nbsp;周五 &nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day5[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day5[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day5[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;<font color="red">周六 </font>&nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day6[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day6[]" value="下午">下午</label>
+					<label>	<input type="checkbox" class="input" name="day6[]" value="夜班">夜班</label><br>
+					&nbsp;&nbsp;<font color="red">周日 </font>&nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="checkbox" class="input" name="day7[]" value="上午">上午</label>
+					<label><input type="checkbox" class="input" name="day7[]" value="下午">下午</label>
+					<label><input type="checkbox" class="input" name="day7[]" value="夜班">夜班</label><br>
+				</td>
+			</tr>
+		</table>
+		<table class="tableStyle">
+			<tr>
+				<th colspan="2">
+					<label style="color: red;"><input type="checkbox" id="8n8n" name="8n8n" onclick="showbang();" value="8n8n">&nbsp;同时加入 <a href="http://8n8n.co.jp" target="_blank">帮帮网</a> ，更多工作信息供你选择！</label>
+				</th>
+			</tr>
+		</table>
+		<div id="bang" style="display: none;">
+			<table class="tableStyle">
+				<tr>
+					<th style="width: 20%;">邮箱地址:<SPAN class=att>※</SPAN></th>
+					<td class="alLeft">
+						<div id="tellOk"></div>
+						<input type="text" size="30" name="email" id="email" onblur="EmailAjax()" value="">
+					</td>
+				</tr>
+				<tr>
+					<th>密　　码:<SPAN class=att>※</SPAN></th>
+					<td class="alLeft">
+						<input type="password" class="input input-60" name="register_pw" id="register_pw">
+					</td>
+				</tr>
+				<tr>
+					<th>确认密码:<SPAN class=att>※</SPAN></th>
+					<td class="alLeft">
+						<input type="password" class="input input-60" name="register_repw" id="register_repw">
+					</td>
+				</tr>
+				<tr>
+					<th>工作意向:<SPAN class=att>※（最多选择3个）</SPAN></th>
+					<td class="alLeft">
+						<table>
+						{section name="list" loop=$biao}
+							{if $smarty.section.list.rownum mod 3 eq 1}
+							<tr align="center" height="28px;">
+							{/if}
+								<td>&nbsp;&nbsp;<label><input name="skills[]" id="skills" type="checkbox" value="{$biao[list].biao_name}">&nbsp;{$biao[list].biao_name}</label></td>
+							{if $smarty.section.list.rownum mod 3 eq 0}
+							</tr>
+							{/if}
+						{/section}
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<br><br>
+		<p class="alCenter">
+		<button type="submit" id="next" class="big button" name="sendB" onclick="return check();">　递交材料　</button>
+		</p>
+		<br><br><br>
+		</section>
+	</form>
+	</div>
+	</div>
+	
+</div>
+  
+		{literal}
+	<!-- 百度分享 -->
+			<script>
+				window._bd_share_config = {
+					"common" : {
+						"bdSnsKey" : {},
+						"bdText" : "",
+						"bdMini" : "2",
+						"bdMiniList" : [ "weixin", "qzone", "t163", "sqq", "tsina",
+								"renren", "tqq", "tqf", "tieba", "tsohu", "hi", "mail",
+								"fbook", "twi" ],
+						"bdPic" : "",
+						"bdStyle" : "0",
+						"bdSize" : "16"
+					},
+					"slide" : {
+						"type" : "slide",
+						"bdImg" : "6",
+						"bdPos" : "right",
+						"bdTop" : "200"
+					}
+				};
+				with (document)
+					0[(getElementsByTagName('head')[0] || body)
+							.appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='
+							+ ~(-new Date() / 36e5)];
+			</script>
+		{/literal}
+</body>
+</html>

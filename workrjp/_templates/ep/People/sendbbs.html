@@ -1,0 +1,276 @@
+{include file="./header.html" title="个人空间"}
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$users.page_color}">
+<link href="{$BASE_URL}_templates/{$THEME}/css/fb.css" rel="stylesheet">
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script type="text/javascript" src="{$BASE_URL}js/jquery.min.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/xheditor.min.js"></script>
+{literal}
+<script type="text/javascript">
+function sendcheck(){
+	//alert($('#content').val());
+	if(!(document.getElementById("bbs").checked||document.getElementById("wen").checked||document.getElementById("shuo").checked)){
+		alert("请选择话题分类！");
+		return false;
+	}
+	if(document.getElementById("flag").value == 1 && document.getElementById("fenlei").value == ""){
+		alert("请选择疑问分类！");
+		return false;
+	}
+	if(document.getElementById("title").value==""){
+		alert("请输入题目！");
+		return false;
+	}
+	if(document.getElementById("title").value.length>50){
+		alert("题目不得超过50个字！");
+		return false;
+	}
+	if($('#content').val()==""){
+		alert("请输入闲聊内容！");
+		return false;
+	}
+	var files = document.getElementsByName("file_upload[]");
+	for(f = 0; f < files.length; f++){
+		if(files[f].value!=""){
+			var strTemp = files[f].value.split(".");
+			var fileCheck = strTemp[strTemp.length-1];
+			if(fileCheck.toUpperCase()!='JPG' && fileCheck.toUpperCase()!='PNG' && fileCheck.toUpperCase()!='GIF' && fileCheck.toUpperCase()!='JPEG'){
+				alert("上传图片图片格式不对！");
+				return false;
+			}
+		}
+	}
+	return true;
+}
+function showC(flag){
+	if(flag == 0){
+		document.getElementById("fenlei").style.display="none";
+		document.getElementById("fenlei").value="";
+		document.getElementById("flag").value = 0;
+	}
+	if(flag == 1){
+		document.getElementById("fenlei").style.display="inline";
+		document.getElementById("flag").value = 1;
+	}
+	if(flag == 2){
+		document.getElementById("fenlei").style.display="none";
+		document.getElementById("fenlei").value="";
+		document.getElementById("flag").value = 2;
+	}
+}
+</script>
+{/literal}
+<!--头部 end-->
+<div class=" tombgroud nohomshop clearfix">
+	<div class="flagnav">
+		<div class="container_24">
+			<ul class="clearfix" id="ajax_shop_myshop">
+				<li><a class="select" href="{$BASE_URL}people/show/user_{$users.user_id}/" target="_self">个人首页</a></li>
+				<li><a class="" href="{$BASE_URL}people/photo/user_{$users.user_id}/" target="_self">个人相册</a></li>
+				<li><a class="" href="{$BASE_URL}people/msg/user_{$users.user_id}/" target="_self">留言板</a></li>
+				<li><a class="" href="{$BASE_URL}people/job/user_{$users.user_id}/" target="_self">Ta的动态</a></li>
+				<li><a class="" href="{$BASE_URL}people/user_pr/{$users.user_id}/" target="_self">Ta的简历</a></li>
+				<!-- 
+				<li><a class="" href="{$BASE_URL}people/live/user_{$users.user_id}/" target="_self">Ta的生活服务</a></li>
+				<li><a class="" href="{$BASE_URL}people/job/user_{$users.user_id}/" target="_self">Ta的工作信息</a></li>
+				<li><a class="" href="{$BASE_URL}people/bbs/user_{$users.user_id}/" target="_self">Ta的闲聊</a></li> 
+				 -->
+				<li class="fl_r c333"><a class="" href="{$BASE_URL}mypage/" target="_blank">我的地盘</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br>
+<div class="container_24 clearfix">
+	<!--内容主体-->
+	<div class="detaileft wid230 fl_l">
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span><img src="{$BASE_URL}{$users.user_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;"></span>
+				<h2>{$users.name01}{$users.name02}</h2>
+				<div class="c666">
+				{if $users.pref_cd}
+				所在地区： {getname name="area" value=$users.pref_cd} - {getname name="pref" value=$users.pref_cd}
+				{/if}
+				</div>
+				<div class="c666">
+				{if $users.points}
+					积分状况：&nbsp;<font style="font-size:16px;">{$users.points}</font> 积分
+				{/if}
+				</div>
+				<div class="c666">
+					认证状况： 
+					{if $users.status eq 1}
+						<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span>
+					{else}
+						还没有任何认证
+					{/if}
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">我要联系TA</a></span>
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">我要联系TA</a></span>
+						{/if}
+						<div class="invita clearfix">
+							{if $smarty.session.kiwa_userid neq $users.user_id and $smarty.session.kiwa_companyid neq $users.user_id}
+							<a style="width: 197px;color: red;" href="javascript:void(0);" onclick="favorite('{$users.user_id}','{$flag}');">关注Ta</a>
+							{/if}
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$users.create_date|date_format:'%Y年%m月%d日'}</span><br>
+				<span class="c666">访问人数：<strong>{$users.see_page}</strong></span>
+			</div>
+		</div>
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+			
+				{if $friend}
+					<em class="fl_l"><strong>Ta所关注的人</strong>&nbsp;( {$friend|@count}人 )</em>
+					<a href="{$BASE_URL}people/friend/user_{$users.user_id}/" class="fl_r c333">更多&nbsp;&gt;</a>
+				{else}
+					<em class="fl_l"><strong>Ta所关注的人</strong></em>
+					<a href="{$BASE_URL}people/friend/user_{$users.user_id}/" class="fl_r c333">推荐的好友&nbsp;&gt;</a>
+				{/if}
+			</div>
+			{section name="list" loop="$friend" max=9}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<ul class="pad10" style="height: 80px;width: 210px;">
+			{/if}
+				<li style="float:left;display: inline;width:60px;padding-left: 5px;padding-right: 5px;">
+					{if $friend[list].flag eq "user"}
+						<a href="{$BASE_URL}people/show/user_{$friend[list].favorite_id}/" target="_blank">
+						<img src="{$BASE_URL}{getname name='user_photo' value=$friend[list].favorite_id}" width="60" height="60">
+						<p style="text-align: center;width:60px; overflow:hidden; text-overflow:clip; white-space:nowrap;">
+						{getname name="username" value=$friend[list].favorite_id}
+						</p>
+						</a>
+					{/if}
+					{if $friend[list].flag eq "company"}
+						<a href="{$BASE_URL}people/show/company_{$friend[list].favorite_id}/" target="_blank">
+						<img src="{$BASE_URL}{getname name='company_photo' value=$friend[list].favorite_id}" width="60" height="60">
+						<p style="text-align: center;width:60px; overflow:hidden; text-overflow:clip; white-space:nowrap;">
+						{getname name="company_name" value=$friend[list].favorite_id}
+						</p>
+						</a>
+					{/if}
+				</li>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</ul>
+			{/if}
+			{/section}
+		</div>
+		{if $users.user_id eq $smarty.session.kiwa_userid}
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>更改版本颜色</strong></em>
+			</div>
+			<ul class="pad10">
+				<div style="padding-top:5px;">
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=red" title="红"><img src="{$BASE_URL}_templates/{$THEME}/img/red.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=black" title="黑"><img src="{$BASE_URL}_templates/{$THEME}/img/black.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=blue" title="蓝"><img src="{$BASE_URL}_templates/{$THEME}/img/blue.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=green" title="绿"><img src="{$BASE_URL}_templates/{$THEME}/img/green.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=orange" title="橙"><img src="{$BASE_URL}_templates/{$THEME}/img/orange.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=purple" title="紫"><img src="{$BASE_URL}_templates/{$THEME}/img/purple.jpg"></a>
+				</div>
+			</ul>
+		</div>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+	<div class="wid750 fl_r">
+		<form action="{$BASE_URL}bbs/senddo/?send_type=1" method="post" name="form1" id="form1" enctype="multipart/form-data">
+	<div class="container_24 clearfix pt_10">
+
+		<div class="select_condition clearfix pad10 mt_10" style="margin-bottom: -10px;">
+			<div class="fl_l mr_5">
+				<h3 class="title">
+					话题分类： 
+					<label for="bbs"><input type="radio" id="bbs" name="c" value="bbs" onclick="showC(0);"><b>闲  聊</b></label>
+					<label for="wen"><input type="radio" id="wen" name="c" value="wen" onclick="showC(1);"><b>疑问咨询</b></label>
+					<label for="shuo"><input type="radio" id="shuo" name="c" value="shuo" onclick="showC(2);"><b>参加《说说你的就职经验》活动</b></label>
+					&nbsp;&nbsp;&nbsp;
+					<input type="hidden" id="flag" name="flag" value="">
+				</h3>
+			</div>
+		</div>
+		<div class="select_condition clearfix pad10 mt_10">
+			<div class="fl_l mr_5">
+				<h3 class="title">
+					题目： 
+					<select id="fenlei" name="fenlei" style="display: none;">
+						<option value="">请选择疑问分类</option>
+						<option value="工作相关">工作相关</option>
+						<option value="生活相关">生活相关</option>
+						<option value="法律相关">法律相关</option>
+						<option value="留学相关">留学相关</option>
+						<option value="签证相关">签证相关</option>
+						<option value="税务相关">税务相关</option>
+						<option value="劳灾相关">劳灾相关</option>
+					</select>
+					<input type="text" name="title" id="title" style="width:360px;" class="txt_input mr_5 ml_0" value="">
+				</h3>
+				<font style="color: red;">&nbsp;&nbsp;※ 题目不得超过50个字</font>
+			</div>
+		</div>
+		<!--end 左内容头-->
+		<div class="box normal clearfix">
+			<!--列表主内容-->
+			<div class="list clearfix">
+				<dl>
+					<dd class="po_re pad10 clearfix odd">
+						{literal}
+						<textarea rows="24" cols="" name="content" id="content" style="width: 700px;" class="xheditor {tools:'FontSize,Bold,FontColor,BackColor,Align,Preview,Emot,Img',upLinkUrl:'upload.php?immediate=1',upLinkExt:'zip,rar,txt',upImgUrl:'upload.php?immediate=1',upImgExt:'jpg,jpeg,gif,png',skin:'default'}"></textarea>
+						{/literal}
+						<!-- <font style="color: red;">&nbsp;&nbsp;※ 内容不得超过5000个字</font> -->
+					</dd>
+				</dl>
+			</div>
+			<div class="usenecdis">
+				{literal}
+				<script>
+				var index = 1;
+				function addfile(){
+					index = index +1;
+					if(index>5){
+						alert("最多上传5张图片！");
+						document.getElementById("addf").disabled='disabled';
+					}else{
+						document.getElementById("file"+index).innerHTML += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='file' name='file_upload[]' value=''>";
+					}
+				}
+				</script>
+				{/literal}
+				<div id="file1">上传图片：<input type='file' name='file_upload[]' value=''>&nbsp;<button type="button" id="addf" onclick="addfile();">再加一张？</button>&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;">(最多上传5张图片，格式为 jpg jpeg png gif)</font></div>
+				<div id="file2"></div>
+				<div id="file3"></div>
+				<div id="file4"></div>
+				<div id="file5"></div>
+				<div class="usenecdis" style="text-align:center;width:600px;">
+					<input type="submit" value=" 发布帖子 " class="combotton submit" onclick="return sendcheck();">
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	</form>
+	</div>
+	<div class="tzla_btpbg"></div>
+			
+	<span class="blank10"></span>
+	<span class="blank10"></span><br>
+</div>
+
+{include file="./footer.html"}

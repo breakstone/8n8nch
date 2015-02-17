@@ -1,0 +1,342 @@
+{include file="./mobile/Mypage/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+	{literal}
+<script>
+	function form_submit(flg){
+		document.getElementById("flg").value = flg;
+		document.getElementById("searchform").submit();
+	}
+</script>
+{/literal}
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}"><span class="title">首页</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+				<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+</div>
+<form action="" name="searchform" id="searchform" method="post">
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+	<div id="wrapper_common" style="overflow: hidden;">
+		<div id="scroller">
+			<div class="userdetitle">&nbsp;</div>
+			<div class="useriner clearfix">
+				<div class="cseiiner f_l">
+					<img src="{$BASE_URL}{$user.user_photo_url}" uid="724483" original-title="" ><br>
+					<span>
+					
+						<a href="{$BASE_URL}mypage/photo/" class="bn_grey">修改头像</a>
+				</div>
+				<div class="s_usna">
+					<h2>{$USERNAME}</h2>
+					我的邮箱：<br>{$user.email}{$skill_1}1{$skill_2}2{$skill_3}
+				</div>
+				<div class="chonzi t_r">
+					<a class="botton_red"	href="#">个人信用</a>
+					<div class="mt_10">
+					
+						<span class="fon1d5em">{$user.points}</span>积分
+					</div>
+				</div>
+			</div>
+			<div class="toolenter">
+				<table width="101%" border="0" cellspacing="1" cellpadding="1">
+					<tbody>
+						<tr>
+							<td>
+								<a	href="{$BASE_URL}mypage/">
+									<span	class="ico ico_12"></span><br>我的地盘
+								</a>
+							</td>
+							<td>
+							
+								<a	href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/" original-title="我的空间">
+									<span	class="ico ico_10"></span><br>我的空间
+								</a>
+							</td>
+							<td>
+								<a	href="{$BASE_URL}mypage/myrequirement/?Which_Show=2">
+									<span	class="ico ico_6"></span><br>我的需求
+								</a>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								<a href="{$BASE_URL}mypage/favorite/?Which_Show=2">
+								<span class="ico ico_8"></span><br>我的收藏夹</a>
+							</td>
+							<td><a
+								href="{$BASE_URL}mypage/personal/"><span
+									class="ico ico_5"></span><br>我的简历</a></td>
+							
+						
+							<td>
+								<a href="{$BASE_URL}mypage/pmessage/">
+									<span	class="ico ico_9"></span><br>我的信箱
+								</a>
+							</td>
+							
+						</tr>
+						<tr >
+							<td colspan=3>
+								<div class="us_tabtl">
+									<table width="100%" border="0" cellspacing="0" cellpadding="1" >
+										<tbody>
+											<tr >
+												<td ><a  href="{$BASE_URL}mypage/" >工作信息</a></td>
+												<td  ><a class="on"  style="color:black;" href="{$BASE_URL}mypage/r/"  >人才信息</a></td>
+												<td  ><a href="{$BASE_URL}mypage/j/"  >生活互助</a></td>
+											</tr>
+									</tbody>
+									</table>
+									</div>
+						</tr>
+					</tbody>
+				</table>
+
+				<input type="hidden" value="" name="flg" id="flg">
+				{if $jobs}
+						<select class="input" style="width:100%;font-size: 16px;" name="job_service" id="job_service" onchange="form_submit(2);">
+							{section name="list" loop=$jobs}
+							<option value="{$jobs[list].job_id}" {if $jobs[list].job_id eq $job_id}selected="selected"{/if}>{$jobs[list].job_title|mb_truncate:42}</option>
+							{/section}
+						</select>
+					{else}
+						<center>
+						<div style="font-size: 28px;margin-top: 25px;">还没有发布工作信息？填写信息，人才推荐给你！</div><br>
+						<a href="{$BASE_URL}requirement/work/"><img src="{$BASE_URL}_templates/{$THEME}/img/work_chose.gif"></a><br><br>
+						</center>
+					{/if}
+				
+				
+			</div>
+				<div id="maincon" class="maincon">
+	
+			<ul id="thelist"  data-role="listview">
+				{if $jobs}
+				<br>
+				<li style="text-align:center;"><font size="+1"  color="green" style="vertical-align: middle;">以下是推荐的人才</font></li>
+					{if $job_array_u}
+					{section name="list" loop="$job_array_u"}
+					
+								<li>
+					<a class="" href="{$BASE_URL}people/show/user_{$job_array_u[list].user_id}/">
+								<span class="imgsub">
+									{if $job_array_u[list].user_photo_url}
+									<img src="{$BASE_URL}{$job_array_u[list].user_photo_url}" style="max-width: 80px;"alt="个人照片"/>
+									{else}
+									<img src="{$BASE_URL}_templates/{$THEME}/img/nopicture.png" style="max-width: 80px;" alt="个人照片"/>
+									{/if}
+								</span>
+								<div class="listcont">
+										<h2>{$job_array_u[list].name01} {$job_array_u[list].name02} {if $job_array_u[list].birth neq "0000-00-00"}{$now-$job_array_u[list].birth} 岁{/if}
+															&nbsp;&nbsp;&nbsp;
+															{if $job_array_u[list].sex eq 1}男{/if}
+														{if $job_array_u[list].sex eq 2}女{/if}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</h2>
+										<div class="lins">
+											<span>地址</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$job_array_u[list].pref} {$job_array_u[list].addr01} </span>
+										</div>
+										<div class="lins">
+											<span>职业信息</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$job_array_u[list].kindsname}&nbsp;&nbsp;{$job_array_u[list].typesname|mb_truncate:50}</span>
+										</div>
+										<div class="lins">
+											<span>就职意向</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$job_array_u[list].skill}</span>
+										</div>
+								</div>
+								<span class="clear"></span>
+								<div class="tages" style="padding-left: 0em;">
+									<strong></strong>
+									<span>{$job_array_u[list].mypr|mb_truncate:60}</span>
+								</div>
+						</a>
+					</li>
+							
+					{/section}
+					{else}
+									
+								<li>		还没有适合您的人才，请别急，我们去募集！</li>
+									
+					{/if}
+				<br>
+				<li style="text-align:center;">以下是<font size="+1" color="red">【 {$skill_1} 】</font>相关人才</font></li>
+				{if $user_1}
+					{section name="list" loop="$user_1"}
+					
+								<li>
+					<a class="" href="{$BASE_URL}people/show/user_{$user_1[list].user_id}/">
+								<span class="imgsub">
+										{if $user_1[list].user_photo_url}
+									<img src="{$BASE_URL}{$user_1[list].user_photo_url}" style="max-width: 80px;"alt="个人照片"/>
+									{else}
+									<img src="{$BASE_URL}_templates/{$THEME}/img/nopicture.png" style="max-width: 80px;" alt="个人照片"/>
+									{/if}
+								</span>
+								<div class="listcont">
+										<h2>{$user_1[list].name01} {$user_1[list].name02} 	{if $user_1[list].birth neq "0000-00-00"}{$now-$user_1[list].birth} 岁{/if}
+															&nbsp;&nbsp;&nbsp;
+												{if $user_1[list].sex eq 1}男{/if}
+												{if $user_1[list].sex eq 2}女{/if}
+										</h2>
+										<div class="lins">
+											<span>地址</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$user_1[list].pref} {$user_1[list].addr01}  </span>
+										</div>
+										<div class="lins">
+											<span>职业信息</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$user_1[list].kindsname}&nbsp;&nbsp;{$user_1[list].typesname|mb_truncate:50}</span>
+										</div>
+										<div class="lins">
+											<span>就职意向</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$user_1[list].skill}</span>
+										</div>
+								</div>
+								<span class="clear"></span>
+								<div class="tages" style="padding-left: 0em;">
+									<strong></strong>
+									<span>{$user_1[list].mypr|mb_truncate:60}</span>
+								</div>
+						</a>
+					</li>
+							
+					{/section}
+					{else}
+									
+								<li>		还没有适合您的人才，请别急，我们去募集！</li>
+									
+					{/if}
+						{if $skill_2}
+						<br>
+					<li style="text-align:center;">以下是<font size="+1" color="red">【 {$skill_2} 】</font>相关人才</font></li>
+				{if $user_2}
+					{section name="list" loop="$user_2"}
+					
+								<li>
+					<a class="" href="{$BASE_URL}people/show/user_{$user_2[list].user_id}/">
+								<span class="imgsub">
+										{if $user_2[list].user_photo_url}
+									<img src="{$BASE_URL}{$user_1[list].user_photo_url}" style="max-width: 80px;"alt="个人照片"/>
+									{else}
+									<img src="{$BASE_URL}_templates/{$THEME}/img/nopicture.png" style="max-width: 80px;" alt="个人照片"/>
+									{/if}
+								</span>
+								<div class="listcont">
+										<h2>{$user_2[list].name01} {$user_2[list].name02} 	{if $user_2[list].birth neq "0000-00-00"}{$now-$user_2[list].birth} 岁{/if}
+															&nbsp;&nbsp;&nbsp;
+												{if $user_2[list].sex eq 1}男{/if}
+												{if $user_2[list].sex eq 2}女{/if}
+										</h2>
+										<div class="lins">
+											<span>地址</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$user_2[list].pref} {$user_2[list].addr01} </span>
+										</div>
+										<div class="lins">
+											<span>职业信息</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$user_2[list].kindsname}&nbsp;&nbsp;{$user_2[list].typesname|mb_truncate:50}</span>
+										</div>
+										<div class="lins">
+											<span>就职意向</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$user_2[list].skill}</span>
+										</div>
+								</div>
+								<span class="clear"></span>
+								<div class="tages" style="padding-left: 0em;">
+									<strong></strong>
+									<span>{$user_2[list].mypr|mb_truncate:60}</span>
+								</div>
+						</a>
+					</li>
+							
+					{/section}
+					{else}
+									
+								<li>		还没有适合您的人才，请别急，我们去募集！</li>
+									
+					{/if}
+									
+					{/if}		
+				{if $skill_3}
+				<br>
+						<li style="text-align:center;">以下是<font size="+1" color="red">【 {$skill_3} 】</font>相关人才</font></li>
+									{if $user_3}
+										{section name="list" loop="$user_3"}
+										
+									<li>
+										<a class="" href="{$BASE_URL}people/show/user_{$user_3[list].user_id}/">
+													<span class="imgsub">
+															{if $user_3[list].user_photo_url}
+														<img src="{$BASE_URL}{$user_1[list].user_photo_url}" style="max-width: 80px;"alt="个人照片"/>
+														{else}
+														<img src="{$BASE_URL}_templates/{$THEME}/img/nopicture.png" style="max-width: 80px;" alt="个人照片"/>
+														{/if}
+													</span>
+													<div class="listcont">
+															<h2>{$user_3[list].name01} {$user_3[list].name02} 	{if $user_3[list].birth neq "0000-00-00"}{$now-$user_3[list].birth} 岁{/if}
+																	&nbsp;&nbsp;&nbsp;
+																	{if $user_3[list].sex eq 1}男{/if}
+																	{if $user_3[list].sex eq 2}女{/if}
+															</h2>
+															<div class="lins">
+																<span>地址</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$user_3[list].pref} {$user_3[list].addr01} </span>
+															</div>
+															<div class="lins">
+																<span>职业信息</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$user_3[list].kindsname}&nbsp;&nbsp;{$user_3[list].typesname|mb_truncate:50}</span>
+															</div>
+															<div class="lins">
+																<span>就职意向</span>&nbsp;&nbsp;<span class="c999 fegex">|</span>&nbsp;&nbsp;<span>{$user_3[list].skill}</span>
+															</div>
+													</div>
+													<span class="clear"></span>
+													<div class="tages" style="padding-left: 0em;">
+														<strong></strong>
+														<span>{$user_3[list].mypr|mb_truncate:60}</span>
+													</div>
+											</a>
+									</li>
+								{/section}
+								{else}
+												
+											<li>		还没有适合您的人才，请别急，我们去募集！</li>
+												
+								{/if}
+									
+					{/if}		
+						{/if}	
+			
+			</ul>
+			</div>
+			<br>
+			<div class="login_botton">
+				<a class="red" href="{$BASE_URL}control/mypageC.php?logout">我要注销退出</a>
+			</div>
+			<br>
+			<br>
+		</div>
+	</div>
+	</form>
+	
+	<script type="text/javascript"
+		src="{$BASE_URL}_templates/{$THEME}/mobile/js/commset.js"></script>
+	
+{include file="./mobile/footer.html"}

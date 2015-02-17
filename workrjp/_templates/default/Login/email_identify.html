@@ -1,0 +1,44 @@
+{include file="./header.html" title="登录"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/puerh2.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/grid.css">
+<!-- wrapper -->
+<DIV id=wrapper><!-- container -->
+<DIV id=container><!-- pan -->
+<UL id=pan>
+	<LI><A href="{$BASE_URL}">HOME</A>
+	<LI>&gt; 登录</LI>
+</UL>
+<!-- //pan --><!-- box -->
+<DIV id=box>
+<DIV id=login><SECTION>
+<FORM id=Form accept-charset=utf-8 action="{$BASE_URL}login/logindo" method=post>
+<H1 class=title>请您 邮箱认证</H1>
+<div class="clearfix " style="margin-top: -15px;">
+<!-- 选择类目-->
+	<div id="select" class="tab tab-vertical clearfix" style="text-align: center;">
+		<FORM id=validateform name="form1" class=form method=post action="">
+		<input type="hidden" value="{$BASE_URL}" id="url" name="url">
+		<br><br><br>
+		<div style="text-align: center;">
+			<b style="font-size: 20px;">&nbsp;您的邮箱: <font size="+3">{$email}</font></b>
+			<br><br>
+			<b style="font-size: 20px;">&nbsp;您还没有邮箱认证，请您<a href="{$BASE_URL}regist/email_register/?email={$email}">邮箱认证</a>，使用更方便！</b>
+			<br><br><br>
+			<a href="{$BASE_URL}regist/email_register/?email={$email}">
+			<button type="button" id="logB" class="button" onclick="javascript:void(0);">马上进行邮箱认证</button>
+			</a>
+			&nbsp;
+			<button type="button" id="regB" class="big button" onclick="javascript:window.location.href='{$BASE_URL}mypage/'">进入我的个人空间</button>
+		</div>
+		</FORM>
+		<br><br><br><br><br>
+	</div>
+</div>
+</FORM>
+</SECTION>
+</DIV>
+</DIV>
+</DIV>
+<!-- //container --></DIV>
+{include file="./footer.html"}

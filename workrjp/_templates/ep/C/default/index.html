@@ -1,0 +1,453 @@
+{include file="./header.html" title=$company.company_name}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$company.page_color}">
+{literal}
+<style>
+.simple_style {
+	background: black;
+}
+</style>
+{/literal}
+<!--头部 end-->
+<div class="tombgroud clearfix">
+	{if $company_page.header_pic neq ""}
+	<div class="shopbanner " style="background:#efefef url({$BASE_URL}{$company_page.header_pic}) no-repeat center top;padding-bottom: -50xp;"></div>
+	{else}
+	<div class="shopbanner " style="background-color: black;font-size: 48px;color: white;text-align: center;"><br><br>
+	<b>{if $company_page.header_title neq ""}{$company_page.header_title}{else}{$company.company_name}{/if}</b>
+	{if $company.company_id eq $smarty.session.kiwa_companyid}
+	<a href="{$BASE_URL}cadmin/headpic/" target="_blank"><button>编辑</button></a>
+	{/if}
+	</div>
+	{/if}
+	<div class="flagnav" style="width: 100%">
+		<div class="container_24">
+			<ul class="clearfix" id="ajax_shop_myshop">
+				<li><a class="select" href="/" target="_self">公司首页</a></li>
+				<li><a class="" href="/photo/" target="_self">商品展示</a></li>
+				<li><a class="" href="/msg/" target="_self">Ta的留言</a></li>
+				<li><a class="" href="/clive/" target="_self">Ta的生活服务</a></li>
+				<li><a class="" href="/cjob/" target="_self">Ta的工作信息</a></li>
+				<!-- <li><a class="" href="{$BASE_URL}people/live/company_{$company.company_id}/" target="_self">Ta的闲聊</a></li> -->
+				<li><a class="" href="/company_pr/" target="_self">关于我们</a></li>
+				{if $company.company_id eq "141113009425" || $company.company_id eq "071445274801" || $company.company_id eq "161559139290"}
+				<li><a class="" href="{$BASE_URL}kiwalogin/?id={$company.company_id}" target="_self">员工登陆</a></li>
+				{/if}
+				{if $company.company_id eq $smarty.session.kiwa_companyid}
+					{if $company_page.newFunction neq ""}
+					<li><a class="" href="{$BASE_URL}online/login/" target="_self">{$company_page.newFunction}</a></li>
+					{/if}
+				{/if}
+				{if $company.company_id eq $smarty.session.kiwa_companyid}
+				<li style="float: right;">
+				<a href="{$BASE_URL}cadmin/" target="_blank"><img src="{$BASE_URL}_templates/{$THEME}/img/seti.png" style="margin-top: -5px;"><button>主页管理</button></a></li>
+				{/if}
+			</ul>
+		</div>
+	</div>
+</div>
+{if $company_page.qq neq ""}
+<!--客服-->
+<div class="cus_ser_box" style="top: 290px;">
+	<div class="po_re clearfix">
+		<table border="0" class="clearfix">
+			<tbody>
+				<tr>
+					<th><h3>采用担当</h3></th>
+				</tr>
+				<tr class="odd">
+					<td><a href="http://wpa.qq.com/msgrd?v=3&uin=27566038&site=qq&menu=yes" target="_blank"> 庞涛</a></td>
+				</tr>
+				<tr class="odd">
+					<td><a href="http://wpa.qq.com/msgrd?v=3&uin=130285388&site=qq&menu=yes" target="_blank"> 徐晓伟</a></td>
+				</tr>
+				<tr class="odd">
+					<td><a href="http://wpa.qq.com/msgrd?v=3&uin=10461638&site=qq&menu=yes" target="_blank"> 李蕊男</a></td>
+				</tr>
+				<tr class="odd">
+					<td><a href="http://wpa.qq.com/msgrd?v=3&uin=2954588611&site=qq&menu=yes" target="_blank"> 许雅宁</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<table border="0" class="clearfix">
+			<tbody>
+				<tr>
+					<th><h3 style="font-size: ">工资咨询</h3></th>
+				</tr>
+				<tr class="odd">
+					<td><a href="http://wpa.qq.com/msgrd?v=3&uin=270069934&site=qq&menu=yes" target="_blank"> 王伟</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<table border="0" class="clearfix">
+			<tfoot><tr><td><a style="background: none; padding: 0;" href="javascript:void(0);">&nbsp;</a></td></tr></tfoot>
+		</table>
+	</div>
+</div>
+<!--客服 end-->
+{/if}
+<div class="container_24 clearfix">
+	<span class="blank10"></span>
+	{if $company_page.turn_pic1 neq ""}
+	<div class="banner clearfix  po_re mt_5 mb_10">
+		<div id="trend">
+			<div id="trendNum" class="clearfix">
+			{if $company.company_id eq $smarty.session.kiwa_companyid}
+			<a href="{$BASE_URL}cadmin/turnpic/" target="_blank"><button>更换图片</button></a>
+			{/if}
+			<br>
+			{if $company_page.turn_pic1 neq ""}
+			  <span aid="1" class="trend_num_selected">1</span>
+			{/if}
+			{if $company_page.turn_pic2 neq ""}
+			  <span aid="2" class="trend_num">2</span>
+			{/if}
+			{if $company_page.turn_pic3 neq ""}
+			  <span aid="3" class="trend_num">3</span>
+			{/if}
+			{if $company_page.turn_pic4 neq ""}
+			  <span aid="4" class="trend_num">4</span>
+			{/if}
+			{if $company_page.turn_pic5 neq ""}
+			  <span aid="5" class="trend_num">5</span>
+			{/if}
+			</div>
+			<div id="trendimg" move="1000" style="left: 0px;">
+			<ul class="trendli">
+	
+			{if $company_page.turn_pic1 neq ""}
+			  <li>
+			  {if $company_page.turn_link1 neq ""}
+			  <a href="{$company_page.turn_link1}" target="_blank"><img src="{$BASE_URL}{$company_page.turn_pic1}" style="width:1000px;height:350px;" original-title=""></a>
+			  {else}
+			  <img src="{$BASE_URL}{$company_page.turn_pic1}" style="width:1000px;height:350px;" original-title="">
+			  {/if}
+			  </li>
+			{/if}
+			{if $company_page.turn_pic2 neq ""}
+			  <li>
+			  {if $company_page.turn_link2 neq ""}
+			  <a href="{$company_page.turn_link2}" target="_blank"><img src="{$BASE_URL}{$company_page.turn_pic2}" style="width:1000px;height:350px;" original-title=""></a>
+			  {else}
+			  <img src="{$BASE_URL}{$company_page.turn_pic2}" style="width:1000px;height:350px;" original-title="">
+			  {/if}
+			  </li>
+			{/if} 
+			{if $company_page.turn_pic3 neq ""}
+			  <li>
+			  {if $company_page.turn_link3 neq ""}
+			  <a href="{$company_page.turn_link3}" target="_blank"><img src="{$BASE_URL}{$company_page.turn_pic3}" style="width:1000px;height:350px;" original-title=""></a>
+			  {else}
+			  <img src="{$BASE_URL}{$company_page.turn_pic3}" style="width:1000px;height:350px;" original-title="">
+			  {/if}
+			  </li>
+			{/if} 
+			{if $company_page.turn_pic4 neq ""}
+			  <li>
+			  {if $company_page.turn_link4 neq ""}
+			  <a href="{$company_page.turn_link4}" target="_blank"><img src="{$BASE_URL}{$company_page.turn_pic4}" style="width:1000px;height:350px;" original-title=""></a>
+			  {else}
+			  <img src="{$BASE_URL}{$company_page.turn_pic4}" style="width:1000px;height:350px;" original-title="">
+			  {/if}
+			  </li>
+			{/if} 
+			{if $company_page.turn_pic5 neq ""}
+			  <li>
+			  {if $company_page.turn_link5 neq ""}
+			  <a href="{$company_page.turn_link5}" target="_blank"><img src="{$BASE_URL}{$company_page.turn_pic5}" style="width:1000px;height:350px;" original-title=""></a>
+			  {else}
+			  <img src="{$BASE_URL}{$company_page.turn_pic5}" style="width:1000px;height:350px;" original-title="">
+			  {/if}
+			  </li>
+			{/if} 
+			</ul>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/adshow.js"></script>
+	{else}
+		{if $document}
+		<div class="banner clearfix  po_re mt_5 mb_10">
+			<div id="trend">
+				<div id="trendNum" class="clearfix">
+				  {if $company.company_id eq $smarty.session.kiwa_companyid}
+				  <a href="{$BASE_URL}cadmin/turnpic/" target="_blank"><button>更换图片</button></a>
+				  {/if}
+				  <br>
+				  <span aid="1" class="trend_num_selected">1</span>
+				  <span aid="2" class="trend_num">2</span>
+				  <span aid="3" class="trend_num">3</span>
+				</div>
+				<div id="trendimg" move="1000" style="left: 0px;">
+				<ul class="trendli">
+				  <li><img src="{$BASE_URL}_templates/{$THEME}/C/img/turn_pic/{$document.type_english}/{$suiji[0]}.jpg" style="width:1000px;height:350px;" original-title=""></li>
+				  <li><img src="{$BASE_URL}_templates/{$THEME}/C/img/turn_pic/{$document.type_english}/{$suiji[1]}.jpg" style="width:1000px;height:350px;" original-title=""></li>
+				  <li><img src="{$BASE_URL}_templates/{$THEME}/C/img/turn_pic/{$document.type_english}/{$suiji[2]}.jpg" style="width:1000px;height:350px;" original-title=""></li>
+				</ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/js/adshow.js"></script>
+		{/if}
+	{/if}
+	<!--内容主体-->
+	<div class="detaileft wid230 fl_l">
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span><img src="{$BASE_URL}{$company.company_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;"></span>
+				<h2>{$company.company_name}</h2>
+				<div class="c666">
+				{if $company.pref_cd}
+				所在地区： {getname name="area" value=$company.pref_cd} - {getname name="pref" value=$company.pref_cd}
+				{/if}
+				</div>
+				<div class="c666">
+				{if $company.points}
+					积分状况：&nbsp;<font style="font-size:16px;">{$company.points}</font> 积分
+				{/if}
+				</div>
+				<div class="c666">
+					认证状况： 
+					{if $company.status eq 1}
+						<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span>
+					{else}
+						还没有任何认证
+					{/if}
+					<!-- 
+					<span class="icoident icosm_on" title="实名认证">&nbsp;</span>
+					<span class="icoident icosj_on" title="手机认证">&nbsp;</span>
+					 -->
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							{if $flag eq "user"}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">我要联系TA</a></span>
+							{/if}
+							{if $flag eq "company"}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$company.company_id}/">我要联系TA</a></span>
+							{/if}
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							{if $flag eq "user"}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">我要联系TA</a></span>
+							{/if}
+							{if $flag eq "company"}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$company.company_id}/">我要联系TA</a></span>
+							{/if}
+						{/if}
+						<div class="invita clearfix">
+							<a href="javascript:;" style="width: 197px;color: red;" onclick="favorite('{$company.company_id}','{$flag}');">加 TA 好友</a>
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+					<!-- JiaThis Button BEGIN -->
+					<div class="jiathis_style_32x32" style="margin-top: 10px;margin-left: 10px;">
+						<a class="jiathis_button_weixin"></a>
+						<a class="jiathis_button_qzone"></a>
+						<a class="jiathis_button_fb"></a>
+						<a class="jiathis_button_tsina"></a>
+						<a class="jiathis_button_cqq"></a>
+					</div>
+					<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1395363105176256" charset="utf-8"></script>
+					<!-- JiaThis Button END -->
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$company.create_date|date_format:'%Y年%m月%d日'}</span><br>
+				<span class="c666">访问人数：<strong>{$company.see_page}</strong></span>
+			</div>
+		</div>
+		<!-- 
+		<span class="blank10"></span>
+		<div class="shopindex">
+			<div class="tztitle">
+				<em class="fl_l"><strong>Ta的综合评价</strong></em>
+			</div>
+			<ul>
+				<li style="background-color: rgb(249, 249, 249); background-position: initial initial; background-repeat: initial initial;"><em>身份认证：</em>
+				<a original-title="10分" class="starsp" score="5" style="width: 100px;"></a></li>
+				<li style="background-color: rgb(249, 249, 249); background-position: initial initial; background-repeat: initial initial;"><em>Ta的评价：</em>
+				<a original-title="50分" class="starsp" score="5" style="width: 100px;"></a></li>
+			</ul>
+		</div>
+		 -->
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>联系方式</strong></em>
+				{if $company.company_id eq $smarty.session.kiwa_companyid}
+				<a href="{$BASE_URL}cadmin/clian/" target="_blank" style="float:right;"><button>编辑</button></a>
+				{/if}
+			</div>
+			<ul class="pad10">
+				<li><strong>{$company.company_name}</strong></li>
+				<li id="left_phone">{if $company.tel01}电话：{$company.tel01}-{$company.tel02}-{$company.tel03}{/if}</li>
+				<li id="left_phone">{if $company.fax01}FAX ：{$company.fax01}-{$company.fax02}-{$company.fax03}{/if}</li>
+				<li id="left_email">邮箱：{$company.company_email}</li>
+				<li>
+				{if $company.pref}
+				地址：{$company.pref} {$company.addr01} {$company.addr02}
+				{/if}
+				</li>
+				<li>
+				{if $yuming neq ""}
+				网址: <a href="http://{$yuming}.8n8n.co.jp" target="_blank">http://{$yuming}.8n8n.co.jp</a>
+				{/if}
+				</li>
+			</ul>
+			{if $yuming neq ""}
+			<center><iframe src="{$BASE_URL}cadmin/qr.php?url={$yuming}" height="220px;" width="220px;"></iframe></center>
+			{else}
+				{if $company.company_id eq $smarty.session.kiwa_companyid}
+				<center><a href="{$BASE_URL}cadmin/set2domain/" target="_blank"><button>申请二级域名</button></a></center><br>
+				{/if}
+			{/if}
+		</div>
+		{if $company.company_id eq $smarty.session.kiwa_companyid}
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>更改版本颜色</strong></em>
+			</div>
+			<ul class="pad10">
+				<div style="padding-top:5px;">
+					<a href="page_set/?color=red" title="红"><img src="{$BASE_URL}_templates/{$THEME}/img/red.jpg"></a>
+					<a href="page_set/?color=black" title="黑"><img src="{$BASE_URL}_templates/{$THEME}/img/black.jpg"></a>
+					<a href="page_set/?color=blue" title="蓝"><img src="{$BASE_URL}_templates/{$THEME}/img/blue.jpg"></a>
+					<a href="page_set/?color=green" title="绿"><img src="{$BASE_URL}_templates/{$THEME}/img/green.jpg"></a>
+					<a href="page_set/?color=orange" title="橙"><img src="{$BASE_URL}_templates/{$THEME}/img/orange.jpg"></a>
+					<a href="page_set/?color=purple" title="紫"><img src="{$BASE_URL}_templates/{$THEME}/img/purple.jpg"></a>
+				</div>
+			</ul>
+		</div>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+	<div class="wid750 fl_r">
+		<div class="tz_details">
+			<div class="tz_detailcon clearfix">
+				<div class="conx">
+					{$company.company_text|nl2br|mb_truncate:162}
+					{if $company.company_id eq $smarty.session.kiwa_companyid}
+					<a href="{$BASE_URL}cadmin/cpr/" target="_blank" style="float:right;"><button>编辑</button></a>
+					{/if}
+				</div>
+			</div>
+			<div class="tztags">
+				<span class="fl_l">营业范围：</span>
+				<div class="tztagal">
+				{if $company.skill}
+					{assign var=skill value=","|explode:$company.skill}
+					{section name="list" loop=$skill}<a>{$skill[list]}</a>{/section}
+				{else}
+					Ta很懒，还没有填写擅长！
+				{/if}
+				</div>
+			</div>
+		</div>
+		<span class="blank10"></span>
+		<div class="tzlatset mt_10">
+			<div class="tztitle">
+				<em class="fl_l"><strong>我的最新动态</strong></em>
+			</div>
+			<div class="pad20">
+				<div class="tzla_topbg"></div>
+				<div class="tzdongtai">
+					{if $lives or $jobs}
+						{section name="list" loop="$jobs"}
+						<div class="tzelement clearfix">
+							<div class="ematbg fl_l"></div>
+							<div class="pl_tz">
+								<span class="c999"></span>&nbsp;<span class="mtr_5 c396">{$company.company_name}</span>
+								在【工作信息】发表了 <span class="c06c"><a href="{$BASE_URL}job/show/{$jobs[list].job_id}/" target="_blank">{$jobs[list].job_title|mb_truncate:160}</a></span>
+								{if $smarty.section.list.index eq 2}
+								&nbsp;&nbsp;&nbsp;<a href="cjob/">更多...</a>
+								{/if}
+							</div>
+						</div>
+						{/section}
+						{section name="list" loop="$lives"}
+						<div class="tzelement clearfix">
+							<div class="ematbg fl_l"></div>
+							<div class="pl_tz">
+								<span class="c999"></span>&nbsp;<span class="mtr_5 c396">{$company.company_name}</span>
+								在【生活互助】发表了 <span class="c06c"><a href="{$BASE_URL}live/show/{$lives[list].live_id}/" target="_blank">{$lives[list].live_title|mb_truncate:38}</a></span>
+								{if $smarty.section.list.index eq 2}
+								&nbsp;&nbsp;&nbsp;<a href="clive/">更多...</a>
+								{/if}
+							</div>
+						</div>
+						{/section}
+					{else}
+						&nbsp;&nbsp;&nbsp;Ta很懒，还没有发布任何信息！
+					{/if}
+				</div>
+				<div class="tzla_btpbg"></div>
+			</div>
+		</div>
+		<span class="blank10"></span>
+		<div class="shopintroduce">
+			<div class="tztitle">
+				<em class="fl_l"><strong>我们的商品展示</strong></em>
+				{if $company.company_id eq $smarty.session.kiwa_companyid}
+				<a href="/photoadd/" class="fl_r c333"><button>添加商品</button></a>
+				{/if}
+			</div>
+			<ul class="clearfix">
+			{if $photo}
+				{section name="list" loop="$photo"}
+				<li style="height: auto;">
+					<a href="photoshow/{$photo[list].Id}/" class="imsgcbx"><img width="220" height="220" src="{$BASE_URL}{$photo[list].photo_url}" alt="" style="display: inline;"></a>
+					<div class="mb_5">
+						<b class="cea5">{$photo[list].title|mb_truncate:14}</b>
+					</div>
+				</li>
+				{/section}
+			{else}
+				&nbsp;&nbsp;&nbsp;Ta 还没有发布任何商品！
+				<br><br>
+			{/if}
+			</ul>
+		</div>
+		<span class="blank10"></span>
+		<div class="tzlatset mt_10">
+			<div class="tztitle">
+				<em class="fl_l"><strong>Ta的留言</strong></em><a href="msg/" class="fl_r c333">更多&nbsp;&gt;</a>
+			</div>
+			<div class="pad20">
+				<div class="tzla_topbg"></div>
+				<div class="tzdongtai">
+					<div class="tzelement clearfix">
+						<div class="ematbg fl_l"></div>
+						{if $msgs}
+							{section name="list" loop="$msgs"}
+							<div class="pl_tz">
+								<span class="c999"></span>&nbsp;
+								<span class="mtr_5 c396">
+								{if $msgs[list].msg_user_type eq "user"}
+									{getname name="username" value=$msgs[list].msg_user_id}
+								{/if}
+								{if $msgs[list].msg_user_type eq "company"}
+									{getname name="company_name" value=$msgs[list].msg_user_id}
+								{/if}
+								</span>
+								留言了 <span class="c06c">{$msgs[list].msg_content}</span>
+							</div>
+							{/section}
+						{else}
+							还没有人给Ta留言！&nbsp;&nbsp;&nbsp; <a href="msg/">我来留言</a>
+						{/if}
+					</div>
+				</div>
+				<div class="tzla_btpbg"></div>
+			</div>
+		</div>
+		<span class="blank10"></span><br>
+	</div>
+</div>
+<!--头部 end-->
+{include file="./footer.html"}

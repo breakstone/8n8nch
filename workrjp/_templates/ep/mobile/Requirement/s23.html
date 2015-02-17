@@ -1,0 +1,343 @@
+{include file="./mobile/Requirement/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/live.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/check.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+{literal}
+
+<script>
+function yanzheng()
+{
+		if(document.getElementById("areaid").value=="" || document.getElementById("pref").value==""){
+			alert("请选择「住址（都道府县）」");
+		}
+		else
+			{
+			$("#condition_list1").show().animate( { left: "0"}, 200 );
+			//myScroll.refresh();
+			}
+}
+function want_show(flag){
+	if(flag==0){
+	$("#want_0_type").show();
+	$("#want_1_type").hide();
+
+
+}
+if(flag==1){
+	$("#want_0_type").hide();
+	$("#want_1_type").show();
+	
+}
+}
+
+</script>
+{/literal}
+
+	<div id="wrapper_release">
+		<div id="scroller">
+			<div class="us_tabtl" style="padding-top:4.5em;">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a href="{$BASE_URL}requirement/">第一步</a></td>
+							<td><a class="on">第二步</a></td>
+							<td><a>第三步</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		<div class="tlli_b">
+					<span class="fon1d5em">发表「公司注册」需求</span>
+			</div>
+			<div class="table_form">
+	<FORM id="validateform" name="form1" class=form method=post action="{$BASE_URL}requirement/save/" enctype="multipart/form-data">
+					<table width="100%" border="0" cellspacing="1" cellpadding="1">
+						<input type="hidden" value="s23" name="service_id">
+									
+							<tr>
+								<td style="width:30%"><span class="f_l c999" >发布者 <SPAN class=att>※</SPAN></span></td>
+								<td>
+								<label class="form-label"><input class="radioInput" type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" checked="checked" value="0" data-parent=".p-line">提供帮助 公司注册</label>
+								<br><label class="form-label"><input class="radioInput" type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" value="1" data-parent=".p-line">需要帮助 公司注册</label>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">地点 <SPAN class=att>※</SPAN></span></td>
+								<td>
+									<select name="areaid" id="areaid" onchange="showPref();" class="input">
+										<option value="">请选择区域</option>
+										<option value="">---------------</option>
+										{section name="list" loop="$areas"}
+											<option value="{$areas[list].area_cd}"
+											{if $areas[list].area_cd eq $areaid}
+												selected='selected'
+											{/if}
+											>{$areas[list].area_name}</option>
+										{/section}
+									</select>
+									<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+									<select name="pref" id="pref" onchange="giveToeki()" class="input">
+										<option value="">请选择县</option>
+										<option value="">---------------</option>
+										{if $prefSearch}
+											{section name="list" loop="$prefSearch"}
+												<option value="{$prefSearch[list].pref_cd}"
+												{if $prefSearch[list].pref_cd eq $pref_cd}selected='selected'{/if}
+												>{$prefSearch[list].name}</option>
+											{/section}
+										{/if}
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">选择车站</span></td>
+								<td>
+								<a	 onclick="yanzheng()"  href="javascript:void(0);" >
+										<img   src="{$BASE_URL}js/ek_files/ek.png" onclick="showStation(document.getElementById('pref').value)">
+									</a>
+									
+										<input type="hidden" name="searchEki">
+										<input type="hidden" name="reqType" value="">
+										<input type="hidden" name="mid_area_cd" value="">
+										<input type="hidden" name="mid_area_cds" value="">
+										<input type="hidden" name="comp_mgr_no" value="">
+										<input type="hidden" name="base_mgr_no" value="">
+										<input type="hidden" name="id_ad" value="">
+										<input type="hidden" name="new_flg" value="">
+										<input type="hidden" name="query_str" value="?">
+										<input type="hidden" name="query_flg" value="">
+										
+										<p id="js-detailSearch-search-animation" class="animate" ></p>
+										<ul style="margin-left: 3px; line-height: 2px;">
+										<span class="ensn_list" id="ensn_list">
+										
+										</span>
+										</ul>
+								</td>
+							</tr>
+							<tr>
+								<td style="width:30%"><span class="f_l c999" >标题 <SPAN class=att>※</SPAN></span></td>
+								<td>
+								<input type="text" size="25"  class="input input-60" name="live_title" id="live_title">&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;">(任务标题最多40字)</font>
+								</td>
+							</tr>
+							<tr>
+								<td style="width:30%"><span class="f_l c999" >补充内容 <SPAN class=att>※</SPAN></span></td>
+								<td>
+									<textarea class="input" cols="32" rows="6" name="live_content" id="live_content"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td style="width:30%"><span class="f_l c999" >上传图片</span></td>
+								<td>
+									<div class="publish-detail-item publish-detail-item">
+										{literal}
+										<script>
+										var index = 1;
+										function addfile(){
+											index = index +1;
+											if(index>5){
+												alert("最多上传5张图片！");
+												document.getElementById("addf").disabled='disabled';
+											}else{
+												document.getElementById("file"+index).innerHTML += "<input type='file' style='width:180px' name='file_upload[]' value=''>";
+											}
+										}
+										</script>
+										{/literal}
+										<div id="file1"><input style="width:180px" type='file' name='file_upload[]' value=''>&nbsp;
+										<input class="big button" type="button" id="addf" onclick="addfile();" value="再加一张？"></a>&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;"><br>(最多上传5张图片，格式为 jpg jpeg png gif)</font></div>
+										<div id="file2"></div>
+										<div id="file3"></div>
+										<div id="file4"></div>
+										<div id="file5"></div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td style="width:30%"><span class="f_l c999" >联系方式 <SPAN class=att>※</SPAN></span></td>
+								<td>
+									<select name="lianxi_type" id="lianxi_type" class="input" style="width: 80px;">
+										
+										<option value="電話">電話</option>
+										<option value="Email">Email</option>
+										<option value="QQ号">QQ号</option>
+										<option value="微信">微信</option>
+									</select>
+									<br><br>
+									<input type="text" name="lianxi_hao" id="lianxi_hao" class="input" size="25">
+									&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;">(真实的联系方式有助于更快的完成您的需求)</font>
+								</td>
+							</tr>
+						<tr>
+								<td colspan="2" style="text-align: center;">
+								<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+								发布即代表您已阅读并同意《<a href="{$BASE_URL}regist/terms/" target="_blank">帮帮网使用协议</a>》<br>
+								</td>
+							</tr>
+							
+
+					</table>
+					{if $smarty.session.kiwa_userid eq '' and $smarty.session.kiwa_companyid eq ''}
+			<table width="100%" border="0" cellspacing="1" cellpadding="1">
+			<tr>
+								<td colspan="2" style="text-align: center;">
+								是否已经注册用户?
+								</td>
+							</tr>
+							<tr>
+								<td  style="width:50%;text-align: center;">
+								<button type="button" id="logB" class="big button" onclick="loginshow();">已 注 册 登 陆</button>&nbsp;
+								</td>
+								<td  >
+									<button type="button" id="regB" class="big button" onclick="registershow();">未 注 册 直 接 发 表 </button>
+								</td>
+							</tr>
+							</table>
+					<div id="login" style="display: none;">
+							<table width="100%" border="0" cellspacing="1" cellpadding="1">
+								<tr>
+									<td>邮箱地址:</td>
+									<td>
+										<input type="text" name="login_email" id="login_email" class="input input-60" size="25">
+									</td>
+								</tr>
+								<tr>
+									<td>密　　码:</td>
+									<td>
+										<input type="password" name="login_pw" id="login_pw" class="input input-60" size="25">
+									</td>
+								</tr>
+								
+							</table>
+							<div class="login_botton">
+							<button class="red" id="next"  id="next" name="nlogin_B" onclick="return s23_check('login');">登 陆 并 发 表</button>
+							
+							</div>	
+					</div>
+					<div id="register" style="display: none;">
+							<table width="100%" border="0" cellspacing="1" cellpadding="1">
+							<tr>
+								<td>用户类型:</td>
+									<td>
+										<label for="user"><input type="radio" name="usertype" id="user" value="user">个人用户</label>
+										<label for="company"><input type="radio" name="usertype" id="company" value="company">企业用户</label>
+									</td>
+							</tr>
+								<tr>
+								<td>用户名称:</td>
+								<td>
+										<input type="text" class="input" name="register_name" id="register_name" size="25">
+								</td>
+								</tr>
+								<tr>
+								<td>邮箱地址:</td>
+									<td>
+										<div id="tellOk"></div>
+										<input type="text" class="input input-60" name="register_email" id="email" onblur="EmailAjax()" value="" size="25">
+									</td>
+								</tr>
+								<tr>
+								<td>密　　码:</td>
+								<td>
+										<input type="password" class="input input-60" name="register_pw" id="register_pw" size="25">
+									</td>
+								</tr>
+								<tr>
+								<td>确认密码:</td>
+									<td>
+										<input type="password" class="input input-60" name="register_repw" id="register_repw" size="25">
+									</td>
+								</tr>
+							
+							</table>
+							<div class="login_botton">
+							<button class="red" id="next"  name="rgister_B" onclick="return s23_check('register');">注 册 并 发 表</button>
+							
+							</div>	
+					</div>
+					{else}
+						<div class="login_botton">
+						<button class="red" id="next" onclick="return s23_check();" name="hlogin_B">发　表　需　求</button>
+						
+						</div>	
+					{/if}
+			
+				</form>
+				<br><br>
+			</div>
+			
+		</div>
+		</div>
+		<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/css_other/car.css">
+	<!-- //wrapper -->
+
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_shok.js"></script>
+ <script src="{$BASE_URL}_templates/{$THEME}/mobile/js/layer_ensn_requirement.js"></script><!--此处修改了关闭 -->
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+			<div style="overflow:scroll;position:fixed; " id="condition_list1" class="condition_list1 pad10">
+				<div id="condison_relat">
+					<div id="condison_absolut" style="overflow: hidden;">
+							<dl class="condition clearfix">
+								<!-- 線・駅 -->
+								<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height:auto; width: 100%; z-index: 1004; top: 0px; left: 0px;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+<!-- common-dialog-conditionSelect -->
+<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+<div class="pattern-2">
+	<div class="bg01">
+		<div class="pt01">
+			<h2>选择沿线</h2>
+			<p><a href="javascript:void(0);" id="js-dialog-station-close">
+			<img id="cacelSelect" src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+		</div>
+		
+		<div id="ensn-tdfk-view" style="display: block;">
+		<span id="ensn-tdfk-data">
+			<div class="pt03" id="js-ensn-tdfk-tabs">
+			<ul>
+				<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);" id="eki_pref_title">{if $user.pref_cd}{getname name="pref" value=$user.pref_cd}{/if}</a></li>
+			</ul>
+			</div>
+			<!-- tab start -->
+			<div class="ensn-01" id="ensn-tab1">
+			<div class="pt05" id="js-dialog-station-lists">
+			<div class="bg02">
+				<h3 class="close"><a href="javascript:void(0);" id="eki_pref">{if $user.pref_cd}{getname name="pref" value=$user.pref_cd}{/if}</a></h3>
+				<section id="station-lists">
+				</section>
+			</div>
+			</div>
+			</div>
+			<!-- //tab end -->
+		</span>
+		</div>
+						<div class="pt07">
+											<div class="pt07a">已经选择的沿线：<div id="selected-ensn">请选择沿线</div></div>
+											<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+										</div>
+		
+		<div class="pt08">
+			<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+		</div>
+	</div>
+</div>
+</div>
+<!-- //common-dialog-conditionSelect -->
+</div>
+</div>
+						
+							</dl>
+					</div>
+				</div>
+			</div>
+	<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commsetrequirement.js"></script>
+{include file="./mobile/footer.html"}

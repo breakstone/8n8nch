@@ -1,0 +1,142 @@
+{include file="./header.html" title="个人-生活动态"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$users.page_color}">
+
+<!--头部 end-->
+<div class=" tombgroud nohomshop clearfix">
+	<div class="flagnav">
+		<div class="container_24">
+			<ul class="clearfix" id="ajax_shop_myshop">
+				<li><a class="" href="{$BASE_URL}people/show/user_{$users.user_id}/" target="_self">个人首页</a></li>
+				<li><a class="" href="{$BASE_URL}people/photo/user_{$users.user_id}/" target="_self">个人相册</a></li>
+				<li><a class="" href="{$BASE_URL}people/msg/user_{$users.user_id}/" target="_self">留言板</a></li>
+				<li><a class="select" href="{$BASE_URL}people/job/user_{$users.user_id}/" target="_self">Ta的动态</a></li>
+				<li><a class="" href="{$BASE_URL}people/pr/user_{$users.user_id}/" target="_self">Ta的简历</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br>
+<div class="container_24 clearfix">
+	<!--内容主体-->
+	<div class="detaileft wid230 fl_l">
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span><img src="{$BASE_URL}{$users.user_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;"></span>
+				<h2>{$users.name01}{$users.name02}</h2>
+				<div class="c666">所在地区： {getname name="area" value=$users.pref_cd} - {getname name="pref" value=$users.pref_cd}</div>
+				<div class="c666">
+					积分状况：&nbsp;<font style="font-size:16px;">{$users.points}</font> 积分
+				</div>
+				<div class="c666">
+					{if $users.status eq 1}
+					认证状况： 
+					<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span>
+					{/if}
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">我要联系TA</a></span>
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">我要联系TA</a></span>
+						{/if}
+						<div class="invita clearfix">
+						{if $smarty.session.kiwa_userid neq $users.user_id and $smarty.session.kiwa_companyid neq $users.user_id}
+							<a style="width: 197px;color: red;" href="javascript:void(0);" onclick="favorite('{$users.user_id}','{$flag}');">关注Ta</a>
+						{/if}
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+					
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$users.create_date|date_format:'%Y年%m月%d日'}</span><br>
+				<span class="c666">访问人数：<strong>{$users.see_page}</strong></span>
+			</div>
+		</div>
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>个人资料</strong></em>
+			</div>
+			<ul class="pad10">
+				<li><strong>{$users.name01}{$users.name02}</strong></li>
+				<li>{if $users.sex}性别：{$usersex}{/if}</li>
+				<li>{if $users.birth neq "0000-00-00"}年龄：{$age}岁{/if}</li>
+				<li id="left_phone">电话：{if $users.tel_flag eq 1}<font style="font-size:16px;">{if $users.tel01}{$users.tel01}-{$users.tel02}-{$users.tel03}{/if}</font>{/if}{if $users.tel_flag eq 2}非公开{/if}</li>
+				<li id="left_email">邮箱：{if $users.per_status eq 1}<font style="font-size:16px;">{$users.email}</font>{/if}{if $users.per_status eq 2}非公开{/if}</li>
+				<li>地址：{$users.pref}{$users.addr01}</li>
+			</ul>
+		</div>
+		{if $users.user_id eq $smarty.session.kiwa_userid}
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>更改版本颜色</strong></em>
+			</div>
+			<ul class="pad10">
+				<div style="padding-top:5px;">
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=red" title="红"><img src="{$BASE_URL}_templates/{$THEME}/img/red.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=black" title="黑"><img src="{$BASE_URL}_templates/{$THEME}/img/black.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=blue" title="蓝"><img src="{$BASE_URL}_templates/{$THEME}/img/blue.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=green" title="绿"><img src="{$BASE_URL}_templates/{$THEME}/img/green.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=orange" title="橙"><img src="{$BASE_URL}_templates/{$THEME}/img/orange.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=purple" title="紫"><img src="{$BASE_URL}_templates/{$THEME}/img/purple.jpg"></a>
+				</div>
+			</ul>
+		</div>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+	<div class="wid750 fl_r">
+		<div class="detaibox box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>生活互助动态</strong></em>
+			</div>
+			<div class="pad20 hpsevbg">
+			</div>
+			<div class="corllevalut clearfix" id="mark">
+				<span><a href="{$BASE_URL}people/job/user_{$users.user_id}/" target="_self">Ta的工作（{$job_nums}）</a></span>
+				<span><a href="{$BASE_URL}people/bbs/user_{$users.user_id}/" target="_self">Ta的闲聊（{$bbs_nums}）</a></span>
+				<span class="on"><a href="{$BASE_URL}people/live/user_{$users.user_id}/" target="_self">Ta的生活互助（{$live_nums}）</a></span>
+			</div>
+			<div class="pad20">
+				<div class="tzla_topbg"></div>
+				<div class="tzdongtai">
+					{if $lives}
+						{section name="list" loop="$lives"}
+						<div class="tzelement clearfix">
+							<div class="ematbg fl_l"></div>
+							<div class="pl_tz">
+								<span class="c999"></span>&nbsp;<span class="mtr_5 c396">{$users.name01}{$users.name02}</span>
+								在【生活互助】发表了 <span class="c06c"><a href="{$BASE_URL}live/show/{$lives[list].live_id}/" target="_blank">{$lives[list].live_title}</a></span>
+							</div>
+						</div>
+						{/section}
+						<div style="float: right;">{$subPages}</div>
+					{else}
+						Ta很懒，还没有发布任何信息！<br><br>
+						<font style="color:red;font-size:14px;">以下为最新的生活互助信息</font>
+						{section name="list" loop="$lives_tj"}
+						<div class="tzelement clearfix">
+							<div class="ematbg fl_l"></div>
+							<div class="pl_tz">
+								<font style="color:green">【{$lives_tj[list].service_name}】</font>
+								<a href="{$BASE_URL}live/show/{$lives_tj[list].live_id}/" target="_blank">{$lives_tj[list].live_title}</a></span>
+							</div>
+						</div>
+						{/section}
+					{/if}
+				</div>
+				<div class="tzla_btpbg"></div>
+			</div>
+		</div>
+	</div>
+</div>
+{include file="./footer.html"}

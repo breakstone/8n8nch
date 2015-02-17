@@ -1,0 +1,164 @@
+{include file="./header.html" title="マイページ"}
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; マイページ</li>
+</ul>
+<!-- //pan --> <!-- rightBox -->
+<div id="rightBox">
+<div id="mypage"><section>
+<h1 class="title half">マイページ</h1>
+<div id="mypageInfoWrapper">
+
+<dl id="mypageInfo">
+	<dt>お知らせ</dt>
+	<dd>適性検査ツールを導入いたしました。会員の皆様は無料で診断可能ですので、是非ご利用下さい。</dd>
+</dl>
+</div>
+<h2 class="title">WEB履歴書</h2>
+<table summary="WEB履歴書" class="tableStyle">
+	<tbody>
+		<tr>
+			<th class="no"></th>
+			<th>ステータス</th>
+			<th>リクエストマッチ</th>
+			<th>オープンオファー</th>
+			<th>スカウト</th>
+			<th>登録・変更</th>
+		</tr>
+		<tr>
+			<td class="title">利用状況</td>
+			<td></td>
+			<td><img src="{$BASE_URL}_templates/{$THEME}/img/mypage_icon_nouse.gif" width="50"
+				height="17" alt="未利用"></td>
+			<td><img src="{$BASE_URL}_templates/{$THEME}/img/mypage_icon_nouse.gif" width="50"
+				height="17" alt="未利用"></td>
+			<td><img src="{$BASE_URL}_templates/{$THEME}/img/mypage_icon_nouse.gif" width="50"
+				height="17" alt="未利用"></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="title">基本情報</td>
+			<td><span class="red">未登録</span></td>
+			<td><span>×</span></td>
+			<td><span>×</span></td>
+			<td><span>×</span></td>
+			<td>
+			<p class="bt"><a
+				href="#">登録・変更</a></p>
+			</td>
+		</tr>
+		<tr>
+			<td class="title">職務経歴</td>
+			<td><span class="red">未登録</span></td>
+			<td>-</td>
+			<td><span>×</span></td>
+			<td><span>×</span></td>
+			<td>
+			<p class="bt"><a
+				href="#">登録・変更</a></p>
+			</td>
+		</tr>
+		<tr>
+			<td class="title">経験能力</td>
+			<td><span class="red">未登録</span></td>
+			<td>-</td>
+			<td>-</td>
+			<td><span>×</span></td>
+			<td>
+			<p class="bt"><a
+				href="#">登録・変更</a></p>
+			</td>
+		</tr>
+		<tr>
+			<td class="title">スカウト</td>
+			<td><span class="red">未登録</span></td>
+			<td>-</td>
+			<td>-</td>
+			<td><span>×</span></td>
+			<td>
+			<p class="bt"><a
+				href="#">登録・変更</a></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</section></div>
+</div>
+<!-- //rightBox --> <!-- leftBox -->
+<div id="leftBox"><!-- search -->
+<section id="mypageMenu">
+<div id="mypageWrapper">
+<div class="inner">
+
+<h3>アカウント情報</h3>
+<ul>
+	<li>会員番号 ：{$USERID}</li>
+	<li>氏名 ：{$USERNAME}</li>
+</ul>
+<p><a href="{$BASE_URL}control/mypageC.php?logout">
+<img src="{$BASE_URL}_templates/{$THEME}/img/common_bt_logout.gif" width="89" height="32" alt="ログアウト" >
+</a></p>
+
+</div>
+</div>
+<div id="mymenuWrapper">
+<div class="wrapper">
+<div class="inner">
+<dl>
+	<dt>メールボックス</dt>
+	<dd>
+	<ul>
+		<li><a href="#">受信メール</a> (
+		<span>未読：0</span> )</li>
+		<li><a href="#">送信メール</a></li>
+	</ul>
+	</dd>
+</dl>
+</div>
+<div class="inner">
+<dl>
+	<dt>履歴管理</dt>
+	<dd>
+	<ul>
+		<li><a href="#">応募履歴</a>: 0件</li>
+		<li><a href="#">研修サービス履歴</a></li>
+		<li><a href="#">研修サービス申し込み</a></li>
+		<li><a href="#">カウンセリング申し込み</a></li>
+		<!-- 	<li><a href="">研修サービス履歴</a></li>  -->
+		<!-- 	<li><a href="">カウンセリング履歴</a></li>  -->
+		<form action="http://pass01.fostercareer.com/pass/api/asseslogin.php"
+			name="SitForPASS" id="indexForm" method="post" accept-charset="utf-8">
+		<div style="display: none;"></div>
+		<li><a href="javascript:void(0)" id="SitForPASSLink">PASS（適正試験）：未</a></li>
+		</form>
+	</ul>
+	</dd>
+</dl>
+</div>
+
+<div class="inner">
+<dl class="end">
+	<dt>求人リスト</dt>
+	<dd>
+	<ul>
+		<li><a href="#">お気に入りリスト</a>
+		</li>
+		<!-- <li><a href="">マッチ求人リスト</a></li> -->
+	</ul>
+	</dd>
+</dl>
+</div>
+</div>
+</div>
+</section> <!-- //mypage --></div>
+<!-- //leftBox -->
+<p id="pagetop"><a href="#container">TOPへ戻る</a></p>
+
+</div>
+<!-- //container --></div>
+<!-- //wrapper -->
+
+{include file="./footer.html"}

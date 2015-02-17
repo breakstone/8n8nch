@@ -1,0 +1,158 @@
+{include file="./header.html" title=$company.company_name}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$company.page_color}">
+
+<!--头部 end-->
+<div class="tombgroud clearfix">
+	{if $company_page.header_pic neq ""}
+	<div class="shopbanner " style="background:#efefef url({$BASE_URL}{$company_page.header_pic}) no-repeat center top;padding-bottom: -50xp;"></div>
+	{else}
+	<div class="shopbanner " style="background-color: black;font-size: 48px;color: white;text-align: center;"><br><br>
+	<b>{if $company_page.header_title neq ""}{$company_page.header_title}{else}{$company.company_name}{/if}</b>
+	</div>
+	{/if}
+	<div class="flagnav" {if $company_page.Id neq ""}style="width: 100%"{/if}>
+		<div class="container_24">
+			<ul class="clearfix" id="ajax_shop_myshop">
+				<li><a class="" href="/" target="_self">公司首页</a></li>
+				<li><a class="" href="/photo/" target="_self">商品展示</a></li>
+				<li><a class="" href="/msg/" target="_self">Ta的留言</a></li>
+				<li><a class="" href="/clive/" target="_self">Ta的生活服务</a></li>
+				<li><a class="select" href="/cjob/" target="_self">Ta的工作信息</a></li>
+				<!-- <li><a class="" href="{$BASE_URL}people/live/company_{$company.company_id}/" target="_self">Ta的闲聊</a></li> -->
+				<li><a class="" href="/company_pr/" target="_self">关于我们</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br>
+<div class="container_24 clearfix">
+	<!--内容主体-->
+	<div class="detaileft wid230 fl_l">
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span><img src="{$BASE_URL}{$company.company_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;"></span>
+				<h2>{$company.company_name}</h2>
+				<div class="c666">所在地区： {getname name="area"
+					value=$company.pref_cd} - {getname name="pref"
+					value=$company.pref_cd}</div>
+				<div class="c666">
+					积分状况：&nbsp;<font style="font-size: 16px;">{$company.points}</font>
+					积分
+				</div>
+				<div class="c666">
+					认证状况： {if $company.status eq 1}<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span> {/if}
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							{if $flag eq "user"}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">我要联系TA</a></span>
+							{/if}
+							{if $flag eq "company"}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$company.company_id}/">我要联系TA</a></span>
+							{/if}
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							{if $flag eq "user"}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">我要联系TA</a></span>
+							{/if}
+							{if $flag eq "company"}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$company.company_id}/">我要联系TA</a></span>
+							{/if}
+						{/if}
+						<div class="invita clearfix">
+							<a href="javascript:;" style="width: 197px;color: red;" onclick="favorite('{$company.company_id}','{$flag}');">加 TA 好友</a>
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$company.create_date|date_format:'%Y年%m月%d日'}</span><br>
+				<span class="c666">访问人数：<strong>{$company.see_page}</strong></span>
+			</div>
+		</div>
+		<!-- 
+		<span class="blank10"></span>
+		<div class="shopindex">
+			<div class="tztitle">
+				<em class="fl_l"><strong>Ta的综合评价</strong></em>
+			</div>
+			<ul>
+				<li
+					style="background-color: rgb(249, 249, 249); background-position: initial initial; background-repeat: initial initial;"><em>身份认证：</em>
+					<a original-title="10分" class="starsp" score="5"
+					style="width: 100px;"></a></li>
+				<li
+					style="background-color: rgb(249, 249, 249); background-position: initial initial; background-repeat: initial initial;"><em>Ta的评价：</em>
+					<a original-title="50分" class="starsp" score="5"
+					style="width: 100px;"></a></li>
+			</ul>
+		</div>
+		-->
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>联系方式</strong></em>
+			</div>
+			<ul class="pad10">
+				<li><strong>{$company.company_name}</strong></li>
+				<li id="left_phone">{if $company.tel01}电话：{$company.tel01}-{$company.tel02}-{$company.tel03}{/if}</li>
+				<li id="left_phone">{if $company.fax01}FAX ：{$company.fax01}-{$company.fax02}-{$company.fax03}{/if}</li>
+				<li id="left_email">邮箱：{$company.company_email}</li>
+				<li>地址：{$company.pref} {$company.addr01} {$company.addr02}</li>
+			</ul>
+		</div>
+		{if $company.company_id eq $smarty.session.kiwa_companyid}
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>更改版本颜色</strong></em>
+			</div>
+			<ul class="pad10">
+				<div style="padding-top:5px;">
+					<a href="page_set/?color=red" title="红"><img src="{$BASE_URL}_templates/{$THEME}/img/red.jpg"></a>
+					<a href="page_set/?color=black" title="黑"><img src="{$BASE_URL}_templates/{$THEME}/img/black.jpg"></a>
+					<a href="page_set/?color=blue" title="蓝"><img src="{$BASE_URL}_templates/{$THEME}/img/blue.jpg"></a>
+					<a href="page_set/?color=green" title="绿"><img src="{$BASE_URL}_templates/{$THEME}/img/green.jpg"></a>
+					<a href="page_set/?color=orange" title="橙"><img src="{$BASE_URL}_templates/{$THEME}/img/orange.jpg"></a>
+					<a href="page_set/?color=purple" title="紫"><img src="{$BASE_URL}_templates/{$THEME}/img/purple.jpg"></a>
+				</div>
+			</ul>
+		</div>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+	<div class="wid750 fl_r">
+		<div class="detaibox box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>工作信息动态</strong></em>
+			</div>
+			<div class="pad20">
+				<div class="tzla_topbg"></div>
+				<div class="tzdongtai">
+					{if $jobs}
+						{section name="list" loop="$jobs"}
+						<div class="tzelement clearfix">
+							<div class="ematbg fl_l"></div>
+							<div class="pl_tz">
+								<span class="c999"></span>&nbsp;<span class="mtr_5 c396">{$company.company_name}</span>
+								在【工作信息】发表了 <span class="c06c"><a href="{$BASE_URL}job/show/{$jobs[list].job_id}/" target="_blank">{$jobs[list].job_title}</a></span>
+							</div>
+						</div>
+						{/section}
+						<div style="float: right;">{$subPages}</div>
+					{else}
+						Ta很懒，还没有发布任何信息！
+					{/if}
+				</div>
+				<div class="tzla_btpbg"></div>
+			</div>
+		</div>
+	</div>
+</div>
+{include file="./footer.html"}

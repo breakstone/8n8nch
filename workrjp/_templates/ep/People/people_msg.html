@@ -1,0 +1,201 @@
+{include file="./header.html" title="个人-留言板"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/{$users.page_color}">
+{literal}
+<script>
+function null_check(){
+	if(document.getElementById("msg_content").value==""){
+		alert("请输入回复内容！");
+		return false;
+	}
+	return true;
+}
+function re_msg(uid,uname){
+	document.getElementById("re_id").value=uid;
+	document.getElementById("msg_content").focus();
+	document.getElementById("msg_content").value="回复( "+uname+" ) : ";
+}
+</script>
+{/literal}
+<!--头部 end-->
+<div class=" tombgroud nohomshop clearfix">
+	<div class="flagnav">
+		<div class="container_24">
+			<ul class="clearfix" id="ajax_shop_myshop">
+				<li><a class="" href="{$BASE_URL}people/show/user_{$users.user_id}/" target="_self">个人首页</a></li>
+				<li><a class="" href="{$BASE_URL}people/photo/user_{$users.user_id}/" target="_self">个人相册</a></li>
+				<li><a class="select" href="{$BASE_URL}people/msg/user_{$users.user_id}/" target="_self">留言板</a></li>
+				<li><a class="" href="{$BASE_URL}people/job/user_{$users.user_id}/" target="_self">Ta的动态</a></li>
+				<li><a class="" href="{$BASE_URL}people/user_pr/{$users.user_id}/" target="_self">Ta的简历</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<br>
+<div class="container_24 clearfix">
+	<!--内容主体-->
+	<div class="detaileft wid230 fl_l">
+		<div class="flag_tag">
+			<div class="flag_tagin clearfix">
+				<span><img src="{$BASE_URL}{$users.user_photo_url}" original-title="" style="z-index: 2;max-width: 200px;max-height: 200px;"></span>
+				<h2>{$users.name01}{$users.name02}</h2>
+				<div class="c666">所在地区： {getname name="area" value=$users.pref_cd} - {getname name="pref" value=$users.pref_cd}</div>
+				<div class="c666">
+					积分状况：&nbsp;<font style="font-size:16px;">{$users.points}</font> 积分
+				</div>
+				<div class="c666">
+					{if $users.status eq 1}
+					认证状况： 
+					<span class="icoident icoyx_on" title="邮箱认证">&nbsp;</span>
+					{/if}
+				</div>
+				<div class="invited_colec clearfix">
+					<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+					{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+						{if $smarty.session.kiwa_companyid}
+							<span><a href="{$BASE_URL}companypage/cmessage_send/{$users.user_id}/">我要联系TA</a></span>
+						{/if}
+						{if $smarty.session.kiwa_userid}
+							<span><a href="{$BASE_URL}mypage/pmessage_send/{$users.user_id}/">我要联系TA</a></span>
+						{/if}
+						<div class="invita clearfix">
+						{if $smarty.session.kiwa_userid neq $users.user_id and $smarty.session.kiwa_companyid neq $users.user_id}
+							<a style="width: 197px;color: red;" href="javascript:void(0);" onclick="favorite('{$users.user_id}','{$flag}');">关注Ta</a>
+						{/if}
+						</div>
+					{/if}
+					{if $smarty.session.kiwa_userid eq "" and $smarty.session.kiwa_companyid eq ""}
+						<span><a href="{$BASE_URL}login/" target="_blank">我要联系TA</a></span>
+					{/if}
+					
+				</div>
+			</div>
+			<div class="pad10 pl_20">
+				<span class="c666">注册时间：{$users.create_date|date_format:'%Y年%m月%d日'}</span><br>
+				<span class="c666">访问人数：<strong>{$users.see_page}</strong></span>
+			</div>
+		</div>
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>个人资料</strong></em>
+			</div>
+			<ul class="pad10">
+				<li><strong>{$users.name01}{$users.name02}</strong></li>
+				<li>{if $users.sex}性别：{$usersex}{/if}</li>
+				<li>{if $users.birth neq "0000-00-00"}年龄：{$age}岁{/if}</li>
+				<li id="left_phone">电话：{if $users.tel_flag eq 1}<font style="font-size:16px;">{if $users.tel01}{$users.tel01}-{$users.tel02}-{$users.tel03}{/if}</font>{/if}{if $users.tel_flag eq 2}非公开{/if}</li>
+				<li id="left_email">邮箱：{if $users.per_status eq 1}<font style="font-size:16px;">{$users.email}</font>{/if}{if $users.per_status eq 2}非公开{/if}</li>
+				<li>地址：{$users.pref}{$users.addr01}</li>
+			</ul>
+		</div>
+		{if $users.user_id eq $smarty.session.kiwa_userid}
+		<span class="blank10"></span>
+		<div class="box default">
+			<div class="tztitle">
+				<em class="fl_l"><strong>更改版本颜色</strong></em>
+			</div>
+			<ul class="pad10">
+				<div style="padding-top:5px;">
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=red" title="红"><img src="{$BASE_URL}_templates/{$THEME}/img/red.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=black" title="黑"><img src="{$BASE_URL}_templates/{$THEME}/img/black.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=blue" title="蓝"><img src="{$BASE_URL}_templates/{$THEME}/img/blue.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=green" title="绿"><img src="{$BASE_URL}_templates/{$THEME}/img/green.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=orange" title="橙"><img src="{$BASE_URL}_templates/{$THEME}/img/orange.jpg"></a>
+					<a href="{$BASE_URL}people/page_set/user_{$users.user_id}/?color=purple" title="紫"><img src="{$BASE_URL}_templates/{$THEME}/img/purple.jpg"></a>
+				</div>
+			</ul>
+		</div>
+		{/if}
+		<span class="blank10"></span><br>
+	</div>
+	<div class="wid750 fl_r">
+		<div class="detailly">
+			<div class="liuyanb">
+				<div class="clearfix">
+					<div class="liuyat clearfix">
+						<strong class="fl_l">发表留言</strong>
+					</div>
+					<div class="liuyheit">
+						<div class="arwoperson clearfix" id="liuyanbox">
+							<div class="fl_l" id="myself">
+								{if $smarty.session.kiwa_userid}
+									<img src="{$BASE_URL}{getname name="user_photo" value=$smarty.session.kiwa_userid}" class="pic_small">
+								{elseif $smarty.session.kiwa_companyid}
+									<img src="{$BASE_URL}{getname name="user_photo" value=$smarty.session.kiwa_companyid}" class="pic_small">
+								{else}
+									<img src="{$BASE_URL}upload/img/nopicture.png" class="pic_small">
+								{/if}
+							</div>
+							<div class="wid540 fl_l" id="newcomment_box">
+								{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+									<span class="c999">已登录 : {getname name="username" value=$smarty.session.kiwa_userid} {getname name="company_name" value=$smarty.session.kiwa_companyid}</span><br>
+								{else}
+									<span class="c999">您需要 <a href="{$BASE_URL}login/" target="_blank">登录</a> 后才能发表留言。</span><br>
+								{/if}
+								<form name="form2" action="{$BASE_URL}people/msgdo/" method="post">
+									<input type="hidden" name="people_id" id="people_id" value="{$users.user_id}">
+									<input type="hidden" name="type" id="type" value="user">
+									<input type="hidden" name="re_id" id="re_id" value="">
+									<textarea class="texare" name="msg_content" id="msg_content"></textarea><br>
+								{if $smarty.session.kiwa_companyid or $smarty.session.kiwa_userid}
+									<button class="button submit block mt_10" type="submit" onclick="return null_check();">发表留言</button>
+								{else}
+									<button class="button submit block mt_10" type="button" onclick="javascript:alert('请先登录！')">发表留言</button>
+								{/if}
+								</from>
+							</div>
+						</div>
+						<div class="plunlistbox clearfix" id="plunlistbox">
+							<div id="load_shop_comment">
+								{section name="list" loop="$msgs"}
+								<div class="arwoperson clearfix" id="{$msgs[list].Id}">
+									<div class="fl_l">
+										{if $msgs[list].msg_user_type eq "user"}
+										<img src="{$BASE_URL}{getname name="user_photo" value=$msgs[list].msg_user_id}" uid="724483" class="pic_small">
+										{/if}
+										{if $msgs[list].msg_user_type eq "company"}
+										<img src="{$BASE_URL}{getname name="company_photo" value=$msgs[list].msg_user_id}" uid="724483" class="pic_small">
+										{/if}
+									</div>
+									<div class="wid540 fl_l">
+										<span class="c999"><span class="c06c">
+										{if $msgs[list].msg_user_type eq "user"}
+										<a href="{$BASE_URL}people/show/user_{$msgs[list].msg_user_id}/" target="_blank">
+										{getname name="username" value=$msgs[list].msg_user_id}
+										</a>
+										{/if}
+										{if $msgs[list].msg_user_type eq "company"}
+										<a href="{$BASE_URL}people/show/company_{$msgs[list].msg_user_id}/" target="_blank">
+										{getname name="company_name" value=$msgs[list].msg_user_id}
+										</a>
+										{/if}
+										</span> 留言于 {$msgs[list].create_date|date_format:'%Y-%m-%d %H:%M'}</span>
+										<div class="clearfix c666" style="word-wrap:break-word;">
+											{$msgs[list].msg_content|nl2br}&nbsp;&nbsp;&nbsp;
+											{if ($msgs[list].msg_user_id eq $smarty.session.kiwa_userid) or ($msgs[list].msg_user_id eq $smarty.session.kiwa_companyid)}
+											<a href="{$BASE_URL}people/msg_del/{$msgs[list].Id}/?type=user" class="del_comment" onclick="return deleteConfirm();">删除</a>
+											{/if}
+											{if ($msgs[list].people_id eq $smarty.session.kiwa_userid) or ($msgs[list].people_id eq $smarty.session.kiwa_companyid)}
+												{if $msgs[list].msg_user_type eq "user"}
+													<a href="javascript:void(0);" class="del_comment" onclick="re_msg('{$msgs[list].msg_user_id}','{getname name=username value=$msgs[list].msg_user_id}');">回复</a>
+												{/if}
+												{if $msgs[list].msg_user_type eq "company"}
+													<a href="javascript:void(0);" class="del_comment" onclick="re_msg('{$msgs[list].msg_user_id}','{getname name=company_name value=$msgs[list].msg_user_id}');">回复</a>
+												{/if}
+												
+											{/if}
+										</div>
+									</div>
+								</div>
+								{/section}
+								<div style="float: right;">{$subPages}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{include file="./footer.html"}

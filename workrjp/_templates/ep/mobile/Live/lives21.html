@@ -1,0 +1,234 @@
+{include file="./mobile/Live/header.html" title="帮帮网，在日华人工作信息互助平台|在日生活互助"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/css_other/car.css">
+{literal}
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+{/literal}
+{literal}
+<script>
+function yanzheng()
+{
+		if(document.getElementById("areaid").value=="" || document.getElementById("pref").value==""){
+			alert("请选择「住址（都道府县）」");
+		}
+		else
+			{
+			$("#condition_list1").show().animate( { left: "0"}, 200 );
+			}
+}
+</script>
+{/literal}
+
+<div id="wrapper_list" style="z-index: 1;top: 8em;bottom:0;width: 100%;overflow: scroll;position: fixed; left: 0px;">
+	<div id="scroller">
+		
+		<div id="hasSelected">
+				
+		</div>
+		<div id="maincon" class="maincon">
+			<ul id="tasklist" data-role="listview">
+				
+				 {section name="list" loop="$lives"}
+							<li>
+						
+								<div class="listcont" style='padding-left:0.2em;'>
+									<h2>
+											{if $lives[list].live_want eq 0}
+										<font style="color:green">【提供方】</font>
+											{else}
+											<font style="color:blue">【需求方】</font>
+											{/if}
+										&nbsp;&nbsp;&nbsp;关注度：<span style="color:#FF9933;">{$lives[list].read_num} 次</span>
+										
+											<a style="border-bottom: 1px solid #FDFCFC;display: block;color:#87CEFA" href="{$BASE_URL}live/show/{$lives[list].live_id}/"   original-title="{$bbs[list].bbs_title}">
+											&nbsp;&nbsp;{$lives[list].live_title|mb_truncate:19}
+											</a>
+											<span style="border-bottom: 1px solid #dfdfdf;display: block;">
+												&nbsp;&nbsp;<span style="color:red;">{$lives[list].service_name}</span> |
+												<span style="color:red;">{$lives[list].pref_name}</span>&nbsp;
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c999"> 
+												{$lives[list].create_date|date_format:"%m/%d日"} 更新
+												</span>
+											</span>
+									</h2>
+								</div>
+						</li> 
+						{/section}
+			</ul>
+			<div style="text-align: center;">
+				{if $all gt 12}
+				<span style="font-size: 18px;"> {$subPages} </span>
+				{/if}
+			</div>
+			<br><br>
+		</div>
+		
+	</div>
+</div>
+
+<form action="{$BASE_URL}live/s21/" accept-charset="utf-8" id="searchform" name="searchform" method="post">
+	<input type="hidden" name="service_id" id="service_id" value="{$service_id}">
+			<div style="overflow:scroll;position:fixed; "  id="condition_list" class="condition_list pad10">
+				<div id="condison_relat">
+					<div id="condison_absolut" >
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">跑腿排队：</dt>
+							<dd>
+								<label class="form-label"><input type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" checked="checked" value="0" data-parent=".p-line" {if $wanted eq 0}checked="checked"{/if}>找人 跑腿排队</label>
+								<label class="form-label"><input type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" value="1" data-parent=".p-line" {if $wanted eq 1}checked="checked"{/if}>我要 跑腿排队</label>
+								&nbsp;&nbsp;
+							</dd>
+						</dl>
+					
+						<dl class="condition clearfix" >
+					 		<dt class="f_l">地点：</dt>
+							<dd>
+							<select name="areaid" id="areaid" onchange="showPref();" class="input">
+								<option value="">不指定</option>
+								<option value="">---------------</option>
+								{section name="list" loop="$areas"}
+									<option value="{$areas[list].area_cd}"
+									{if $areas[list].area_cd eq $areaid}
+										selected='selected'
+									{/if}
+									>{$areas[list].area_name}</option>
+								{/section}
+							</select>
+							<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+							<select name="pref" id="pref" onchange="giveToeki()" class="input">
+								<option value="">不指定</option>
+								<option value="">---------------</option>
+								{if $prefSearch}
+									{section name="list" loop="$prefSearch"}
+										<option value="{$prefSearch[list].pref_cd}"
+											{if $prefSearch[list].pref_cd eq $pref}
+												selected='selected'
+											{/if}
+										>
+										{$prefSearch[list].name}
+										</option>
+									{/section}
+								{/if}
+							</select>
+							</dd>
+							</dl>
+							<dl class="condition clearfix" >
+					 		<dt class="f_l">车站：</dt>
+					 		<dd>
+							<a	style='background: #FFFFFF;' onclick="yanzheng()"  href="javascript:void(0);" >
+										<img   src="{$BASE_URL}js/ek_files/ek.png" onclick="showStation(document.getElementById('pref').value)">
+							</a>
+									<input type="hidden" name="searchEki">
+									<input type="hidden" name="reqType" value="">
+									<input type="hidden" name="mid_area_cd" value="">
+									<input type="hidden" name="mid_area_cds" value="">
+									<input type="hidden" name="comp_mgr_no" value="">
+									<input type="hidden" name="base_mgr_no" value="">
+									<input type="hidden" name="id_ad" value="">
+									<input type="hidden" name="new_flg" value="">
+									<input type="hidden" name="query_str" value="?">
+									<input type="hidden" name="query_flg" value="">
+									<p id="js-detailSearch-search-animation" class="animate" ></p>
+									<span class="ensn_list" id="ensn_list" style="width: 550px;">
+										{if $ensn}
+											{section name="list" loop="$ensn"}
+												<label><input type="checkbox" class="ensn-chk" id="{getname name='ensn' value='$ensn[list]'}" name="ensn[]" value="{$ensn[list]}" checked >{getname name="ensn" value="$ensn[list]"}</label>
+											{/section}
+										{/if}
+										{if $eki}
+											{section name="list" loop="$eki"}
+												<label><input type="checkbox" class="ensn-chk" id="{getname name='eki' value='$eki[list]'}" name="eki[]" value="{$eki[list]}" checked >{getname name="eki" value="$eki[list]"}</label>
+											{/section}
+										{/if}
+									</span>
+							</dd>
+						</dl>
+						
+						<div class="conditbot">
+								<div class="submit">
+									
+									<input type="submit" name="searchB" class="big button" value=" 确认 ">
+									<a style='background: #FFFFFF;' href="{$BASE_URL}live/s21/"><input  type="button" value="清除选择"/></a>
+									<input id="cacelSelect" type="button" value="取消"/>
+									
+								</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+	</form>
+	<!-- //wrapper -->
+
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_shok.js"></script>
+<script src="{$BASE_URL}_templates/{$THEME}/mobile/js/layer_ensn_nosubmit_live.js"></script><!-- 此处修改了关闭 -->
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+			<div style="overflow:scroll;position:fixed; " id="condition_list1" class="condition_list1 pad10">
+				<div id="condison_relat">
+					<div id="condison_absolut" style="overflow: hidden;">
+							<dl class="condition clearfix">
+								<!-- 線・駅 -->
+								<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height:auto; width: 100%; z-index: 1004; top: 0px; left: 0px;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+								<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+								<!-- common-dialog-conditionSelect -->
+								<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+								<div class="pattern-2">
+									<div class="bg01">
+										<div class="pt01">
+											<h2>选择沿线</h2>
+											<p><a href="javascript:void(0);" id="js-dialog-station-close">
+											<img id="cacelSelect1" src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+										</div>
+										
+										<div id="ensn-tdfk-view" style="display: block;">
+										<span id="ensn-tdfk-data">
+											<div class="pt03" id="js-ensn-tdfk-tabs">
+											<ul>
+												<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);" id="eki_pref_title">{if $pref_cd}{getname name="pref" value=$pref_cd}{/if}</a></li>
+											</ul>
+											</div>
+											<!-- tab start -->
+											<div class="ensn-01" id="ensn-tab1">
+											<div class="pt05" id="js-dialog-station-lists">
+											<div class="bg02">
+												<h3 class="close"><a href="javascript:void(0);" id="eki_pref">{if $pref_cd}{getname name="pref" value=$pref_cd}{/if}</a></h3>
+												<section id="station-lists">
+												</section>
+											</div>
+											</div>
+											</div>
+											<!-- //tab end -->
+										</span>
+										</div>
+								
+										<div class="pt07">
+											<div class="pt07a">已经选择的沿线：<div id="selected-ensn">请选择沿线</div></div>
+											<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+										</div>
+										
+										<div style="text-align:center;" class="pt08">
+											<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+										</div>
+									</div>
+								</div>
+								</div>
+								<!-- //common-dialog-conditionSelect -->
+								</div>
+								</div>
+						
+							</dl>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+	<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commsetlive.js"></script>
+		<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklist2.js"></script>
+{include file="./mobile/footer.html"}

@@ -1,0 +1,178 @@
+{include file="./header.html" title="生活服务"}
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/puerh2.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/grid.css">
+<link href="{$BASE_URL}_templates/{$THEME}/css/publish.css" rel="stylesheet">
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/live.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+{literal}
+<style>
+.p-line{
+	font-size: 15px;
+	color:#123456;
+}
+</style>
+<script>
+function want_show(flag){
+	if(flag==0){
+		document.getElementById("want_0_type").style.display='block';
+		document.getElementById("want_1_type").style.display='none';
+	}
+	if(flag==1){
+		document.getElementById("want_1_type").style.display='block';
+		document.getElementById("want_0_type").style.display='none';
+	}
+}
+</script>
+{/literal}
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}requirement/">发布需求</a></li>
+	<li>&gt; <a href="{$BASE_URL}requirement/live/">生活服务</a></li>
+	<li>&gt; 机票供求</li>
+</ul>
+<!-- //pan -->
+<h1 class="title">发表「机票供求」需求</h1>
+<ul class="flow clearfix sep-big" style="margin-top: -12px;">
+	<li class="flow-item flow-item-current">1. 选择类目&nbsp;<a href="{$BASE_URL}requirement/live/">[重选]</a></li>
+	<li class="flow-item flow-item-current">2. 填写信息</li>
+	<li class="flow-item flow-item-last">3. 完成发布</li>
+</ul>
+<div class="clearfix " style="margin-top: -15px;">
+<!-- 选择类目-->
+	<div id="select" class="tab tab-vertical clearfix">
+		<FORM id="validateform" name="form1" class=form method=post action="{$BASE_URL}requirement/save/">
+		<input type="hidden" value="s17" name="service_id">
+		<div class="p-line">
+			<label class="p-label"><span class="red required">*</span>发布者：</label>
+			<div class="publish-detail-item publish-detail-item">
+				<label class="form-label"><input type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" checked="checked" value="0" data-parent=".p-line">机票贩卖</label>
+				<label class="form-label"><input type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" value="1" data-parent=".p-line">机票求购</label>
+			</div>
+		</div>
+		<div class="p-line">
+			<label class="p-label"><span class="red required">*</span>区域：</label>
+			<div class="publish-detail-item publish-detail-item">
+				<label><input type="checkbox" name="type[]" value="上海">上海</label>
+				<label><input type="checkbox" name="type[]" value="北京">北京</label>
+				<label><input type="checkbox" name="type[]" value="广州">广州</label>
+				<label><input type="checkbox" name="type[]" value="大连">大连</label>
+				<label><input type="checkbox" name="type[]" value="中国各地">中国各地</label>
+				<label><input type="checkbox" name="type[]" value="日本境内">日本境内</label>
+				<label><input type="checkbox" name="type[]" value="亚洲">亚洲</label>
+				<label><input type="checkbox" name="type[]" value="欧美">欧美</label>
+				<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+			</div>
+		</div>
+		<div class="p-line">
+			<label class="p-label"><span class="red required">*</span>标题：</label>
+			<div class="publish-detail-item publish-detail-item">
+				<input type="text" class="input input-60" name="live_title" id="live_title">&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;">(任务标题最多30字)</font>
+			</div>
+		</div>
+		<div class="p-line">
+			<label class="p-label"><span class="red required">*</span>补充内容：</label>
+			<div class="publish-detail-item publish-detail-item">
+				<textarea class="input" style="width:450px;" name="live_content" id="live_content"></textarea>
+			</div>
+		</div>
+		<div class="p-line">
+			<label class="p-label"><span class="red required">*</span>联系方式：</label>
+			<div class="publish-detail-item publish-detail-item">
+				<select name="lianxi_type" id="lianxi_type" class="input" style="width: 80px;">
+					<option value="電話">電話</option>
+					<option value="Email">Email</option>
+					<option value="QQ号">QQ号</option>
+					<option value="微信">微信</option>
+				</select>
+				<input type="text" name="lianxi_hao" id="lianxi_hao" class="input" style="width:350px;">
+				&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;">(真实的联系方式有助于更快的完成您的需求)</font>
+			</div>
+		</div>
+		<div class="p-line" style="margin-top: -13px;">
+			<label class="p-label"></label>
+			<div class="publish-detail-item publish-detail-item">
+				发布即代表您已阅读并同意 利用规约 和 关于个人情报管理同意
+			</div>
+		</div>
+		<br><br>
+		<!-- 共同是否注册 -->
+		{if $smarty.session.kiwa_userid eq '' and $smarty.session.kiwa_companyid eq ''}
+		<div style="text-align: center;">
+			<b style="font-size: 20px;">&nbsp;是否已经注册用户?</b>
+			<br><br>
+			<button type="button" id="logB" class="big button" onclick="loginshow();">已 注 册 登 陆</button>&nbsp;
+			<button type="button" id="regB" class="big button" onclick="registershow();">未 注 册 直 接 发 表 </button>
+		</div>
+		<div id="login" style="display: none;">
+			<div class="p-line" >
+				<label class="p-label"><span class="red required">*</span>邮箱地址:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<input type="text" name="login_email" id="login_email" class="input input-60" value="">
+				</div>
+			</div>
+			<div class="p-line" >
+				<label class="p-label"><span class="red required">*</span>密　　码:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<input type="password" name="login_pw" id="login_pw" class="input input-60" value="">
+				</div>
+			</div>
+			<br>
+			<center><button type="submit" id="next" style="display: none;" onclick="return s17_check('login');" class="big button" name="nlogin_B"> 登 陆 并 发 表 </button></center>
+		</div>
+		<div id="register" style="display: none;">
+			<div class="p-line">
+				<label class="p-label"><span class="red required">*</span>用户类型:</label>
+				<div class="publish-detail-item publish-detail-item" style="width: 403px;">
+					<label for="user"><input type="radio" name="usertype" id="user" value="user">个人用户</label>
+					<label for="company"><input type="radio" name="usertype" id="company" value="company">企业用户</label>
+				</div>
+			</div>
+			<div class="p-line">
+				<label class="p-label"><span class="red required">*</span>用户名称:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<input type="text" class="input input-60" name="register_name" id="register_name">
+				</div>
+			</div>
+			<div class="p-line" >
+				<label class="p-label"><span class="red required">*</span>邮箱地址:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<div id="tellOk"></div>
+					<input type="text" class="input input-60" name="register_email" id="email" onblur="EmailAjax()" value="">
+				</div>
+			</div>
+			<div class="p-line" >
+				<label class="p-label"><span class="red required">*</span>密　　码:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<input type="password" class="input input-60" name="register_pw" id="register_pw">
+				</div>
+			</div>
+			<div class="p-line" >
+				<label class="p-label"><span class="red required">*</span>确认密码:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<input type="password" class="input input-60" name="register_repw" id="register_repw">
+				</div>
+			</div>
+			<center><button type="submit" id="next" onclick="return s17_check('register');" class="big button" name="rgister_B"> 注 册 并 发 表 </button></center>
+		</div>
+		{else}
+		<center><button type="submit" id="next" onclick="return s17_check();" class="big button" name="hlogin_B"> 发　表　需　求 </button></center>
+		{/if}
+		<br><br>
+		</FORM>
+	</div>
+</div>
+<script src="{$BASE_URL}js/bootstrap.9f69faf1.js"></script>
+<br>
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+</div>
+<!-- //container -->
+</div>
+<!-- //wrapper -->
+{include file="./footer.html"}

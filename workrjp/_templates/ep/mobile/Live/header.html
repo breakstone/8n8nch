@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!-- saved from url=(0021)http://m.epweike.com/ -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{$title}</title>
+<meta name="keywords" content="帮帮网，在日华人，「在日华人工作信息，在日工作信息，日本华人工作」，「日本华人论坛，日本华人平台」，日本华人生活，日本留学，华人日本就职">
+<meta name="description" content="帮帮网，是提供给在日华人工作信息，在日华人互助，在日华人生活交流，免费发布华人求人信息的平台！帮帮网，在日本华人工作生活信息一点一滴开始！">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/jquery.js"></script>
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/iscroll.js"></script>
+<link rel="apple-touch-icon" href="{$BASE_URL}_templates/{$THEME}/img/minilogo.jpg">
+<link rel="shortcut icon" type="image/ico" href="{$BASE_URL}_templates/{$THEME}/img/minilogo.jpg">
+
+<link type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/common.min.css">
+</head>
+<body >
+{literal}
+<script type="text/javascript">
+_record = 0;
+var myTitle = document.title;
+function titleBlink(){
+	document.getElementById("rg").className="frg";
+	_record++;
+	if(_record==3){//当变量_record累加到3是，将其赋值为1。相当于无限循环。
+		_record=1;
+	}
+	if(_record==1){
+		document.title='【      】'+myTitle;
+	}
+	if(_record==2){
+		document.title='【新消息】'+myTitle;
+	}
+	setTimeout("titleBlink()",800);//调节时间，单位毫秒。
+}
+</script>
+{/literal}
+<div id="header" >
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}live"><span class="title">返回</span></a>
+		</div>
+	<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}live/mlive/"><span class="ico ico_sec"></span></a>&nbsp;
+				<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+				{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+	<div   class="tabcrooll">
+		<span class="tabbar on">
+		&nbsp;&nbsp;</span>
+		<span style="color:black;font-size:13px;">{$all}件中&nbsp;<em>|</em> 第{$start}件～第{if $start+$end > 1}{$start+$end-1}{else}0{/if}件表示</span>
+		
+		<a	id="selecTool" class="botton_a f_r" href="">
+		<span class="ico ico_reflesh"></span>筛选</a>
+	</div>
+</div>

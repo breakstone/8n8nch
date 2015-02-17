@@ -1,0 +1,308 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|在日生活互助"}
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/grid.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/publish.css">
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/puerh2.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/live.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				{if $smarty.session.kiwa_userid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/">个人空间</a></em></li>
+				{elseif $smarty.session.kiwa_companyid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/">企业空间</a></em></li>
+				{else}
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">个人空间</a></em></li>
+				{/if}
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+{literal}
+<style>
+.p-line{
+	font-size: 15px;
+	color:#123456;
+}
+</style>
+{/literal}
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}requirement/">发布需求</a></li>
+	<li>&gt; <a href="{$BASE_URL}requirement/live/">生活互助</a></li>
+	<li>&gt; 搬家车务</li>
+</ul>
+<!-- //pan -->
+<h1 class="title">发表「搬家车务」需求</h1>
+<ul class="flow clearfix sep-big" style="margin-top: -12px;">
+	<li class="flow-item flow-item-current">1. 选择类目&nbsp;<a href="{$BASE_URL}requirement/live/">[重选]</a></li>
+	<li class="flow-item flow-item-current">2. 填写信息</li>
+	<li class="flow-item flow-item-last">3. 完成发布</li>
+</ul>
+<div class="clearfix " style="margin-top: -15px;">
+<!-- 选择类目-->
+	<div id="select" class="tab tab-vertical clearfix">
+		<FORM id="validateform" name="form1" class=form method=post action="{$BASE_URL}requirement/save/" enctype="multipart/form-data">
+		<input type="hidden" value="s9" name="service_id">
+		<div class="p-line">
+			<label class="p-label"><span class="red required">*</span>发布者：</label>
+			<div class="publish-detail-item publish-detail-item">
+				<label class="form-label"><input type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" checked="checked" value="0" data-parent=".p-line">提供  搬家车务</label>
+				<label class="form-label"><input type="radio" maxlength="50" name="wanted" title="供求" class="form-radio" value="1" data-parent=".p-line">需要  搬家车务</label>
+			</div>
+		</div>
+		<div class="p-line">
+			<label class="p-label"><span class="red required">*</span>地点：</label>
+			<div class="publish-detail-item publish-detail-item">
+				<select name="areaid" id="areaid" onchange="showPref();" class="input">
+					<option value="">请选择</option>
+					<option value="">---------------</option>
+					{section name="list" loop="$areas"}
+						<option value="{$areas[list].area_cd}"
+						{if $areas[list].area_cd eq $areaid}
+							selected='selected'
+						{/if}
+						>{$areas[list].area_name}</option>
+					{/section}
+				</select>
+				<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+				<select name="pref" id="pref" onchange="giveToeki()" class="input">
+					<option value="">请选择</option>
+					<option value="">---------------</option>
+					{if $prefSearch}
+						{section name="list" loop="$prefSearch"}
+							<option value="{$prefSearch[list].pref_cd}"
+							{if $prefSearch[list].pref_cd eq $pref_cd}selected='selected'{/if}
+							>{$prefSearch[list].name}</option>
+						{/section}
+					{/if}
+				</select>
+				<a href="javascript:void(0);" id="js-dialog-station-open" onclick="showStation(document.getElementById('pref').value)">选择沿线车站</a>
+				<input type="hidden" name="searchEki">
+				<input type="hidden" name="reqType" value="">
+				<input type="hidden" name="mid_area_cd" value="">
+				<input type="hidden" name="mid_area_cds" value="">
+				<input type="hidden" name="comp_mgr_no" value="">
+				<input type="hidden" name="base_mgr_no" value="">
+				<input type="hidden" name="id_ad" value="">
+				<input type="hidden" name="new_flg" value="">
+				<input type="hidden" name="query_str" value="?">
+				<input type="hidden" name="query_flg" value="">
+				<p id="js-detailSearch-search-animation" class="animate" ></p>
+				<span class="ensn_list" id="ensn_list" style="margin-left:-2px; margin-top: 10px;width: 600px;display: block"></span>
+			</div>
+		</div>
+		<div class="p-line">
+			<label class="p-label"><span class="red required">*</span>标题：</label>
+			<div class="publish-detail-item publish-detail-item">
+				<input type="text" class="input input-60" name="live_title" id="live_title">&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;">(任务标题最多30字)</font>
+			</div>
+		</div>
+		<div class="p-line">
+			<label class="p-label"><span class="red required">*</span>补充内容：</label>
+			<div class="publish-detail-item publish-detail-item">
+				<textarea class="input" style="width:450px;" name="live_content" id="live_content"></textarea>
+			</div>
+		</div>
+		<div class="p-line">
+			<label class="p-label">上传图片：</label>
+			<div class="publish-detail-item publish-detail-item">
+				{literal}
+				<script>
+				var index = 1;
+				function addfile(){
+					index = index +1;
+					if(index>5){
+						alert("最多上传5张图片！");
+						document.getElementById("addf").disabled='disabled';
+					}else{
+						document.getElementById("file"+index).innerHTML += "<input type='file' name='file_upload[]' value=''>";
+					}
+				}
+				</script>
+				{/literal}
+				<div id="file1"><input type='file' name='file_upload[]' value=''>&nbsp;<input class="big button" type="button" id="addf" onclick="addfile();" value="再加一张？"></a>&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;">(最多上传5张图片，格式为 jpg jpeg png gif)</font></div>
+				<div id="file2"></div>
+				<div id="file3"></div>
+				<div id="file4"></div>
+				<div id="file5"></div>
+			</div>
+		</div>
+		<div class="p-line">
+			<label class="p-label"><span class="red required">*</span>联系方式：</label>
+			<div class="publish-detail-item publish-detail-item">
+				<select name="lianxi_type" id="lianxi_type" class="input" style="width: 80px;">
+					<option value="電話">電話</option>
+					<option value="Email">Email</option>
+					<option value="QQ号">QQ号</option>
+					<option value="微信">微信</option>
+				</select>
+				<input type="text" name="lianxi_hao" id="lianxi_hao" class="input" style="width:350px;">
+				&nbsp;&nbsp;&nbsp;<font style="font-size: 12px;color: #4F4F4F;">(真实的联系方式有助于更快的完成您的需求)</font>
+			</div>
+		</div>
+		<div class="p-line" style="margin-top: -13px;">
+			<label class="p-label"></label>
+			<div class="publish-detail-item publish-detail-item">
+				发布即代表您已阅读并同意 《<a href="{$BASE_URL}regist/terms/" target="_blank">帮帮网使用协议</a>》
+			</div>
+		</div>
+		<br><br>
+		<!-- 共同是否注册 -->
+		{if $smarty.session.kiwa_userid eq '' and $smarty.session.kiwa_companyid eq ''}
+		<div style="text-align: center;">
+			<b style="font-size: 20px;">&nbsp;是否已经注册用户?</b>
+			<br><br>
+			<button type="button" id="logB" class="big button" onclick="loginshow();">已 注 册 登 陆</button>&nbsp;
+			<button type="button" id="regB" class="big button" onclick="registershow();">未 注 册 直 接 发 表 </button>
+		</div>
+		<div id="login" style="display: none;">
+			<div class="p-line" >
+				<label class="p-label"><span class="red required">*</span>邮箱地址:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<input type="text" name="login_email" id="login_email" class="input input-60" value="">
+				</div>
+			</div>
+			<div class="p-line" >
+				<label class="p-label"><span class="red required">*</span>密　　码:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<input type="password" name="login_pw" id="login_pw" class="input input-60" value="">
+				</div>
+			</div>
+			<br>
+			<center><button type="submit" id="next" style="display: none;" onclick="return s9_check('login');" class="big button" name="nlogin_B"> 登 陆 并 发 表 </button></center>
+		</div>
+		<div id="register" style="display: none;">
+			<div class="p-line">
+				<label class="p-label"><span class="red required">*</span>用户类型:</label>
+				<div class="publish-detail-item publish-detail-item" style="width: 403px;">
+					<label for="user"><input type="radio" name="usertype" id="user" value="user">个人用户</label>
+					<label for="company"><input type="radio" name="usertype" id="company" value="company">企业用户</label>
+				</div>
+			</div>
+			<div class="p-line">
+				<label class="p-label"><span class="red required">*</span>用户名称:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<input type="text" class="input input-60" name="register_name" id="register_name">
+				</div>
+			</div>
+			<div class="p-line" >
+				<label class="p-label"><span class="red required">*</span>邮箱地址:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<div id="tellOk"></div>
+					<input type="text" class="input input-60" name="register_email" id="email" onblur="EmailAjax()" value="">
+				</div>
+			</div>
+			<div class="p-line" >
+				<label class="p-label"><span class="red required">*</span>密　　码:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<input type="password" class="input input-60" name="register_pw" id="register_pw">
+				</div>
+			</div>
+			<div class="p-line" >
+				<label class="p-label"><span class="red required">*</span>确认密码:</label>
+				<div class="publish-detail-item publish-detail-item">
+					<input type="password" class="input input-60" name="register_repw" id="register_repw">
+				</div>
+			</div>
+			<center><button type="submit" id="next" onclick="return s9_check('register');" class="big button" name="rgister_B"> 注 册 并 发 表 </button></center>
+		</div>
+		{else}
+		<center><button type="submit" id="next" onclick="return s9_check();" class="big button" name="hlogin_B"> 发　表　需　求 </button></center>
+		{/if}
+		<br><br>
+		</FORM>
+	</div>
+</div>
+<script src="{$BASE_URL}js/bootstrap.9f69faf1.js"></script>
+</form>
+<br>
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+</div>
+<!-- //container -->
+</div>
+<!-- //wrapper -->
+
+
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_ensn_requirement.js"></script>
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+<!-- 線・駅 -->
+<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 780px; z-index: 1004; top: 76px; left: 242px; display: none;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+<!-- common-dialog-conditionSelect -->
+<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+<div class="pattern-2">
+	<div class="bg01">
+		<div class="pt01">
+			<h2>选择沿线</h2>
+			<p><a href="javascript:void(0);" id="js-dialog-station-close">
+			<img src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+		</div>
+		
+		<div id="ensn-tdfk-view" style="display: block;">
+		<span id="ensn-tdfk-data">
+			<div class="pt03" id="js-ensn-tdfk-tabs">
+			<ul>
+				<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);" id="eki_pref_title">{if $pref_cd}{getname name="pref" value=$pref_cd}{/if}</a></li>
+			</ul>
+			</div>
+			<!-- tab start -->
+			<div class="ensn-01" id="ensn-tab1">
+			<div class="pt05" id="js-dialog-station-lists">
+			<div class="bg02">
+				<h3 class="close"><a href="javascript:void(0);" id="eki_pref">{if $pref_cd}{getname name="pref" value=$pref_cd}{/if}</a></h3>
+				<section id="station-lists">
+				</section>
+			</div>
+			</div>
+			</div>
+			<!-- //tab end -->
+		</span>
+		</div>
+
+		<div class="pt07">
+			<div class="pt07a"><dl><dt>已经选择的沿线：</dt><dd><div id="selected-ensn">请选择沿线</div></dd></dl></div>
+			<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+		</div>
+		
+		<div class="pt08">
+			<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+		</div>
+	</div>
+</div>
+</div>
+<!-- //common-dialog-conditionSelect -->
+</div>
+</div>
+{include file="./footer.html"}

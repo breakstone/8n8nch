@@ -1,0 +1,170 @@
+{include file="./header.html" title="递交简历"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}companypage/getnote/">应募管理</a></li>
+	<li>&gt; 应募者简历</li>
+</ul>
+<!-- //pan -->
+
+<!-- main -->
+<h1 class="title">应募者简历</h1>
+<form name="form1" action="" method="post">
+<section id="jobEntryRegist">
+<input type="hidden" name="company_name" id="company_name" value="{$job.company_name}">
+<input type="hidden" name="company_id" id="company_id" value="{$job.company_id}">
+<input type="hidden" name="job_title" id="job_title" value="{$job.job_title}">
+<input type="hidden" name="job_id" id="job_id" value="{$job.job_id}">
+
+<table summary="求人応募" class="tableStyle">
+	<tr>
+		<th>工作标题</th>
+		<td class="alLeft">
+		<a href="{$BASE_URL}job/show/{$lvli.job_id}/" target="_blank"><font size="3">{$lvli.job_title}</font></a>
+		</td>
+	</tr>
+</table>
+<table summary="求人応募" class="tableStyle">
+	<tr>
+		<th>应募者姓名</th>
+		<td class="alLeft"><font size="3">{$user.name01} {$user.name02}</font></td>
+	</tr>
+	<tr>
+		<th>对企业说的话</th>
+		<td class="alLeft">
+		{$toCompany_pr}
+		</td>
+	</tr>
+</table>
+
+<h2 class="title">个人简历信息</h2>
+<table class="tableStyle">
+	<tr>
+		<th>氏名（汉字）</th>
+		<td class="alLeft">
+			{$user.name01} {$user.name02}
+		</td>
+	</tr>
+	<tr>
+		<th>生年月日 </th>
+		<td class="alLeft">
+			{$user.birth}
+		</td>
+	</tr>
+	<tr>
+		<th>性別 </th>
+		<td class="alLeft">
+			{if $user.sex eq 1} 男性 {/if}
+			{if $user.sex eq 2} 女性 {/if}
+		</td>
+	</tr>
+	<tr>
+		<th>邮件信箱地址 </th>
+		<td class="alLeft">
+			{if $user.per_status eq 1}{$user.email}{/if}
+			{if $user.per_status eq 2}非公开{/if}
+		</td>
+	</tr>
+	<tr>
+		<th>自我PR </th>
+		<td class="alLeft">
+			{$pr}
+		</td>
+	</tr>
+	<tr>
+		<th>资格,取得成绩</th>
+		<td class="alLeft">
+			{$zige}
+		</td>
+	</tr>
+</table>
+<table class="tableStyle">
+	<tr>
+		<th>最近车站</th>
+		<td class="alLeft">
+		{$user.eki}
+		</td>
+	</tr>
+	<tr>
+		<th>邮政编号</th>
+		<td class="alLeft">
+		{if $user.zip01}
+			〒{$user.zip01}-{$user.zip02}
+		{/if}
+		</td>
+	</tr>
+	<tr>
+		<th>住址（都道府县）</th>
+		<td class="alLeft">
+		{$user.pref}
+		</td>
+	</tr>
+	<tr>
+		<th>住址（市区町村）</th>
+		<td class="alLeft">
+			{$user.addr01}
+		</td>
+	</tr>
+	<tr>
+		<th>住址（丁番建物）</th>
+		<td class="alLeft">
+			{$user.addr02}
+		</td>
+	</tr>
+	<tr>
+		<th>联络电话（手机/固定） </th>
+		<td class="alLeft">
+            {if $user.tel_flag eq 1}{$user.tel01} {$user.tel02} {$user.tel03}{/if}
+			{if $user.tel_flag eq 2}非公开{/if}
+		</td>
+	</tr>
+</table>
+<table class="tableStyle">
+	<tr>
+		<th>最终学历 </th>
+		<td class="alLeft">
+			{getname name="education" value=$user.last_education}
+		</td>
+	</tr>
+	<tr>
+		<th>所学专业</th>
+		<td class="alLeft">
+			{$user.zhuanye}
+		</td>
+	</tr>
+</table>
+<table class="tableStyle">
+	<tr>
+		<th>就职年限</th>
+		<td class="alLeft">
+			{$user.job_experiencetimes}
+		</td>
+	</tr>
+	<tr>
+		<th>现在就职状况 </th>
+		<td class="alLeft">
+            {if $user.job_nowstatus eq 1}已退职{/if}
+            {if $user.job_nowstatus eq 2}就职中{/if}
+		</td>
+	</tr>
+	<tr>
+		<th>转职次数</th>
+		<td class="alLeft">
+		{$user.job_experience}
+		</td>
+	</tr>
+</table>
+<p class="alCenter">
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_send.gif" alt="确认">
+</p>
+</section>
+</form>
+
+<p id="pagetop"><a href="#container">TOPへ戻る</a></p>
+</div>
+</div>
+{include file="./footer.html"}

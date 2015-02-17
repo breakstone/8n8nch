@@ -1,0 +1,54 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|登录"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/black.css">
+	<link href="{$BASE_URL}_templates/{$THEME}/mobile/css/user.css"	type="text/css" rel="stylesheet">
+<div id="header">
+	<div class="headbar index clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><img src="{$BASE_URL}_templates/{$THEME}/mobile/images/mlogo.png" alt=""></a>
+		</div>
+		<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+		
+		
+		</div>
+	</div>
+</div>
+	<div id="wrapper_notop"  class="bac_grey" style="position: absolute;top: 5.0em;">
+		<div class="inerlogin">
+		<div class="us_tabtl" >
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a>忘记密码</a></td>
+						
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>	<br>
+			<div class="loginform">
+			<font color="red">{$_error}</font>
+				<form action="{$BASE_URL}login/forgetdo" accept-charset="utf-8" id="form" method="post">
+					<div class="formlogin clearfix">
+					<INPUT class="widtxt" name="email" size="40" type="text" id="email" placeholder="邮箱地址">
+						
+					</div>
+				
+					<div class="login_botton">
+					
+						<button class="red" name=submit onclick="return SentEmailCheck();">返信</button>
+					</div>
+				</form>
+				<div class="login_botton">
+					<a href="{$BASE_URL}login/" class="grey">您以想起密码？点此登陆</a>
+				</div>
+				<br><br><br><br><br><br><br><br><br><br><br><br>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

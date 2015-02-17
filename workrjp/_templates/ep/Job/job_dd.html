@@ -1,0 +1,499 @@
+{include file="./header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息"}
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/common.css">
+<link rel="stylesheet" href="{$BASE_URL}js/ek_files/jquery-ui.css">
+
+<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css_other/hirelist20130228.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/common.css">
+<LINK type=text/css rel=stylesheet href="{$BASE_URL}_templates/{$THEME}/css_other/applicant.css">
+
+<div class="navouterbox">
+	<nav id="mainnavfix" class="mainav">
+		<div class="container_24 clearfix">
+			<ul id="navlisbox" class="clearfix">
+				<li><em><a class=" hasub" href="{$BASE_URL}">首页</a></em></li>
+				<li><em><a class="on hasub" href="{$BASE_URL}job/">工作信息</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=2">人才秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}people/?Which_Show=1">企业秀</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}live/">生活互助</a></em></li>
+				<li><em><a class=" hasub" href="{$BASE_URL}bbs/">闲聊吧</a></em></li>
+				{if $smarty.session.kiwa_userid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/">个人空间</a></em></li>
+				{elseif $smarty.session.kiwa_companyid}
+					<li><em><a class=" hasub" href="{$BASE_URL}people/show/company_{$smarty.session.kiwa_companyid}/">企业空间</a></em></li>
+				{else}
+					<li><em><a class=" hasub" href="{$BASE_URL}mypage/">个人空间</a></em></li>
+				{/if}
+			</ul>
+			<div class="specinavli fl_r">
+				<a href="{$BASE_URL}requirement/work/" target="_blank"><font size="+1" color="#fff">发布工作信息</font></a>
+				<a href="{$BASE_URL}requirement/live/" target="_blank"><font size="+1" color="#fff">发布生活信息</font></a>
+			</div>
+		</div>
+	</nav>
+</div>
+{literal}
+<script>
+	function job_biao_submit(biaoname){
+		document.getElementById("biaoname").value = biaoname;
+		document.getElementById("searchform").submit();
+	}
+</script>
+{/literal}
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; 工作信息</li>
+</ul>
+<!-- //pan -->
+{if $smarty.session.kiwa_userid eq '' and $smarty.session.kiwa_companyid eq ''}
+<div id="mypage">
+
+</div>
+{/if}
+<!-- rightBox -->
+<div id="rightBox">
+<div id="job">
+<section>
+<h1 class="title">检索结果一览</h1>
+<p id="number"><span>{$all}件中</span> {$start}件～{if $start+$end > 1}{$start+$end-1}{else}0{/if}件表示</p>
+<ul id="pagenav">
+	{$subPages}
+</ul>
+</section>
+</div>
+<div class="infolist" style="background: #ffffff;">
+    <div id="recomInfocon" class="maincon">
+        <div id="maincon" class="maincon">
+        {section name="list" loop="$jobs"}
+            <div id="infolist" class="tablist cleft">
+              	<dl logr="q_2_12813556_5442195267587_4_2" id="jingzhun" class="" style="height:40px;line-height:40px;">
+                    <dt style="height:40px;line-height:40px;">
+                        <a href="{$BASE_URL}job/show/{$jobs[list].job_id}/" class="t" _t="jingzhun" rel="nofollow" tips="t">
+                        	{$jobs[list].job_title|mb_truncate:30}
+						</a>
+						<span class="hoverinfobox" style="display: none;">
+                            <div id="arrow">
+                                <em></em>
+                                <span></span>
+                            </div>
+                            <!-- 
+                            <div id="tipsbox" class="tipsbox" style="top: -18px;">
+                                <div class="xboxcontent">
+                                    <div class="posCom">
+                                       	由 {$jobs[list].company_name|mb_truncate:9} 发布
+                                    </div>
+									<h2>{$jobs[list].service_name}</h2>
+                                    <ul class="zhanshi clearfix">
+                                        <li class="mar30" style="word-wrap:break-word;">
+                                            <span style="font-size:13px;color:#1874CD;">内容大概：</span>
+											{$jobs[list].contents|mb_truncate:58}
+                                        </li>
+                                        <li class="mar30">
+                                            <span></span>
+                                        </li>
+                                        <li class="mar30">
+                                            <span></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                              -->
+                        </span>
+                        {if $jobs[list].read_num > 15}<a class="ico ding1"></a>{/if}
+                        {if $jobs[list].job_photo neq ""}<a class="ico jingpin"></a>{/if}
+                        {if $smarty.now|date_format:'%Y/%m/%d' eq $jobs[list].create_date|date_format:"%Y/%m/%d"}<a class="ico ding2"></a>{/if}
+                    </dt>
+                    <dd class="w271" style="height:30px;line-height:30px;">
+                       	 
+                    </dd>
+                    <dd class="w133" style="height:30px;line-height:30px;">{$jobs[list].pref_name}</dd>
+                    <dd class="w96" style="height:30px;line-height:30px;">
+                   	{if $jobs[list].create_date|date_format:'%Y-%m-%d' eq $today}
+						<font color="red">今天</font>
+					{elseif $jobs[list].create_date|date_format:'%Y-%m-%d' eq $yestoday}
+						昨天
+					{elseif $jobs[list].create_date|date_format:'%Y-%m-%d' eq $bfyestoday}
+						前天
+					{else}
+						{$jobs[list].create_date|date_format:'%m月%d日'}
+					{/if}
+					 更新
+                    </dd>
+                    <dd class="w68" style="height:30px;line-height:30px;">&nbsp;&nbsp;&nbsp;&nbsp;关注度:{$jobs[list].read_num} 次</dd>
+                </dl>
+            </div>
+        {/section}
+        </div>
+    </div>
+</div>
+<ul id="pagenav" style="float: right !important">
+	{$subPages}
+</ul>
+
+</div>
+<!-- //rightBox -->
+
+<!-- leftBox -->
+<div id="leftBox"><!-- search -->
+<form action="{$BASE_URL}job/" accept-charset="utf-8" id="searchform" name="searchform" method="post">
+<div id="leftSearch">
+<section>
+<input type="hidden" value="{$c}" id="c" name="c">
+<h3><img src="{$BASE_URL}_templates/{$THEME}/img/common_txt_search.gif" width="286" height="46" alt="求人を探す" /></h3>
+<div class="wrap">
+<h4>根据地点找工作</h4>
+<dl id="areaSearch">
+	<dt name="acc" style="background-image: url({$BASE_URL}_templates/{$THEME}/img/common_icon_minus.gif);">选择工作地点</dt>
+	<dd style='display: block;'>
+	<table>
+		<tr>
+			<td><font>&nbsp;选择区域：</font></td>
+		</tr>
+		<tr>
+			<td>
+				<select name="areaid" id="areaid" onchange="showPref();" multiple="value" size="8" style="text-align: left;font-size: 16px;width: 138px;">
+					{section name="list" loop="$areas"}
+						<option value="{$areas[list].area_cd}"
+						{if $areas[list].area_cd eq $areaid}
+							selected='selected'
+						{/if}
+						>{$areas[list].area_name}</option>
+					{/section}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td nowrap="nowrap"><font>&nbsp;选择都道府県：</font></td>
+		</tr>
+		<tr>
+			<td>
+				<select name="pref" id="pref" onchange="prefChange()" multiple="value" size="10" style="text-align: left;font-size: 16px;width: 138px;">
+					<option value="">不指定</option>
+					<option value="">---------------</option>
+					{if $prefSearch}
+						{section name="list" loop="$prefSearch"}
+							<option value="{$prefSearch[list].pref_cd}"
+								{if $prefSearch[list].pref_cd eq $pref}
+									selected='selected'
+								{/if}
+							>
+							{$prefSearch[list].name}
+							</option>
+						{/section}
+					{/if}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td nowrap="nowrap">
+			<font>&nbsp;选择沿線・车站：</font><br>
+			<a href="javascript:void(0);" id="js-dialog-station-open">
+			<img src="{$BASE_URL}js/ek_files/ek.png" onclick="showStation({$pref})">
+			</a>
+			</td>
+		</tr>
+		<tr>
+			<td nowrap="nowrap">
+				<input type="hidden" name="searchEki">
+				<input type="hidden" name="reqType" value="">
+				<input type="hidden" name="mid_area_cd" value="">
+				<input type="hidden" name="mid_area_cds" value="">
+				<input type="hidden" name="comp_mgr_no" value="">
+				<input type="hidden" name="base_mgr_no" value="">
+				<input type="hidden" name="id_ad" value="">
+				<input type="hidden" name="new_flg" value="">
+				<input type="hidden" name="query_str" value="?">
+				<input type="hidden" name="query_flg" value="">
+				<p id="js-detailSearch-search-animation" class="animate" ></p>
+				<ul>
+				<span class="ensn_list" id="ensn_list">
+					{if $ensn}
+						{section name="list" loop="$ensn"}
+							<li style="margin-left:-6px;"><label><input type="checkbox" class="ensn-chk" id="{getname name='ensn' value='$ensn[list]'}" name="ensn[]" value="{$ensn[list]}" checked >{getname name="ensn" value="$ensn[list]"}</label></li><br/>
+						{/section}
+					{/if}
+					{if $eki}
+						{section name="list" loop="$eki"}
+							<li style="margin-left:-6px;"><label><input type="checkbox" class="ensn-chk" id="{getname name='eki' value='$eki[list]'}" name="eki[]" value="{$eki[list]}" checked >{getname name="eki" value="$eki[list]"}</label></li><br/>
+						{/section}
+					{/if}
+				</span>
+				</ul>
+			</td>
+		</tr>
+	</table>
+	<br>
+	</dd>
+</dl>
+<h4>热门工作</h4>
+<dl id="areaSearch">
+	<dt name="acc" style="background-image: url({$BASE_URL}_templates/{$THEME}/img/common_icon_minus.gif);">热门工作</dt>
+	<dd style='display: block;'>
+		<input type="hidden" value="{$biaoname}" id="biaoname" name="biaoname">
+	<table>
+		{section name="list" loop=$biao}
+			{if $smarty.section.list.rownum mod 3 eq 1}
+			<tr align="center" height="28px;">
+			{/if}
+				<td>&nbsp;&nbsp;<a href="javascript:void(0);" onclick="job_biao_submit('{$biao[list].biao_name}');">{$biao[list].biao_name}</a></td>
+			{if $smarty.section.list.rownum mod 3 eq 0}
+			</tr>
+			{/if}
+		{/section}
+	</table>
+	{if $biaoname neq ""}
+	<br>
+	<font>【已选择】</font>:  <b style="font-size: 19px;">{$biaoname}</b>&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}job/?c=dd">×清除选择</a>
+	{/if}
+	</dd>
+</dl>
+<div id="keywordSearch">
+	<input name="keyword" size="40" class="txt" type="text" value="{$keyword}" id="keyword" />
+	<input name="searchKey" class="bt" type="submit" value="" />
+</div>
+<h4>选择业种职种</h4>
+<dl>
+	<dt name="acc" style="background-image: url({$BASE_URL}_templates/{$THEME}/img/common_icon_minus.gif);">选择职业</dt>
+	<dd style='display: block;'>
+	<table>
+		<tr>
+			<td><font>&nbsp;选择业种：</font></td>
+		</tr>
+		<tr>
+			<td>
+			<select name="kinds" id="kinds" onchange="showTypes();">
+				<option value="">不指定</option>
+				<option value="">---------------</option>
+			{section name="list" loop="$companyfrom"}
+				<option value="{$companyfrom[list].kindsID}"
+				{if $companyfrom[list].kindsID eq $kindsid}
+					selected='selected'
+				{/if}
+				>{$companyfrom[list].kindsname}</option>
+			{/section}
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td><font>&nbsp;选择职种：</font></td>
+		</tr>
+		<tr>
+			<td id="typecheck">
+				{$types_str}
+			</td>
+		</tr>
+	</table>
+	</dd>
+</dl>
+<h4>详细检索</h4>
+<dl>
+	<dt name="acc">所希望的工作时间</dt>
+	<dd>
+		<table>
+			<tr>
+				<td><font>所希望的工作时间：</font></td>
+			</tr>
+			<tr>
+				<td>
+				{section name="list" loop="$hope"}
+					<label><input type="checkbox" value="{$hope[list].id}" name="hopeid[]" id="hopeid" {if $hopeid}{if in_array($hope[list].id,$hopeid)}checked="checked"{/if}{/if}>{$hope[list].name}</label>
+					{if $smarty.section.list.rownum mod 3 eq 1 and $smarty.section.list.rownum neq 1}
+						<br>
+					{/if}
+				{/section}
+				
+				</td>
+			</tr>
+		</table>
+	</dd>
+</dl>
+<dl>
+	<dt name="acc">选择薪资标准</dt>
+	<dd>
+		<table>
+			<tr>
+				<td><font>选择薪资：</font></td>
+			</tr>
+			<tr>
+				<td>
+				<select name="moneyid" id="moneyid">
+					<option value="">不指定</option>
+					<option value="">---------------</option>
+					{section name="list" loop="$money"}
+						<option value="{$money[list].moneyid}"
+						{if $money[list].moneyid eq $moneyid}
+							selected='selected'
+						{/if}
+						>{$money[list].name}---{$money[list].moneyname}</option>
+					{/section}
+				</select>
+				</td>
+			</tr>
+		</table>
+	</dd>
+</dl>
+<dl>
+	<dt name="acc">选择雇用形式</dt>
+	<dd>
+		<table>
+			<tr>
+				<td nowrap="nowrap"><font>选择雇用形式：</font></td>
+			</tr>
+			<tr>
+				<td>
+				{section name="list" loop="$employ"}
+					<label><input type="checkbox" value="{$employ[list].Id}" name="employid[]" id="employid" {if $employid}{if in_array($employ[list].Id,$employid)}checked="checked"{/if}{/if}>{$employ[list].name}</label>
+					{if $smarty.section.list.rownum mod 2 eq 0 and $smarty.section.list.rownum neq 1}
+						<br>
+					{/if}
+				{/section}
+				
+				</td>
+			</tr>
+		</table>
+	</dd>
+</dl>
+<dl>
+	<dt name="acc">其他</dt>
+	<dd>
+		<ul>
+		<span class="shok_list" id="shok_list">
+		{if $conditionSearch}
+			{section name="list" loop="$conditionSearch"}
+				<li style="margin-left:-10px;"><label><input type="checkbox" class="shok-chk" name="shok3[]" value="{$conditionSearch[list]}" checked>{getname name="condition" value="$conditionSearch[list]"}</label></li>
+			{/section}
+		{/if}
+		</span>
+		<li><span><a href="javascript:void(0);" id="js-dialog-job-open">追加・変更</a></span></li>
+		</ul>
+	</dd>
+</dl>
+	<div class="submit">
+	<input name="search" class="bt" type="submit" value=""/>
+	</div>
+</div>
+</section>
+</div>
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+</form>
+<!-- //search -->
+</div>
+
+<p id="pagetop"><a href="#container">返回顶部</a></p>
+</div>
+<!-- //container -->
+</div>
+<!-- //wrapper -->
+
+
+
+
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_shok.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_ensn.js"></script>
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+<!-- 線・駅 -->
+<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 780px; z-index: 1004; top: 76px; left: 242px; display: none;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+<!-- common-dialog-conditionSelect -->
+<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+<div class="pattern-2">
+	<div class="bg01">
+		<div class="pt01">
+			<h2>选择沿线</h2>
+			<p><a href="javascript:void(0);" id="js-dialog-station-close">
+			<img src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+		</div>
+		
+		<div id="ensn-tdfk-view" style="display: block;">
+		<span id="ensn-tdfk-data">
+			<div class="pt03" id="js-ensn-tdfk-tabs">
+			<ul>
+				<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);">{getname name="pref" value=$pref}</a></li>
+			</ul>
+			</div>
+			<!-- tab start -->
+			<div class="ensn-01" id="ensn-tab1">
+			<div class="pt05" id="js-dialog-station-lists">
+			<div class="bg02">
+				<h3 class="close"><a href="javascript:void(0);">{getname name="pref" value=$pref}</a></h3>
+				<section id="station-lists">
+				</section>
+			</div>
+			</div>
+			</div>
+			<!-- //tab end -->
+		</span>
+		</div>
+
+		<div class="pt07">
+			<div class="pt07a"><dl><dt>已经选择的沿线：</dt><dd><div id="selected-ensn">请选择沿线</div></dd></dl></div>
+			<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+		</div>
+		
+		<div class="pt08">
+			<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+		</div>
+	</div>
+</div>
+</div>
+<!-- //common-dialog-conditionSelect -->
+</div>
+</div>
+
+<!-- その他 -->
+<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height: auto; width: 780px; z-index: 1002; top: 89px; left: 242px; display: none; " class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-job">
+<div id="js-dialog-job" style="width: auto; min-height: 150px; height: auto; " class="ui-dialog-content ui-widget-content">
+	<!-- common-dialog-conditionSelect -->
+	<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+	<div class="pattern-3">
+		<div class="bg01">
+			<div class="pt01">
+				<h2>选择其他</h2>
+				<p><a href="javascript:void(0);" id="js-dialog-job-close"><img src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+			</div>
+			<span id="shok-data">
+			<div class="pt06" id="js-dialog-job-lists">
+			<div class="bg02">
+			<div class="pt06a" style="display: block;">
+			<div class="parents">
+			<dl>
+				<dt><label><input type="hidden" class="level-1s" id="99" name="99" value="1:99:其他">其他</label></dt>
+				<dd>
+				<ul>
+				{section name="list" loop="$condition"}
+					<li><label><input type="checkbox" class="level-3s" id="{$condition[list].Id}" name="{$condition[list].Id}" value="3:99:{$condition[list].name}">{$condition[list].name}</label></li>
+				{/section}
+				</ul>
+				</dd>
+			</dl>
+			</div></div></div></div></span>
+			<div class="pt07">
+				<div class="pt07a">
+					<dl>
+					<dt>已经选择：</dt>
+					<dd><div id="selected-shok">请选择</div></dd>
+					</dl>
+				</div>
+				<div class="pt07b"><input type="button" value="清　空" id="allclear-shok"></div>
+			</div>
+			<div class="pt08">
+				<p><a href="javascript:void(0);" id="shokSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+			</div>
+		</div>
+	</div>
+	</div>
+	<!-- //common-dialog-conditionSelect -->
+</div></div>
+
+{include file="./footer.html"}

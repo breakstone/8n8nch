@@ -1,0 +1,70 @@
+{include file="./mobile/header.html" title="信 箱"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+	<link  type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/user.css">
+
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}mypage/pmessage/"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}mypage/pmessage/"><span class="title">我的信箱</span></a>
+		</div>
+		<div class="f_r">
+				<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+		</div>
+	</div>
+</div>
+	<div id="wrapper_list"  >
+		<div id="scroller">
+			<div class="us_tabtl">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+						<tr>
+							<td><a href="#" class=""> 发送信件</a></td>
+						</tr>
+				</table>
+			</div>
+			<div class="table_form"><div class="table_form">
+			<form name="form1" action="{$BASE_URL}mypage/pmessage_senddo/" method="post">
+					<table width="100%" border="0" cellspacing="1" cellpadding="1">
+						<tr>
+							<td style="width:20%">发信人</td>
+							<td class="alLeft">
+								{$USERNAME}
+							<input type="hidden" name="message_from" value="{$USERID}">
+							</td>
+						</tr>
+						<tr>
+							<td>收信人</td>
+							<td class="alLeft">
+								{getname name="username" value=$toid}
+								{getname name="company_name" value=$toid}
+								<input type="hidden" name="message_to" value="{$toid}">
+							</td>
+						</tr>
+						<tr>
+							<td>信件标题</td>
+							<td class="alLeft">	<input type="text" name="message_title" id="message_title" size="28"></td>
+						</tr>
+						<tr>
+							<td>信件内容</td>
+							<td class="alLeft"><textarea name="message_content" id="message_content" rows="12" cols="35"></textarea></td>
+						</tr>
+						<tr>
+						<td colspan=2>
+					<span style="float:right;">
+					<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_send.gif" alt="送信" onclick="return messageSCheck();">
+					</span>
+						</td>
+						</tr>
+					</table>
+				
+					
+					
+					</form>
+					</div>
+		</div>
+	</div>
+{include file="./mobile/footer.html"}

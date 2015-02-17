@@ -1,0 +1,133 @@
+{include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+{literal}
+<style type="text/css">
+.tableStyle {
+	margin:auto;font-size:15px;BORDER-RIGHT: #ccc 1px solid; BORDER-TOP: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; BORDER-BOTTOM: #ccc 1px solid;
+}
+.tableStyle TH {
+	 BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 15px; BORDER-TOP: #ccc 1px solid; PADDING-LEFT: 15px; BACKGROUND: #e5ebf2; PADDING-BOTTOM: 7px; BORDER-LEFT: #ccc 1px solid; PADDING-TOP: 7px; BORDER-BOTTOM: #ccc 1px solid
+}
+.tableStyle TD {
+	width: 150px;BORDER-RIGHT: #ccc 1px solid; PADDING-RIGHT: 15px; BORDER-TOP: #ccc 1px solid; PADDING-LEFT: 15px; PADDING-BOTTOM: 7px; BORDER-LEFT: #ccc 1px solid; PADDING-TOP: 7px; BORDER-BOTTOM: #ccc 1px solid
+}
+</style>
+
+{/literal}
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+
+<div class="headbar clearfix" style="background:#B2DFEE;">
+					<div class="f_l">
+						<a href="{$BASE_URL}/regist"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+						<a  href="{$BASE_URL}/regist" onclick="return RegistChoose(2);">
+						<span class="title">返回	</span>
+						</a>
+					</div>
+</div>
+<div style="text-align:center;">
+<br><br><br><br><br>
+<form action="{$BASE_URL}regist/companyregistdo/" id="from" name="from" method="post" accept-charset="utf-8">
+
+<h1 class="title">企业会员注册   确认</h1>
+<table summary="新规企业会员注册" class="tableStyle">
+	<tr>
+		<th>企业名称</th>
+		<td colspan="4">{$company_name}</td>
+	</tr>
+	<tr>
+		<th>企业代表名</th>
+		<td colspan="4">{$company_manager}</td>
+	</tr>
+	<tr>
+		<th>邮政编码</th>
+		<td colspan="4">{if $zip01}〒 {$zip01} - {$zip02}{/if}</td>
+	</tr>
+	<tr>
+		<th>住址</th>
+		<td colspan="4">{$add_pref} {$addr01}<br>{$addr02}</td>
+	</tr>
+	<tr>
+		<th>最近车站</th>
+		<td colspan="4">
+			{if $ensn}
+				{section name="list" loop="$ensn"}
+					<input type="hidden" name="ensn[]" value="{$ensn[list]}">
+					{getname name="ensn" value="$ensn[list]"}&nbsp;&nbsp;&nbsp;
+				{/section}
+			{/if}
+			{if $eki}
+				{section name="list" loop="$eki"}
+					<input type="hidden" name="eki[]" value="{$eki[list]}">
+					{getname name="eki" value="$eki[list]"}&nbsp;&nbsp;&nbsp;
+				{/section}
+			{/if}
+		</td>
+	</tr>
+
+	<tr>
+		<th>电话号码</th>
+		<td colspan="4">{$tel01}-{$tel02}-{$tel03}</td>
+	</tr>
+	<tr>
+		<th>FAX号码</th>
+		<td colspan="4">{if $fax01}{$fax01}-{$fax02}-{$fax02}{/if}</td>
+	</tr>
+	<tr>
+		<th>企业营业范围</th>
+		<td colspan="4">
+			{$skills_str}
+		</td>
+	</tr>
+</table>
+<table class="tableStyle">
+	<tr>
+		<th>登陆邮箱</th>
+		<td colspan="4">{$company_email}</td>
+	</tr>
+	<tr>
+		<th>密码</th>
+		<td colspan="4">{$password}</td>
+	</tr>
+	
+</table>
+<input type="hidden" name="url" id="url" value="{$BASE_URL}">
+<input type="hidden" name="company_name" value="{$company_name}">
+<input type="hidden" name="company_manager" value="{$company_manager}">
+<input type="hidden" name="foundation_dateYear" value="{$foundation_dateYear}">
+<input type="hidden" name="foundation_dateMonth" value="{$foundation_dateMonth}">
+<input type="hidden" name="company_money" value="{$company_money}">
+<input type="hidden" name="company_url" value="{$company_url}">
+<input type="hidden" name="zip01" value="{$zip01}">
+<input type="hidden" name="zip02" value="{$zip02}">
+<input type="hidden" name="add_pref" value="{$add_pref}">
+<input type="hidden" name="addr01" value="{$addr01}">
+<input type="hidden" name="addr02" value="{$addr02}">
+
+<input type="hidden" name="areaid" value="{$areaid}">
+<input type="hidden" name="pref" value="{$pref}">
+
+<input type="hidden" name="kinds" value="{$kinds}">
+<input type="hidden" name="types_str" value="{$types_str}">
+<input type="hidden" name="skills_str" value="{$skills_str}">
+
+<input type="hidden" name="tel01" value="{$tel01}">
+<input type="hidden" name="tel02" value="{$tel02}">
+<input type="hidden" name="tel03" value="{$tel03}">
+<input type="hidden" name="fax01" value="{$fax01}">
+<input type="hidden" name="fax02" value="{$fax02}">
+<input type="hidden" name="fax03" value="{$fax03}">
+<input type="hidden" name="company_email" value="{$company_email}">
+<input type="hidden" name="password" value="{$password}">
+<p>以上の内容で登録しますか？</p>
+<p style="text-align:center;">
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_correction.gif" id="modify" onclick="return RegistChoose(2);" alt="修正" style="width: auto !important;" />
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_entry.gif" id="regist" alt="注册" style="width: auto !important;" />
+</p>
+</form>
+
+
+
+
+</div>
+{include file="./mobile/footer.html"}

@@ -1,0 +1,76 @@
+ {include file="./mobile/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"} 
+<link type="text/css" rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/black.css">
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+
+
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="javascript:history.go(-1);"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a href="javascript:history.go(-1);"><span class="title">返回</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+		
+	</div>
+</div>
+<div id="wrapper_tasktail" >
+	<div id="" 	 style="top:4em;position: absolute;">
+		
+		<div class="tasktop" style="background-color: black;">
+		
+			<div  style="z-index:-5;font-size: 22px;text-align: center;vertical-align: middle;">
+			<span class="cfc0"> {$photo.title}</span>
+			</div>
+		</div>
+			
+
+		<div class="tasktitl clearfix">
+			<b class="f_l">{$photo.title}</b>
+			{if $photo.user_id eq $smarty.session.kiwa_userid}
+			<span class="f_r">
+			
+			<a href="{$BASE_URL}people/photo_del/{$photo.Id}/" onclick="return deleteConfirm();">删除此商品</a>
+			</span>
+			{/if}
+		</div>
+	
+		<div class="task_detal">
+	
+				<div id="casecontentbox" class="anlimgsbox">
+					<img src="{$BASE_URL}{$photo.photo_url}" style="max-width:285px;min-width:285px;"/>
+				</div>
+				<div class="border_b_c pb_5 mb_5">
+					<strong>商品描述</strong>
+				</div>
+				{$photo.content|nl2br}
+		</div>
+		
+					
+				
+	</div>
+
+</div>
+{include file="./mobile/footer.html"}

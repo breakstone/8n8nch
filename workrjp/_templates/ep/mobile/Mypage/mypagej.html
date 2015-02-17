@@ -1,0 +1,186 @@
+{include file="./mobile/Mypage/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+	<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+	{literal}
+<script>
+	function form_submit(flg){
+		document.getElementById("flg").value = flg;
+		document.getElementById("searchform").submit();
+	}
+</script>
+{/literal}
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}"><span class="title">首页</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+				<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+</div>
+	<div id="wrapper_common" style="overflow: hidden;">
+		<div id="scroller">
+			<div class="userdetitle">&nbsp;</div>
+			<div class="useriner clearfix">
+				<div class="cseiiner f_l">
+					<img src="{$BASE_URL}{$user.user_photo_url}" uid="724483" original-title="" ><br>
+					<span>
+					
+						<a href="{$BASE_URL}mypage/photo/" class="bn_grey">修改头像</a>
+				</div>
+				<div class="s_usna">
+					<h2>{$USERNAME}</h2>
+					我的邮箱：<br>{$user.email}
+				</div>
+				<div class="chonzi t_r">
+					<a class="botton_red"	href="#">个人信用</a>
+					<div class="mt_10">
+					
+						<span class="fon1d5em">{$user.points}</span>积分
+					</div>
+				</div>
+			</div>
+			<div class="toolenter">
+				<table width="101%" border="0" cellspacing="1" cellpadding="1">
+					<tbody>
+						<tr>
+							<td>
+								<a	href="{$BASE_URL}mypage/">
+									<span	class="ico ico_12"></span><br>我的地盘
+								</a>
+							</td>
+							<td>
+							
+								<a	href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/" original-title="我的空间">
+									<span	class="ico ico_10"></span><br>我的空间
+								</a>
+							</td>
+							<td>
+								<a	href="{$BASE_URL}mypage/myrequirement/?Which_Show=2">
+									<span	class="ico ico_6"></span><br>我的需求
+								</a>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								<a href="{$BASE_URL}mypage/favorite/?Which_Show=2">
+								<span class="ico ico_8"></span><br>我的收藏夹</a>
+							</td>
+							<td><a
+								href="{$BASE_URL}mypage/personal/"><span
+									class="ico ico_5"></span><br>我的简历</a></td>
+							
+						
+							<td>
+								<a href="{$BASE_URL}mypage/pmessage/">
+									<span	class="ico ico_9"></span><br>我的信箱
+								</a>
+							</td>
+							
+						</tr>
+						<tr >
+							<td colspan=3>
+								<div class="us_tabtl">
+									<table width="100%" border="0" cellspacing="0" cellpadding="1" >
+										<tbody>
+											<tr >
+												<td ><a  href="{$BASE_URL}mypage/" >工作信息</a></td>
+												<td  ><a  href="{$BASE_URL}mypage/r/" >人才信息</a></td>
+												<td  ><a class="on"  style="color:black;"  href="{$BASE_URL}mypage/j/"  >生活互助</a></td>
+											</tr>
+									</tbody>
+									</table>
+									</div>
+						</tr>
+					</tbody>
+				</table>
+						{if $lives}
+									<select class="input" style="width:100%;font-size: 16px;" name="live_service" id="live_service" onchange="form_submit(1);">
+										{section name="list" loop=$lives}
+										<option value="{$lives[list].live_id}" {if $lives[list].live_id eq $live_id}selected="selected"{/if}>{$lives[list].live_title|mb_truncate:42}</option>
+										{/section}
+									</select>
+						{else}
+											<center>
+											<div style="font-size: 25px;margin-top: 25px;">还没有发布生活互助？发布需求，在日华人帮你解决！</div><br>
+											<a href="{$BASE_URL}requirement/"><img src="{$BASE_URL}_templates/{$THEME}/img/live_chose.gif"></a><br><br>
+											</center>
+						{/if}
+						<table  width="100%" border="1" cellspacing="1" cellpadding="0" style="text-align:left;font-size:14px;">
+									
+								
+						{if $lives}
+								<tbody>
+									<tr>
+									<td>
+										<font color="green">以下是系统自动为您匹配的信息</font>
+									</td>
+									</tr>
+									{if $live_array}
+									{section name="list" loop=$live_array}
+									<tr>
+									<td style="text-align:left;font-size:14px;">
+									&nbsp;&nbsp;&nbsp;<a href="{$BASE_URL}live/show/{$live_array[list].live_id}/"  class="t" _t="jingzhun" rel="nofollow" tips="t" style="font-size: 12px;">{$live_array[list].live_title|mb_truncate:17}</a>
+									</td>
+									</tr>
+									{/section}
+									{else}
+									<tr>
+									<td>
+									&nbsp;&nbsp;&nbsp;<font color="red"  style="text-align:left;font-size:12px;">根据您需求的条件没有找到匹配的数据！请稍等一会！</font>
+									</td>
+									</tr>
+									{/if}
+									<tr>
+									<td>
+										<font color="green"> 以下是相关的信息</font>
+									</td>
+									</tr>
+									{section name="list" loop=$live_b}
+									<tr>
+									<td style="text-align:left;font-size:14px;">
+									<a href="{$BASE_URL}live/show/{$live_b[list].live_id}/"  class="t" _t="jingzhun" rel="nofollow" tips="t" style="font-size: 12px;">{$live_b[list].live_title|mb_truncate:20}</a>
+									</td>
+									</tr>
+									{/section}
+								</tbody>
+								{/if}
+								</table>
+			</div>
+			<br>
+			<div class="login_botton">
+				<a class="red" href="{$BASE_URL}control/mypageC.php?logout">我要注销退出</a>
+			</div>
+			<br>
+			<br>
+		</div>
+	</div>
+	
+	<script type="text/javascript"
+		src="{$BASE_URL}_templates/{$THEME}/mobile/js/commset.js"></script>
+	
+{include file="./mobile/footer.html"}

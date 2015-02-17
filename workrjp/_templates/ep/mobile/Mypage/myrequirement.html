@@ -1,0 +1,128 @@
+{include file="./mobile/Mypage/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+{literal}
+<script>
+	function form_submit(){
+		document.getElementById("searchform").submit();
+	}
+	function dconfirm(){
+		if(!confirm("是否将此需求删除?")){
+			return false;
+		}
+		return true;
+	}
+</script>
+{/literal}
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}mypage/"><span class="title">我的地盘</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+				<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+</div>
+<input type="hidden" value="{$Which_Show}" name="Which_Show" id="Which_Show">
+	<div id="wrapper_list"  >
+		<div id="scroller">
+		<div id="pullDown">
+			</div>
+			<div class="us_tabtl">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a href="{$BASE_URL}mypage/myrequirement/?Which_Show=2" {if $Which_Show eq 2}class="on"{/if} >工作信息需求( <b>{if $job_um}{$job_um}{else}0{/if}</b> )</a></td>
+							<td><a href="{$BASE_URL}mypage/myrequirement/?Which_Show=1"  {if $Which_Show eq 1}class="on"{/if} >生活互助需求( <b>{if $live_um}{$live_um}{else}0{/if}</b> )</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		
+	{if $Which_Show eq 1}
+		
+			<ul id="tasklist" data-role="listview">
+			{section name="list" loop="$requirement"}
+									
+				<li style="padding: 1em;border-bottom: 1px solid #dfdfdf;">
+					
+						
+						<div class="listcont" style="padding-left:0em;">
+							<h2><a style="color:#87CEFA;background:#fff;" href='{$BASE_URL}live/show/{$requirement[list].live_id}/' >{$requirement[list].live_title}</a></h2>
+							<div class="lins">
+								<span class="cEB2">{$requirement[list].service_name}</span>&nbsp;&nbsp;{$requirement[list].create_date|date_format:"%Y年%m月 %d日"}
+								
+								<span class="f_r" style="padding-right:20px;"><a style="background:#fff;" href="{$BASE_URL}mypage/myrequirement_delete/?id={$requirement[list].Id}&type=live&ws=1" onclick="return dconfirm();">删除</a></span>
+								<br>
+							</div>
+							
+						</div>
+					
+				</li>
+			{/section}
+			</ul>
+			{/if}
+				{if $Which_Show eq 2}
+			<ul id="tasklist" data-role="listview">
+			{section name="list" loop="$requirement"}
+				<li style="padding: 1em;border-bottom: 1px solid #dfdfdf;">
+						<div class="listcont" style="padding-left:0em;">
+							<h2><a style="color:#87CEFA;background:#fff;" href='{$BASE_URL}job/show/{$requirement[list].job_id}/' >{$requirement[list].job_title}</a></h2>
+							<div class="lins">
+								<span class="cEB2">{$requirement[list].create_date|date_format:"%Y年%m月 %d日"} 
+									{if $points < 10}
+										<a style="background:#fff;" href="javascript:alert('置顶需要10积分，您的积分不足！');"><button type="button" id="logB" class="big button">置顶</button></a>
+									{else}
+										<a style="background:#fff;" href="{$BASE_URL}mypage/myrequirement_up/?id={$requirement[list].Id}&type=job&ws=2"><button type="button" id="logB" class="big button">置顶</button></a>
+									{/if}
+								</span>&nbsp;&nbsp;
+								
+								<span class="f_r" style="padding-right:20px;"><a style="background:#fff;" href="{$BASE_URL}mypage/myrequirement_delete/?id={$requirement[list].Id}&type=job&ws=2" onclick="return dconfirm();">删除</a></span>
+								<br>
+							</div>
+							
+						</div>
+					
+				</li>
+			{/section}
+			</ul>
+				{/if}
+				
+		{if $requirement[0].Id eq ''}
+				<br>
+				<h2>该选项、您还没有发布任何需求！<h2>
+			
+				{/if}
+			<div style="text-align: center;">
+				{if $all gt 10}
+				<span style="font-size: 18px;"> {$subPages} </span>
+				{/if}
+			</div>
+		
+			<div id="pullUp">
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/tasklistmypage.js"></script>
+{include file="./mobile/footer.html"}

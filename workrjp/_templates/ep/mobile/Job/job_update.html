@@ -1,0 +1,350 @@
+{include file="./mobile/Requirement/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+
+<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+{literal}
+<script>
+function yanzheng()
+{
+		if(document.getElementById("areaid").value=="" || document.getElementById("pref").value==""){
+			alert("请选择「住址（都道府县）」");
+		}
+		else
+			{
+			$("#condition_list1").show().animate( { left: "0"}, 200 );
+			}
+}
+</script>
+{/literal}
+
+	<div id="wrapper_release">
+		<div id="scroller">
+			<div class="us_tabtl" style="padding-top:4.5em;">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+					<tbody>
+						<tr>
+							<td><a href="#" class="">修改求人信息</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		
+			<div class="table_form">
+			<input name="url" id="url" type="hidden" value="{$BASE_URL}"/>
+			<form name="form1" action="{$BASE_URL}job/updatedo/" method="post">
+				<input type="hidden" value="{$job.job_id}" name="id" id="id">
+					<table width="100%" border="0" cellspacing="1" cellpadding="1">
+						
+									
+							<tr>
+								<td style="width:30%"><span class="f_l c999" >求人标题 <SPAN class=att>※</SPAN></span></td>
+								<td>
+									<input name="job_title" id="job_title" size="25" type="text" value="{$job_title}" class="input"/>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">工作标签 <SPAN class=att>※</SPAN><br>（最多选择3个）</span></td>
+								<td>	
+								<table cellpadding="0" border="0" cellspacing="0" style="background:#fff;">
+									<tr>
+									<td><label><input style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("厨师类",$zz)}checked="checked"{/if}{/if} value="厨师类">&nbsp;厨师类</label></td>
+									<td><label><input style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("事務类",$zz)}checked="checked"{/if}{/if} value="事務类">&nbsp;事務类</label></td>
+									</tr>
+									<tr>
+									<td><label><input style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("IT业",$zz)}checked="checked"{/if}{/if} value="IT业">&nbsp;IT业</label></td>
+									<td><label><input style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("工厂制造类",$zz)}checked="checked"{/if}{/if} value="工厂制造类">&nbsp;工厂制造类</label></td>
+									</tr>
+									<tr>
+									<td><label><input style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("司机",$zz)}checked="checked"{/if}{/if} value="司机">&nbsp;司机</label></td>
+									<td><label><input style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("销售/营业",$zz)}checked="checked"{/if}{/if} value="销售/营业">&nbsp;销售/营业</label></td>
+									</tr>
+									<tr>
+									<td><label><input style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("建筑类",$zz)}checked="checked"{/if}{/if} value="建筑类">&nbsp;建筑类</label></td>
+									<td><label><input style="vertical-align:-7px;"name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("服务员",$zz)}checked="checked"{/if}{/if} value="服务员">&nbsp;服务员</label></td>
+									</tr>
+									<tr>
+									<td><label><input style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("按摩师",$zz)}checked="checked"{/if}{/if} value="按摩师">&nbsp;按摩师</label></td>
+									<td><label><input  style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("清扫类",$zz)}checked="checked"{/if}{/if} value="清扫类">&nbsp;清扫类</label></td>
+									</tr>
+									<tr>
+									<td><label><input  style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("派遣类",$zz)}checked="checked"{/if}{/if} value="派遣类">&nbsp;派遣类</label></td>
+									<td><label><input name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("会计/财务",$zz)}checked="checked"{/if}{/if} value="会计/财务">&nbsp;会计/财务</label></td>
+									</tr>
+									<tr>
+									<td><label><input  style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("教师",$zz)}checked="checked"{/if}{/if} value="教师">&nbsp;教师</label></td>
+									<td><label><input  style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("翻译/导游",$zz)}checked="checked"{/if}{/if} value="翻译/导游">&nbsp;翻译/导游</label></td>
+									</tr>
+									<tr >
+									<td colspan=2><label><input  style="vertical-align:-7px;" name="zz[]" id="zz" type="checkbox" {if $zz}{if in_array("其他类别",$zz)}checked="checked"{/if}{/if} value="其他类别">&nbsp;其他类别</label></td>
+									</tr>
+								</table>
+										
+								
+										
+									
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">工作内容 <SPAN class=att>※</SPAN></span></td>
+								<td>
+									<textarea name="contents" id="contents" cols="32" rows="6" style="ime-mode: active" class="input">{$contents}</textarea>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">招收对象 <SPAN class=att>※</SPAN></span></td>
+								<td>
+								<textarea name="requirements" id="requirements" cols="32" rows="6" style="ime-mode: active" class="input">{$requirements}</textarea>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">联系方式 <SPAN class=att>※</SPAN></td>
+								<td>
+								<input name="lianxi" id="lianxi" size="22" type="text" value="{$lianxi}" class="input"/>
+								</td>
+							</tr>
+								<tr>
+								<td><span class="f_l c999">是否收费  <SPAN class=att>※</SPAN></span></td>
+								<td>
+								<input type="radio" name="shoufei" id="shoufei" checked="checked"  value="(免费)"/>免费
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">采用人数 </span></td>
+								<td>
+								<input name="numbers" id="numbers" size="8" style="ime-mode: disabled" type="text" value="{$numbers}" class="input"/>&nbsp;&nbsp;&nbsp;人
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">职业种类 <SPAN class=att>※</SPAN></span></td>
+								<td>
+									<select name="kinds" id="kinds" onchange="showTypes();" class="input">
+										<option value="">請指定</option>
+										<option value="">---------------</option>
+									{section name="list" loop="$companyfrom"}
+										<option value="{$companyfrom[list].kindsID}"
+										{if $companyfrom[list].kindsID eq $kinds}selected='selected'{/if}
+										>{$companyfrom[list].kindsname}</option>
+									{/section}
+									</select>
+															<div id="typecheck" style="margin-top: 8px;">
+										{if $types}
+											{section name="list" loop="$types"}
+												<label for="{$smarty.section.list.index}">
+									            <input class="radioInput" type="checkbox" name="types[]" value="{$types[list].typesID}" id="{$smarty.section.list.index}" 
+									            {if in_array($types[list].typesID,$select_types)}checked="checked"{/if}> {$types[list].typesname}</label><br>
+											{/section}
+										{/if}
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">勤务地点  <SPAN class=att>※</SPAN></span></td>
+								<td>
+										<select name="areaid" id="areaid" onchange="showPref();" class="input">
+											<option value="">請指定</option>
+											<option value="">---------------</option>
+											{section name="list" loop="$areas"}
+												<option value="{$areas[list].area_cd}"
+												{if $areas[list].area_cd eq $areaid}selected='selected'{/if}
+												>{$areas[list].area_name}</option>
+											{/section}
+										</select>
+										<select name="pref" id="pref" onchange="giveToeki()" class="input">
+											<option value="">請指定</option>
+											<option value="">---------------</option>
+											{if $prefSearch}
+												{section name="list" loop="$prefSearch"}
+													<option value="{$prefSearch[list].pref_cd}"
+													{if $prefSearch[list].pref_cd eq $pref}selected='selected'{/if}
+													>{$prefSearch[list].name}</option>
+												{/section}
+											{/if}
+										</select>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">车站选择</span></td>
+								<td>
+								<a	 onclick="yanzheng()"  href="javascript:void(0);" >
+										<img   src="{$BASE_URL}js/ek_files/ek.png" onclick="showStation(document.getElementById('pref').value)">
+									</a>
+									
+										<input type="hidden" name="searchEki">
+										<input type="hidden" name="reqType" value="">
+										<input type="hidden" name="mid_area_cd" value="">
+										<input type="hidden" name="mid_area_cds" value="">
+										<input type="hidden" name="comp_mgr_no" value="">
+										<input type="hidden" name="base_mgr_no" value="">
+										<input type="hidden" name="id_ad" value="">
+										<input type="hidden" name="new_flg" value="">
+										<input type="hidden" name="query_str" value="?">
+										<input type="hidden" name="query_flg" value="">
+										<p id="js-detailSearch-search-animation" class="animate" ></p>
+										<ul style="margin-left: 3px; line-height: 2px;">
+										<span class="ensn_list" id="ensn_list">
+										{if $ensn}
+											{section name="list" loop="$ensn"}
+												<li style="margin-left: -5px;"><label><input type="checkbox" style="display: inline;" class="ensn-chk" id="{getname name='ensn' value='$ensn[list]'}" name="ensn[]" value="{$ensn[list]}" checked >{getname name="ensn" value="$ensn[list]"}</label></li><br/>
+											{/section}
+										{/if}
+										{if $eki}
+											{section name="list" loop="$eki"}
+												<li style="margin-left: -5px;"><label><input type="checkbox" style="display: inline;" class="ensn-chk" id="{getname name='eki' value='$eki[list]'}" name="eki[]" value="{$eki[list]}" checked >{getname name="eki" value="$eki[list]"}</label></li><br/>
+											{/section}
+										{/if}
+										</span>
+										</ul>
+								</td>
+							</tr>
+							<tr>
+								<td><span class="f_l c999">薪资选择 <SPAN class=att>※</SPAN></span></td>
+								<td>
+									<select name="moneyid" id="moneyid" class="input">
+											<option value="">請指定</option>
+											<option value="">---------------</option>
+											{section name="list" loop="$money"}
+												<option value="{$money[list].moneyid}"
+												{if $money[list].moneyid eq $moneyid}selected='selected'{/if}
+												>{$money[list].name}---{$money[list].moneyname}</option>
+											{/section}
+										</select>
+								</td>
+							</tr>
+							
+								<tr>
+								<td><span class="f_l c999">雇用形式 <SPAN class=att>※</SPAN></span></td>
+								<td>
+								{section name="list" loop="$employ"}
+									<label><input name="employid[]" id="employid" type="checkbox" value="{$employ[list].Id}"
+									{if $employid}
+									{if in_array($employ[list].Id,$employid)}checked="checked"{/if}
+									{/if}
+									>&nbsp;{$employ[list].name}
+									</label>
+									{if $smarty.section.list.rownum mod 2 eq 0}
+											<br>
+											{/if}
+								{/section}
+								</td>
+							</tr>
+								<tr>
+								<td><span class="f_l c999">勤务时间 <SPAN class=att>※</SPAN></span></td>
+								<td >
+										{section name="list" loop="$hope"}
+										<label><input  name="hopeid[]" id="hopeid" type="checkbox" value="{$hope[list].id}" style="vertical-align:-7px;"
+										{if $hopeid}
+										{if in_array($hope[list].id,$hopeid)}checked="checked"{/if}
+										{/if}
+										>&nbsp;{$hope[list].name}</label>
+									{/section}
+								</td>
+							</tr>
+								<tr>
+								<td><span class="f_l c999">勤務日数 <SPAN class=att>※</SPAN></span></td>
+								<td>
+								<label>
+								<input style="vertical-align:-7px;" type="radio" value="7" id="w_d" name="w_d" 
+								{if $w_d}
+									{if $w_d eq 7}checked{/if}
+								{else}
+									checked
+								{/if}>不限
+								</label>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label><input style="vertical-align:-7px;" type="radio" value="1" id="w_d" name="w_d" {if $w_d}{if $w_d eq 1}checked{/if}{/if}>週1日以上</label>
+								<br><label><input style="vertical-align:-7px;" type="radio" value="2" id="w_d" name="w_d" {if $w_d}{if $w_d eq 2}checked{/if}{/if}>週2日以上</label>
+								<label><input style="vertical-align:-7px;" type="radio" value="3" id="w_d" name="w_d" {if $w_d}{if $w_d eq 3}checked{/if}{/if}>週3日以上</label>
+								<br><label><input style="vertical-align:-7px;" type="radio" value="4" id="w_d" name="w_d" {if $w_d}{if $w_d eq 4}checked{/if}{/if}>週4日以上</label>
+								
+								<label><input style="vertical-align:-7px;" type="radio" value="5" id="w_d" name="w_d" {if $w_d}{if $w_d eq 5}checked{/if}{/if}>週5日以上</label>
+								</td>
+							</tr>
+							
+						
+						
+					</table>
+					<div class="login_botton">
+					<button class="red" onclick="return findpeople_addcheck();">修改信息</button>
+					
+					</div>
+					
+				</form>
+			</div>
+			
+		</div>
+	</div>
+	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/mobile/css/css_other/car.css">
+	<!-- //wrapper -->
+
+<script src="{$BASE_URL}js/ek_files/jquery-1.7.1.min.js"></script>
+<script src="{$BASE_URL}js/ek_files/jquery-ui.js"></script>
+<script src="{$BASE_URL}js/ek_files/detailSearch.js"></script>
+<script src="{$BASE_URL}js/ek_files/layer_shok.js"></script>
+
+ <script src="{$BASE_URL}_templates/{$THEME}/mobile/js/layer_ensn_requirement.js"></script><!--此处修改了关闭 -->
+<script type="text/javascript">
+	var mid_area_all = "";
+</script>
+
+			<div style="overflow:scroll;position:fixed;top:0px;" id="condition_list1" class="condition_list1 pad10">
+				<div id="condison_relat">
+					<div id="condison_absolut" style="overflow: hidden;">
+							<dl class="condition clearfix">
+								<!-- 線・駅 -->
+								<div style="outline-width: 0px; outline-style: initial; outline-color: initial; height:auto; width: 100%; z-index: 1004; top: 0px; left: 0px;" class="ui-dialog ui-widget ui-widget-content ui-corner-all" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-js-dialog-station">
+<div id="js-dialog-station" class="ui-dialog-content ui-widget-content">
+<!-- common-dialog-conditionSelect -->
+<div class="common-dialog-conditionSelect" style="font-family:SimSun;">
+<div class="pattern-2">
+	<div class="bg01">
+		<div class="pt01">
+			<h2>选择沿线</h2>
+			<p><a href="javascript:void(0);" id="js-dialog-station-close">
+			<img id="cacelSelect" src="{$BASE_URL}js/ek_files/bt_007a.png" width="20" height="20" alt="閉じる"></a></p>
+		</div>
+		
+		<div id="ensn-tdfk-view" style="display: block;">
+		<span id="ensn-tdfk-data">
+			<div class="pt03" id="js-ensn-tdfk-tabs">
+			<ul>
+				<li class="on" id="ensn-tdfk-tab-1"><a href="javascript:void(0);" id="eki_pref_title">{if $user.pref_cd}{getname name="pref" value=$user.pref_cd}{/if}</a></li>
+			</ul>
+			</div>
+			<!-- tab start -->
+			<div class="ensn-01" id="ensn-tab1">
+			<div class="pt05" id="js-dialog-station-lists">
+			<div class="bg02">
+				<h3 class="close"><a href="javascript:void(0);" id="eki_pref">{if $user.pref_cd}{getname name="pref" value=$user.pref_cd}{/if}</a></h3>
+				<section id="station-lists">
+				</section>
+			</div>
+			</div>
+			</div>
+			<!-- //tab end -->
+		</span>
+		</div>
+						<div class="pt07">
+											<div class="pt07a">已经选择的沿线：<div id="selected-ensn">请选择沿线</div></div>
+											<div class="pt07b"><input type="button" value="清　空" id="allclear-ensn"></div>
+										</div>
+		
+		<div class="pt08">
+			<p><a href="javascript:void(0);" id="ensnSearchForm"><img src="{$BASE_URL}js/ek_files/bt_090a.png" width="214" height="90" alt="この内容で設定する"></a></p>
+		</div>
+	</div>
+</div>
+</div>
+<!-- //common-dialog-conditionSelect -->
+</div>
+</div>
+						
+							</dl>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript" src="{$BASE_URL}_templates/{$THEME}/mobile/js/commsetrequirement.js"></script>
+	
+{include file="./mobile/footer.html"}

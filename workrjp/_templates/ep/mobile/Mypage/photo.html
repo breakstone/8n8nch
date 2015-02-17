@@ -1,0 +1,77 @@
+{include file="./mobile/Mypage/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+
+<script src="{$BASE_URL}js/ek_files/html5.js"></script>
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}mypage/"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}mypage/"><span class="title">我的地盘</span></a>
+		</div>
+		<div class="f_r" id="rg" >
+				<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+</div>
+	
+	<div id="wrapper_list"  >
+		<div id="scroller">
+		<div class="us_tabtl">
+				<table width="100%" border="0" cellspacing="0" cellpadding="1">
+						<tr>
+							<td><a href="#" class="">修改头像</a></td>
+						</tr>
+				</table>
+			</div>
+				<div class="box_detail">
+						<div class="data_list">
+							<input type="hidden" value="" name="flg" id="flg">
+							<form name="form1" action="{$BASE_URL}mypage/photo/" method="post" enctype="multipart/form-data">
+							<input type="hidden" value="{$user.user_photo_url}" name="dir" id="dir">
+							{if $error}<SPAN class=att>{$error}</SPAN>{/if}
+							<section id="jobEntryRegist">
+							<table class="tableStyle" style="width: 100%;" id="photo">
+								<tr>
+									<td class="alLeft">
+										&nbsp;<img src="{$BASE_URL}{$user.user_photo_url}?{$catch_img}" alt="{$user.name01}" style="max-width:300px;" class="fixAspect" />
+										
+										<br>（图片类型:jpg,png,gif,jpeg）
+									</td>
+									
+								</tr>
+								<tr><td>上传: <input type="file" name="user_photo_url" id="user_photo_url" style="width:130px;" value=""></td></tr>
+							</table>
+							<p class="alCenter">
+							<br>
+							<button type="submit" name="left">头像左转90°</button><button type="submit" name="right">头像右转90°</button>
+							&nbsp;
+							<button type="submit" name="gaiphoto" onclick="return photocheck();">上传新头像</button>
+							</p>
+							</section>
+							</form>
+						</div>
+					</div>
+						</div>
+	</div>
+{include file="./mobile/footer.html"}

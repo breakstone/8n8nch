@@ -1,0 +1,229 @@
+{include file="./mobile/Mypage/header.html" title="帮帮网，在日华人工作信息互助平台|在日工作信息，华人帮帮网"}
+	
+<div id="header">
+	<div class="headbar clearfix">
+		<div class="f_l">
+			<a href="{$BASE_URL}"><span class="ico ico_home"></span></a>&nbsp;&nbsp;
+			<a  href="{$BASE_URL}"><span class="title">首页</span></a>
+		</div>
+			<div class="f_r" id="rg" >
+				<a href="{$BASE_URL}mypage/"><span class="ico ico_pers"></span></a>&nbsp;
+			<a href="{$BASE_URL}requirement/"><span class="ico ico_writ"></span></a>
+			{if $smarty.session.kiwa_companyname or $smarty.session.kiwa_username}
+		
+					{php}
+						if($_SESSION['kiwa_companyid']!=""){
+							$um = unreadMessage($_SESSION['kiwa_companyid']);
+							if($um>0){
+								echo "<a href=".APP_URL."companypage/cmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}else{
+							$um = unreadMessage($_SESSION['kiwa_userid']);
+							if($um>0){
+								echo "	<a href=".APP_URL."mypage/pmessage/ style=\"margin-right: 0px;\"><span class=\"ico ico_xinxi\"><span style=\"z-index:100;float:right;margin-right:7px;margin-top:3px;color:white\">$um</span></span></a>";
+								echo "<script type='text/javascript'>titleBlink();</script>";
+							}
+						}
+					{/php}
+			
+			{/if}					
+		</div>
+	</div>
+</div>
+	<div id="wrapper_common" style="overflow: hidden;">
+		<div id="scroller">
+			<div class="userdetitle">&nbsp;</div>
+			<div class="useriner clearfix">
+				<div class="cseiiner f_l">
+					<img src="{$BASE_URL}{$user.user_photo_url}" uid="724483" original-title="" ><br>
+					<span>
+					
+						<a href="{$BASE_URL}mypage/photo/" class="bn_grey">修改头像</a>
+				</div>
+				<div class="s_usna">
+					<h2>{$USERNAME}</h2>
+					我的邮箱：<br>{$user.email}
+				</div>
+				<div class="chonzi t_r">
+					<a class="botton_red"	href="#">个人信用</a>
+					<div class="mt_10">
+					
+						<span class="fon1d5em">{$user.points}</span>积分
+					</div>
+				</div>
+			</div>
+			<div class="toolenter">
+				<table width="101%" border="0" cellspacing="1" cellpadding="1">
+					<tbody>
+						<tr>
+							<td>
+								<a	href="{$BASE_URL}mypage/">
+									<span	class="ico ico_12"></span><br>我的地盘
+								</a>
+							</td>
+							<td>
+							
+								<a	href="{$BASE_URL}people/show/user_{$smarty.session.kiwa_userid}/" original-title="我的空间">
+									<span	class="ico ico_10"></span><br>我的空间
+								</a>
+							</td>
+							<td>
+								<a	href="{$BASE_URL}mypage/myrequirement/?Which_Show=2">
+									<span	class="ico ico_6"></span><br>我的需求
+								</a>
+							</td>
+							
+						</tr>
+						<tr>
+							<td>
+								<a href="{$BASE_URL}mypage/favorite/?Which_Show=2">
+								<span class="ico ico_8"></span><br>我的收藏夹</a>
+							</td>
+							<td><a
+								href="{$BASE_URL}mypage/personal/"><span
+									class="ico ico_5"></span><br>我的简历</a></td>
+							
+						
+							<td>
+								<a href="{$BASE_URL}mypage/pmessage/">
+									<span	class="ico ico_9"></span><br>我的信箱
+								</a>
+							</td>
+							
+						</tr>
+						<tr >
+							<td colspan=3>
+								<div class="us_tabtl">
+									<table width="100%" border="0" cellspacing="0" cellpadding="1" >
+										<tbody>
+											<tr >
+												<td ><a class="on"  style="color:black;" href="{$BASE_URL}mypage/" >工作信息</a></td>
+												<td ><a  href="{$BASE_URL}mypage/r/"  >人才信息</a></td>
+												<td ><a href="{$BASE_URL}mypage/j/" >生活互助</a></td>
+											</tr>
+									</tbody>
+									</table>
+									</div>
+							</td>
+									
+						</tr>
+								<input type="hidden" value="" name="flg" id="flg">
+					</tbody>
+				</table>
+					{if $user.info_flg}
+						{if $skill_1}
+							<table  width="100%" border="1" cellspacing="1" cellpadding="0">
+							
+									<tr>
+									<td>
+										<font color="green">以下是<font size="+1" color="red">【 {$skill_1} 】</font>的工作信息！</font>
+									</td>
+									</tr>
+									
+										
+										{if $job_1}
+										{section name="list" loop="$job_1"}
+										<tr>
+										<td style="text-align:left;font-size:14px;">
+							                        <a href="{$BASE_URL}job/show/{$job_1[list].job_id}/"  style="padding:0.3em;display:inline;color:#87CEFA;">
+							                        	{$job_1[list].job_title|mb_truncate:18}
+													</a>
+													
+							                        &nbsp;&nbsp;<span style="color:red;float:right;padding-right:1em;">{$job_1[list].pref_name}</span>
+							                   	</td>
+								
+										{/section}
+										{else}
+										<td>	还没有适合您的工作，请别急，我们去收集！</td>
+										{/if}
+									</tr>
+									
+							
+							</table>
+							{/if}
+							{if $skill_2}
+							<table  width="100%" border="1" cellspacing="1" cellpadding="0">
+							
+									<tr>
+									<td>
+										<font color="green">以下是<font size="+1" color="red">【 {$skill_2} 】</font>的工作信息！</font>
+									</td>
+									</tr>
+									
+										
+										{if $job_2}
+										{section name="list" loop="$job_2"}
+										<tr>
+										<td style="text-align:left;font-size:14px;">
+							                        <a href="{$BASE_URL}job/show/{$job_2[list].job_id}/"  style="padding:0.3em;display:inline;color:#87CEFA;">
+							                        	{$job_2[list].job_title|mb_truncate:18}
+													</a>
+													
+							                        &nbsp;&nbsp;<span style="color:red;float:right;padding-right:1em;">{$job_2[list].pref_name}</span>
+							                   	</td>
+								
+										{/section}
+										{else}
+										<td style="color:red;">	还没有适合您的工作，请别急，我们去收集！</td>
+										{/if}
+									</tr>
+									
+							
+							</table>
+							{/if}
+							
+						
+						{if $skill_3}
+							<table  width="100%" border="1" cellspacing="1" cellpadding="0">
+							
+									<tr>
+									<td>
+										<font color="green">以下是<font size="+1" color="red">【 {$skill_3} 】</font>的工作信息！</font>
+									</td>
+									</tr>
+									
+										
+									{if $job_3}
+										{section name="list" loop="$job_3"}
+										<tr>
+										<td style="text-align:left;font-size:14px;">
+							                        <a href="{$BASE_URL}job/show/{$job_3[list].job_id}/"  style="padding:0.3em;display:inline;color:#87CEFA;">
+							                        	{$job_3[list].job_title|mb_truncate:18}
+													</a>
+													
+							                        &nbsp;&nbsp;<span style="color:red;float:right;padding-right:1em;">{$job_3[list].pref_name}</span>
+							                   	</td>
+								
+										{/section}
+										{else}
+										<td style="color:red;">	还没有适合您的工作，请别急，我们去收集！</td>
+										{/if}
+									</tr>
+									
+							
+							</table>
+							{/if}
+								{else}
+								
+							
+								<center>
+								<div style="font-size: 28px;margin-top: 25px;">想要找工作？ 填写简历，工作推荐给你！</div><br>
+								<a href="{$BASE_URL}mypage/personal/"><img src="{$BASE_URL}_templates/{$THEME}/img/wyzgz_hove.jpg"></a><br><br>
+								</center>
+								
+								
+							{/if}
+			</div>
+			<br>
+			<div class="login_botton">
+				<a class="red" href="{$BASE_URL}control/mypageC.php?logout">我要注销退出</a>
+			</div>
+			<br>
+			<br>
+		</div>
+	</div>
+	
+	<script type="text/javascript"	src="{$BASE_URL}_templates/{$THEME}/mobile/js/commset.js"></script>
+	
+{include file="./mobile/footer.html"}

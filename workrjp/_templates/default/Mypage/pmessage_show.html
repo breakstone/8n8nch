@@ -1,0 +1,59 @@
+{include file="./header.html" title="个人信箱"}
+<script type="text/javascript" src="{$BASE_URL}js/check.js"></script>
+<script type="text/javascript" src="{$BASE_URL}js/functions.js"></script>
+<!-- wrapper -->
+<div id="wrapper"><!-- container -->
+<div id="container"><!-- pan -->
+<ul id="pan">
+	<li><a href="{$BASE_URL}">HOME</a></li>
+	<li>&gt; <a href="{$BASE_URL}mypage/">MyPage</a></li>
+	<li>&gt; <a href="{$BASE_URL}mypage/pmessage/">个人信箱</a></li>
+	<li>&gt; 查看信件</li>
+</ul>
+<!-- //pan -->
+<h1 class="title">查看信件</h1>
+<form name="form1" action="{$BASE_URL}mypage/pmessage_re/" method="post">
+<section id="jobEntryRegist">
+<table summary="求人応募" class="tableStyle">
+	<tr>
+		<th>发信人</th>
+		<td class="alLeft">
+		<a href="{$BASE_URL}people/show/company_{$message.message_from}/" target="_blank">{getname name="company_name" value=$message.message_from}</a>
+		<a href="{$BASE_URL}people/show/user_{$message.message_from}/" target="_blank">{getname name="username" value=$message.message_from}</a>
+		</td>
+	</tr>
+	<tr>
+		<th>收信人</th>
+		<td class="alLeft">
+		{getname name="company_name" value=$message.message_to}
+		{getname name="username" value=$message.message_to}
+		</td>
+	</tr>
+	<tr>
+		<th>信件标题</th>
+		<td class="alLeft">{$message.message_title}</td>
+	</tr>
+	<tr>
+		<th>信件内容</th>
+		<td class="alLeft">{$message_content}</td>
+	</tr>
+</table>
+<br>
+<input type="hidden" name="rem_id" id="rem_id" value="{$message.message_id}">
+<table summary="求人応募" class="tableStyle">
+	<tr>
+		<th>返信</th>
+		<td class="alLeft">
+			<textarea name="re_message" id="re_message" rows="12" cols="90"></textarea>
+		</td>
+	</tr>
+</table>
+<p class="alCenter">
+<input type="image" src="{$BASE_URL}_templates/{$THEME}/img/common_bt_remessage.gif" alt="返信" onclick="return remessageCheck();">
+</p>
+</section>
+</form>
+
+<p id="pagetop"><a href="#container">TOPへ戻る</a></p>
+</div></div>
+{include file="./footer.html"}
