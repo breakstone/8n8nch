@@ -1,0 +1,17 @@
+RewriteEngine on
+Options +FollowSymlinks
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]
+
+RewriteCond %{HTTP_HOST} ^(www)\.8n8n\.co\.jp
+RewriteRule . index.php [L]
+
+RewriteCond %{HTTP_HOST} (.*)\.8n8n\.co\.jp
+RewriteRule . c_index.php [L]
+
+
+Order allow,deny
+Allow from all
+
